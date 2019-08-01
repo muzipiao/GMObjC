@@ -1,0 +1,26 @@
+# references:
+# * https://www.objc.io/issues/6-build-tools/travis-ci/
+# * https://github.com/supermarin/xcpretty#usage
+
+osx_image: xcode10.2
+language: objective-c
+cache: cocoapods
+podfile: Example/Podfile
+
+before_install:
+- env
+- locale
+- gem install xcpretty --no-document --quiet
+- gem install cocoapods --pre
+- pod update --project-directory=Example
+- xcpretty --version
+- xcodebuild -version
+- xcodebuild -showsdks
+
+
+script:
+- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/GMObjC.xcworkspace -scheme GMObjC-Example -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 8,OS=latest" ONLY_ACTIVE_ARCH=NO | xcpretty
+- pod lib lint
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)

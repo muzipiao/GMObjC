@@ -1,0 +1,23 @@
+PODS:
+  - GMObjC (1.0.0):
+    - GMOpenSSL
+  - GMOpenSSL (2.0.2)
+
+DEPENDENCIES:
+  - GMObjC (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - GMOpenSSL
+
+EXTERNAL SOURCES:
+  GMObjC:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  GMObjC: cff158bdd37459c1e7fa224d3ca8965c3180a3b3
+  GMOpenSSL: 6caf76275b303430560190baba8dea3347b94fe1
+
+PODFILE CHECKSUM: e8a4bc557d9c69d98d9d1bcf575a62cac20efb8b
+
+COCOAPODS: 1.7.5
