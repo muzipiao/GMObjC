@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/cocoapods/l/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 [![Platform](https://img.shields.io/cocoapods/p/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 
-OpenSSL 1.1.1 以上版本增加了对中国 SM2/SM3/SM4 加密算法的支持，但纯 C 的 Api 非常不友好，且无注释，所以针对国密 sm2、sm4 加密做 OC 封装。
+OpenSSL 1.1.1 以上版本增加了对中国 SM2/SM3/SM4 加密算法的支持，基于 OpenSSL 1.1.1c 对国密 sm2、sm4 加密做 OC 封装。
 
 ## 快速开始
 
