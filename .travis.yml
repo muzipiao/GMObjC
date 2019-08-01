@@ -20,7 +20,7 @@ before_install:
 
 script:
 - set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/GMObjC.xcworkspace -scheme GMObjC-Example -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 8,OS=latest" ONLY_ACTIVE_ARCH=NO | xcpretty
-- pod lib lint
+- pod lib lint --use-libraries
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
