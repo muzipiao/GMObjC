@@ -21,6 +21,8 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		9C36EEEB22F420DE002203E9 /* sm4TestFile.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9C36EEEA22F420DE002203E9 /* sm4TestFile.txt */; };
+		9C36EEEC22F420E3002203E9 /* sm4TestFile.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9C36EEEA22F420DE002203E9 /* sm4TestFile.txt */; };
 		B0234877E959B291C47C6594 /* Pods_GMObjC_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F4109CE706901DBCBA9E6C /* Pods_GMObjC_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +38,7 @@
 
 /* Begin PBXFileReference section */
 		05F4109CE706901DBCBA9E6C /* Pods_GMObjC_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMObjC_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BAEE7A162291C88241027FF /* GMObjC.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GMObjC.podspec; path = ../GMObjC.podspec; sourceTree = "<group>"; };
+		2BAEE7A162291C88241027FF /* GMObjC.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GMObjC.podspec; path = ../GMObjC.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3C64D8FFF5C0179DFD89DC7C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* GMObjC_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMObjC_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -58,6 +60,7 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		68788533A01750D2A2469344 /* Pods-GMObjC_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC_Example.release.xcconfig"; path = "Target Support Files/Pods-GMObjC_Example/Pods-GMObjC_Example.release.xcconfig"; sourceTree = "<group>"; };
+		9C36EEEA22F420DE002203E9 /* sm4TestFile.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sm4TestFile.txt; sourceTree = "<group>"; };
 		DCB385E32425ACA4FA411973 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		DE3D9A1AC83C3B8A3540C29B /* Pods-GMObjC_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC_Tests.debug.xcconfig"; path = "Target Support Files/Pods-GMObjC_Tests/Pods-GMObjC_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E6FF4074B03685EE43CBD7CE /* Pods-GMObjC_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC_Example.debug.xcconfig"; path = "Target Support Files/Pods-GMObjC_Example/Pods-GMObjC_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +142,7 @@
 		6003F593195388D20070C39A /* Example for GMObjC */ = {
 			isa = PBXGroup;
 			children = (
+				9C36EEEA22F420DE002203E9 /* sm4TestFile.txt */,
 				6003F59C195388D20070C39A /* GMAppDelegate.h */,
 				6003F59D195388D20070C39A /* GMAppDelegate.m */,
 				6003F5A5195388D20070C39A /* GMViewController.h */,
@@ -274,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				9C36EEEB22F420DE002203E9 /* sm4TestFile.txt in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
+				9C36EEEC22F420E3002203E9 /* sm4TestFile.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

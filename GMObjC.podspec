@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   spec.name         = "GMObjC"
-  spec.version      = "1.0.0"
-  spec.summary      = "基于 OpenSSL 封装国密 sm2 和 sm4 加解密。"
+  spec.version      = "1.0.1"
+  spec.summary      = "国密 sm2、sm4 加解密 OC 封装，基于 OpenSSL。"
 
   spec.description  = <<-DESC
-  OpenSSL 1.1.1 以上版本支持国密加密，纯 C 的 Api 不方便使用，使用 OC 封装。
+  OpenSSL 1.1.1 以上版本支持国密加密，基于 OpenSSL 1.1.1c 封装 sm2、sm4 加解密。
                    DESC
 
   spec.homepage     = "https://github.com/muzipiao/GMObjC"
@@ -21,6 +21,8 @@ Pod::Spec.new do |spec|
 
 
   spec.source_files  = "GMObjC/Classes/**/*.{h,m}"
+  
+  spec.public_header_files = "GMObjC/Classes/**/*.h"
 
   spec.framework  = "Foundation"
 

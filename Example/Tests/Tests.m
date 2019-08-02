@@ -11,6 +11,9 @@
 
 @interface Tests : XCTestCase
 
+// sm4 加解密文件测试
+@property (nonatomic, strong) NSData *fileData;
+
 @end
 
 static NSString *gPubkey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9C624537215DE9507BC0E2DD276CF74695C99DF42424F28E9004CDE4678F63D698";
@@ -21,10 +24,13 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
 - (void)setUp
 {
     [super setUp];
+    NSString *txtPath = [[NSBundle mainBundle] pathForResource:@"sm4TestFile.txt" ofType:nil];
+    self.fileData = [NSData dataWithContentsOfFile:txtPath];
 }
 
 - (void)tearDown
 {
+    self.fileData = nil;
     [super tearDown];
 }
 
@@ -34,6 +40,7 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
 - (void)testSm4Null {
     NSString *strNull = nil;
     NSString *strLenZero = @"";
+    NSData *dataNull = [NSData data];
     NSString *sm4Key = [GMSm4Utils createSm4Key];
     
     // 加密空
@@ -43,6 +50,10 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
     XCTAssertNil(encryptLenZeroStr, @"加密字符串应为空");
     NSString *encryptNullKey = [GMSm4Utils encrypt:@"123456" Key:@""];
     XCTAssertNil(encryptNullKey, @"加密字符串应为空");
+    NSData *encryptNullData = [GMSm4Utils encryptData:dataNull Key:sm4Key];
+    XCTAssertNil(encryptNullData, @"Data 为空，加密 Data 应为空");
+    NSData *encryptDataNullKey = [GMSm4Utils encryptData:self.fileData Key:@""];
+    XCTAssertNil(encryptDataNullKey, @"key为空，加密 Data 应为空");
     
     // 解密空
     NSString *decryptNullStr = [GMSm4Utils decrypt:strNull Key:sm4Key];
@@ -51,6 +62,11 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
     XCTAssertNil(decryptLenZeroStr, @"解密字符串应为空");
     NSString *decryptNullKey = [GMSm4Utils decrypt:@"123456" Key:@""];
     XCTAssertNil(decryptNullKey, @"解密字符串应为空");
+    
+    NSData *decryptNullData = [GMSm4Utils decryptData:dataNull Key:sm4Key];
+    XCTAssertNil(decryptNullData, @"Data 为空，解密 Data 应为空");
+    NSData *decryptDataNullKey = [GMSm4Utils decryptData:self.fileData Key:@""];
+    XCTAssertNil(decryptDataNullKey, @"key为空，解密 Data 应为空");
 }
 
 /**
@@ -66,6 +82,33 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
     }
 }
 
+
+/**
+ * 测试 sm4 加解密文件
+ */
+- (void)testSm4File {
+    XCTAssertNotNil(self.fileData, @"待加密 NSData 不为空");
+    
+    for (NSInteger i = 0; i < 1000; i++) {
+        // 生产密钥不为空
+        NSString *sm4Key = [GMSm4Utils createSm4Key];
+        XCTAssertNotNil(sm4Key, @"生成 sm4 密钥不为空");
+        
+        NSData *encryptData = [GMSm4Utils encryptData:self.fileData Key:sm4Key];
+        XCTAssertTrue(encryptData.length > 0, @"加密后数据不为空");
+        
+        NSData *decryptData = [GMSm4Utils decryptData:encryptData Key:sm4Key];
+        XCTAssertTrue(decryptData.length > 0, @"解密后数据不为空");
+        
+        // 加解密后与原数据相同
+        BOOL isSameData = [decryptData isEqualToData:self.fileData];
+        XCTAssertTrue(isSameData, @"sm4 加解密后数据不变");
+    }
+}
+
+/**
+ * 测试 sm 4 大量加解密数字英文字符字符串
+ */
 - (void)testSm4En {
     for (NSInteger i = 0; i < 10000; i++) {
         int randLen = arc4random_uniform((int)10000);

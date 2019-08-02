@@ -26,7 +26,7 @@
     return result.copy;
 }
 
-///MARK: - sm4 加密
+///MARK: - sm4 字符串加密
 + (nullable NSString *)encrypt:(NSString *)plainText Key:(NSString *)key{
     if (!plainText || plainText.length == 0 || !key || key.length != SM4_BLOCK_SIZE) {
         return nil;
@@ -70,9 +70,9 @@
     return encryptedStr;
 }
 
-///MARK: - sm4 解密
+///MARK: - sm4 字符串解密
 + (nullable NSString *)decrypt:(NSString *)encryptText Key:(NSString *)key{
-    if (!encryptText || encryptText.length < 2 || !key || key.length != SM4_BLOCK_SIZE) {
+    if (!encryptText || encryptText.length == 0 || !key || key.length != SM4_BLOCK_SIZE) {
         return nil;
     }
     // 全大写，加上冒号标准化
@@ -111,5 +111,81 @@
     return plainText;
 }
 
+///MARK: - sm4 文件加密
++ (nullable NSData *)encryptData:(NSData *)plainData Key:(NSString *)key{
+    if (!plainData || plainData.length == 0 || !key || key.length != SM4_BLOCK_SIZE) {
+        return nil;
+    }
+    // 计算填充长度
+    const uint8_t *pData = (uint8_t *)plainData.bytes;
+    size_t pDataLen = plainData.length;
+    int padLen = SM4_BLOCK_SIZE - pDataLen % SM4_BLOCK_SIZE;
+    
+    size_t resultLen = pDataLen + padLen;
+    // 填充
+    uint8_t pText[resultLen];
+    memcpy(pText, pData, pDataLen);
+    for (int i = 0; i < padLen; i++) {
+        pText[pDataLen + i] = padLen;
+    }
+    
+    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(resultLen + 1));
+    int groupNum = (int)(resultLen / SM4_BLOCK_SIZE);
+    // 密钥
+    uint8_t *ktext = (uint8_t *)key.UTF8String;
+    SM4_KEY sm4key;
+    SM4_set_key(ktext, &sm4key);
+    // 循环加密
+    for (NSInteger i = 0; i < groupNum; i++) {
+        uint8_t block[SM4_BLOCK_SIZE];
+        memcpy(block, pText + i * SM4_BLOCK_SIZE, SM4_BLOCK_SIZE);
+        
+        SM4_encrypt(block, block, &sm4key);
+        memcpy(result + i * SM4_BLOCK_SIZE, block, SM4_BLOCK_SIZE);
+    }
+    // 转为 NSData
+    NSData *encryptData = [NSData dataWithBytes:result length:resultLen];
+    
+    OPENSSL_free(result);
+    
+    return encryptData;
+}
+
+///MARK: - sm4 文件加密
++ (nullable NSData *)decryptData:(NSData *)encryptData Key:(NSString *)key{
+    if (!encryptData || encryptData.length == 0 || !key || key.length != SM4_BLOCK_SIZE) {
+        return nil;
+    }
+    const uint8_t *cData = (uint8_t *)encryptData.bytes;
+    size_t cTextLen = encryptData.length;
+    
+    // 分组解密
+    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(cTextLen + 1));
+    int groupNum = (int)(cTextLen / SM4_BLOCK_SIZE);
+    // 密钥
+    uint8_t *ktext = (uint8_t *)key.UTF8String;
+    SM4_KEY sm4key;
+    SM4_set_key(ktext, &sm4key);
+    // 循环解密
+    for (NSInteger i = 0; i < groupNum; i++) {
+        uint8_t block[SM4_BLOCK_SIZE];
+        memcpy(block, cData + i * SM4_BLOCK_SIZE, SM4_BLOCK_SIZE);
+        
+        SM4_decrypt(block, block, &sm4key);
+        memcpy(result + i * SM4_BLOCK_SIZE, block, SM4_BLOCK_SIZE);
+    }
+    // 移除填充
+    int padLen = (int)result[cTextLen - 1];
+    int end_len = (int)(cTextLen - padLen);
+    uint8_t *end_result = (uint8_t *)OPENSSL_zalloc((int)(end_len + 1));
+    memcpy(end_result, result, end_len);
+    
+    NSData *plainData = [NSData dataWithBytes:end_result length:end_len];
+    
+    OPENSSL_free(result);
+    OPENSSL_free(end_result);
+    
+    return plainData;
+}
 
 @end

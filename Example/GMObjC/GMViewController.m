@@ -61,6 +61,20 @@
     
     NSString *result = [NSString stringWithFormat:@"\nsm2加密密文：\n%@\nASN1 解码sm2密文：\n%@\nASN1编码sm2密文：\n%@\nsm2解密结果：\n%@\n生成sm2公钥：\n%@\n生成sm2私钥：\n%@\nsm4密钥：\n%@\nsm4加密密文：\n%@\nsm4解密结果：\n%@\n", ctext, dcodeCtext, encodeCtext, plainText, pubKey, priKey, sm4Key, sm4Ctext, sm4Ptext];
     self.gTextView.text = result;
+    
+    // 加解密文件，任意文件可读取为 NSData 格式
+    NSString *txtPath = [[NSBundle mainBundle] pathForResource:@"sm4TestFile.txt" ofType:nil];
+    NSData *fileData = [NSData dataWithContentsOfFile:txtPath];
+    // 读取的文本文件
+    NSString *orginStr = [[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding];
+    NSLog(@"文本文件原文：\n%@", orginStr);
+
+    // 加解密
+    NSData *encryptData = [GMSm4Utils encryptData:fileData Key:sm4Key];
+    NSData *decryptData = [GMSm4Utils decryptData:encryptData Key:sm4Key];
+    // 加解密后台文本不变
+    NSString *sm4DeFileStr = [[NSString alloc] initWithData:decryptData encoding:NSUTF8StringEncoding];
+    NSLog(@"加解密后文本：\n%@", sm4DeFileStr);
 }
 
 @end

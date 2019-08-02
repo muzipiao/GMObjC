@@ -24,8 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nullable NSString *)createSm4Key;
 
+///MARK: - sm4 字符串加解密
+
 /**
- * sm4 加密
+ * sm4 字符串加密
  @param plainText 待加密的字符串
  @param key sm4 密钥，长度 16 字节
  @return 加密后的字符串，16进制编码格式
@@ -33,12 +35,30 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSString *)encrypt:(NSString *)plainText Key:(NSString *)key;
 
 /**
- * sm4 解密
+ * sm4 字符串解密
  @param encryptText 密文
  @param key sm4 密钥，长度 16 字节
  @return 解密后的明文
  */
 + (nullable NSString *)decrypt:(NSString *)encryptText Key:(NSString *)key;
+
+///MARK: - sm4 文件加解密
+
+/**
+ * sm4 文件加密
+ @param plainData 从文件读取 NSData
+ @param key sm4 密钥，长度 16 字节
+ @return 加密后的 NSData
+ */
++ (nullable NSData *)encryptData:(NSData *)plainData Key:(NSString *)key;
+
+/**
+ * sm4 文件解密
+ @param encryptData 加密的 NSData
+ @param key sm4 密钥，长度 16 字节
+ @return 解密后的 NSData 原文
+ */
++ (nullable NSData *)decryptData:(NSData *)encryptData Key:(NSString *)key;
 
 @end
 

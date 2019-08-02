@@ -70,10 +70,12 @@
     NSUInteger len = str.length + (NSUInteger)(str.length / 2);
     NSMutableString *mstr = [NSMutableString stringWithCapacity:len];
     for (NSInteger i = 0; i < str.length - 1; i+=2) {
-        NSString *sub = [str substringWithRange:NSMakeRange(i, 2)];
-        [mstr appendString:sub];
-        if (i < str.length - 2) {
-            [mstr appendString:@":"];
+        @autoreleasepool{
+            NSString *sub = [str substringWithRange:NSMakeRange(i, 2)];
+            [mstr appendString:sub];
+            if (i < str.length - 2) {
+                [mstr appendString:@":"];
+            }
         }
     }
     if (lastStr.length > 0) {
