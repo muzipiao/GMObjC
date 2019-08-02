@@ -7,8 +7,7 @@
 //
 
 #import "GMViewController.h"
-#import "GMSm2Utils.h"
-#import "GMSm4Utils.h"
+#import "GMSm.h"
 
 @interface GMViewController ()
 

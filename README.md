@@ -24,7 +24,7 @@ open GMObjC.xcworkspace
 
 ## 环境需求
 
-* GMOpenSSL.framework(openssl.framework)
+* [GMOpenSSL.framework](https://github.com/muzipiao/GMOpenSSL)(openssl.framework)
 * Foundation.framework
 
 ## 集成
@@ -41,7 +41,7 @@ pod 'GMObjC'
 
 ### 直接集成
 
-从 Git 下载最新代码，找到和 README 同级的 GMObjC 文件夹，将 GMObjC 文件夹拖入项目即可，在需要使用的地方导入头文件 `GMSm2Utils.h` 即可使用 sm2 加解密。
+从 Git 下载最新代码，找到和 README 同级的 GMObjC 文件夹，将 GMObjC 文件夹拖入项目即可，在需要使用的地方导入头文件 `GMSm.h` 即可使用 sm2、sm4 加解密。
 
 集成 OpenSSL 的注意事项：
 
@@ -72,7 +72,7 @@ NSString *plainText = [GMSm2Utils decrypt:encodeCtext PrivateKey:gPrikey];
 注意：
 
 1. OpenSSL 所用公钥是 04 开头的，后台返回公钥可能是不带 04 的，需要手动拼接。
-2. 后台返回的解密结果可能是没有标准编码的原始密文，而 OpenSSL 的加解密都是需要标准 ASN1 编码格式，所以与后台交互过程中，可能需要 ASN1 编码解码。
+2. 后台返回的解密结果可能是没有标准编码的原始密文，而 OpenSSL 的加解密都是需要 ASN1 编码格式，所以与后台交互过程中，可能需要 ASN1 编码解码。
 
 ### sm4 加解密
 

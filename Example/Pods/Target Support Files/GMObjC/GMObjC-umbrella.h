@@ -11,6 +11,7 @@
 #endif
 
 #import "GMCodecUtils.h"
+#import "GMSm.h"
 #import "GMSm2Def.h"
 #import "GMSm2Utils.h"
 #import "GMSm4Utils.h"
