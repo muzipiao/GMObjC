@@ -8,7 +8,7 @@
 #import "GMSm4Utils.h"
 #import <openssl/sm4.h>
 #import <openssl/evp.h>
-#import "GMCodecUtils.h"
+#import "GMUtils.h"
 
 @implementation GMSm4Utils
 
@@ -77,7 +77,7 @@
     }
     // 全大写，加上冒号标准化
     NSString *cStr = encryptText.uppercaseString;
-    cStr = [GMCodecUtils addColon:cStr];
+    cStr = [GMUtils addColon:cStr];
     
     long ctext_len = 0;
     uint8_t *ctext = OPENSSL_hexstr2buf(cStr.UTF8String, &ctext_len);

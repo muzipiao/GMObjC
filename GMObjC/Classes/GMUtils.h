@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GMCodecUtils : NSObject
+@interface GMUtils : NSObject
 
 /**
  * 字符串每两位加一个冒号(:)

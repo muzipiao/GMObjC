@@ -25,7 +25,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.gTextView = [[UITextView alloc]initWithFrame:self.view.bounds];
     self.gTextView.userInteractionEnabled = NO;
-    self.gTextView.font = [UIFont systemFontOfSize:11];
+    self.gTextView.font = [UIFont systemFontOfSize:10];
     [self.view addSubview:self.gTextView];
     // 测试用的固定公私钥
     self.gPubkey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9C624537215DE9507BC0E2DD276CF74695C99DF42424F28E9004CDE4678F63D698";
@@ -54,12 +54,15 @@
     NSString *pubKey = newKey[0];
     NSString *priKey = newKey[1];
     
+    // sm3 摘要算法
+    NSString *digest = [GMSm3Utils hashWithString:pwd];
+    
     // sm4 加解密测试
     NSString *sm4Key = [GMSm4Utils createSm4Key]; // 生成16位密钥
     NSString *sm4Ctext = [GMSm4Utils encrypt:pwd Key:sm4Key];
     NSString *sm4Ptext = [GMSm4Utils decrypt:sm4Ctext Key:sm4Key];
     
-    NSString *result = [NSString stringWithFormat:@"\nsm2加密密文：\n%@\nASN1 解码sm2密文：\n%@\nASN1编码sm2密文：\n%@\nsm2解密结果：\n%@\n生成sm2公钥：\n%@\n生成sm2私钥：\n%@\nsm4密钥：\n%@\nsm4加密密文：\n%@\nsm4解密结果：\n%@\n", ctext, dcodeCtext, encodeCtext, plainText, pubKey, priKey, sm4Key, sm4Ctext, sm4Ptext];
+    NSString *result = [NSString stringWithFormat:@"\nsm2加密密文：\n%@\nASN1 解码sm2密文：\n%@\nASN1编码sm2密文：\n%@\nsm2解密结果：\n%@\n生成sm2公钥：\n%@\n生成sm2私钥：\n%@\nsm4密钥：\n%@\nsm4加密密文：\n%@\nsm4解密结果：\n%@\n密码字符串 123456 的摘要值：\n%@\n", ctext, dcodeCtext, encodeCtext, plainText, pubKey, priKey, sm4Key, sm4Ctext, sm4Ptext, digest];
     self.gTextView.text = result;
     
     // 加解密文件，任意文件可读取为 NSData 格式

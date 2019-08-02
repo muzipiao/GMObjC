@@ -6,7 +6,7 @@
 
 #import "GMSm2Utils.h"
 #import "GMSm2Def.h"
-#import "GMCodecUtils.h"
+#import "GMUtils.h"
 #import <openssl/sm2.h>
 #import <openssl/evp.h>
 #import <openssl/bn.h>
@@ -176,8 +176,8 @@
         return nil;
     }
     
-    NSString *C3StrFormat = [GMCodecUtils addColon:C3Str];
-    NSString *C2StrFormat = [GMCodecUtils addColon:C2Str];
+    NSString *C3StrFormat = [GMUtils addColon:C3Str];
+    NSString *C2StrFormat = [GMUtils addColon:C2Str];
     long C3Text_len = 0;
     uint8_t *C3Text = OPENSSL_hexstr2buf(C3StrFormat.UTF8String, &C3Text_len);
     long C2Text_len = 0;

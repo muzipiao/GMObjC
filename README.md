@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/cocoapods/l/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 [![Platform](https://img.shields.io/cocoapods/p/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 
-OpenSSL 1.1.1 以上版本增加了对中国 SM2/SM3/SM4 加密算法的支持，基于 OpenSSL 1.1.1c 对国密 sm2、sm4 加密做 OC 封装。
+OpenSSL 1.1.1 以上版本增加了对中国 SM2/SM3/SM4 加密算法的支持，基于 OpenSSL 1.1.1c 对国密 sm2 非对称加密、sm3 摘要算法、sm4 对称加密做 OC 封装。
 
 ## 快速开始
 
@@ -87,6 +87,23 @@ NSString *sm4Key = [GMSm4Utils createSm4Key]; // 生成16位密钥
 NSString *sm4Ctext = [GMSm4Utils encrypt:pwd Key:sm4Key];
 // sm4 解密
 NSString *sm4Ptext = [GMSm4Utils decrypt:sm4Ctext Key:sm4Key];
+```
+
+### sm3 摘要
+
+类似于 hash、md5，sm3 摘要算法可对文本文件进行摘要计算，摘要长度为 64 个字符的字符串格式。
+
+```objc
+// 待提取摘要的字符串
+NSString *pwd = @"123456";
+// 字符串的摘要
+NSString *pwdDigest = [GMSm3Utils hashWithString:plainText];
+
+// 对文件进行摘要计算，传入 NSData 即可
+NSString *txtPath = [[NSBundle mainBundle] pathForResource:@"sm4TestFile.txt" ofType:nil];
+NSData *fileData = [NSData dataWithContentsOfFile:txtPath];
+// 文件的摘要值
+NSString *fileDigest = [GMSm3Utils hashWithData:self.fileData];
 ```
 
 ### ASN1 编码解码

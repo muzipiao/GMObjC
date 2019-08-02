@@ -6,9 +6,9 @@
 //  Copyright © 2019 lifei. All rights reserved.
 //
 
-#import "GMCodecUtils.h"
+#import "GMUtils.h"
 
-@implementation GMCodecUtils
+@implementation GMUtils
 
 ///MARK: - 编码为 16 进制字符串
 + (nullable NSString *)stringToHex:(NSString *)str{

@@ -34,6 +34,129 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
     [super tearDown];
 }
 
+///MARK: - sm3
+
+/**
+ * 测试 sm3 出现空的情况
+ */
+- (void)testSm3Null {
+    NSString *strNull = nil;
+    NSString *strLenZero = @"";
+    NSData *dataNull = [NSData data];
+    
+    NSString *digStrNull = [GMSm3Utils hashWithString:strNull];
+    XCTAssertNil(digStrNull, @"字符串为空摘要为空");
+    
+    NSString *digStrZero = [GMSm3Utils hashWithString:strLenZero];
+    XCTAssertNil(digStrZero, @"字符串为空摘要为空");
+    
+    NSString *digDataNull = [GMSm3Utils hashWithData:dataNull];
+    XCTAssertNil(digDataNull, @"字符串为空摘要为空");
+}
+
+/**
+ * 测试对英文字符串提取摘要
+ */
+- (void)testSm3EnStr {
+    for (NSInteger i = 0; i < 10000; i++) {
+        int randLen = arc4random_uniform((int)1000);
+        NSString *plainText = [self randomEn:randLen];
+        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
+    }
+    // 多次摘要相同
+    int randLen = arc4random_uniform((int)1000);
+    NSString *plainText = [self randomEn:randLen];
+    NSString *digStr = nil;
+    for (NSInteger i = 0; i < 10000; i++) {
+        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
+        if (digStr) {
+            BOOL isSameDig = [digStr isEqualToString:tempDigStr];
+            XCTAssertTrue(isSameDig, @"多次摘要相同");
+        }
+        digStr = tempDigStr;
+    }
+}
+
+/**
+ * 测试对中文字符串提取摘要
+ */
+- (void)testSm3ZhStr {
+    for (NSInteger i = 0; i < 10000; i++) {
+        int randLen = arc4random_uniform((int)1000);
+        NSString *plainText = [self randomZh:randLen];
+        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
+    }
+    // 多次摘要相同
+    int randLen = arc4random_uniform((int)1000);
+    NSString *plainText = [self randomZh:randLen];
+    NSString *digStr = nil;
+    for (NSInteger i = 0; i < 10000; i++) {
+        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
+        if (digStr) {
+            BOOL isSameDig = [digStr isEqualToString:tempDigStr];
+            XCTAssertTrue(isSameDig, @"多次摘要相同");
+        }
+        digStr = tempDigStr;
+    }
+}
+
+/**
+ * 测试对中英文混合字符串提取摘要
+ */
+- (void)testSm3ZhEnStr {
+    for (NSInteger i = 0; i < 10000; i++) {
+        int randLen = arc4random_uniform((int)1000);
+        NSString *plainText = [self randomZhEnString:randLen];
+        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
+    }
+    // 多次摘要相同
+    int randLen = arc4random_uniform((int)1000);
+    NSString *plainText = [self randomZhEnString:randLen];
+    NSString *digStr = nil;
+    for (NSInteger i = 0; i < 10000; i++) {
+        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
+        if (digStr) {
+            BOOL isSameDig = [digStr isEqualToString:tempDigStr];
+            XCTAssertTrue(isSameDig, @"多次摘要相同");
+        }
+        digStr = tempDigStr;
+    }
+}
+
+/**
+ * 测试对文件加密
+ */
+- (void)testSm3Data {
+    XCTAssertNotNil(self.fileData, @"待加密 NSData 不为空");
+    NSString *digStr = nil;
+    for (NSInteger i = 0; i < 1000; i++) {
+        NSString *tempDigStr = [GMSm3Utils hashWithData:self.fileData];
+        XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
+        if (digStr) {
+            BOOL isSameDig = [digStr isEqualToString:tempDigStr];
+            XCTAssertTrue(isSameDig, @"多次摘要相同");
+        }
+        digStr = tempDigStr;
+    }
+}
+
+///MARK: - sm4
+
 /**
  * 测试 sm4 出现空的情况
  */
@@ -74,8 +197,6 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
  */
 - (void)testSm4CreateKeys {
     for (NSInteger i = 0; i < 1000; i++) {
-        // 生成一对新的公私钥
-//        NSString *sm4Key = [GMSm4Utils create]
         NSString *sm4Key = [GMSm4Utils createSm4Key];
         XCTAssertNotNil(sm4Key, @"生成 sm4 密钥不为空");
         XCTAssertTrue(sm4Key.length == 16, @" sm4密钥长度 ");
@@ -340,7 +461,7 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
         int randLen = arc4random_uniform((int)1000);
         NSString *plainText = [self randomZh:randLen];
         XCTAssertNotNil(plainText, @"生成字符串不为空");
-        NSString *hexStr = [GMCodecUtils stringToHex:plainText];
+        NSString *hexStr = [GMUtils stringToHex:plainText];
         
         NSString *encryptStr = [GMSm2Utils encrypt:hexStr PublicKey:gPubkey];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");
@@ -351,7 +472,7 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
         BOOL isSame = [decryptStr isEqualToString:hexStr];
         XCTAssertTrue(isSame, @"加解密结果应该相同");
         
-        NSString *orginStr = [GMCodecUtils hexToString:hexStr];
+        NSString *orginStr = [GMUtils hexToString:hexStr];
         BOOL isSameHex = [plainText isEqualToString:orginStr];
         XCTAssertTrue(isSameHex, @"加解密结果应该相同");
     }
@@ -365,7 +486,7 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
         int randLen = arc4random_uniform((int)1000);
         NSString *plainText = [self randomZhEnString:randLen];
         XCTAssertNotNil(plainText, @"生成字符串不为空");
-        NSString *hexStr = [GMCodecUtils stringToHex:plainText];
+        NSString *hexStr = [GMUtils stringToHex:plainText];
         
         NSString *encryptStr = [GMSm2Utils encrypt:hexStr PublicKey:gPubkey];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");

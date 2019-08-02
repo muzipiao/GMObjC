@@ -10,11 +10,12 @@
 #endif
 #endif
 
-#import "GMCodecUtils.h"
 #import "GMSm.h"
 #import "GMSm2Def.h"
 #import "GMSm2Utils.h"
+#import "GMSm3Utils.h"
 #import "GMSm4Utils.h"
+#import "GMUtils.h"
 
 FOUNDATION_EXPORT double GMObjCVersionNumber;
 FOUNDATION_EXPORT const unsigned char GMObjCVersionString[];
