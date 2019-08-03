@@ -10,7 +10,7 @@
 #endif
 #endif
 
-#import "GMSm.h"
+#import "GMObjC.h"
 #import "GMSm2Def.h"
 #import "GMSm2Utils.h"
 #import "GMSm3Utils.h"

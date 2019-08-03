@@ -1,7 +1,3 @@
-//
-//  GMSm.h
-//  BaseDemo
-//
 //  Created by lifei on 2019/8/2.
 //  Copyright © 2019 lifei. All rights reserved.
 /**
@@ -11,8 +7,8 @@
  * GMUtils 工具类
  */
 
-#ifndef GMSm_h
-#define GMSm_h
+#ifndef GMObjC_h
+#define GMObjC_h
 
 #import "GMUtils.h"
 #import "GMSm2Utils.h"

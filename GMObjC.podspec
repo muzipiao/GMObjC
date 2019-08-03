@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "GMObjC"
-  spec.version      = "1.0.2"
+  spec.version      = "1.0.3"
   spec.summary      = "国密 sm2、sm4 加解密，sm3 摘要算法 OC 封装，基于 OpenSSL。"
 
   spec.description  = <<-DESC

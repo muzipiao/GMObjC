@@ -41,7 +41,7 @@ pod 'GMObjC'
 
 ### 直接集成
 
-从 Git 下载最新代码，找到和 README 同级的 GMObjC 文件夹，将 GMObjC 文件夹拖入项目即可，在需要使用的地方导入头文件 `GMSm.h` 即可使用 sm2、sm4 加解密。
+从 Git 下载最新代码，找到和 README 同级的 GMObjC 文件夹，将 GMObjC 文件夹拖入项目即可，在需要使用的地方导入头文件 `GMObjC.h` 即可使用 sm2、sm4 加解密。
 
 集成 OpenSSL 的注意事项：
 

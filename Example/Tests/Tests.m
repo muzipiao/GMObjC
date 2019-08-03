@@ -7,7 +7,7 @@
 //
 
 @import XCTest;
-#import "GMSm.h"
+#import "GMObjC.h"
 
 @interface Tests : XCTestCase
 
