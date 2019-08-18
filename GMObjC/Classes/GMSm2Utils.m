@@ -307,7 +307,7 @@
         if (rStr.length == 0 || sStr.length == 0) {
             break;
         }
-        sigStr = [NSString stringWithFormat:@"%@%@", rStr, sStr];
+        sigStr = [NSString stringWithFormat:@"%@,%@", rStr, sStr];
     } while (NO);
     
     ECDSA_SIG_free(sig);
@@ -333,9 +333,12 @@
     uint8_t *user_id = (uint8_t *)userDefault.UTF8String;
     size_t user_len = strlen((char *)user_id);
     
-    NSInteger rs_len = sign.length / 2;
-    NSString *r_hex = [sign substringToIndex:rs_len];
-    NSString *s_hex = [sign substringFromIndex:rs_len];
+    NSArray<NSString *> *rsArray = [sign componentsSeparatedByString:@","];
+    if (rsArray.count < 2) {
+        return NO;
+    }
+    NSString *r_hex = rsArray[0];
+    NSString *s_hex = rsArray[1];
     
     ECDSA_SIG *sig = NULL;  // 签名结果
     BIGNUM *sig_r = NULL;
@@ -388,9 +391,12 @@
     if (originSign.length == 0) {
         return nil;
     }
-    NSInteger rs_len = originSign.length / 2;
-    NSString *r_hex = [originSign substringToIndex:rs_len];
-    NSString *s_hex = [originSign substringFromIndex:rs_len];
+    NSArray<NSString *> *rsArray = [originSign componentsSeparatedByString:@","];
+    if (rsArray.count < 2) {
+        return nil;
+    }
+    NSString *r_hex = rsArray[0];
+    NSString *s_hex = rsArray[1];
     
     ECDSA_SIG *sig = NULL;  // 签名结果
     BIGNUM *sig_r = NULL;
@@ -473,7 +479,7 @@
         if (rStr.length == 0 || sStr.length == 0) {
             break;
         }
-        originSign = [NSString stringWithFormat:@"%@%@", rStr, sStr];
+        originSign = [NSString stringWithFormat:@"%@,%@", rStr, sStr];
     } while (NO);
     
     ECDSA_SIG_free(sig);

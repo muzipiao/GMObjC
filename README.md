@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/cocoapods/l/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 [![Platform](https://img.shields.io/cocoapods/p/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 
-OpenSSL 1.1.1 以上版本增加了对中国 SM2/SM3/SM4 加密算法的支持，基于 OpenSSL 1.1.1c 对国密 sm2 非对称加密、sm3 摘要算法、sm4 对称加密做 OC 封装。
+OpenSSL 1.1.1 以上版本增加了对中国 SM2/SM3/SM4 加密算法的支持，基于 OpenSSL 1.1.1c 对国密 sm2 非对称加密、sm2 签名验签、sm3 摘要算法，sm4 对称加密做 OC 封装。
 
 ## 快速开始
 
@@ -73,6 +73,35 @@ NSString *plainText = [GMSm2Utils decrypt:encodeCtext PrivateKey:gPrikey];
 
 1. OpenSSL 所用公钥是 04 开头的，后台返回公钥可能是不带 04 的，需要手动拼接。
 2. 后台返回的解密结果可能是没有标准编码的原始密文，而 OpenSSL 的加解密都是需要 ASN1 编码格式，所以与后台交互过程中，可能需要 ASN1 编码解码。
+
+### sm2 签名验签
+
+sm2 私钥签名，公钥验签，可防篡改或验证身份。签名时传入明文、私钥和用户 ID；验签时传入明文、签名、公钥和用户 ID，代码：
+
+```objc
+// 公钥
+NSString *gPubkey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9C624537215DE9507BC0E2DD276CF74695C99DF42424F28E9004CDE4678F63D698";
+// 私钥
+NSString *gPrikey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB3422E7838E24DEAE"
+
+// 待签名的原文
+NSString *pwd = @"123456";
+// 这里传入自定义 ID，和服务器保持两端一致即可。
+NSString *userID = @"lifei_zdjl@126.com";
+// 签名结果(r+s)拼接的 16 进制字符
+NSString *signStr = [GMSm2Utils sign:pwd PrivateKey:gPrikey UserID:userID];
+// 验签，isOK 为 YES 验签通过，NO 为未通过
+BOOL isOK = [GMSm2Utils verify:pwd Sign:signStr PublicKey:self.gPubkey UserID:userID];
+// 对签名结果 Der 编码
+NSString *derSign = [GMSm2Utils encodeWithDer:signStr];
+// 对 Der 编码解码
+NSString *originStr = [GMSm2Utils decodeWithDer:derSign];
+```
+
+注意：
+
+1. 用户 ID 可传空值，当传空值时使用 OpenSSL 默认用户 ID，OpenSSL 中默认用户定义为`#define SM2_DEFAULT_USERID "1234567812345678"` ，客户端和服务端用户 ID 要保持一致。
+2. 客户端和后台交互的过程中，假设后台签名，客户端验签，后台返回的签名是 DER 编码格式，就需要先对签名进行 DER 解码，然后再进行验签。同理，若客户端签名，后台验签，根据后台是需要 (r, s) 拼接格式签名，还是 DER 格式，进行编码解码。
 
 ### sm4 加解密
 
