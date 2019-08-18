@@ -461,20 +461,15 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
         int randLen = arc4random_uniform((int)1000);
         NSString *plainText = [self randomZh:randLen];
         XCTAssertNotNil(plainText, @"生成字符串不为空");
-        NSString *hexStr = [GMUtils stringToHex:plainText];
         
-        NSString *encryptStr = [GMSm2Utils encrypt:hexStr PublicKey:gPubkey];
+        NSString *encryptStr = [GMSm2Utils encrypt:plainText PublicKey:gPubkey];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");
         
         NSString *decryptStr = [GMSm2Utils decrypt:encryptStr PrivateKey:gPrivkey];
         XCTAssertNotNil(decryptStr, @"解密结果不为空");
         
-        BOOL isSame = [decryptStr isEqualToString:hexStr];
+        BOOL isSame = [decryptStr isEqualToString:plainText];
         XCTAssertTrue(isSame, @"加解密结果应该相同");
-        
-        NSString *orginStr = [GMUtils hexToString:hexStr];
-        BOOL isSameHex = [plainText isEqualToString:orginStr];
-        XCTAssertTrue(isSameHex, @"加解密结果应该相同");
     }
 }
 
@@ -486,15 +481,14 @@ static NSString *gPrivkey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB34
         int randLen = arc4random_uniform((int)1000);
         NSString *plainText = [self randomZhEnString:randLen];
         XCTAssertNotNil(plainText, @"生成字符串不为空");
-        NSString *hexStr = [GMUtils stringToHex:plainText];
         
-        NSString *encryptStr = [GMSm2Utils encrypt:hexStr PublicKey:gPubkey];
+        NSString *encryptStr = [GMSm2Utils encrypt:plainText PublicKey:gPubkey];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");
         
         NSString *decryptStr = [GMSm2Utils decrypt:encryptStr PrivateKey:gPrivkey];
         XCTAssertNotNil(decryptStr, @"解密结果不为空");
         
-        BOOL isSame = [decryptStr isEqualToString:hexStr];
+        BOOL isSame = [decryptStr isEqualToString:plainText];
         XCTAssertTrue(isSame, @"加解密结果应该相同");
     }
 }

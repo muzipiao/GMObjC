@@ -52,7 +52,7 @@
         return nil;
     }
     uint8_t *plain_text = (uint8_t *)plainText.UTF8String;
-    size_t msg_len = (size_t)plainText.length;
+    size_t msg_len = strlen((char *)plain_text);
     const char *pulic_key = publicKey.UTF8String;
     const EVP_MD *digest = EVP_sm3(); // 摘要算法
     const EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
@@ -243,6 +243,244 @@
     OPENSSL_free(C2_text);
     SM2_Ciphertext_1_free(sm2_st);
     return decodeStr;
+}
+
+///MARK: - SM2 签名
++ (nullable NSString *)sign:(NSString *)plainText PrivateKey:(NSString *)priKey UserID:(NSString *)userID{
+    if (plainText.length == 0 || priKey.length == 0) {
+        return nil;
+    }
+    
+    NSString *userDefault = [NSString stringWithCString:SM2_DEFAULT_USERID encoding:NSUTF8StringEncoding];
+    if (userID.length > 0) {
+        userDefault = userID;
+    }
+    
+    const char *private_key = priKey.UTF8String;
+    uint8_t *plain_text = (uint8_t *)plainText.UTF8String;
+    size_t plain_len = strlen((char *)plain_text);
+    uint8_t *user_id = (uint8_t *)userDefault.UTF8String;
+    size_t user_len = strlen((char *)user_id);
+    
+    ECDSA_SIG *sig = NULL;  // 签名结果
+    const BIGNUM *sig_r = NULL;
+    const BIGNUM *sig_s = NULL;
+    const EVP_MD *digest = EVP_sm3();  // 摘要算法
+    const EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2);
+    BIGNUM *pri_num = NULL;  // 私钥
+    EC_KEY *key = NULL; // 密钥对
+    EC_POINT *pub_point = NULL; // 公钥坐标
+    NSString *sigStr = nil;  // 签名结果
+    do {
+        if (!BN_hex2bn(&pri_num, private_key)) {
+            break;
+        }
+        key = EC_KEY_new();
+        if (!EC_KEY_set_group(key, group)) {
+            break;
+        }
+        // 设置私钥
+        if (!EC_KEY_set_private_key(key, pri_num)) {
+            break;
+        }
+        // 用私钥算出公钥
+        pub_point = EC_POINT_new(group);
+        if (!EC_POINT_mul(group, pub_point, pri_num, NULL, NULL, NULL)) {
+            break;
+        }
+        if (!EC_KEY_set_public_key(key, pub_point)) {
+            break;
+        }
+        // 计算签名
+        sig = sm2_do_sign(key, digest, user_id, user_len, plain_text, plain_len);
+        if (!sig) {
+            break;
+        }
+        ECDSA_SIG_get0(sig, &sig_r, &sig_s);
+        char *r_hex = BN_bn2hex(sig_r);
+        char *s_hex = BN_bn2hex(sig_s);
+        NSString *rStr = [NSString stringWithCString:r_hex encoding:NSUTF8StringEncoding];
+        NSString *sStr = [NSString stringWithCString:s_hex encoding:NSUTF8StringEncoding];
+        
+        OPENSSL_free(r_hex);
+        OPENSSL_free(s_hex);
+        if (rStr.length == 0 || sStr.length == 0) {
+            break;
+        }
+        sigStr = [NSString stringWithFormat:@"%@%@", rStr, sStr];
+    } while (NO);
+    
+    ECDSA_SIG_free(sig);
+    EC_POINT_free(pub_point);
+    EC_KEY_free(key);
+    BN_free(pri_num);
+    
+    return sigStr;
+}
+
+///MARK: - SM2 验签
++ (BOOL)verify:(NSString *)plainText Sign:(NSString *)sign PublicKey:(NSString *)pubKey UserID:(NSString *)userID{
+    if (plainText.length == 0 || sign.length == 0 || pubKey.length == 0) {
+        return NO;
+    }
+    NSString *userDefault = [NSString stringWithCString:SM2_DEFAULT_USERID encoding:NSUTF8StringEncoding];
+    if (userID.length > 0) {
+        userDefault = userID;
+    }
+    const char *pub_key = pubKey.UTF8String;
+    uint8_t *plain_text = (uint8_t *)plainText.UTF8String;
+    size_t plain_len = strlen((char *)plain_text);
+    uint8_t *user_id = (uint8_t *)userDefault.UTF8String;
+    size_t user_len = strlen((char *)user_id);
+    
+    NSInteger rs_len = sign.length / 2;
+    NSString *r_hex = [sign substringToIndex:rs_len];
+    NSString *s_hex = [sign substringFromIndex:rs_len];
+    
+    ECDSA_SIG *sig = NULL;  // 签名结果
+    BIGNUM *sig_r = NULL;
+    BIGNUM *sig_s = NULL;
+    const EVP_MD *digest = EVP_sm3();  // 摘要算法
+    EC_POINT *pub_point = NULL;  // 公钥坐标
+    EC_KEY *key = NULL;  // 密钥key
+    const EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2);
+    
+    BOOL isOK = NO;  // 验签结果
+    
+    do {
+        if (!BN_hex2bn(&sig_r, r_hex.UTF8String)) {
+            break;
+        }
+        if (!BN_hex2bn(&sig_s, s_hex.UTF8String)) {
+            break;
+        }
+        sig = ECDSA_SIG_new();
+        if (sig == NULL) {
+            BN_free(sig_r);
+            BN_free(sig_s);
+            break;
+        }
+        if (!ECDSA_SIG_set0(sig, sig_r, sig_s)) {
+            break;
+        }
+        key = EC_KEY_new();
+        if (!EC_KEY_set_group(key, group)) {
+            break;
+        }
+        pub_point = EC_POINT_new(group);
+        EC_POINT_hex2point(group, pub_key, pub_point, NULL);
+        if (!EC_KEY_set_public_key(key, pub_point)) {
+            break;
+        }
+        int ok = sm2_do_verify(key, digest, sig, user_id, user_len, plain_text, plain_len);
+        isOK = ok > 0 ? YES : NO;
+    } while (NO);
+    
+    EC_POINT_free(pub_point);
+    EC_KEY_free(key);
+    ECDSA_SIG_free(sig);
+    
+    return isOK;
+}
+
+///MARK: - SM2签名 Der 编码
++ (NSString *)encodeWithDer:(NSString *)originSign{
+    if (originSign.length == 0) {
+        return nil;
+    }
+    NSInteger rs_len = originSign.length / 2;
+    NSString *r_hex = [originSign substringToIndex:rs_len];
+    NSString *s_hex = [originSign substringFromIndex:rs_len];
+    
+    ECDSA_SIG *sig = NULL;  // 签名结果
+    BIGNUM *sig_r = NULL;
+    BIGNUM *sig_s = NULL;
+    NSString *derEncode = nil;
+    do {
+        if (!BN_hex2bn(&sig_r, r_hex.UTF8String)) {
+            break;
+        }
+        if (!BN_hex2bn(&sig_s, s_hex.UTF8String)) {
+            break;
+        }
+        sig = ECDSA_SIG_new();
+        if (sig == NULL) {
+            BN_free(sig_r);
+            BN_free(sig_s);
+            break;
+        }
+        if (!ECDSA_SIG_set0(sig, sig_r, sig_s)) {
+            break;
+        }
+        unsigned char *der_sig = NULL;
+        int der_sig_len = i2d_ECDSA_SIG(sig, &der_sig);
+        if (der_sig_len < 0) {
+            break;
+        }
+        char *der_sig_hex = OPENSSL_buf2hexstr((uint8_t *)der_sig, der_sig_len);
+        derEncode = [NSString stringWithCString:der_sig_hex encoding:NSUTF8StringEncoding];
+        
+        OPENSSL_free(der_sig);
+        OPENSSL_free(der_sig_hex);
+    } while (NO);
+    
+    ECDSA_SIG_free(sig);
+    
+    return derEncode;
+}
+
+///MARK: - SM2签名 Der 解码
++ (NSString *)decodeWithDer:(NSString *)derSign{
+    if (derSign.length == 0) {
+        return nil;
+    }
+    const char *sign_hex = derSign.UTF8String;
+    long sign_len = 0;
+    const uint8_t *sign_char = OPENSSL_hexstr2buf(sign_hex, &sign_len);
+    // 复制一份，对比验证
+    long sign_copy_len = 0;
+    uint8_t *sign_copy = OPENSSL_hexstr2buf(sign_hex, &sign_copy_len);
+    
+    ECDSA_SIG *sig = NULL;
+    const BIGNUM *sig_r = NULL;
+    const BIGNUM *sig_s = NULL;
+    unsigned char *der = NULL;
+    int derlen = -1;
+    
+    NSString *originSign = nil;
+    
+    do {
+        sig = ECDSA_SIG_new();
+        if (sig == NULL) {
+            break;
+        }
+        if (d2i_ECDSA_SIG(&sig, &sign_char, sign_len) == NULL) {
+            break;
+        }
+        /* Ensure signature uses DER and doesn't have trailing garbage */
+        derlen = i2d_ECDSA_SIG(sig, &der);
+        if (derlen != sign_len || memcmp(sign_copy, der, derlen) != 0) {
+            break;
+        }
+        // 取出 r, s
+        ECDSA_SIG_get0(sig, &sig_r, &sig_s);
+        char *r_hex = BN_bn2hex(sig_r);
+        char *s_hex = BN_bn2hex(sig_s);
+        NSString *rStr = [NSString stringWithCString:r_hex encoding:NSUTF8StringEncoding];
+        NSString *sStr = [NSString stringWithCString:s_hex encoding:NSUTF8StringEncoding];
+        OPENSSL_free(r_hex);
+        OPENSSL_free(s_hex);
+        if (rStr.length == 0 || sStr.length == 0) {
+            break;
+        }
+        originSign = [NSString stringWithFormat:@"%@%@", rStr, sStr];
+    } while (NO);
+    
+    ECDSA_SIG_free(sig);
+    OPENSSL_free(der);
+    OPENSSL_free(sign_copy);
+    
+    return originSign;
 }
 
 @end
