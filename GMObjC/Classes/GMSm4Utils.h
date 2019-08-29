@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nullable NSString *)decrypt:(NSString *)encryptText Key:(NSString *)key;
 
-///MARK: - sm4 文件加解密
+///MARK: - sm4 Data 加解密
 
 /**
  * sm4 文件加密

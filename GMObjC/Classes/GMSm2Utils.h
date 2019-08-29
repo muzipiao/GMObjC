@@ -5,7 +5,7 @@
 //  Created by lifei on 2019/7/9.
 //  Copyright © 2019 PacteraLF. All rights reserved.
 /**
- * Sm2 加解密 OC 封装
+ * SM2 加解密及签名的 OC 封装
  */
 
 #import <Foundation/Foundation.h>
@@ -59,34 +59,34 @@ NS_ASSUME_NONNULL_BEGIN
  * -------SM2 数字签名-------
  @param plainText 明文
  @param priKey SM2 私钥
- @param userID 用户ID，可为空；不为空时，签名和验签需要相同 ID
+ @param userID 用户ID，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
  @return 数字签名，格式为(r,s)逗号分隔的 16 进制字符串
  */
-+ (nullable NSString *)sign:(NSString *)plainText PrivateKey:(NSString *)priKey UserID:(NSString *)userID;
++ (nullable NSString *)sign:(NSString *)plainText PrivateKey:(NSString *)priKey UserID:(nullable NSString *)userID;
 
 /**
  * -------SM2 验证数字签名-------
  @param plainText 明文
  @param sign 数字签名，格式为(r,s)拼接的 16 进制字符串
  @param pubKey SM2 公钥
- @param userID 用户ID，可为空；不为空时，签名和验签需要相同 ID
+ @param userID 用户ID，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
  @return 验签结果，YES 为通过，NO 为不通过
  */
-+ (BOOL)verify:(NSString *)plainText Sign:(NSString *)sign PublicKey:(NSString *)pubKey UserID:(NSString *)userID;
++ (BOOL)verify:(NSString *)plainText Sign:(NSString *)sign PublicKey:(NSString *)pubKey UserID:(nullable NSString *)userID;
 
 /**
  * -------SM2 数字签名 Der 编码-------
  @param originSign 格式为(r,s)逗号分隔的 16 进制字符串
  @return 数字签名，Der 编码格式
  */
-+ (NSString *)encodeWithDer:(NSString *)originSign;
++ (nullable NSString *)encodeWithDer:(NSString *)originSign;
 
 /**
  * -------SM2 数字签名 Der 解码-------
  @param derSign Der 编码格式的数字签名
  @return 数字签名，(r,s)逗号分隔 16 进制字符串格式
  */
-+ (NSString *)decodeWithDer:(NSString *)derSign;
++ (nullable NSString *)decodeWithDer:(NSString *)derSign;
 
 @end
 

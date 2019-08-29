@@ -8,7 +8,6 @@
 
 #import "GMViewController.h"
 #import "GMObjC.h"
-#import <openssl/sm2.h>
 
 @interface GMViewController ()
 
@@ -74,11 +73,18 @@
 
 // sm2 签名验签
 - (void)testSm2Sign{
+    // 传入 nil 或空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
     NSString *userID = @"lifei_zdjl@126.com";
-    // 签名结果
+    // 签名结果r,s，格式为r和s逗号分割的 16 进制字符串
     NSString *signStr = [GMSm2Utils sign:self.gPwd PrivateKey:self.gPrikey UserID:userID];
-    // 验签
-    BOOL isOK = [GMSm2Utils verify:self.gPwd Sign:signStr PublicKey:self.gPubkey UserID:userID];
+    // 若后端验签【明文】前进行了 16 进制解码，传给后端的数据前要进行 16 进制编码
+    NSString *hexPwd = [GMUtils stringToHex:self.gPwd];
+    // 模拟服务端 16 进制解码，解码出【明文】再进行验签
+    NSString *plainPwd = [GMUtils hexToString:hexPwd];
+    /**
+     * 模拟服务端验证签名，传入【明文】，签名，公钥，用户 ID
+     */
+    BOOL isOK = [GMSm2Utils verify:plainPwd Sign:signStr PublicKey:self.gPubkey UserID:userID];
     NSString *result = isOK ? @"通过" : @"未通过";
     // 对签名结果 Der 编码
     NSString *derSign = [GMSm2Utils encodeWithDer:signStr];

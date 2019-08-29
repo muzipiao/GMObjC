@@ -246,7 +246,7 @@
 }
 
 ///MARK: - SM2 签名
-+ (nullable NSString *)sign:(NSString *)plainText PrivateKey:(NSString *)priKey UserID:(NSString *)userID{
++ (nullable NSString *)sign:(NSString *)plainText PrivateKey:(NSString *)priKey UserID:(nullable NSString *)userID{
     if (plainText.length == 0 || priKey.length == 0) {
         return nil;
     }
@@ -319,7 +319,7 @@
 }
 
 ///MARK: - SM2 验签
-+ (BOOL)verify:(NSString *)plainText Sign:(NSString *)sign PublicKey:(NSString *)pubKey UserID:(NSString *)userID{
++ (BOOL)verify:(NSString *)plainText Sign:(NSString *)sign PublicKey:(NSString *)pubKey UserID:(nullable NSString *)userID{
     if (plainText.length == 0 || sign.length == 0 || pubKey.length == 0) {
         return NO;
     }
@@ -387,7 +387,7 @@
 }
 
 ///MARK: - SM2签名 Der 编码
-+ (NSString *)encodeWithDer:(NSString *)originSign{
++ (nullable NSString *)encodeWithDer:(NSString *)originSign{
     if (originSign.length == 0) {
         return nil;
     }
@@ -436,7 +436,7 @@
 }
 
 ///MARK: - SM2签名 Der 解码
-+ (NSString *)decodeWithDer:(NSString *)derSign{
++ (nullable NSString *)decodeWithDer:(NSString *)derSign{
     if (derSign.length == 0) {
         return nil;
     }

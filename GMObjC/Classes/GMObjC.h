@@ -1,10 +1,10 @@
 //  Created by lifei on 2019/8/2.
 //  Copyright © 2019 lifei. All rights reserved.
 /**
- * GMSm2Utils sm2 非对称加解密
+ * GMSm2Utils sm2 非对称加解密及签名验签
  * GMSm3Utils sm3 摘要提取
  * GMSm4Utils sm4 对称加解密
- * GMUtils 工具类
+ * GMUtils  工具类，16进制编码解码等
  */
 
 #ifndef GMObjC_h

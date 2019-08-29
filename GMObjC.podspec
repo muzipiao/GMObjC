@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   spec.name         = "GMObjC"
-  spec.version      = "1.0.4"
+  spec.version      = "1.0.5"
   spec.summary      = "国密 sm2、sm4 加解密，sm2 签名验签，sm3 摘要算法 OC 封装，基于 OpenSSL。"
 
   spec.description  = <<-DESC
-  OpenSSL 1.1.1 以上版本支持国密加密，基于 OpenSSL 1.1.1c 封装 sm2、sm4 加解密，sm2 签名验签，sm3 摘要算法。
+  OpenSSL 1.1.1 以上版本支持国密加密，基于 OpenSSL 封装 sm2、sm4 加解密，sm2 签名验签，sm3 摘要算法。
                    DESC
 
   spec.homepage     = "https://github.com/muzipiao/GMObjC"
