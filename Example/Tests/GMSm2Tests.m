@@ -116,6 +116,30 @@
     XCTAssertFalse(isUserZeroOK, @"用户 ID 不同验证不通过");
 }
 
+- (void)testErrorKey {
+    NSString *plaintext = @"123456";
+    NSString *pubErrorKey = @"0408E3FFF9505BCFAF9307E888888999999B3936437A870407EA3D97886BAFBC9C624537215DE9507BC0E2DD276CF74695C924F28E9004CDE4678F63D698";
+    NSString *privErrorKey = @"6666662B9FE24AB196305F82E647616C3A3694441FB3422E7838E24DEAE";
+    
+    NSString *enTrueStr = [GMSm2Utils encrypt:plaintext PublicKey:gPubkey];
+    XCTAssertNotNil(enTrueStr, @"加密字符串不为空");
+
+    NSString *signTrueStr = [GMSm2Utils sign:plaintext PrivateKey:gPrivkey UserID:nil];
+    XCTAssertNotNil(signTrueStr, @"签名结果不为为空");
+    
+    NSString *enWithErrorPubKey = [GMSm2Utils encrypt:plaintext PublicKey:pubErrorKey];
+    XCTAssertNil(enWithErrorPubKey, @"加密结果为空");
+    
+    NSString *deWithErrorPri = [GMSm2Utils decrypt:enTrueStr PrivateKey:privErrorKey];
+    XCTAssertNil(deWithErrorPri, @"解密结果为空");
+    
+    NSString *signWithErrorPriv = [GMSm2Utils sign:plaintext PrivateKey:privErrorKey UserID:nil];
+    BOOL isOKErrorPub = [GMSm2Utils verify:plaintext Sign:signTrueStr PublicKey:pubErrorKey UserID:nil];
+    BOOL isOKErrorSign = [GMSm2Utils verify:plaintext Sign:signWithErrorPriv PublicKey:pubErrorKey UserID:nil];
+    XCTAssertFalse(isOKErrorPub, @"签名结果应该校验失败");
+    XCTAssertFalse(isOKErrorSign, @"签名结果应该校验失败");
+}
+
 /**
  * 测试大量生产 sm2 公私钥
  */
