@@ -36,7 +36,7 @@
  * 测试对英文字符串提取摘要
  */
 - (void)testSm3EnStr {
-    for (NSInteger i = 0; i < 10000; i++) {
+    for (NSInteger i = 0; i < 1000; i++) {
         int randLen = arc4random_uniform((int)1000);
         NSString *plaintext = [self randomEn:randLen];
         XCTAssertNotNil(plaintext, @"生成字符串不为空");
@@ -48,7 +48,7 @@
     int randLen = arc4random_uniform((int)1000);
     NSString *plaintext = [self randomEn:randLen];
     NSString *digStr = nil;
-    for (NSInteger i = 0; i < 10000; i++) {
+    for (NSInteger i = 0; i < 1000; i++) {
         XCTAssertNotNil(plaintext, @"生成字符串不为空");
         NSString *tempDigStr = [GMSm3Utils hashWithString:plaintext];
         XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
@@ -64,7 +64,7 @@
  * 测试对中文字符串提取摘要
  */
 - (void)testSm3ZhStr {
-    for (NSInteger i = 0; i < 10000; i++) {
+    for (NSInteger i = 0; i < 1000; i++) {
         int randLen = arc4random_uniform((int)1000);
         NSString *plaintext = [self randomZh:randLen];
         XCTAssertNotNil(plaintext, @"生成字符串不为空");
@@ -76,7 +76,7 @@
     int randLen = arc4random_uniform((int)1000);
     NSString *plaintext = [self randomZh:randLen];
     NSString *digStr = nil;
-    for (NSInteger i = 0; i < 10000; i++) {
+    for (NSInteger i = 0; i < 1000; i++) {
         XCTAssertNotNil(plaintext, @"生成字符串不为空");
         NSString *tempDigStr = [GMSm3Utils hashWithString:plaintext];
         XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
@@ -92,7 +92,7 @@
  * 测试对中英文混合字符串提取摘要
  */
 - (void)testSm3ZhEnStr {
-    for (NSInteger i = 0; i < 10000; i++) {
+    for (NSInteger i = 0; i < 1000; i++) {
         int randLen = arc4random_uniform((int)1000);
         NSString *plaintext = [self randomZhEnString:randLen];
         XCTAssertNotNil(plaintext, @"生成字符串不为空");
@@ -104,7 +104,7 @@
     int randLen = arc4random_uniform((int)1000);
     NSString *plaintext = [self randomZhEnString:randLen];
     NSString *digStr = nil;
-    for (NSInteger i = 0; i < 10000; i++) {
+    for (NSInteger i = 0; i < 1000; i++) {
         XCTAssertNotNil(plaintext, @"生成字符串不为空");
         NSString *tempDigStr = [GMSm3Utils hashWithString:plaintext];
         XCTAssertNotNil(tempDigStr, @"加密字符串不为空");

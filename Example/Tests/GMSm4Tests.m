@@ -139,12 +139,12 @@
  * 测试 sm 4 大量加解密数字英文字符字符串
  */
 - (void)testSm4Str {
-    for (NSInteger i = 0; i < 30000; i++) {
+    for (NSInteger i = 0; i < 3000; i++) {
         int randLen = arc4random_uniform((int)10000);
         NSString *plaintext = nil;
-        if (i<10000) {
+        if (i<1000) {
             plaintext = [self randomEn:randLen]; // 数字英文
-        }else if (i>=10000 && i< 20000){
+        }else if (i>=1000 && i< 2000){
             plaintext = [self randomZh:randLen]; // 中文字符
         }else{
             plaintext = [self randomZhEnString:randLen]; //中英文混合

@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = GMOpenSSL;
+			productName = GMOpenSSL;
 		};
 /* End PBXAggregateTarget section */
 
@@ -107,7 +108,7 @@
 		1C35926279C12C5C6B4F497E5FA3411E /* tls1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = tls1.h; path = GMOpenSSL/openssl.framework/Headers/tls1.h; sourceTree = "<group>"; };
 		217E04D35BAE548D2148C462E8C97DAA /* md4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = md4.h; path = GMOpenSSL/openssl.framework/Headers/md4.h; sourceTree = "<group>"; };
 		223A9E01FD01083ECC7411394CBD9BBD /* safestack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = safestack.h; path = GMOpenSSL/openssl.framework/Headers/safestack.h; sourceTree = "<group>"; };
-		23B003F20D597F10D50956D50CDEF86F /* GMObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GMObjC.framework; path = GMObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23B003F20D597F10D50956D50CDEF86F /* GMObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27277A33A2E120BACB4577F243169494 /* blowfish.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = blowfish.h; path = GMOpenSSL/openssl.framework/Headers/blowfish.h; sourceTree = "<group>"; };
 		28E4E2FA1B109C2232B75122D54D0D42 /* crypto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto.h; path = GMOpenSSL/openssl.framework/Headers/crypto.h; sourceTree = "<group>"; };
 		29115A7449EF811728CD6E859A005C4A /* pkcs12err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs12err.h; path = GMOpenSSL/openssl.framework/Headers/pkcs12err.h; sourceTree = "<group>"; };
@@ -117,13 +118,13 @@
 		2C135FF297A2B56231E0DA42084FC116 /* opensslconf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf.h; path = GMOpenSSL/openssl.framework/Headers/opensslconf.h; sourceTree = "<group>"; };
 		2D6AA4C70779EFC12BC8BBEBDC43D3F5 /* asn1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1.h; path = GMOpenSSL/openssl.framework/Headers/asn1.h; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3412EC4E2BE0B0A89006F93219F0A67F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		3412EC4E2BE0B0A89006F93219F0A67F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3418B9467024E611C5EF93E8C78E2A56 /* mdc2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mdc2.h; path = GMOpenSSL/openssl.framework/Headers/mdc2.h; sourceTree = "<group>"; };
 		3637CFC7AB7525104BB1A820DDEDCD3B /* dsa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dsa.h; path = GMOpenSSL/openssl.framework/Headers/dsa.h; sourceTree = "<group>"; };
 		3A570F9CDDCD74063C6515A61EEF1AB4 /* obj_mac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = obj_mac.h; path = GMOpenSSL/openssl.framework/Headers/obj_mac.h; sourceTree = "<group>"; };
 		3FC4A571D6871053C3DE76C99B73ABE6 /* Pods-GMObjC_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GMObjC_Example-dummy.m"; sourceTree = "<group>"; };
 		4020B6E5E5BEFD55513F986C963A9EA6 /* bioerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bioerr.h; path = GMOpenSSL/openssl.framework/Headers/bioerr.h; sourceTree = "<group>"; };
-		459C874B256761E6BD4B13E8CCB686D6 /* GMObjC.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = GMObjC.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		459C874B256761E6BD4B13E8CCB686D6 /* GMObjC.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = GMObjC.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		467AAA7875D3D613859886A2D479E049 /* Pods-GMObjC_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GMObjC_Tests.modulemap"; sourceTree = "<group>"; };
 		4720FF333C5409A9ECAD7E2E70D1BD78 /* ssl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl.h; path = GMOpenSSL/openssl.framework/Headers/ssl.h; sourceTree = "<group>"; };
 		47ABBCB7033FE315F9DD99FB85EB87EF /* Pods-GMObjC_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GMObjC_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -156,7 +157,7 @@
 		68ED96B1A117373CCA7507BA4D309CC9 /* asn1t.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1t.h; path = GMOpenSSL/openssl.framework/Headers/asn1t.h; sourceTree = "<group>"; };
 		69314951DF0FF2F55B30DDD3814FD488 /* sm4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sm4.h; path = GMOpenSSL/openssl.framework/Headers/sm4.h; sourceTree = "<group>"; };
 		69F0286579DBCB82CFF87E3D597229CC /* ui.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ui.h; path = GMOpenSSL/openssl.framework/Headers/ui.h; sourceTree = "<group>"; };
-		6B73C2FDF1C9300E83D475F743A65628 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		6B73C2FDF1C9300E83D475F743A65628 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		6C40D3F95DE951A02AEF580FB775BB5B /* camellia.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = camellia.h; path = GMOpenSSL/openssl.framework/Headers/camellia.h; sourceTree = "<group>"; };
 		70C60B8D4E25CA1498DFF2F887ABC75D /* pkcs7.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs7.h; path = GMOpenSSL/openssl.framework/Headers/pkcs7.h; sourceTree = "<group>"; };
 		733DDD5D699507AAD54D57D1BA55A4B4 /* GMOpenSSL.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GMOpenSSL.xcconfig; sourceTree = "<group>"; };
@@ -177,7 +178,7 @@
 		94237CD26F54BFFE9AF44E4E812A441F /* srp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = srp.h; path = GMOpenSSL/openssl.framework/Headers/srp.h; sourceTree = "<group>"; };
 		999CCA907318CA3B46559F105B3AE210 /* evperr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = evperr.h; path = GMOpenSSL/openssl.framework/Headers/evperr.h; sourceTree = "<group>"; };
 		9B51BE728393C53EC930694FE9A78593 /* objectserr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = objectserr.h; path = GMOpenSSL/openssl.framework/Headers/objectserr.h; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DA995CF0AE8C38FBA6F2C585808A619 /* GMSm2Def.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMSm2Def.h; path = GMObjC/Classes/GMSm2Def.h; sourceTree = "<group>"; };
 		9E0E1D265B3D297DEC8EC9C02CA597AE /* ossl_typ.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ossl_typ.h; path = GMOpenSSL/openssl.framework/Headers/ossl_typ.h; sourceTree = "<group>"; };
 		9FB7A2DA051DFA53915FA49FA2EBF873 /* ecdh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ecdh.h; path = GMOpenSSL/openssl.framework/Headers/ecdh.h; sourceTree = "<group>"; };
@@ -213,7 +214,7 @@
 		D1DEE5A65C81AAE391609153AAB3FD5F /* GMObjC-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GMObjC-umbrella.h"; sourceTree = "<group>"; };
 		D3C65737CD79C9843EDD3EE35FD1B221 /* cast.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cast.h; path = GMOpenSSL/openssl.framework/Headers/cast.h; sourceTree = "<group>"; };
 		D66C273EE518ED25AE081D9770512FEA /* Pods-GMObjC_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GMObjC_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		D6C0391615D894783CF80359100104F7 /* Pods_GMObjC_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GMObjC_Example.framework; path = "Pods-GMObjC_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6C0391615D894783CF80359100104F7 /* Pods_GMObjC_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMObjC_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7C56EEFC347F227014BF46DBB049B6B /* GMSm4Utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMSm4Utils.h; path = GMObjC/Classes/GMSm4Utils.h; sourceTree = "<group>"; };
 		D8CC8A6760D58A4F817314712C5277E1 /* cryptoerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cryptoerr.h; path = GMOpenSSL/openssl.framework/Headers/cryptoerr.h; sourceTree = "<group>"; };
 		DC23F829203815B88F655E69ED8DD108 /* des.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = des.h; path = GMOpenSSL/openssl.framework/Headers/des.h; sourceTree = "<group>"; };
@@ -224,7 +225,7 @@
 		E38DFCD52D4EC27BF24B5C5EB1D85066 /* GMSm3Utils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMSm3Utils.m; path = GMObjC/Classes/GMSm3Utils.m; sourceTree = "<group>"; };
 		E3CFA2C4877F9A4C540B2E88BD4B180C /* ssl2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl2.h; path = GMOpenSSL/openssl.framework/Headers/ssl2.h; sourceTree = "<group>"; };
 		E4904E7AFE9E55DAC29C58798017AE0D /* md5.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = md5.h; path = GMOpenSSL/openssl.framework/Headers/md5.h; sourceTree = "<group>"; };
-		E530B9D12E6673745F8B2C2A63E79003 /* Pods_GMObjC_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GMObjC_Tests.framework; path = "Pods-GMObjC_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E530B9D12E6673745F8B2C2A63E79003 /* Pods_GMObjC_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMObjC_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C1397C88A3881B844CC3FD697115C9 /* conf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = conf.h; path = GMOpenSSL/openssl.framework/Headers/conf.h; sourceTree = "<group>"; };
 		E8AC9A4B2E56E0036B96CA392F486103 /* Pods-GMObjC_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GMObjC_Tests-umbrella.h"; sourceTree = "<group>"; };
 		E99135BC577EF1D07C88A6F70D41F208 /* aes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = aes.h; path = GMOpenSSL/openssl.framework/Headers/aes.h; sourceTree = "<group>"; };
@@ -402,7 +403,6 @@
 				2F5D0C5DFE593331CC64D1B67C1945CD /* Frameworks */,
 				34DB75BFBD0958B1B17E9B094AEE77CD /* Support Files */,
 			);
-			name = GMOpenSSL;
 			path = GMOpenSSL;
 			sourceTree = "<group>";
 		};
@@ -657,6 +657,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = 46C3FDA7964208FE9C9E1A85A5AF0912 /* Products */;
@@ -900,8 +901,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

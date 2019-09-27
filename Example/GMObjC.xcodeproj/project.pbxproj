@@ -26,6 +26,7 @@
 		9C36EEEC22F420E3002203E9 /* sm4TestFile.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9C36EEEA22F420DE002203E9 /* sm4TestFile.txt */; };
 		9C97272B23096BE400A39090 /* GMSm3Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C97272A23096BE400A39090 /* GMSm3Tests.m */; };
 		9C97272D23096C4900A39090 /* GMSm4Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C97272C23096C4900A39090 /* GMSm4Tests.m */; };
+		ABBEF70B233E7928002A0B0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABBEF70A233E7928002A0B0B /* LaunchScreen.storyboard */; };
 		B0234877E959B291C47C6594 /* Pods_GMObjC_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F4109CE706901DBCBA9E6C /* Pods_GMObjC_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		9C97272A23096BE400A39090 /* GMSm3Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm3Tests.m; sourceTree = "<group>"; };
 		9C97272C23096C4900A39090 /* GMSm4Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm4Tests.m; sourceTree = "<group>"; };
 		9CBBFDB72309693E00873B67 /* GMBaseTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMBaseTests.h; sourceTree = "<group>"; };
+		ABBEF70A233E7928002A0B0B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DCB385E32425ACA4FA411973 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		DE3D9A1AC83C3B8A3540C29B /* Pods-GMObjC_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC_Tests.debug.xcconfig"; path = "Target Support Files/Pods-GMObjC_Tests/Pods-GMObjC_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E6FF4074B03685EE43CBD7CE /* Pods-GMObjC_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC_Example.debug.xcconfig"; path = "Target Support Files/Pods-GMObjC_Example/Pods-GMObjC_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				6003F59D195388D20070C39A /* GMAppDelegate.m */,
 				6003F5A5195388D20070C39A /* GMViewController.h */,
 				6003F5A6195388D20070C39A /* GMViewController.m */,
+				ABBEF70A233E7928002A0B0B /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -290,6 +293,7 @@
 			files = (
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				9C36EEEB22F420DE002203E9 /* sm4TestFile.txt in Resources */,
+				ABBEF70B233E7928002A0B0B /* LaunchScreen.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,13 +514,13 @@
 			baseConfigurationReference = E6FF4074B03685EE43CBD7CE /* Pods-GMObjC_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5876MU3PLA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GMObjC/GMObjC-Prefix.pch";
 				INFOPLIST_FILE = "GMObjC/GMObjC-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jdr.gmobjc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -532,13 +536,13 @@
 			baseConfigurationReference = 68788533A01750D2A2469344 /* Pods-GMObjC_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5876MU3PLA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GMObjC/GMObjC-Prefix.pch";
 				INFOPLIST_FILE = "GMObjC/GMObjC-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jdr.gmobjc;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -144,7 +144,7 @@
  * 测试大量生产 sm2 公私钥
  */
 - (void)testSm2CreateKeys {
-    for (NSInteger i = 0; i < 10000; i++) {
+    for (NSInteger i = 0; i < 1000; i++) {
         // 生成一对新的公私钥
         NSArray *newKey = [GMSm2Utils createPublicAndPrivateKey];
         XCTAssertNotNil(newKey[0], @"生成公钥不为空");
@@ -164,7 +164,7 @@
     
     NSString *decodeStr = [GMSm2Utils decodeWithASN1:encryptStr];
     XCTAssertNotNil(decodeStr, @"ASN1解码后字符串不为空");
-    for (NSInteger i = 0; i < 10000; i++) {
+    for (NSInteger i = 0; i < 1000; i++) {
         NSString *newDecodeStr = [GMSm2Utils decodeWithASN1:encryptStr];
         BOOL isSame_decode = [newDecodeStr isEqualToString:decodeStr];
         XCTAssertTrue(isSame_decode, @"多次解码应该相同");
@@ -172,7 +172,7 @@
     
     NSString *encodeStr = [GMSm2Utils encodeWithASN1:decodeStr];
     XCTAssertNotNil(encodeStr, @"ASN1编码后字符串不为空");
-    for (NSInteger i = 0; i < 10000; i++) {
+    for (NSInteger i = 0; i < 1000; i++) {
         NSString *newEncodeStr = [GMSm2Utils encodeWithASN1:decodeStr];
         BOOL isSame_encode = [newEncodeStr isEqualToString:encodeStr];
         XCTAssertTrue(isSame_encode, @"多次编码应该相同");
@@ -191,7 +191,7 @@
  * 测试大量包含 ASN1 编解码的加解密无错误出现
  */
 - (void)testSm2EncryptDecryptWithASN1 {
-    for (NSInteger i = 0; i < 10000; i++) {
+    for (NSInteger i = 0; i < 1000; i++) {
         int randLen = arc4random_uniform((int)10000);
         NSString *plaintext = [self randomEn:randLen];
         XCTAssertNotNil(plaintext, @"生成字符串不为空");
@@ -215,12 +215,12 @@
  * 测试大量加解密字符串无错误
  */
 - (void)testSm2Str {
-    for (NSInteger i = 0; i < 30000; i++) {
+    for (NSInteger i = 0; i < 3000; i++) {
         int randLen = arc4random_uniform((int)10000);
         NSString *plaintext = nil;
-        if (i<10000) {
+        if (i<1000) {
             plaintext = [self randomEn:randLen]; // 数字英文
-        }else if (i>=10000 && i< 20000){
+        }else if (i>=1000 && i< 2000){
             plaintext = [self randomZh:randLen]; // 中文字符
         }else{
             plaintext = [self randomZhEnString:randLen]; //中英文混合
