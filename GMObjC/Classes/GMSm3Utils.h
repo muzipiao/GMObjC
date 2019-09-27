@@ -18,10 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 提取文本字符串的摘要值
- @param plainText 待提取摘要的字符串
+ @param plaintext 待提取摘要的字符串
  @return 摘要值，16进制编码格式
  */
-+ (nullable NSString *)hashWithString:(NSString *)plainText;
++ (nullable NSString *)hashWithString:(NSString *)plaintext;
 
 /**
  * 提取数据或文件的摘要值

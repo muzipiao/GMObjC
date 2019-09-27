@@ -26,13 +26,13 @@
  */
 - (void)testGMUtils {
     int randLen = arc4random_uniform((int)10000);
-    NSString *plainText = [self randomEn:randLen];
-    XCTAssertNotNil(plainText, @"生成字符串不为空");
+    NSString *plaintext = [self randomEn:randLen];
+    XCTAssertNotNil(plaintext, @"生成字符串不为空");
     
-    NSString *colonStr = [GMUtils addColon:plainText];
+    NSString *colonStr = [GMUtils addColon:plaintext];
     XCTAssertNotNil(colonStr, @"添加冒号字符串不为空");
     
-    NSString *hexStr = [GMUtils stringToHex:plainText];
+    NSString *hexStr = [GMUtils stringToHex:plaintext];
     XCTAssertNotNil(hexStr, @"16 进制字符串不为空");
     
     NSString *originStr = [GMUtils hexToString:hexStr];

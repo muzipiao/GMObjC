@@ -65,8 +65,7 @@ NSString *pwd = @"123456";
 // 加密
 NSString *ctext = [GMSm2Utils encrypt:pwd PublicKey:gPubkey];
 // 解密
-NSString *plainText = [GMSm2Utils decrypt:encodeCtext PrivateKey:gPrikey];
-
+NSString *plaintext = [GMSm2Utils decrypt:encodeCtext PrivateKey:gPrikey];
 ```
 
 注意：
@@ -103,19 +102,29 @@ NSString *originStr = [GMSm2Utils decodeWithDer:derSign];
 1. 用户 ID 可传空值，当传空值时使用 OpenSSL 默认用户 ID，OpenSSL 中默认用户定义为`#define SM2_DEFAULT_USERID "1234567812345678"` ，客户端和服务端用户 ID 要保持一致。
 2. 客户端和后台交互的过程中，假设后台签名，客户端验签，后台返回的签名是 DER 编码格式，就需要先对签名进行 DER 解码，然后再进行验签。同理，若客户端签名，后台验签，根据后台是需要 (r, s) 拼接格式签名，还是 DER 格式，进行编码解码。
 
-### sm4 加解密
+### SM4 加解密
 
-sm4 加解密都很简单，加密传入待加密字符串和密钥，解密传入密文和密钥即可，代码：
+SM4 加解密都很简单，加密传入待加密字符串和密钥，解密传入密文和密钥即可，代码：
+
+* ECB 电子密码本模式，密文分割成长度相等的块（不足补齐），逐个块加密。
+* CBC 密文分组链接模式，前一个分组的密文和当前分组的明文异或或操作后再加密。
 
 ```objc
 // 待加密字符串
 NSString *pwd = @"123456";
-// 生产 sm4 密钥，注意为 16 字节字母数字符号混合的字符串
+// 生产 SM4 密钥，注意为 16 字节字母数字符号混合的字符串
 NSString *sm4Key = [GMSm4Utils createSm4Key]; // 生成16位密钥
-// sm4 加密
-NSString *sm4Ctext = [GMSm4Utils encrypt:pwd Key:sm4Key];
-// sm4 解密
-NSString *sm4Ptext = [GMSm4Utils decrypt:sm4Ctext Key:sm4Key];
+// SM4 ECB 模式加密
+NSString *sm4EnByECB = [GMSm4Utils encrypt:pwd Key:sm4Key];
+// SM4 ECB 模式解密
+NSString *sm4DeByECB = [GMSm4Utils decrypt:sm4EnByECB Key:sm4Key];
+
+// CBC 模式加密需要一个 16 字节的字符串，解密需要相同的字符串
+NSString *ivec = [GMSm4Utils createSm4Key]; // 生成16位初始化向量
+// SM4 CBC 模式加密
+NSString *sm4EnByCBC = [GMSm4Utils cbcEncrypt:pwd Key:sm4Key IV:ivec];
+// SM4 CBC 模式解密
+NSString *sm4DeByCBC = [GMSm4Utils cbcDecrypt:sm4EnByCBC Key:sm4Key IV:ivec];
 ```
 
 ### sm3 摘要
@@ -126,7 +135,7 @@ NSString *sm4Ptext = [GMSm4Utils decrypt:sm4Ctext Key:sm4Key];
 // 待提取摘要的字符串
 NSString *pwd = @"123456";
 // 字符串的摘要
-NSString *pwdDigest = [GMSm3Utils hashWithString:plainText];
+NSString *pwdDigest = [GMSm3Utils hashWithString:plaintext];
 
 // 对文件进行摘要计算，传入 NSData 即可
 NSString *txtPath = [[NSBundle mainBundle] pathForResource:@"sm4TestFile.txt" ofType:nil];

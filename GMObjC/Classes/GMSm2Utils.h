@@ -24,55 +24,55 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * -------加密-------
  * 使用 SM2 公钥加密字符串，加密失败返回 nil
- @param plainText 待加密的原始字符串
+ @param plaintext 待加密的原始字符串
  @param publicKey 04 开头的公钥
  @return 加密后的字符串(ASN1编码格式)
  */
-+ (nullable NSString *)encrypt:(NSString *)plainText PublicKey:(NSString *)publicKey;
++ (nullable NSString *)encrypt:(NSString *)plaintext PublicKey:(NSString *)publicKey;
 
 /**
  * -------解密-------
  * 使用 SM2 私钥解密，解密失败返回 nil
- @param encryptText 密文(ASN1编码格式)
+ @param ciphertext 密文(ASN1编码格式)
  @param privateKey 私钥
  @return 解密后的明文
  */
-+ (nullable NSString *)decrypt:(NSString *)encryptText PrivateKey:(NSString *)privateKey;
++ (nullable NSString *)decrypt:(NSString *)ciphertext PrivateKey:(NSString *)privateKey;
 
 /**
  * -------ASN1 编码-------
  * 对 C1C3C2 拼接的原始密文进行 ASN1 编码
- @param encryptText 原始密文(C1C3C2 直接拼接)
+ @param ciphertext 原始密文(C1C3C2 直接拼接)
  @return 编码后的密文
  */
-+ (nullable NSString *)encodeWithASN1:(NSString *)encryptText;
++ (nullable NSString *)encodeWithASN1:(NSString *)ciphertext;
 
 /**
  * -------ASN1 解码-------
  * 对 ASN1 格式的密文解码
- @param encryptText ASN1 编码格式的密文
+ @param ciphertext ASN1 编码格式的密文
  @return 解码后的密文(C1C3C2 直接拼接)
  */
-+ (nullable NSString *)decodeWithASN1:(NSString *)encryptText;
++ (nullable NSString *)decodeWithASN1:(NSString *)ciphertext;
 
 /**
  * -------SM2 数字签名-------
- @param plainText 明文
+ @param plaintext 明文
  @param priKey SM2 私钥
  @param userID 用户ID，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
  @return 数字签名，格式为(r,s)逗号分隔的 16 进制字符串
  */
-+ (nullable NSString *)sign:(NSString *)plainText PrivateKey:(NSString *)priKey UserID:(nullable NSString *)userID;
++ (nullable NSString *)sign:(NSString *)plaintext PrivateKey:(NSString *)priKey UserID:(nullable NSString *)userID;
 
 /**
  * -------SM2 验证数字签名-------
- @param plainText 明文
+ @param plaintext 明文
  @param sign 数字签名，格式为(r,s)拼接的 16 进制字符串
  @param pubKey SM2 公钥
  @param userID 用户ID，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
  @return 验签结果，YES 为通过，NO 为不通过
  */
-+ (BOOL)verify:(NSString *)plainText Sign:(NSString *)sign PublicKey:(NSString *)pubKey UserID:(nullable NSString *)userID;
++ (BOOL)verify:(NSString *)plaintext Sign:(NSString *)sign PublicKey:(NSString *)pubKey UserID:(nullable NSString *)userID;
 
 /**
  * -------SM2 数字签名 Der 编码-------

@@ -60,14 +60,14 @@
     // 解码的密文为 C1C3C2 拼接格式，解密需要转换为 ASN1 标准格式
     NSString *encodeCtext = [GMSm2Utils encodeWithASN1:dcodeCtext];
     // 对 ASN1 标准格式的密文进行解密
-    NSString *plainText = [GMSm2Utils decrypt:encodeCtext PrivateKey:self.gPrikey];
+    NSString *plaintext = [GMSm2Utils decrypt:encodeCtext PrivateKey:self.gPrikey];
     // 生成一对新的公私钥
     NSArray *newKey = [GMSm2Utils createPublicAndPrivateKey];
     NSString *pubKey = newKey[0];
     NSString *priKey = newKey[1];
     
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
-    [mStr appendFormat:@"\nsm2加密密文：\n%@\nASN1 解码sm2密文：\n%@\nASN1编码sm2密文：\n%@\nsm2解密结果：\n%@\n生成sm2公钥：\n%@\n生成sm2私钥：\n%@", ctext, dcodeCtext, encodeCtext, plainText, pubKey, priKey];
+    [mStr appendFormat:@"\n-------SM2加解密及编码-------\nSM2加密密文：\n%@\nASN1 解码SM2密文：\n%@\nASN1编码SM2密文：\n%@\nSM2解密结果：\n%@\n生成SM2公钥：\n%@\n生成SM2私钥：\n%@", ctext, dcodeCtext, encodeCtext, plaintext, pubKey, priKey];
     self.gTextView.text = mStr;
 }
 
@@ -92,7 +92,7 @@
     NSString *originStr = [GMSm2Utils decodeWithDer:derSign];
     
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
-    [mStr appendFormat:@"\nsm2签名：\n%@\n验签结果：\n%@\nDer编码sm2签名：\n%@\nDer解码sm2签名：\n%@", signStr, result, derSign, originStr];
+    [mStr appendFormat:@"\n-------SM2签名验签-------\nSM2签名：\n%@\n验签结果：\n%@\nDer编码SM2签名：\n%@\nDer解码SM2签名：\n%@", signStr, result, derSign, originStr];
     self.gTextView.text = mStr;
 }
 
@@ -106,18 +106,23 @@
     NSString *sm3DigFile = [GMSm3Utils hashWithData:fileData];
     
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
-    [mStr appendFormat:@"\n字符串 123456 sm3摘要：\n%@\n文件 sm4TestFile.txt sm3摘要：\n%@", sm3DigPwd, sm3DigFile];
+    [mStr appendFormat:@"\n-------SM3摘要-------\n字符串 123456 SM3摘要：\n%@\n文件 sm4TestFile.txt SM3摘要：\n%@", sm3DigPwd, sm3DigFile];
     self.gTextView.text = mStr;
 }
 
 // sm4 加解密测试
 - (void)testSm4{
     NSString *sm4Key = [GMSm4Utils createSm4Key]; // 生成16位密钥
-    NSString *sm4Ctext = [GMSm4Utils encrypt:self.gPwd Key:sm4Key];
-    NSString *sm4Ptext = [GMSm4Utils decrypt:sm4Ctext Key:sm4Key];
-    
+    // ECB 加解密模式
+    NSString *sm4EcbCipertext = [GMSm4Utils ecbEncrypt:self.gPwd Key:sm4Key];
+    NSString *sm4EcbPlaintext = [GMSm4Utils ecbDecrypt:sm4EcbCipertext Key:sm4Key];
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
-    [mStr appendFormat:@"\nsm4密钥：\n%@\nsm4加密密文：\n%@\nsm4解密结果：\n%@", sm4Key, sm4Ctext, sm4Ptext];
+    [mStr appendFormat:@"\n-------SM4加解密-------\nSM4密钥：\n%@\nECB 模式加密密文：\n%@\nECB模式解密结果：\n%@", sm4Key, sm4EcbCipertext, sm4EcbPlaintext];
+    // CBC 加解密模式
+    NSString *ivec = [GMSm4Utils createSm4Key]; // 生成16位初始化向量
+    NSString *sm4CbcCipertext = [GMSm4Utils cbcEncrypt:self.gPwd Key:sm4Key IV:ivec];
+    NSString *sm4CbcPlaintext = [GMSm4Utils cbcDecrypt:sm4CbcCipertext Key:sm4Key IV:ivec];
+    [mStr appendFormat:@"\nCBC模式需要的16字节向量：\n%@\nCBC模式加密密文：\n%@\nCBC模式解密结果：\n%@", ivec, sm4CbcCipertext, sm4CbcPlaintext];
     self.gTextView.text = mStr;
     
     // 加解密文件，任意文件可读取为 NSData 格式
@@ -127,12 +132,17 @@
     NSString *orginStr = [[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding];
     NSLog(@"文本文件原文：\n%@", orginStr);
     
-    // 加解密
-    NSData *encryptData = [GMSm4Utils encryptData:fileData Key:sm4Key];
-    NSData *decryptData = [GMSm4Utils decryptData:encryptData Key:sm4Key];
+    // ECB 模式加解密
+    NSData *ecbCipherData = [GMSm4Utils ecbEncryptData:fileData Key:sm4Key];
+    NSData *ecbDecryptData = [GMSm4Utils ecbDecryptData:ecbCipherData Key:sm4Key];
+    // CBC 模式加解密
+    NSData *cbcCipherData = [GMSm4Utils cbcEncryptData:fileData Key:sm4Key IV:ivec];
+    NSData *cbcDecryptData = [GMSm4Utils cbcDecryptData:cbcCipherData Key:sm4Key IV:ivec];
     // 加解密后台文本不变
-    NSString *sm4DeFileStr = [[NSString alloc] initWithData:decryptData encoding:NSUTF8StringEncoding];
-    NSLog(@"加解密后文本：\n%@", sm4DeFileStr);
+    NSString *sm4EcbFileStr = [[NSString alloc] initWithData:ecbDecryptData encoding:NSUTF8StringEncoding];
+    NSString *sm4CbcFileStr = [[NSString alloc] initWithData:cbcDecryptData encoding:NSUTF8StringEncoding];
+    NSLog(@"SM4 ECB 模式加解密后文本：\n%@", sm4EcbFileStr);
+    NSLog(@"SM4 CBC 模式加解密后文本：\n%@", sm4CbcFileStr);
 }
 
 @end

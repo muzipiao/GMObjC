@@ -77,20 +77,20 @@
     XCTAssertNil(signZeroStr, @"签名字符串应为空");
     
     // 签名私钥为空
-    NSString *plainText = @"123456";
-    NSString *signPriKeyNull = [GMSm2Utils sign:plainText PrivateKey:strNull UserID:userID];
+    NSString *plaintext = @"123456";
+    NSString *signPriKeyNull = [GMSm2Utils sign:plaintext PrivateKey:strNull UserID:userID];
     XCTAssertNil(signPriKeyNull, @"签名字符串应为空");
-    NSString *signPriKeyZero = [GMSm2Utils sign:plainText PrivateKey:strZero UserID:userID];
+    NSString *signPriKeyZero = [GMSm2Utils sign:plaintext PrivateKey:strZero UserID:userID];
     XCTAssertNil(signPriKeyZero, @"签名字符串应为空");
     
     // 签名的 UserID 为空
-    NSString *signUserNull = [GMSm2Utils sign:plainText PrivateKey:gPrivkey UserID:strNull];
+    NSString *signUserNull = [GMSm2Utils sign:plaintext PrivateKey:gPrivkey UserID:strNull];
     XCTAssertNotNil(signUserNull, @"签名字符串不应为空");
-    NSString *signUserZero = [GMSm2Utils sign:plainText PrivateKey:gPrivkey UserID:strZero];
+    NSString *signUserZero = [GMSm2Utils sign:plaintext PrivateKey:gPrivkey UserID:strZero];
     XCTAssertNotNil(signUserZero, @"签名字符串不应为空");
     
     // 生成一个签名
-    NSString *signNormal = [GMSm2Utils sign:plainText PrivateKey:gPrivkey UserID:userID];
+    NSString *signNormal = [GMSm2Utils sign:plaintext PrivateKey:gPrivkey UserID:userID];
     // 测试明文为空
     BOOL isMsgNullOK = [GMSm2Utils verify:strNull Sign:signNormal PublicKey:gPubkey UserID:userID];
     BOOL isMsgZeroOK = [GMSm2Utils verify:strZero Sign:signNormal PublicKey:gPubkey UserID:userID];
@@ -98,20 +98,20 @@
     XCTAssertFalse(isMsgZeroOK, @"明文为空验证不通过");
     
     // 测试签名为空
-    BOOL isSignNullOK = [GMSm2Utils verify:plainText Sign:strNull PublicKey:gPubkey UserID:userID];
-    BOOL isSignZeroOK = [GMSm2Utils verify:plainText Sign:strZero PublicKey:gPubkey UserID:userID];
+    BOOL isSignNullOK = [GMSm2Utils verify:plaintext Sign:strNull PublicKey:gPubkey UserID:userID];
+    BOOL isSignZeroOK = [GMSm2Utils verify:plaintext Sign:strZero PublicKey:gPubkey UserID:userID];
     XCTAssertFalse(isSignNullOK, @"签名为空验证不通过");
     XCTAssertFalse(isSignZeroOK, @"签名为空验证不通过");
     
     // 测试公钥为空
-    BOOL isPubNullOK = [GMSm2Utils verify:plainText Sign:signNormal PublicKey:strNull UserID:userID];
-    BOOL isPubZeroOK = [GMSm2Utils verify:plainText Sign:signNormal PublicKey:strZero UserID:userID];
+    BOOL isPubNullOK = [GMSm2Utils verify:plaintext Sign:signNormal PublicKey:strNull UserID:userID];
+    BOOL isPubZeroOK = [GMSm2Utils verify:plaintext Sign:signNormal PublicKey:strZero UserID:userID];
     XCTAssertFalse(isPubNullOK, @"公钥为空验证不通过");
     XCTAssertFalse(isPubZeroOK, @"公钥为空验证不通过");
     
     // 测试用户ID为空，不同用户
-    BOOL isUserNullOK = [GMSm2Utils verify:plainText Sign:signNormal PublicKey:strNull UserID:strNull];
-    BOOL isUserZeroOK = [GMSm2Utils verify:plainText Sign:signNormal PublicKey:strZero UserID:strZero];
+    BOOL isUserNullOK = [GMSm2Utils verify:plaintext Sign:signNormal PublicKey:strNull UserID:strNull];
+    BOOL isUserZeroOK = [GMSm2Utils verify:plaintext Sign:signNormal PublicKey:strZero UserID:strZero];
     XCTAssertFalse(isUserNullOK, @"用户 ID 不同验证不通过");
     XCTAssertFalse(isUserZeroOK, @"用户 ID 不同验证不通过");
 }
@@ -157,9 +157,9 @@
  */
 - (void)testSm2EncodeDecodeASN1 {
     int randLen = arc4random_uniform((int)10000);
-    NSString *plainText = [self randomEn:randLen];
-    XCTAssertNotNil(plainText, @"生成字符串不为空");
-    NSString *encryptStr = [GMSm2Utils encrypt:plainText PublicKey:gPubkey];
+    NSString *plaintext = [self randomEn:randLen];
+    XCTAssertNotNil(plaintext, @"生成字符串不为空");
+    NSString *encryptStr = [GMSm2Utils encrypt:plaintext PublicKey:gPubkey];
     XCTAssertNotNil(encryptStr, @"加密字符串不为空");
     
     NSString *decodeStr = [GMSm2Utils decodeWithASN1:encryptStr];
@@ -183,7 +183,7 @@
     
     NSString *decryptStr = [GMSm2Utils decrypt:encryptStr PrivateKey:gPrivkey];
     XCTAssertNotNil(decryptStr, @"解密结果不为空");
-    BOOL isSame_plain = [decryptStr isEqualToString:plainText];
+    BOOL isSame_plain = [decryptStr isEqualToString:plaintext];
     XCTAssertTrue(isSame_plain, @"加解密结果应该相同");
 }
 
@@ -193,10 +193,10 @@
 - (void)testSm2EncryptDecryptWithASN1 {
     for (NSInteger i = 0; i < 10000; i++) {
         int randLen = arc4random_uniform((int)10000);
-        NSString *plainText = [self randomEn:randLen];
-        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        NSString *plaintext = [self randomEn:randLen];
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
         
-        NSString *encryptStr = [GMSm2Utils encrypt:plainText PublicKey:gPubkey];
+        NSString *encryptStr = [GMSm2Utils encrypt:plaintext PublicKey:gPubkey];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");
         
         NSString *decodeStr = [GMSm2Utils decodeWithASN1:encryptStr];
@@ -206,67 +206,34 @@
         
         NSString *decryptStr = [GMSm2Utils decrypt:encryptStr PrivateKey:gPrivkey];
         XCTAssertNotNil(decryptStr, @"解密结果不为空");
-        BOOL isSame_plain = [decryptStr isEqualToString:plainText];
+        BOOL isSame_plain = [decryptStr isEqualToString:plaintext];
         XCTAssertTrue(isSame_plain, @"加解密结果应该相同");
     }
 }
 
 /**
- * 测试大量加解密英文字符串无错误
+ * 测试大量加解密字符串无错误
  */
-- (void)testSm2En {
-    for (NSInteger i = 0; i < 10000; i++) {
+- (void)testSm2Str {
+    for (NSInteger i = 0; i < 30000; i++) {
         int randLen = arc4random_uniform((int)10000);
-        NSString *plainText = [self randomEn:randLen];
-        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        NSString *plaintext = nil;
+        if (i<10000) {
+            plaintext = [self randomEn:randLen]; // 数字英文
+        }else if (i>=10000 && i< 20000){
+            plaintext = [self randomZh:randLen]; // 中文字符
+        }else{
+            plaintext = [self randomZhEnString:randLen]; //中英文混合
+        }
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
         
-        NSString *encryptStr = [GMSm2Utils encrypt:plainText PublicKey:gPubkey];
+        NSString *encryptStr = [GMSm2Utils encrypt:plaintext PublicKey:gPubkey];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");
         
         NSString *decryptStr = [GMSm2Utils decrypt:encryptStr PrivateKey:gPrivkey];
         XCTAssertNotNil(decryptStr, @"解密结果不为空");
         
-        BOOL isSame = [decryptStr isEqualToString:plainText];
-        XCTAssertTrue(isSame, @"加解密结果应该相同");
-    }
-}
-
-/**
- * 测试大量加密中文字符串无错误
- */
-- (void)testSm2Zh {
-    for (NSInteger i = 0; i < 1000; i++) {
-        int randLen = arc4random_uniform((int)1000);
-        NSString *plainText = [self randomZh:randLen];
-        XCTAssertNotNil(plainText, @"生成字符串不为空");
-        
-        NSString *encryptStr = [GMSm2Utils encrypt:plainText PublicKey:gPubkey];
-        XCTAssertNotNil(encryptStr, @"加密字符串不为空");
-        
-        NSString *decryptStr = [GMSm2Utils decrypt:encryptStr PrivateKey:gPrivkey];
-        XCTAssertNotNil(decryptStr, @"解密结果不为空");
-        
-        BOOL isSame = [decryptStr isEqualToString:plainText];
-        XCTAssertTrue(isSame, @"加解密结果应该相同");
-    }
-}
-
-/**
- * 测试大量加密中英文混合字符串无错误
- */
-- (void)testSm2ZhEn {
-    for (NSInteger i = 0; i < 1000; i++) {
-        int randLen = arc4random_uniform((int)1000);
-        NSString *plainText = [self randomZhEnString:randLen];
-        XCTAssertNotNil(plainText, @"生成字符串不为空");
-        
-        NSString *encryptStr = [GMSm2Utils encrypt:plainText PublicKey:gPubkey];
-        XCTAssertNotNil(encryptStr, @"加密字符串不为空");
-        
-        NSString *decryptStr = [GMSm2Utils decrypt:encryptStr PrivateKey:gPrivkey];
-        XCTAssertNotNil(decryptStr, @"解密结果不为空");
-        
-        BOOL isSame = [decryptStr isEqualToString:plainText];
+        BOOL isSame = [decryptStr isEqualToString:plaintext];
         XCTAssertTrue(isSame, @"加解密结果应该相同");
     }
 }
@@ -275,8 +242,8 @@
     NSString *userID = @"lifei_zdjl@126.com";
     for (NSInteger i = 0; i < 1000; i++) {
         int randLen = arc4random_uniform((int)1000);
-        NSString *plainText = [self randomZhEnString:randLen];
-        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        NSString *plaintext = [self randomZhEnString:randLen];
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
         
         // 随机 UserID
         NSString *tempUserID = userID;
@@ -287,10 +254,10 @@
             tempUserID = @"";
         }
         
-        NSString *signStr = [GMSm2Utils sign:plainText PrivateKey:gPrivkey UserID:tempUserID];
+        NSString *signStr = [GMSm2Utils sign:plaintext PrivateKey:gPrivkey UserID:tempUserID];
         XCTAssertNotNil(signStr, @"签名结果不为空");
         
-        BOOL isOK = [GMSm2Utils verify:plainText Sign:signStr PublicKey:gPubkey UserID:tempUserID];
+        BOOL isOK = [GMSm2Utils verify:plaintext Sign:signStr PublicKey:gPubkey UserID:tempUserID];
         XCTAssertTrue(isOK, @"签名结果应该校验成功");
         
         NSString *derStr = [GMSm2Utils encodeWithDer:signStr];
@@ -310,8 +277,8 @@
 - (void)testPerformanceSm2Encrypt {
     // 加密耗时
     [self measureBlock:^{
-        NSString *plainText = @"123456";
-        NSString *encryptStr = [GMSm2Utils encrypt:plainText PublicKey:gPubkey];
+        NSString *plaintext = @"123456";
+        NSString *encryptStr = [GMSm2Utils encrypt:plaintext PublicKey:gPubkey];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");
     }];
 }

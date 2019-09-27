@@ -12,11 +12,11 @@
 @implementation GMSm3Utils
 
 ///MARK: - 字符串的摘要值
-+ (nullable NSString *)hashWithString:(NSString *)plainText{
-    if (!plainText || plainText.length == 0) {
++ (nullable NSString *)hashWithString:(NSString *)plaintext{
+    if (!plaintext || plaintext.length == 0) {
         return nil;
     }
-    NSData *strData = [plainText dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *strData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
     NSString *digStr = [self hashWithData:strData];
     return digStr;
 }

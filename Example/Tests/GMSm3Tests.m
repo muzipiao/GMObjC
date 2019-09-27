@@ -38,19 +38,19 @@
 - (void)testSm3EnStr {
     for (NSInteger i = 0; i < 10000; i++) {
         int randLen = arc4random_uniform((int)1000);
-        NSString *plainText = [self randomEn:randLen];
-        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        NSString *plaintext = [self randomEn:randLen];
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
         
-        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plaintext];
         XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
     }
     // 多次摘要相同
     int randLen = arc4random_uniform((int)1000);
-    NSString *plainText = [self randomEn:randLen];
+    NSString *plaintext = [self randomEn:randLen];
     NSString *digStr = nil;
     for (NSInteger i = 0; i < 10000; i++) {
-        XCTAssertNotNil(plainText, @"生成字符串不为空");
-        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plaintext];
         XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
         if (digStr) {
             BOOL isSameDig = [digStr isEqualToString:tempDigStr];
@@ -66,19 +66,19 @@
 - (void)testSm3ZhStr {
     for (NSInteger i = 0; i < 10000; i++) {
         int randLen = arc4random_uniform((int)1000);
-        NSString *plainText = [self randomZh:randLen];
-        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        NSString *plaintext = [self randomZh:randLen];
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
         
-        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plaintext];
         XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
     }
     // 多次摘要相同
     int randLen = arc4random_uniform((int)1000);
-    NSString *plainText = [self randomZh:randLen];
+    NSString *plaintext = [self randomZh:randLen];
     NSString *digStr = nil;
     for (NSInteger i = 0; i < 10000; i++) {
-        XCTAssertNotNil(plainText, @"生成字符串不为空");
-        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plaintext];
         XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
         if (digStr) {
             BOOL isSameDig = [digStr isEqualToString:tempDigStr];
@@ -94,19 +94,19 @@
 - (void)testSm3ZhEnStr {
     for (NSInteger i = 0; i < 10000; i++) {
         int randLen = arc4random_uniform((int)1000);
-        NSString *plainText = [self randomZhEnString:randLen];
-        XCTAssertNotNil(plainText, @"生成字符串不为空");
+        NSString *plaintext = [self randomZhEnString:randLen];
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
         
-        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plaintext];
         XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
     }
     // 多次摘要相同
     int randLen = arc4random_uniform((int)1000);
-    NSString *plainText = [self randomZhEnString:randLen];
+    NSString *plaintext = [self randomZhEnString:randLen];
     NSString *digStr = nil;
     for (NSInteger i = 0; i < 10000; i++) {
-        XCTAssertNotNil(plainText, @"生成字符串不为空");
-        NSString *tempDigStr = [GMSm3Utils hashWithString:plainText];
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
+        NSString *tempDigStr = [GMSm3Utils hashWithString:plaintext];
         XCTAssertNotNil(tempDigStr, @"加密字符串不为空");
         if (digStr) {
             BOOL isSameDig = [digStr isEqualToString:tempDigStr];

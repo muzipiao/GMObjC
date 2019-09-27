@@ -47,11 +47,11 @@
 }
 
 ///MARK: - SM2 加密
-+ (nullable NSString *)encrypt:(NSString *)plainText PublicKey:(NSString *)publicKey{
-    if (!plainText || plainText.length == 0 || !publicKey || publicKey.length == 0) {
++ (nullable NSString *)encrypt:(NSString *)plaintext PublicKey:(NSString *)publicKey{
+    if (!plaintext || plaintext.length == 0 || !publicKey || publicKey.length == 0) {
         return nil;
     }
-    uint8_t *plain_text = (uint8_t *)plainText.UTF8String;
+    uint8_t *plain_text = (uint8_t *)plaintext.UTF8String;
     size_t msg_len = strlen((char *)plain_text);
     const char *pulic_key = publicKey.UTF8String;
     const EVP_MD *digest = EVP_sm3(); // 摘要算法
@@ -95,8 +95,8 @@
 }
 
 ///MARK: - SM2 解密
-+ (nullable NSString *)decrypt:(NSString *)encryptText PrivateKey:(NSString *)privateKey{
-    if (!encryptText || !privateKey || encryptText.length == 0 || privateKey.length == 0) {
++ (nullable NSString *)decrypt:(NSString *)ciphertext PrivateKey:(NSString *)privateKey{
+    if (!ciphertext || !privateKey || ciphertext.length == 0 || privateKey.length == 0) {
         return nil;
     }
     const char *private_key = privateKey.UTF8String; // 私钥
@@ -119,7 +119,7 @@
         }
         
         long ctext_len = 0;
-        uint8_t *ctext = OPENSSL_hexstr2buf(encryptText.UTF8String, &ctext_len);
+        uint8_t *ctext = OPENSSL_hexstr2buf(ciphertext.UTF8String, &ctext_len);
         size_t ptext_len = 0;
         if (!sm2_plaintext_size(key, digest, ctext_len, &ptext_len)) {
             break;
@@ -147,11 +147,11 @@
 }
 
 ///MARK: - ASN1 编码
-+ (nullable NSString *)encodeWithASN1:(NSString *)encryptText{
-    if (encryptText.length <= 192) {
++ (nullable NSString *)encodeWithASN1:(NSString *)ciphertext{
+    if (ciphertext.length <= 192) {
         return nil;
     }
-    NSString *upperEnText = encryptText.uppercaseString;
+    NSString *upperEnText = ciphertext.uppercaseString;
     NSString *C1xStr = [upperEnText substringWithRange:NSMakeRange(0, 64)];
     NSString *C1yStr = [upperEnText substringWithRange:NSMakeRange(64, 64)];
     NSString *C3Str = [upperEnText substringWithRange:NSMakeRange(128, 64)];
@@ -209,11 +209,11 @@
 }
 
 ///MARK: - ASN1 解码
-+ (nullable NSString *)decodeWithASN1:(NSString *)encryptText{
-    if (!encryptText || encryptText.length == 0) {
++ (nullable NSString *)decodeWithASN1:(NSString *)ciphertext{
+    if (!ciphertext || ciphertext.length == 0) {
         return nil;
     }
-    const char *hex_ctext = encryptText.UTF8String;
+    const char *hex_ctext = ciphertext.UTF8String;
     const EVP_MD *digest = EVP_sm3(); // 摘要算法
     long ctext_len = 0; // 密文原文长度
     const uint8_t *ctext = OPENSSL_hexstr2buf(hex_ctext, &ctext_len);
@@ -246,8 +246,8 @@
 }
 
 ///MARK: - SM2 签名
-+ (nullable NSString *)sign:(NSString *)plainText PrivateKey:(NSString *)priKey UserID:(nullable NSString *)userID{
-    if (plainText.length == 0 || priKey.length == 0) {
++ (nullable NSString *)sign:(NSString *)plaintext PrivateKey:(NSString *)priKey UserID:(nullable NSString *)userID{
+    if (plaintext.length == 0 || priKey.length == 0) {
         return nil;
     }
     
@@ -257,7 +257,7 @@
     }
     
     const char *private_key = priKey.UTF8String;
-    uint8_t *plain_text = (uint8_t *)plainText.UTF8String;
+    uint8_t *plain_text = (uint8_t *)plaintext.UTF8String;
     size_t plain_len = strlen((char *)plain_text);
     uint8_t *user_id = (uint8_t *)userDefault.UTF8String;
     size_t user_len = strlen((char *)user_id);
@@ -319,8 +319,8 @@
 }
 
 ///MARK: - SM2 验签
-+ (BOOL)verify:(NSString *)plainText Sign:(NSString *)sign PublicKey:(NSString *)pubKey UserID:(nullable NSString *)userID{
-    if (plainText.length == 0 || sign.length == 0 || pubKey.length == 0) {
++ (BOOL)verify:(NSString *)plaintext Sign:(NSString *)sign PublicKey:(NSString *)pubKey UserID:(nullable NSString *)userID{
+    if (plaintext.length == 0 || sign.length == 0 || pubKey.length == 0) {
         return NO;
     }
     NSString *userDefault = [NSString stringWithCString:SM2_DEFAULT_USERID encoding:NSUTF8StringEncoding];
@@ -328,7 +328,7 @@
         userDefault = userID;
     }
     const char *pub_key = pubKey.UTF8String;
-    uint8_t *plain_text = (uint8_t *)plainText.UTF8String;
+    uint8_t *plain_text = (uint8_t *)plaintext.UTF8String;
     size_t plain_len = strlen((char *)plain_text);
     uint8_t *user_id = (uint8_t *)userDefault.UTF8String;
     size_t user_len = strlen((char *)user_id);
