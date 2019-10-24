@@ -53,7 +53,7 @@
     }
     uint8_t *plain_text = (uint8_t *)plaintext.UTF8String;
     size_t msg_len = strlen((char *)plain_text);
-    const char *pulic_key = publicKey.UTF8String;
+    const char *public_key = publicKey.UTF8String;
     const EVP_MD *digest = EVP_sm3(); // 摘要算法
     const EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
     EC_KEY *key = NULL; // 密钥对
@@ -67,7 +67,7 @@
         }
         
         pub_point = EC_POINT_new(group);
-        EC_POINT_hex2point(group, pulic_key, pub_point, NULL);
+        EC_POINT_hex2point(group, public_key, pub_point, NULL);
         if (!EC_KEY_set_public_key(key, pub_point)) {
             break;
         }
@@ -487,6 +487,59 @@
     OPENSSL_free(sign_copy);
     
     return originSign;
+}
+
+///MARK: - ECDH 密钥协商
++ (nullable NSString *)computeECDH:(NSString *)publicKey PrivateKey:(NSString *)privateKey{
+    if (!publicKey || publicKey.length == 0 || !privateKey || privateKey.length == 0) {
+        return nil;
+    }
+    
+    const char *public_key = publicKey.UTF8String;
+    const char *private_key = privateKey.UTF8String; // 私钥
+    const EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
+    
+    EC_POINT *pub_point = NULL;  // 公钥
+    BIGNUM *pri_big_num = NULL; // 私钥
+    EC_KEY *key = NULL;  // 密钥结构体
+    NSString *ecdhStr = nil; // 协商出的密钥字符
+
+    do {
+        // 公钥转换为 EC_POINT
+        pub_point = EC_POINT_new(group);
+        EC_POINT_hex2point(group, public_key, pub_point, NULL);
+        // 私钥转换为 BIGNUM 并存储在 EC_KEY 中
+        if (!BN_hex2bn(&pri_big_num, private_key)) {
+            break;
+        }
+        key = EC_KEY_new();
+        if (!EC_KEY_set_group(key, group)) {
+            break;
+        }
+        if (!EC_KEY_set_private_key(key, pri_big_num)) {
+            break;
+        }
+        
+        size_t outlen = 32;
+        uint8_t *ecdh_text = (uint8_t *)OPENSSL_zalloc(outlen + 1);
+        int ret = ECDH_compute_key(ecdh_text, outlen, pub_point, key, 0);
+        if (ret <= 0) {
+            break;
+        }
+        char *hex_ctext = OPENSSL_buf2hexstr((const uint8_t *)ecdh_text, outlen);
+        NSString *hexCtext = [NSString stringWithCString:hex_ctext encoding:NSUTF8StringEncoding];
+        ecdhStr = [hexCtext stringByReplacingOccurrencesOfString:@":" withString:@""];
+        
+        OPENSSL_free(ecdh_text);
+        OPENSSL_free(hex_ctext);
+        
+    } while (NO);
+    
+    EC_POINT_free(pub_point);
+    BN_free(pri_big_num);
+    EC_KEY_free(key);
+    
+    return ecdhStr;
 }
 
 @end

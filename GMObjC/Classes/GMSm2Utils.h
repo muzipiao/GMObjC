@@ -88,6 +88,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nullable NSString *)decodeWithDer:(NSString *)derSign;
 
+/// 椭圆曲线Diffie-Hellman密钥协商（ECDH），返回64字节16进制编码格式密钥
+/// @param publicKey 临时公钥（其他端传入的公钥）
+/// @param privateKey 临时私钥（当前端生成的私钥）
++ (nullable NSString *)computeECDH:(NSString *)publicKey PrivateKey:(NSString *)privateKey;
+
 @end
 
 NS_ASSUME_NONNULL_END

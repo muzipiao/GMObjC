@@ -42,6 +42,7 @@
     [self testSm2Sign];  // sm2 签名验签及 Der 编码解码
     [self testSm3];      // sm3 摘要计算文本或文件
     [self testSm4];      // sm4 加密文本或文件
+    [self testECDH];     // ECDH 密钥协商
     [self adjustText];   // 调整显示范围
 }
 
@@ -143,6 +144,31 @@
     NSString *sm4CbcFileStr = [[NSString alloc] initWithData:cbcDecryptData encoding:NSUTF8StringEncoding];
     NSLog(@"SM4 ECB 模式加解密后文本：\n%@", sm4EcbFileStr);
     NSLog(@"SM4 CBC 模式加解密后文本：\n%@", sm4CbcFileStr);
+}
+
+// ECDH 密钥协商
+- (void)testECDH{
+    // 客户端client生成一对公私钥
+    NSArray *clientKey = [GMSm2Utils createPublicAndPrivateKey];
+    NSString *cPubKey = clientKey[0];
+    NSString *cPriKey = clientKey[1];
+    
+    // 服务端server生成一对公私钥
+    NSArray *serverKey = [GMSm2Utils createPublicAndPrivateKey];
+    NSString *sPubKey = serverKey[0];
+    NSString *sPriKey = serverKey[1];
+    
+    // 客户端client从服务端server获取公钥sPubKey，client协商出32字节对称密钥clientECDH
+    NSString *clientECDH = [GMSm2Utils computeECDH:sPubKey PrivateKey:cPriKey];
+    // 客户端client将公钥cPubKey发送给服务端server，server协商出32字节对称密钥serverECDH
+    NSString *serverECDH = [GMSm2Utils computeECDH:cPubKey PrivateKey:sPriKey];
+    
+    // 在全部明文传输的情况下，client与server协商出相等的对称密钥，clientECDH==serverECDH 成立
+    if ([clientECDH isEqualToString:serverECDH]) {
+        NSLog(@"ECDH 密钥协商成功，协商出的对称密钥为：\n%@", clientECDH);
+    }else{
+        NSLog(@"ECDH 密钥协商失败");
+    }
 }
 
 @end
