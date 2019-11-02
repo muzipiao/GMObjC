@@ -7,7 +7,7 @@ DEPENDENCIES:
   - GMObjC (from `../`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - GMOpenSSL
 
 EXTERNAL SOURCES:
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  GMObjC: 7a9113acf819ee3ab5dd99aff9133626fd3639da
+  GMObjC: 1426848ab7c44889109aca026c9decfdcab8d03a
   GMOpenSSL: 6caf76275b303430560190baba8dea3347b94fe1
 
 PODFILE CHECKSUM: 0f754ed7d9a42b18f1635b95527d729d2073e940
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4

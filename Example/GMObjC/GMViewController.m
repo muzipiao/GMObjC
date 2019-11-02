@@ -158,9 +158,9 @@
     NSString *sPubKey = serverKey[0];
     NSString *sPriKey = serverKey[1];
     
-    // 客户端client从服务端server获取公钥sPubKey，client协商出32字节对称密钥clientECDH
+    // 客户端client从服务端server获取公钥sPubKey，client协商出32字节对称密钥clientECDH，转Hex后为64字节
     NSString *clientECDH = [GMSm2Utils computeECDH:sPubKey PrivateKey:cPriKey];
-    // 客户端client将公钥cPubKey发送给服务端server，server协商出32字节对称密钥serverECDH
+    // 客户端client将公钥cPubKey发送给服务端server，server协商出32字节对称密钥serverECDH，转Hex后为64字节
     NSString *serverECDH = [GMSm2Utils computeECDH:cPubKey PrivateKey:sPriKey];
     
     // 在全部明文传输的情况下，client与server协商出相等的对称密钥，clientECDH==serverECDH 成立

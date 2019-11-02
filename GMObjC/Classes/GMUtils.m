@@ -54,6 +54,25 @@
     return utfStr;
 }
 
+///MARK: - 16 字符串解码为 uint8_t
++ (uint8_t *)hexToBytes:(NSString *)hexStr{
+    if (hexStr.length == 0) {
+        return (uint8_t *)@"".UTF8String;
+    }
+    uint8_t *myBuffer = (uint8_t *)malloc((int)(hexStr.length / 2) + 1);
+    bzero(myBuffer, hexStr.length / 2 + 1);
+    for (int i = 0; i < hexStr.length - 1; i += 2) {
+        @autoreleasepool{
+            unsigned int anInt;
+            NSString * hexCharStr = [hexStr substringWithRange:NSMakeRange(i, 2)];
+            NSScanner * scanner = [[NSScanner alloc] initWithString:hexCharStr];
+            [scanner scanHexInt:&anInt];
+            myBuffer[i / 2] = (uint8_t)anInt;
+        }
+    }
+    return myBuffer;
+}
+
 ///MARK: - 字符串每两位加冒号
 +(nullable NSString *)addColon:(NSString *)str{
     if (!str || str.length == 0) {

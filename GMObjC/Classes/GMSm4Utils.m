@@ -13,345 +13,319 @@
 
 @implementation GMSm4Utils
 
-///MARK: - 生成 sm4 密钥
+///MARK: - 生成 SM4 密钥
 + (nullable NSString *)createSm4Key{
     NSInteger len = SM4_BLOCK_SIZE;
+    NSMutableString *result = [[NSMutableString alloc] initWithCapacity:(len * 2)];
+    
+    uint8_t bytes[len];
+    int status = SecRandomCopyBytes(kSecRandomDefault, (sizeof bytes)/(sizeof bytes[0]), &bytes);
+    if (status == errSecSuccess) {
+        for (int i = 0; i < (sizeof bytes)/(sizeof bytes[0]); i++) {
+            NSString *hexStr = [NSString stringWithFormat:@"%X",bytes[i]&0xff];///16进制数
+            if (hexStr.length == 1) {
+                [result appendFormat:@"0%@", hexStr];
+            }else{
+                [result appendString:hexStr];
+            }
+        }
+        return result.copy;
+    }
+    // 容错，若 SecRandomCopyBytes 失败
     NSString *keyStr = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    // 密钥
-    NSMutableString *result = [[NSMutableString alloc] initWithCapacity:len];
     for (int i = 0; i < len; i++){
         uint32_t index = arc4random_uniform((uint32_t)keyStr.length);
         NSString *subChar = [keyStr substringWithRange:NSMakeRange(index, 1)];
         [result appendString:subChar];
     }
-    return result.copy;
+    NSString *hexResult = [GMUtils stringToHex:result];
+    return hexResult;
 }
 
-///MARK: - sm4 字符串加密
+///MARK: - NSObject to Bytes
++ (uint8_t *)plainObjToBytes:(id)plainObj Len:(size_t *)p_len{
+    uint8_t *p_obj = NULL;
+    if ([plainObj isKindOfClass:[NSString class]]) {
+        p_obj = (uint8_t *)((NSString *)plainObj).UTF8String;
+        *p_len = strlen(((NSString *)plainObj).UTF8String);
+    }else if ([plainObj isKindOfClass:[NSData class]]){
+        p_obj = (uint8_t *)((NSData *)plainObj).bytes;
+        *p_len = ((NSData *)plainObj).length;
+    }
+    return p_obj;
+}
 
-// ECB 模式加密字符串
-+ (nullable NSString *)ecbEncrypt:(NSString *)plaintext Key:(NSString *)key{
-    if (plaintext.length == 0 || key.length != SM4_BLOCK_SIZE) {
-        // 明文、密钥不能为空
-        return nil;
+// 加密对象类型并转为 bytes
++ (uint8_t *)cipherObjToBytes:(id)cipherObj Len:(size_t *)c_len{
+    uint8_t *c_obj = NULL;
+    if ([cipherObj isKindOfClass:[NSString class]]) {
+        NSString *cStr = ((NSString *)cipherObj).uppercaseString;
+        cStr = [GMUtils addColon:cStr];
+        long c_obj_len = 0;
+        c_obj = OPENSSL_hexstr2buf(cStr.UTF8String, &c_obj_len);
+        *c_len = c_obj_len;
+    }else if ([cipherObj isKindOfClass:[NSData class]]){
+        c_obj = (uint8_t *)((NSData *)cipherObj).bytes;
+        *c_len = ((NSData *)cipherObj).length;
     }
+    return c_obj;
+}
+
+///MARK: - ECB & CBC 加密
++ (id)enWithECB:(id)plainObj Key:(NSString *)key{
+    size_t plain_obj_len = 0;
+    uint8_t *plain_obj = [self plainObjToBytes:plainObj Len:&plain_obj_len];
+    
     // 计算填充长度
-    size_t pTextLen = strlen(plaintext.UTF8String);
-    int padLen = SM4_BLOCK_SIZE - pTextLen % SM4_BLOCK_SIZE;
-    
-    size_t resultLen = pTextLen + padLen;
+    int pad_en = SM4_BLOCK_SIZE - plain_obj_len % SM4_BLOCK_SIZE;
+    size_t result_len = plain_obj_len + pad_en;
     // 填充
-    uint8_t pText[resultLen];
-    memcpy(pText, (uint8_t *)plaintext.UTF8String, pTextLen);
-    for (int i = 0; i < padLen; i++) {
-        pText[pTextLen + i] = padLen;
+    uint8_t p_text[result_len];
+    memcpy(p_text, plain_obj, plain_obj_len);
+    for (int i = 0; i < pad_en; i++) {
+        p_text[plain_obj_len + i] = pad_en;
     }
     
-    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(resultLen + 1));
-    int groupNum = (int)(resultLen / SM4_BLOCK_SIZE);
-    // 密钥
-    uint8_t *kText = (uint8_t *)key.UTF8String;
+    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(result_len + 1));
+    int group_num = (int)(result_len / SM4_BLOCK_SIZE);
+    // 密钥 key Hex 转 uint8_t
+    uint8_t *k_text = [GMUtils hexToBytes:key];
     SM4_KEY sm4Key;
-    SM4_set_key(kText, &sm4Key);
+    SM4_set_key(k_text, &sm4Key);
     // 循环加密
-    for (NSInteger i = 0; i < groupNum; i++) {
+    for (NSInteger i = 0; i < group_num; i++) {
         uint8_t block[SM4_BLOCK_SIZE];
-        memcpy(block, pText + i * SM4_BLOCK_SIZE, SM4_BLOCK_SIZE);
+        memcpy(block, p_text + i * SM4_BLOCK_SIZE, SM4_BLOCK_SIZE);
         
         SM4_encrypt(block, block, &sm4Key);
         memcpy(result + i * SM4_BLOCK_SIZE, block, SM4_BLOCK_SIZE);
     }
-    
-    char *hexCiphertext = OPENSSL_buf2hexstr(result, resultLen);
-    NSString *encryptedStr = [NSString stringWithCString:hexCiphertext encoding:NSUTF8StringEncoding];
-    // 移除冒号
-    if (encryptedStr) {
-        encryptedStr = [encryptedStr stringByReplacingOccurrencesOfString:@":" withString:@""];
+    id resultObj = nil; // 结果
+    if ([plainObj isKindOfClass:[NSString class]]) {
+        char *hex_ciphertext = OPENSSL_buf2hexstr(result, result_len);
+        NSString *encryptedStr = [NSString stringWithCString:hex_ciphertext encoding:NSUTF8StringEncoding];
+        if (encryptedStr) {
+            resultObj = [encryptedStr stringByReplacingOccurrencesOfString:@":" withString:@""];
+        }
+        OPENSSL_free(hex_ciphertext);
+    }else{
+        NSData *cipherData = [NSData dataWithBytes:result length:result_len];
+        resultObj = cipherData;
     }
-    OPENSSL_free(hexCiphertext);
-    OPENSSL_free(result);
     
-    return encryptedStr;
+    OPENSSL_free(result);
+    free(k_text);
+    
+    return resultObj;
 }
 
-// CBC 模式加密字符串
-+ (nullable NSString *)cbcEncrypt:(NSString *)plaintext Key:(NSString *)key IV:(NSString *)ivec{
-    if (plaintext.length == 0 || key.length != SM4_BLOCK_SIZE || ivec.length != SM4_BLOCK_SIZE) {
-        // 加密字符、密钥、偏移向量不能为空
-        return nil;
-    }
-    // 计算填充长度
-    size_t pTextLen = strlen(plaintext.UTF8String);
-    int padLen = SM4_BLOCK_SIZE - pTextLen % SM4_BLOCK_SIZE;
+// CBC 加密
++ (id)enWithCBC:(id)plainObj Key:(NSString *)key IV:(NSString *)ivec{
+    size_t p_obj_len = 0;
+    uint8_t *p_obj = [self plainObjToBytes:plainObj Len:&p_obj_len];
     
-    size_t resultLen = pTextLen + padLen;
-    // 填充
-    uint8_t pText[resultLen];
-    memcpy(pText, (uint8_t *)plaintext.UTF8String, pTextLen);
-    for (int i = 0; i < padLen; i++) {
-        pText[pTextLen + i] = padLen;
+    int pad_len = SM4_BLOCK_SIZE - p_obj_len % SM4_BLOCK_SIZE;
+    size_t result_len = p_obj_len + pad_len;
+    // PKCS7 填充
+    uint8_t p_text[result_len];
+    memcpy(p_text, p_obj, p_obj_len);
+    for (int i = 0; i < pad_len; i++) {
+        p_text[p_obj_len + i] = pad_len;
     }
-    // 加密结果
-    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(resultLen + 1));
-    // 密钥
-    uint8_t *kText = (uint8_t *)key.UTF8String;
+    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(result_len + 1));
+    // 密钥 key Hex 转 uint8_t
+    uint8_t *k_text = [GMUtils hexToBytes:key];
     SM4_KEY sm4Key;
-    SM4_set_key(kText, &sm4Key);
+    SM4_set_key(k_text, &sm4Key);
     // 初始化向量
-    uint8_t *ivText = (uint8_t *)ivec.UTF8String;
-    uint8_t ivecBlock[SM4_BLOCK_SIZE] = {0};
-    memcpy(ivecBlock, ivText, SM4_BLOCK_SIZE);
+    uint8_t *iv_text = [GMUtils hexToBytes:ivec];
+    uint8_t ivec_block[SM4_BLOCK_SIZE] = {0};
+    memcpy(ivec_block, iv_text, SM4_BLOCK_SIZE);
     // cbc 加密
-    CRYPTO_cbc128_encrypt(pText, result, resultLen, &sm4Key, ivecBlock,
+    CRYPTO_cbc128_encrypt(p_text, result, result_len, &sm4Key, ivec_block,
                           (block128_f)SM4_encrypt);
-    char *hexCiphertext = OPENSSL_buf2hexstr(result, resultLen);
-    NSString *encryptedStr = [NSString stringWithCString:hexCiphertext encoding:NSUTF8StringEncoding];
-    // 移除冒号
-    if (encryptedStr) {
-        encryptedStr = [encryptedStr stringByReplacingOccurrencesOfString:@":" withString:@""];
+    id resultObj = nil; // 结果
+    if ([plainObj isKindOfClass:[NSString class]]) {
+        char *hex_ciphertext = OPENSSL_buf2hexstr(result, result_len);
+        NSString *encryptedStr = [NSString stringWithCString:hex_ciphertext encoding:NSUTF8StringEncoding];
+        if (encryptedStr) {
+            resultObj = [encryptedStr stringByReplacingOccurrencesOfString:@":" withString:@""];
+        }
+        OPENSSL_free(hex_ciphertext);
+    }else{
+        NSData *cipherData = [NSData dataWithBytes:result length:result_len];
+        resultObj = cipherData;
     }
-    OPENSSL_free(hexCiphertext);
-    OPENSSL_free(result);
     
-    return encryptedStr;
+    OPENSSL_free(result);
+    free(iv_text);
+    free(k_text);
+    
+    return resultObj;
 }
 
-///MARK: - sm4 字符串解密
+///MARK: - ECB & CBC 解密
+// ECB 解密
++ (id)deWithECB:(id)cipherObj Key:(NSString *)key{
+    size_t c_obj_len = 0;
+    uint8_t *c_obj = [self cipherObjToBytes:cipherObj Len:&c_obj_len];
 
-// ECB 模式解密字符串
-+ (nullable NSString *)ecbDecrypt:(NSString *)ciphertext Key:(NSString *)key{
-    if (ciphertext.length == 0 || key.length != SM4_BLOCK_SIZE) {
-        // 密文、密钥不能为空
-        return nil;
-    }
-    // 全大写，加上冒号标准化
-    NSString *cStr = ciphertext.uppercaseString;
-    cStr = [GMUtils addColon:cStr];
-    
-    long ciphertextLen = 0;
-    uint8_t *ctext = OPENSSL_hexstr2buf(cStr.UTF8String, &ciphertextLen);
-    
     // 分组解密
-    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(ciphertextLen + 1));
-    int groupNum = (int)(ciphertextLen / SM4_BLOCK_SIZE);
-    // 密钥
-    uint8_t *kText = (uint8_t *)key.UTF8String;
+    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(c_obj_len + 1));
+    int group_num = (int)(c_obj_len / SM4_BLOCK_SIZE);
+    // 密钥 key Hex 转 uint8_t
+    uint8_t *k_text = [GMUtils hexToBytes:key];
     SM4_KEY sm4Key;
-    SM4_set_key(kText, &sm4Key);
+    SM4_set_key(k_text, &sm4Key);
     // 循环解密
-    for (NSInteger i = 0; i < groupNum; i++) {
+    for (NSInteger i = 0; i < group_num; i++) {
         uint8_t block[SM4_BLOCK_SIZE];
-        memcpy(block, ctext + i * SM4_BLOCK_SIZE, SM4_BLOCK_SIZE);
+        memcpy(block, c_obj + i * SM4_BLOCK_SIZE, SM4_BLOCK_SIZE);
         
         SM4_decrypt(block, block, &sm4Key);
         memcpy(result + i * SM4_BLOCK_SIZE, block, SM4_BLOCK_SIZE);
     }
     // 移除填充
-    int padLen = (int)result[ciphertextLen - 1];
-    int endLen = (int)(ciphertextLen - padLen);
-    uint8_t *endResult = (uint8_t *)OPENSSL_zalloc((int)(endLen + 1));
-    memcpy(endResult, result, endLen);
+    int pad_len = (int)result[c_obj_len - 1];
+    int end_len = (int)(c_obj_len - pad_len);
+    uint8_t *no_pad_result = (uint8_t *)OPENSSL_zalloc((int)(end_len + 1));
+    memcpy(no_pad_result, result, end_len);
     
-    NSString *plaintext = [NSString stringWithCString:(const char *)endResult encoding:NSUTF8StringEncoding];
+   id resultObj = nil; // 结果
+    if ([cipherObj isKindOfClass:[NSString class]]) {
+        resultObj = [NSString stringWithCString:(const char *)no_pad_result encoding:NSUTF8StringEncoding];
+        OPENSSL_free(c_obj);
+    }else{
+        resultObj = [NSData dataWithBytes:no_pad_result length:end_len];
+    }
     
-    OPENSSL_free(ctext);
     OPENSSL_free(result);
-    OPENSSL_free(endResult);
+    OPENSSL_free(no_pad_result);
+    free(k_text);
     
+    return resultObj;
+}
+
+// CBC 解密
++ (id)deWithCBC:(id)cipherObj Key:(NSString *)key IV:(NSString *)ivec{
+    size_t c_obj_len = 0;
+    uint8_t *c_obj = [self cipherObjToBytes:cipherObj Len:&c_obj_len];
+    
+    // 分组解密
+    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(c_obj_len + 1));
+    // 密钥 key Hex 转 uint8_t
+    uint8_t *k_text = [GMUtils hexToBytes:key];
+    SM4_KEY sm4Key;
+    SM4_set_key(k_text, &sm4Key);
+    // 初始化向量
+    uint8_t *iv_text = [GMUtils hexToBytes:ivec];
+    uint8_t ivec_block[SM4_BLOCK_SIZE] = {0};
+    memcpy(ivec_block, iv_text, SM4_BLOCK_SIZE);
+    // CBC 解密
+    CRYPTO_cbc128_decrypt(c_obj, result, c_obj_len, &sm4Key, ivec_block,
+                          (block128_f)SM4_decrypt);
+    // 移除填充
+    int pad_len = (int)result[c_obj_len - 1];
+    int end_len = (int)(c_obj_len - pad_len);
+    uint8_t *no_pad_result = (uint8_t *)OPENSSL_zalloc((int)(end_len + 1));
+    memcpy(no_pad_result, result, end_len);
+    
+    id resultObj = nil; // 结果
+    if ([cipherObj isKindOfClass:[NSString class]]) {
+        resultObj = [NSString stringWithCString:(const char *)no_pad_result encoding:NSUTF8StringEncoding];
+        OPENSSL_free(c_obj);
+    }else{
+        resultObj = [NSData dataWithBytes:no_pad_result length:end_len];
+    }
+
+    OPENSSL_free(result);
+    OPENSSL_free(no_pad_result);
+    free(iv_text);
+    free(k_text);
+    
+    return resultObj;
+}
+
+///MARK: - SM4 字符串加密
+
+// ECB 模式加密字符串
++ (nullable NSString *)ecbEncrypt:(NSString *)plaintext Key:(NSString *)key{
+    if (plaintext.length == 0 || key.length != SM4_BLOCK_SIZE * 2) {
+        // 明文、密钥不能为空
+        return nil;
+    }
+    NSString *result = (NSString *)[self enWithECB:plaintext Key:key];
+    return result;
+}
+
+// CBC 模式加密字符串
++ (nullable NSString *)cbcEncrypt:(NSString *)plaintext Key:(NSString *)key IV:(NSString *)ivec{
+    if (plaintext.length == 0 || key.length != SM4_BLOCK_SIZE * 2 || ivec.length != SM4_BLOCK_SIZE * 2) {
+        // 加密字符、密钥、偏移向量不能为空
+        return nil;
+    }
+    NSString *result = (NSString *)[self enWithCBC:plaintext Key:key IV:ivec];
+    return result;
+}
+
+///MARK: - SM4 字符串解密
+
+// ECB 模式解密字符串
++ (nullable NSString *)ecbDecrypt:(NSString *)ciphertext Key:(NSString *)key{
+    if (ciphertext.length == 0 || key.length != SM4_BLOCK_SIZE * 2) {
+        return nil;
+    }
+    NSString *plaintext = (NSString *)[self deWithECB:ciphertext Key:key];
     return plaintext;
 }
 
 // CBC 模式解密字符串
 + (nullable NSString *)cbcDecrypt:(NSString *)ciphertext Key:(NSString *)key IV:(NSString *)ivec{
-    if (ciphertext.length == 0 || key.length != SM4_BLOCK_SIZE || ivec.length != SM4_BLOCK_SIZE) {
+    if (ciphertext.length == 0 || key.length != SM4_BLOCK_SIZE * 2 || ivec.length != SM4_BLOCK_SIZE * 2) {
         // 密文、密钥、偏移向量不能为空
         return nil;
     }
-    // 全大写，加上冒号标准化
-    NSString *cStr = ciphertext.uppercaseString;
-    cStr = [GMUtils addColon:cStr];
-    
-    long ciphertextLen = 0;
-    uint8_t *ctext = OPENSSL_hexstr2buf(cStr.UTF8String, &ciphertextLen);
-    
-    // 分组解密
-    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(ciphertextLen + 1));
-    // 密钥
-    uint8_t *kText = (uint8_t *)key.UTF8String;
-    SM4_KEY sm4Key;
-    SM4_set_key(kText, &sm4Key);
-    // 初始化向量
-    uint8_t *ivText = (uint8_t *)ivec.UTF8String;
-    uint8_t ivecBlock[SM4_BLOCK_SIZE] = {0};
-    memcpy(ivecBlock, ivText, SM4_BLOCK_SIZE);
-    // CBC 解密
-    CRYPTO_cbc128_decrypt(ctext, result, ciphertextLen, &sm4Key, ivecBlock,
-                          (block128_f)SM4_decrypt);
-    // 移除填充
-    int padLen = (int)result[ciphertextLen - 1];
-    int endLen = (int)(ciphertextLen - padLen);
-    uint8_t *endResult = (uint8_t *)OPENSSL_zalloc((int)(endLen + 1));
-    memcpy(endResult, result, endLen);
-    
-    NSString *plaintext = [NSString stringWithCString:(const char *)endResult encoding:NSUTF8StringEncoding];
-    
-    OPENSSL_free(ctext);
-    OPENSSL_free(result);
-    OPENSSL_free(endResult);
-    
+    NSString *plaintext = (NSString *)[self deWithCBC:ciphertext Key:key IV:ivec];
     return plaintext;
 }
 
-///MARK: - sm4 文件加密
+///MARK: - SM4 文件加密
 + (nullable NSData *)ecbEncryptData:(NSData *)plainData Key:(NSString *)key{
-    if (plainData.length == 0 || key.length != SM4_BLOCK_SIZE) {
+    if (plainData.length == 0 || key.length != SM4_BLOCK_SIZE * 2) {
         // 密文、密钥不能为空
         return nil;
     }
-    // 计算填充长度
-    const uint8_t *pData = (uint8_t *)plainData.bytes;
-    size_t pDataLen = plainData.length;
-    int padLen = SM4_BLOCK_SIZE - pDataLen % SM4_BLOCK_SIZE;
-    
-    size_t resultLen = pDataLen + padLen;
-    // 填充
-    uint8_t pText[resultLen];
-    memcpy(pText, pData, pDataLen);
-    for (int i = 0; i < padLen; i++) {
-        pText[pDataLen + i] = padLen;
-    }
-    
-    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(resultLen + 1));
-    int groupNum = (int)(resultLen / SM4_BLOCK_SIZE);
-    // 密钥
-    uint8_t *ktext = (uint8_t *)key.UTF8String;
-    SM4_KEY sm4key;
-    SM4_set_key(ktext, &sm4key);
-    // 循环加密
-    for (NSInteger i = 0; i < groupNum; i++) {
-        uint8_t block[SM4_BLOCK_SIZE];
-        memcpy(block, pText + i * SM4_BLOCK_SIZE, SM4_BLOCK_SIZE);
-        
-        SM4_encrypt(block, block, &sm4key);
-        memcpy(result + i * SM4_BLOCK_SIZE, block, SM4_BLOCK_SIZE);
-    }
-    // 转为 NSData
-    NSData *cipherData = [NSData dataWithBytes:result length:resultLen];
-    
-    OPENSSL_free(result);
-    
-    return cipherData;
+    NSData *result = (NSData *)[self enWithECB:plainData Key:key];
+    return result;
 }
 
 // CBC 模式Data加密
 + (nullable NSData *)cbcEncryptData:(NSData *)plainData Key:(NSString *)key IV:(NSString *)ivec{
-    if (plainData.length == 0 || key.length != SM4_BLOCK_SIZE || ivec.length != SM4_BLOCK_SIZE) {
+    if (plainData.length == 0 || key.length != SM4_BLOCK_SIZE * 2 || ivec.length != SM4_BLOCK_SIZE * 2) {
         // 密文、密钥不能为空
         return nil;
     }
-    // 计算填充长度
-    const uint8_t *pData = (uint8_t *)plainData.bytes;
-    size_t pDataLen = plainData.length;
-    int padLen = SM4_BLOCK_SIZE - pDataLen % SM4_BLOCK_SIZE;
-    
-    size_t resultLen = pDataLen + padLen;
-    // 填充
-    uint8_t pText[resultLen];
-    memcpy(pText, pData, pDataLen);
-    for (int i = 0; i < padLen; i++) {
-        pText[pDataLen + i] = padLen;
-    }
-    // 加密结果
-    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(resultLen + 1));
-    // 密钥
-    uint8_t *kText = (uint8_t *)key.UTF8String;
-    SM4_KEY sm4Key;
-    SM4_set_key(kText, &sm4Key);
-    // 初始化向量
-    uint8_t *ivText = (uint8_t *)ivec.UTF8String;
-    uint8_t ivecBlock[SM4_BLOCK_SIZE] = {0};
-    memcpy(ivecBlock, ivText, SM4_BLOCK_SIZE);
-    // cbc 加密
-    CRYPTO_cbc128_encrypt(pText, result, resultLen, &sm4Key, ivecBlock,
-                          (block128_f)SM4_encrypt);
-    // 转为 NSData
-    NSData *cipherData = [NSData dataWithBytes:result length:resultLen];
-    
-    OPENSSL_free(result);
-    
+    NSData *cipherData = [self enWithCBC:plainData Key:key IV:ivec];
     return cipherData;
 }
 
-///MARK: - sm4 文件加密
+///MARK: - SM4 文件加密
 
 // ECB 模式解密 Data
 + (nullable NSData *)ecbDecryptData:(NSData *)cipherData Key:(NSString *)key{
-    if (cipherData.length == 0 || key.length != SM4_BLOCK_SIZE) {
+    if (cipherData.length == 0 || key.length != SM4_BLOCK_SIZE * 2) {
         return nil;
     }
-    const uint8_t *cData = (uint8_t *)cipherData.bytes;
-    size_t cTextLen = cipherData.length;
-    
-    // 分组解密
-    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(cTextLen + 1));
-    int groupNum = (int)(cTextLen / SM4_BLOCK_SIZE);
-    // 密钥
-    uint8_t *ktext = (uint8_t *)key.UTF8String;
-    SM4_KEY sm4key;
-    SM4_set_key(ktext, &sm4key);
-    // 循环解密
-    for (NSInteger i = 0; i < groupNum; i++) {
-        uint8_t block[SM4_BLOCK_SIZE];
-        memcpy(block, cData + i * SM4_BLOCK_SIZE, SM4_BLOCK_SIZE);
-        
-        SM4_decrypt(block, block, &sm4key);
-        memcpy(result + i * SM4_BLOCK_SIZE, block, SM4_BLOCK_SIZE);
-    }
-    // 移除填充
-    int padLen = (int)result[cTextLen - 1];
-    int endLen = (int)(cTextLen - padLen);
-    uint8_t *endResult = (uint8_t *)OPENSSL_zalloc((int)(endLen + 1));
-    memcpy(endResult, result, endLen);
-    
-    NSData *plainData = [NSData dataWithBytes:endResult length:endLen];
-    
-    OPENSSL_free(result);
-    OPENSSL_free(endResult);
-    
+    NSData *plainData = (NSData *)[self deWithECB:cipherData Key:key];
     return plainData;
 }
 
 // CBC 模式解密 Data
 + (nullable NSData *)cbcDecryptData:(NSData *)cipherData Key:(NSString *)key IV:(NSString *)ivec{
-    if (cipherData.length == 0 || key.length != SM4_BLOCK_SIZE || ivec.length != SM4_BLOCK_SIZE) {
+    if (cipherData.length == 0 || key.length != SM4_BLOCK_SIZE * 2 || ivec.length != SM4_BLOCK_SIZE * 2) {
         return nil;
     }
-    const uint8_t *cData = (uint8_t *)cipherData.bytes;
-    size_t cTextLen = cipherData.length;
-    // 解密结果
-    uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(cTextLen + 1));
-    // 密钥
-    uint8_t *kText = (uint8_t *)key.UTF8String;
-    SM4_KEY sm4Key;
-    SM4_set_key(kText, &sm4Key);
-    // 初始化向量
-    uint8_t *ivText = (uint8_t *)ivec.UTF8String;
-    uint8_t ivecBlock[SM4_BLOCK_SIZE] = {0};
-    memcpy(ivecBlock, ivText, SM4_BLOCK_SIZE);
-    // CBC 解密
-    CRYPTO_cbc128_decrypt(cData, result, cTextLen, &sm4Key, ivecBlock,
-                          (block128_f)SM4_decrypt);
-    // 移除填充
-    int padLen = (int)result[cTextLen - 1];
-    int endLen = (int)(cTextLen - padLen);
-    uint8_t *endResult = (uint8_t *)OPENSSL_zalloc((int)(endLen + 1));
-    memcpy(endResult, result, endLen);
-    
-    NSData *plainData = [NSData dataWithBytes:endResult length:endLen];
-    
-    OPENSSL_free(result);
-    OPENSSL_free(endResult);
-    
+    NSData *plainData = (NSData *)[self deWithCBC:cipherData Key:key IV:ivec];
     return plainData;
 }
 

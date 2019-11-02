@@ -16,7 +16,7 @@
 ///MARK: - 创建公私钥
 + (NSArray<NSString *> *)createPublicAndPrivateKey{
     NSArray<NSString *> *keyArray = @[@"", @""];
-    const EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
     EC_KEY *key = NULL; // 密钥对
     do {
         key = EC_KEY_new();
@@ -42,6 +42,9 @@
     } while (NO);
     
     EC_KEY_free(key);
+    if (group != NULL){
+        EC_GROUP_free(group);
+    }
     
     return keyArray;
 }
@@ -55,7 +58,7 @@
     size_t msg_len = strlen((char *)plain_text);
     const char *public_key = publicKey.UTF8String;
     const EVP_MD *digest = EVP_sm3(); // 摘要算法
-    const EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
     EC_KEY *key = NULL; // 密钥对
     EC_POINT *pub_point = NULL; // 坐标
     uint8_t *ctext = NULL; // 加密后 uint8_t 格式字符
@@ -90,6 +93,9 @@
     OPENSSL_free(ctext);
     EC_POINT_free(pub_point);
     EC_KEY_free(key);
+    if (group != NULL){
+        EC_GROUP_free(group);
+    }
     
     return encryptedStr;
 }
@@ -101,7 +107,7 @@
     }
     const char *private_key = privateKey.UTF8String; // 私钥
     const EVP_MD *digest = EVP_sm3(); // 摘要算法
-    const EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
     BIGNUM *pri_big_num = NULL; // 私钥
     EC_KEY *key = NULL; // 密钥对
     EC_POINT *pub_point = NULL; // 坐标
@@ -142,6 +148,9 @@
     EC_POINT_free(pub_point);
     EC_KEY_free(key);
     BN_free(pri_big_num);
+    if (group != NULL){
+        EC_GROUP_free(group);
+    }
     
     return decryptedStr;
 }
@@ -162,41 +171,47 @@
     ctext_st.C3 = NULL;
     BIGNUM *x1 = NULL;
     BIGNUM *y1 = NULL;
-    if (!BN_hex2bn(&x1, C1xStr.UTF8String)) {
-        return nil;
-    }
-    if (!BN_hex2bn(&y1, C1yStr.UTF8String)) {
-        return nil;
-    }
-    ctext_st.C1x = x1;
-    ctext_st.C1y = y1;
-    ctext_st.C3 = ASN1_OCTET_STRING_new();
-    ctext_st.C2 = ASN1_OCTET_STRING_new();
-    if (ctext_st.C3 == NULL || ctext_st.C2 == NULL) {
-        return nil;
-    }
-    
-    NSString *C3StrFormat = [GMUtils addColon:C3Str];
-    NSString *C2StrFormat = [GMUtils addColon:C2Str];
-    long C3Text_len = 0;
-    uint8_t *C3Text = OPENSSL_hexstr2buf(C3StrFormat.UTF8String, &C3Text_len);
-    long C2Text_len = 0;
-    uint8_t *C2Text = OPENSSL_hexstr2buf(C2StrFormat.UTF8String, &C2Text_len);
-    
-    if (!ASN1_OCTET_STRING_set(ctext_st.C3, (uint8_t *)C3Text, (int)C3Text_len)
-        || !ASN1_OCTET_STRING_set(ctext_st.C2, (uint8_t *)C2Text, (int)C2Text_len)) {
-        return nil;
-    }
-    
+    uint8_t *C3Text = NULL;
+    uint8_t *C2Text = NULL;
     uint8_t *ctext_buf = NULL;
-    int ctext_len = i2d_SM2_Ciphertext_1(&ctext_st, &ctext_buf);
-    /* Ensure cast to size_t is safe */
-    if (ctext_len < 0 || !ctext_buf) {
-        return nil;
-    }
-    
-    char *hex_ctext = OPENSSL_buf2hexstr((uint8_t *)ctext_buf, ctext_len);
-    NSString *encodeStr = [NSString stringWithCString:hex_ctext encoding:NSUTF8StringEncoding];
+    char *hex_ctext = NULL;
+    NSString *encodeStr = nil;
+    do {
+        if (!BN_hex2bn(&x1, C1xStr.UTF8String)) {
+            break;
+        }
+        if (!BN_hex2bn(&y1, C1yStr.UTF8String)) {
+            break;
+        }
+        ctext_st.C1x = x1;
+        ctext_st.C1y = y1;
+        ctext_st.C3 = ASN1_OCTET_STRING_new();
+        ctext_st.C2 = ASN1_OCTET_STRING_new();
+        if (ctext_st.C3 == NULL || ctext_st.C2 == NULL) {
+            break;
+        }
+        
+        NSString *C3StrFormat = [GMUtils addColon:C3Str];
+        NSString *C2StrFormat = [GMUtils addColon:C2Str];
+        long C3Text_len = 0;
+        C3Text = OPENSSL_hexstr2buf(C3StrFormat.UTF8String, &C3Text_len);
+        long C2Text_len = 0;
+        C2Text = OPENSSL_hexstr2buf(C2StrFormat.UTF8String, &C2Text_len);
+        
+        if (!ASN1_OCTET_STRING_set(ctext_st.C3, (uint8_t *)C3Text, (int)C3Text_len)
+            || !ASN1_OCTET_STRING_set(ctext_st.C2, (uint8_t *)C2Text, (int)C2Text_len)) {
+            break;
+        }
+        
+        int ctext_len = i2d_SM2_Ciphertext_1(&ctext_st, &ctext_buf);
+        /* Ensure cast to size_t is safe */
+        if (ctext_len < 0 || !ctext_buf) {
+            break;
+        }
+        
+        hex_ctext = OPENSSL_buf2hexstr((uint8_t *)ctext_buf, ctext_len);
+        encodeStr = [NSString stringWithCString:hex_ctext encoding:NSUTF8StringEncoding];
+    } while (NO);
     
     ASN1_OCTET_STRING_free(ctext_st.C2);
     ASN1_OCTET_STRING_free(ctext_st.C3);
@@ -204,6 +219,8 @@
     OPENSSL_free(ctext_buf);
     OPENSSL_free(C2Text);
     OPENSSL_free(C3Text);
+    BN_free(x1);
+    BN_free(y1);
     
     return encodeStr;
 }
@@ -216,7 +233,8 @@
     const char *hex_ctext = ciphertext.UTF8String;
     const EVP_MD *digest = EVP_sm3(); // 摘要算法
     long ctext_len = 0; // 密文原文长度
-    const uint8_t *ctext = OPENSSL_hexstr2buf(hex_ctext, &ctext_len);
+    uint8_t *ctext_buf = OPENSSL_hexstr2buf(hex_ctext, &ctext_len);
+    const uint8_t *ctext = ctext_buf;
     
     struct SM2_Ciphertext_st_1 *sm2_st = NULL;
     sm2_st = d2i_SM2_Ciphertext_1(NULL, &ctext, ctext_len);
@@ -242,6 +260,7 @@
     OPENSSL_free(C3_text);
     OPENSSL_free(C2_text);
     SM2_Ciphertext_1_free(sm2_st);
+    OPENSSL_free(ctext_buf);
     return decodeStr;
 }
 
@@ -266,7 +285,7 @@
     const BIGNUM *sig_r = NULL;
     const BIGNUM *sig_s = NULL;
     const EVP_MD *digest = EVP_sm3();  // 摘要算法
-    const EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2);
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2);
     BIGNUM *pri_num = NULL;  // 私钥
     EC_KEY *key = NULL; // 密钥对
     EC_POINT *pub_point = NULL; // 公钥坐标
@@ -314,6 +333,9 @@
     EC_POINT_free(pub_point);
     EC_KEY_free(key);
     BN_free(pri_num);
+    if (group != NULL){
+        EC_GROUP_free(group);
+    }
     
     return sigStr;
 }
@@ -346,7 +368,7 @@
     const EVP_MD *digest = EVP_sm3();  // 摘要算法
     EC_POINT *pub_point = NULL;  // 公钥坐标
     EC_KEY *key = NULL;  // 密钥key
-    const EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2);
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2);
     
     BOOL isOK = NO;  // 验签结果
     
@@ -382,6 +404,9 @@
     EC_POINT_free(pub_point);
     EC_KEY_free(key);
     ECDSA_SIG_free(sig);
+    if (group != NULL){
+        EC_GROUP_free(group);
+    }
     
     return isOK;
 }
@@ -442,7 +467,8 @@
     }
     const char *sign_hex = derSign.UTF8String;
     long sign_len = 0;
-    const uint8_t *sign_char = OPENSSL_hexstr2buf(sign_hex, &sign_len);
+    uint8_t *sign_buffer = OPENSSL_hexstr2buf(sign_hex, &sign_len);
+    const uint8_t *sign_char = sign_buffer;
     // 复制一份，对比验证
     long sign_copy_len = 0;
     uint8_t *sign_copy = OPENSSL_hexstr2buf(sign_hex, &sign_copy_len);
@@ -484,6 +510,7 @@
     
     ECDSA_SIG_free(sig);
     OPENSSL_free(der);
+    OPENSSL_free(sign_buffer);
     OPENSSL_free(sign_copy);
     
     return originSign;
@@ -497,7 +524,7 @@
     
     const char *public_key = publicKey.UTF8String;
     const char *private_key = privateKey.UTF8String; // 私钥
-    const EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
     
     EC_POINT *pub_point = NULL;  // 公钥
     BIGNUM *pri_big_num = NULL; // 私钥
@@ -538,6 +565,9 @@
     EC_POINT_free(pub_point);
     BN_free(pri_big_num);
     EC_KEY_free(key);
+    if (group != NULL){
+        EC_GROUP_free(group);
+    }
     
     return ecdhStr;
 }

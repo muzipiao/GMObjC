@@ -97,7 +97,7 @@
     for (NSInteger i = 0; i < 1000; i++) {
         NSString *sm4Key = [GMSm4Utils createSm4Key];
         XCTAssertNotNil(sm4Key, @"生成 sm4 密钥不为空");
-        XCTAssertTrue(sm4Key.length == 16, @" sm4密钥长度 ");
+        XCTAssertTrue(sm4Key.length == 32, @" sm4密钥长度 ");
     }
 }
 
@@ -178,7 +178,7 @@
  */
 - (void)testPerformanceSm4EcbEncrypt {
     NSString *plaintext = @"123456";
-    NSString *sm4Key = @"PfM1_Fv.Zd11Enc)";
+    NSString *sm4Key = @"CCDEE6FB253E1CBCD40B12D5E230D0F4";
     // 加密耗时
     [self measureBlock:^{
         NSString *encryptStr = [GMSm4Utils ecbEncrypt:plaintext Key:sm4Key];
@@ -190,8 +190,8 @@
  * 测试 sm4 ECB 模式解密耗时
  */
 - (void)testPerformanceSm4EcbDecrypt {
-    NSString *encryptStr = @"F4A4AD144E539A430FA92946B00BEA0510";
-    NSString *sm4Key = @"PfM1_Fv.Zd11Enc)";
+    NSString *encryptStr = @"271B76936B39CEE6CAE1ABBB4539D8E7";
+    NSString *sm4Key = @"CCDEE6FB253E1CBCD40B12D5E230D0F4";
     // 解密耗时
     [self measureBlock:^{
         NSString *decryptStr = [GMSm4Utils ecbDecrypt:encryptStr Key:sm4Key];
@@ -204,8 +204,8 @@
  */
 - (void)testPerformanceSm4CbcEncrypt {
     NSString *plaintext = @"123456";
-    NSString *sm4Key = @"U59RpKpnQvTl4V9P";
-    NSString *ivec = @"i505rFb3ePRnvuh2";
+    NSString *sm4Key = @"26FADA370AECFB5CBCF8397BD1D8363A";
+    NSString *ivec = @"685E7C9D456A5093C83606D94FE67AA5";
     // 加密耗时
     [self measureBlock:^{
         NSString *encryptStr = [GMSm4Utils cbcEncrypt:plaintext Key:sm4Key IV:ivec];
@@ -217,9 +217,9 @@
  * 测试 sm4 ECB 模式解密耗时
  */
 - (void)testPerformanceSm4CbcDecrypt {
-    NSString *encryptStr = @"CD20B59B9C561AB8A9C53FFECB9B694D";
-    NSString *sm4Key = @"U59RpKpnQvTl4V9P";
-    NSString *ivec = @"i505rFb3ePRnvuh2";
+    NSString *encryptStr = @"C4DDE9A8211F78584867850DF47F0128";
+    NSString *sm4Key = @"26FADA370AECFB5CBCF8397BD1D8363A";
+    NSString *ivec = @"685E7C9D456A5093C83606D94FE67AA5";
     // 解密耗时
     [self measureBlock:^{
         NSString *decryptStr = [GMSm4Utils cbcEncrypt:encryptStr Key:sm4Key IV:ivec];
