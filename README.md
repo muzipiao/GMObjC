@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/cocoapods/l/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 [![Platform](https://img.shields.io/cocoapods/p/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 
-OpenSSL 1.1.1 以上版本增加了对中国 SM2/SM3/SM4 加密算法的支持，基于 OpenSSL 1.1.1c 对国密 sm2 非对称加密、sm2 签名验签、sm3 摘要算法，sm4 对称加密做 OC 封装。
+OpenSSL 1.1.1 以上版本增加了对中国 SM2/SM3/SM4 加密算法的支持，基于 OpenSSL 对国密 SM2 非对称加密、SM2 签名验签、ECDH 密钥协商、SM3 摘要算法，SM4 对称加密做 OC 封装。
 
 ## 快速开始
 
@@ -41,7 +41,7 @@ pod 'GMObjC'
 
 ### 直接集成
 
-从 Git 下载最新代码，找到和 README 同级的 GMObjC 文件夹，将 GMObjC 文件夹拖入项目即可，在需要使用的地方导入头文件 `GMObjC.h` 即可使用 sm2、sm4 加解密。
+从 Git 下载最新代码，找到和 README 同级的 GMObjC 文件夹，将 GMObjC 文件夹拖入项目即可，在需要使用的地方导入头文件 `GMObjC.h` 即可使用 SM2、SM4 加解密。
 
 集成 OpenSSL 的注意事项：
 
@@ -51,9 +51,9 @@ pod 'GMObjC'
 
 ## 用法
 
-### sm2 加解密
+### SM2 加解密
 
-sm2 加解密都很简单，加密传入待加密字符串和公钥，解密传入密文和私钥即可，代码：
+SM2 加解密都很简单，加密传入待加密字符串和公钥，解密传入密文和私钥即可，代码：
 
 ```objc
 // 公钥
@@ -73,9 +73,9 @@ NSString *plaintext = [GMSm2Utils decrypt:encodeCtext PrivateKey:gPrikey];
 1. OpenSSL 所用公钥是 04 开头的，后台返回公钥可能是不带 04 的，需要手动拼接。
 2. 后台返回的解密结果可能是没有标准编码的原始密文，而 OpenSSL 的加解密都是需要 ASN1 编码格式，所以与后台交互过程中，可能需要 ASN1 编码解码。
 
-### sm2 签名验签
+### SM2 签名验签
 
-sm2 私钥签名，公钥验签，可防篡改或验证身份。签名时传入明文、私钥和用户 ID；验签时传入明文、签名、公钥和用户 ID，代码：
+SM2 私钥签名，公钥验签，可防篡改或验证身份。签名时传入明文、私钥和用户 ID；验签时传入明文、签名、公钥和用户 ID，代码：
 
 ```objc
 // 公钥
@@ -102,6 +102,43 @@ NSString *originStr = [GMSm2Utils decodeWithDer:derSign];
 1. 用户 ID 可传空值，当传空值时使用 OpenSSL 默认用户 ID，OpenSSL 中默认用户定义为`#define SM2_DEFAULT_USERID "1234567812345678"` ，客户端和服务端用户 ID 要保持一致。
 2. 客户端和后台交互的过程中，假设后台签名，客户端验签，后台返回的签名是 DER 编码格式，就需要先对签名进行 DER 解码，然后再进行验签。同理，若客户端签名，后台验签，根据后台是需要 (r, s) 拼接格式签名，还是 DER 格式，进行编码解码。
 
+### ECDH 密钥协商
+
+OpenSSL 中的 `ECDH_compute_key()`执行椭圆曲线 Diffie-Hellman 密钥协商，可在双方都是明文传输的情况下，协商出一个相同的密钥。
+
+协商流程：
+
+1. 客户端随机生成一对公私钥 clientPublicKey，clientPrivateKey；
+2. 服务端随机生成一对公私钥 serverPublicKey，serverPrivateKey；
+3. 双方利用网络请求或其他方式交换公钥 clientPublicKey 和 serverPublicKey，私钥自己保存；
+4. 客户端计算`clientKey = ECDH_compute_key(clientPrivateKey，serverPublicKey)`；
+5. 服务端计算`serverKey = ECDH_compute_key(serverPrivateKey，clientPublicKey)`；
+6. 双方各自计算出的 clientKey 和 serverKey 应该是相等的，这个 key 可以作为对称加密的密钥。
+
+```objc
+// 客户端client生成一对公私钥
+NSArray *clientKey = [GMSm2Utils createPublicAndPrivateKey];
+NSString *cPubKey = clientKey[0];
+NSString *cPriKey = clientKey[1];
+
+// 服务端server生成一对公私钥
+NSArray *serverKey = [GMSm2Utils createPublicAndPrivateKey];
+NSString *sPubKey = serverKey[0];
+NSString *sPriKey = serverKey[1];
+
+// 客户端client从服务端server获取公钥sPubKey，client协商出32字节对称密钥clientECDH，转Hex后为64字节
+NSString *clientECDH = [GMSm2Utils computeECDH:sPubKey PrivateKey:cPriKey];
+// 客户端client将公钥cPubKey发送给服务端server，server协商出32字节对称密钥serverECDH，转Hex后为64字节
+NSString *serverECDH = [GMSm2Utils computeECDH:cPubKey PrivateKey:sPriKey];
+
+// 在全部明文传输的情况下，client与server协商出相等的对称密钥，clientECDH==serverECDH 成立
+if ([clientECDH isEqualToString:serverECDH]) {
+    NSLog(@"ECDH 密钥协商成功，协商出的对称密钥为：\n%@", clientECDH);
+}else{
+    NSLog(@"ECDH 密钥协商失败");
+}
+```
+
 ### SM4 加解密
 
 SM4 加解密都很简单，加密传入待加密字符串和密钥，解密传入密文和密钥即可，代码：
@@ -127,9 +164,9 @@ NSString *sm4EnByCBC = [GMSm4Utils cbcEncrypt:pwd Key:sm4Key IV:ivec];
 NSString *sm4DeByCBC = [GMSm4Utils cbcDecrypt:sm4EnByCBC Key:sm4Key IV:ivec];
 ```
 
-### sm3 摘要
+### SM3 摘要
 
-类似于 hash、md5，sm3 摘要算法可对文本文件进行摘要计算，摘要长度为 64 个字符的字符串格式。
+类似于 hash、md5，SM3 摘要算法可对文本文件进行摘要计算，摘要长度为 64 个字符的字符串格式。
 
 ```objc
 // 待提取摘要的字符串
@@ -146,7 +183,7 @@ NSString *fileDigest = [GMSm3Utils hashWithData:self.fileData];
 
 ### ASN1 编码解码
 
-OpenSSL 对 sm2 加密结果进行了 ASN1 编码，解密时也是要求密文编码格式为 ASN1 格式，其他平台加解密可能需要 C1C3C2 拼接的原始密文，所以需要编码解码，代码：
+OpenSSL 对 SM2 加密结果进行了 ASN1 编码，解密时也是要求密文编码格式为 ASN1 格式，其他平台加解密可能需要 C1C3C2 拼接的原始密文，所以需要编码解码，代码：
 
 ```objc
 // ASN1 编码的密文
@@ -163,7 +200,7 @@ NSString *encodeStr = [GMSm2Utils encodeWithASN1:dCtext];
 
 ### 生成公私钥
 
-基于 sm2 推荐曲线（素数域 256 位椭圆曲线），生成公私钥。
+基于 SM2 推荐曲线（素数域 256 位椭圆曲线），生成公私钥。
 
 ```objc
 // 生成公私钥对，数组元素 1 为公钥，2 为私钥

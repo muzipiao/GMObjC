@@ -46,20 +46,25 @@ NSString *const GMTestUserID = @"lifei_zdjl@126.com";
 
 // 生成中英文混合字符串
 - (NSString *)randomZhEnString:(NSInteger)maxLength{
-    int randLen = arc4random_uniform((int)maxLength);
-    randLen = randLen > 1 ? randLen : 10;
-    NSMutableString *mstr = [NSMutableString stringWithCapacity:randLen];
-    for (NSInteger i = 0; i < randLen - 1; i+=2) {
-        int randZhEn = arc4random_uniform(2);
-        if (randZhEn % 2 == 0) {
-            NSString *zh = [self randomZh:2];
-            [mstr appendString:zh];
+    int zhEnLen = arc4random_uniform((int)maxLength);
+    zhEnLen = zhEnLen > 1 ? zhEnLen : 10;
+    NSMutableString *zhEnStr = [NSMutableString stringWithCapacity:zhEnLen];
+    for (NSInteger i = 0; i < zhEnLen - 1; i++) {
+        if (zhEnStr.length >= zhEnLen) {
+            break;
+        }
+        int randType = arc4random_uniform(2);
+        int surplusNum = (int)(zhEnLen - zhEnStr.length);
+        int surplusRandNum = surplusNum <= 3 ? surplusNum : arc4random_uniform(surplusNum);
+        if (randType % 2 == 0) {
+            NSString *zh = [self randomZh:surplusRandNum];
+            [zhEnStr appendString:zh];
         }else{
-            NSString *en = [self randomEn:2];
-            [mstr appendString:en];
+            NSString *en = [self randomEn:surplusRandNum];
+            [zhEnStr appendString:en];
         }
     }
-    return mstr.copy;
+    return zhEnStr.copy;
 }
 
 // 随机生成ascii符串(由大小写字母、数字组成)
@@ -77,17 +82,13 @@ NSString *const GMTestUserID = @"lifei_zdjl@126.com";
 // 随机生成汉字字符串
 -(NSString *)randomZh:(NSInteger)len{
     len = len > 1 ? len : 10;
-    NSMutableString *mStr = [NSMutableString string];
+    NSMutableString *mStr = [NSMutableString stringWithCapacity:len];
+    NSStringEncoding gbkEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     for (NSInteger i = 0; i < len; i++) {
-        NSStringEncoding gbkEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-        
         NSInteger randomH = 0xA1+arc4random()%(0xFE - 0xA1+1);
-        
         NSInteger randomL = 0xB0+arc4random()%(0xF7 - 0xB0+1);
-        
         NSInteger number = (randomH<<8)+randomL;
         NSData *data = [NSData dataWithBytes:&number length:2];
-        
         NSString *string = [[NSString alloc] initWithData:data encoding:gbkEncoding];
         [mStr appendString:string];
     }
