@@ -27,15 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// CBC 模式需传入 32 字节 Hex 编码格式向量字符串
 /// @param plaintext 待加密的字符串
 /// @param key SM4 密钥，长度  32 字节 Hex 编码格式字符串
-+ (nullable NSString *)ecbEncrypt:(NSString *)plaintext Key:(NSString *)key;
-+ (nullable NSString *)cbcEncrypt:(NSString *)plaintext Key:(NSString *)key IV:(NSString *)ivec;
++ (nullable NSString *)ecbEncryptText:(NSString *)plaintext key:(NSString *)key;
++ (nullable NSString *)cbcEncryptText:(NSString *)plaintext key:(NSString *)key IV:(NSString *)ivec;
 
 /// SM4 字符串解密。返回值：解密后的明文
 /// CBC 模式需传入  32 字节 Hex 编码格式字符串
 /// @param ciphertext 密文
 /// @param key SM4 密钥，长度  32 字节 Hex 编码格式字符串
-+ (nullable NSString *)ecbDecrypt:(NSString *)ciphertext Key:(NSString *)key;
-+ (nullable NSString *)cbcDecrypt:(NSString *)ciphertext Key:(NSString *)key IV:(NSString *)ivec;
++ (nullable NSString *)ecbDecryptText:(NSString *)ciphertext key:(NSString *)key;
++ (nullable NSString *)cbcDecryptText:(NSString *)ciphertext key:(NSString *)key IV:(NSString *)ivec;
 
 ///MARK: - SM4 Data 加解密
 
@@ -43,15 +43,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// CBC 模式需传入  32 字节 Hex 编码格式字符串
 /// @param plainData 从文件读取 NSData 类型原文
 /// @param key SM4 密钥，长度  32 字节 Hex 编码格式字符串
-+ (nullable NSData *)ecbEncryptData:(NSData *)plainData Key:(NSString *)key;
-+ (nullable NSData *)cbcEncryptData:(NSData *)plainData Key:(NSString *)key IV:(NSString *)ivec;
++ (nullable NSData *)ecbEncryptData:(NSData *)plainData key:(NSString *)key;
++ (nullable NSData *)cbcEncryptData:(NSData *)plainData key:(NSString *)key IV:(NSString *)ivec;
 
 /// SM4 文件解密。返回值：解密后的 NSData 类型原文
 /// CBC 模式需传入  32 字节 Hex 编码格式字符串
 /// @param cipherData 加密的 NSData 类型密文
 /// @param key SM4 密钥，长度  32 字节 Hex 编码格式字符串
-+ (nullable NSData *)ecbDecryptData:(NSData *)cipherData Key:(NSString *)key;
-+ (nullable NSData *)cbcDecryptData:(NSData *)cipherData Key:(NSString *)key IV:(NSString *)ivec;
++ (nullable NSData *)ecbDecryptData:(NSData *)cipherData key:(NSString *)key;
++ (nullable NSData *)cbcDecryptData:(NSData *)cipherData key:(NSString *)key IV:(NSString *)ivec;
 
 @end
 

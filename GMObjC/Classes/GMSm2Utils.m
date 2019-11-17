@@ -13,8 +13,8 @@
 
 @implementation GMSm2Utils
 
-///MARK: - 创建公私钥
-+ (NSArray<NSString *> *)createPublicAndPrivateKey{
+///MARK: - 创建公私钥对
++ (NSArray<NSString *> *)createKeyPair{
     NSArray<NSString *> *keyArray = @[@"", @""];
     EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
     EC_KEY *key = NULL; // 密钥对
@@ -50,7 +50,7 @@
 }
 
 ///MARK: - SM2 加密
-+ (nullable NSString *)encrypt:(NSString *)plaintext PublicKey:(NSString *)publicKey{
++ (nullable NSString *)encrypt:(NSString *)plaintext publicKey:(NSString *)publicKey{
     if (!plaintext || plaintext.length == 0 || !publicKey || publicKey.length == 0) {
         return nil;
     }
@@ -101,7 +101,7 @@
 }
 
 ///MARK: - SM2 解密
-+ (nullable NSString *)decrypt:(NSString *)ciphertext PrivateKey:(NSString *)privateKey{
++ (nullable NSString *)decrypt:(NSString *)ciphertext privateKey:(NSString *)privateKey{
     if (!ciphertext || !privateKey || ciphertext.length == 0 || privateKey.length == 0) {
         return nil;
     }
@@ -156,7 +156,7 @@
 }
 
 ///MARK: - ASN1 编码
-+ (nullable NSString *)encodeWithASN1:(NSString *)ciphertext{
++ (nullable NSString *)asn1Encode:(NSString *)ciphertext{
     if (ciphertext.length <= 192) {
         return nil;
     }
@@ -226,7 +226,7 @@
 }
 
 ///MARK: - ASN1 解码
-+ (nullable NSString *)decodeWithASN1:(NSString *)ciphertext{
++ (nullable NSString *)asn1Decode:(NSString *)ciphertext{
     if (!ciphertext || ciphertext.length == 0) {
         return nil;
     }
@@ -265,7 +265,7 @@
 }
 
 ///MARK: - SM2 签名
-+ (nullable NSString *)sign:(NSString *)plaintext PrivateKey:(NSString *)priKey UserID:(nullable NSString *)userID{
++ (nullable NSString *)sign:(NSString *)plaintext privateKey:(NSString *)priKey userID:(nullable NSString *)userID{
     if (plaintext.length == 0 || priKey.length == 0) {
         return nil;
     }
@@ -341,7 +341,7 @@
 }
 
 ///MARK: - SM2 验签
-+ (BOOL)verify:(NSString *)plaintext Sign:(NSString *)sign PublicKey:(NSString *)pubKey UserID:(nullable NSString *)userID{
++ (BOOL)verify:(NSString *)plaintext sign:(NSString *)sign publicKey:(NSString *)pubKey userID:(nullable NSString *)userID{
     if (plaintext.length == 0 || sign.length == 0 || pubKey.length == 0) {
         return NO;
     }
@@ -412,7 +412,7 @@
 }
 
 ///MARK: - SM2签名 Der 编码
-+ (nullable NSString *)encodeWithDer:(NSString *)originSign{
++ (nullable NSString *)derEncode:(NSString *)originSign{
     if (originSign.length == 0) {
         return nil;
     }
@@ -461,7 +461,7 @@
 }
 
 ///MARK: - SM2签名 Der 解码
-+ (nullable NSString *)decodeWithDer:(NSString *)derSign{
++ (nullable NSString *)derDecode:(NSString *)derSign{
     if (derSign.length == 0) {
         return nil;
     }
@@ -517,7 +517,7 @@
 }
 
 ///MARK: - ECDH 密钥协商
-+ (nullable NSString *)computeECDH:(NSString *)publicKey PrivateKey:(NSString *)privateKey{
++ (nullable NSString *)computeECDH:(NSString *)publicKey privateKey:(NSString *)privateKey{
     if (!publicKey || publicKey.length == 0 || !privateKey || privateKey.length == 0) {
         return nil;
     }

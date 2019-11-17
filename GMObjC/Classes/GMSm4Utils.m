@@ -249,7 +249,7 @@
 ///MARK: - SM4 字符串加密
 
 // ECB 模式加密字符串
-+ (nullable NSString *)ecbEncrypt:(NSString *)plaintext Key:(NSString *)key{
++ (nullable NSString *)ecbEncryptText:(NSString *)plaintext key:(NSString *)key{
     if (plaintext.length == 0 || key.length != SM4_BLOCK_SIZE * 2) {
         // 明文、密钥不能为空
         return nil;
@@ -259,7 +259,7 @@
 }
 
 // CBC 模式加密字符串
-+ (nullable NSString *)cbcEncrypt:(NSString *)plaintext Key:(NSString *)key IV:(NSString *)ivec{
++ (nullable NSString *)cbcEncryptText:(NSString *)plaintext key:(NSString *)key IV:(NSString *)ivec{
     if (plaintext.length == 0 || key.length != SM4_BLOCK_SIZE * 2 || ivec.length != SM4_BLOCK_SIZE * 2) {
         // 加密字符、密钥、偏移向量不能为空
         return nil;
@@ -271,7 +271,7 @@
 ///MARK: - SM4 字符串解密
 
 // ECB 模式解密字符串
-+ (nullable NSString *)ecbDecrypt:(NSString *)ciphertext Key:(NSString *)key{
++ (nullable NSString *)ecbDecryptText:(NSString *)ciphertext key:(NSString *)key{
     if (ciphertext.length == 0 || key.length != SM4_BLOCK_SIZE * 2) {
         return nil;
     }
@@ -280,7 +280,7 @@
 }
 
 // CBC 模式解密字符串
-+ (nullable NSString *)cbcDecrypt:(NSString *)ciphertext Key:(NSString *)key IV:(NSString *)ivec{
++ (nullable NSString *)cbcDecryptText:(NSString *)ciphertext key:(NSString *)key IV:(NSString *)ivec{
     if (ciphertext.length == 0 || key.length != SM4_BLOCK_SIZE * 2 || ivec.length != SM4_BLOCK_SIZE * 2) {
         // 密文、密钥、偏移向量不能为空
         return nil;
@@ -290,7 +290,7 @@
 }
 
 ///MARK: - SM4 文件加密
-+ (nullable NSData *)ecbEncryptData:(NSData *)plainData Key:(NSString *)key{
++ (nullable NSData *)ecbEncryptData:(NSData *)plainData key:(NSString *)key{
     if (plainData.length == 0 || key.length != SM4_BLOCK_SIZE * 2) {
         // 密文、密钥不能为空
         return nil;
@@ -300,7 +300,7 @@
 }
 
 // CBC 模式Data加密
-+ (nullable NSData *)cbcEncryptData:(NSData *)plainData Key:(NSString *)key IV:(NSString *)ivec{
++ (nullable NSData *)cbcEncryptData:(NSData *)plainData key:(NSString *)key IV:(NSString *)ivec{
     if (plainData.length == 0 || key.length != SM4_BLOCK_SIZE * 2 || ivec.length != SM4_BLOCK_SIZE * 2) {
         // 密文、密钥不能为空
         return nil;
@@ -312,7 +312,7 @@
 ///MARK: - SM4 文件加密
 
 // ECB 模式解密 Data
-+ (nullable NSData *)ecbDecryptData:(NSData *)cipherData Key:(NSString *)key{
++ (nullable NSData *)ecbDecryptData:(NSData *)cipherData key:(NSString *)key{
     if (cipherData.length == 0 || key.length != SM4_BLOCK_SIZE * 2) {
         return nil;
     }
@@ -321,7 +321,7 @@
 }
 
 // CBC 模式解密 Data
-+ (nullable NSData *)cbcDecryptData:(NSData *)cipherData Key:(NSString *)key IV:(NSString *)ivec{
++ (nullable NSData *)cbcDecryptData:(NSData *)cipherData key:(NSString *)key IV:(NSString *)ivec{
     if (cipherData.length == 0 || key.length != SM4_BLOCK_SIZE * 2 || ivec.length != SM4_BLOCK_SIZE * 2) {
         return nil;
     }

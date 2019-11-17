@@ -26,67 +26,67 @@
     NSString *ivec = [GMSm4Utils createSm4Key];
     
     // ECB 模式加密空
-    NSString *ecbEnNullStr = [GMSm4Utils ecbEncrypt:strNull Key:sm4Key];
+    NSString *ecbEnNullStr = [GMSm4Utils ecbEncryptText:strNull key:sm4Key];
     XCTAssertNil(ecbEnNullStr, @"加密字符串应为空");
-    NSString *ecbEnZeroStr = [GMSm4Utils ecbEncrypt:strLenZero Key:sm4Key];
+    NSString *ecbEnZeroStr = [GMSm4Utils ecbEncryptText:strLenZero key:sm4Key];
     XCTAssertNil(ecbEnZeroStr, @"加密字符串应为空");
-    NSString *ecbEnNullKey = [GMSm4Utils ecbEncrypt:pwd Key:@""];
+    NSString *ecbEnNullKey = [GMSm4Utils ecbEncryptText:pwd key:@""];
     XCTAssertNil(ecbEnNullKey, @"加密字符串应为空");
-    NSData *ecbEnNullData = [GMSm4Utils ecbEncryptData:dataNull Key:sm4Key];
+    NSData *ecbEnNullData = [GMSm4Utils ecbEncryptData:dataNull key:sm4Key];
     XCTAssertNil(ecbEnNullData, @"Data 为空，加密 Data 应为空");
-    NSData *ecbEnDataNullKey = [GMSm4Utils ecbEncryptData:self.fileData Key:@""];
+    NSData *ecbEnDataNullKey = [GMSm4Utils ecbEncryptData:self.fileData key:@""];
     XCTAssertNil(ecbEnDataNullKey, @"key为空，加密 Data 应为空");
     
     // CBC 模式加密空
-    NSString *cbcEnNullStr = [GMSm4Utils cbcEncrypt:strNull Key:sm4Key IV:ivec];
+    NSString *cbcEnNullStr = [GMSm4Utils cbcEncryptText:strNull key:sm4Key IV:ivec];
     XCTAssertNil(cbcEnNullStr, @"加密字符串应为空");
-    NSString *cbcEnZeroStr = [GMSm4Utils cbcEncrypt:strLenZero Key:sm4Key IV:ivec];
+    NSString *cbcEnZeroStr = [GMSm4Utils cbcEncryptText:strLenZero key:sm4Key IV:ivec];
     XCTAssertNil(cbcEnZeroStr, @"加密字符串应为空");
-    NSString *cbcEnNullKey = [GMSm4Utils cbcEncrypt:pwd Key:@"" IV:ivec];
+    NSString *cbcEnNullKey = [GMSm4Utils cbcEncryptText:pwd key:@"" IV:ivec];
     XCTAssertNil(cbcEnNullKey, @"加密字符串应为空");
-    NSData *cbcEnNullData = [GMSm4Utils cbcEncryptData:dataNull Key:sm4Key IV:ivec];
+    NSData *cbcEnNullData = [GMSm4Utils cbcEncryptData:dataNull key:sm4Key IV:ivec];
     XCTAssertNil(cbcEnNullData, @"Data 为空，加密 Data 应为空");
-    NSData *cbcEnDataNullKey = [GMSm4Utils cbcEncryptData:self.fileData Key:@"" IV:ivec];
+    NSData *cbcEnDataNullKey = [GMSm4Utils cbcEncryptData:self.fileData key:@"" IV:ivec];
     XCTAssertNil(cbcEnDataNullKey, @"key为空，加密 Data 应为空");
-    NSString *cbcEnIvNull = [GMSm4Utils cbcEncrypt:pwd Key:sm4Key IV:strNull];
+    NSString *cbcEnIvNull = [GMSm4Utils cbcEncryptText:pwd key:sm4Key IV:strNull];
     XCTAssertNil(cbcEnIvNull, @"加密字符串应为空");
-    NSString *cbcEnIvZero = [GMSm4Utils cbcEncrypt:pwd Key:sm4Key IV:strLenZero];
+    NSString *cbcEnIvZero = [GMSm4Utils cbcEncryptText:pwd key:sm4Key IV:strLenZero];
     XCTAssertNil(cbcEnIvZero, @"加密字符串应为空");
-    NSData *cbcEnDataIvNull = [GMSm4Utils cbcEncryptData:self.fileData Key:sm4Key IV:strNull];
+    NSData *cbcEnDataIvNull = [GMSm4Utils cbcEncryptData:self.fileData key:sm4Key IV:strNull];
     XCTAssertNil(cbcEnDataIvNull, @"加密字符串应为空");
-    NSData *cbcEnDataIvZero = [GMSm4Utils cbcEncryptData:self.fileData Key:sm4Key IV:strLenZero];
+    NSData *cbcEnDataIvZero = [GMSm4Utils cbcEncryptData:self.fileData key:sm4Key IV:strLenZero];
     XCTAssertNil(cbcEnDataIvZero, @"加密字符串应为空");
     
     // ECB 模式解密空
-    NSString *ecbDeNullStr = [GMSm4Utils ecbDecrypt:strNull Key:sm4Key];
+    NSString *ecbDeNullStr = [GMSm4Utils ecbDecryptText:strNull key:sm4Key];
     XCTAssertNil(ecbDeNullStr, @"解密字符串应为空");
-    NSString *ecbDeZeroStr = [GMSm4Utils ecbDecrypt:strLenZero Key:sm4Key];
+    NSString *ecbDeZeroStr = [GMSm4Utils ecbDecryptText:strLenZero key:sm4Key];
     XCTAssertNil(ecbDeZeroStr, @"解密字符串应为空");
-    NSString *ecbDeNullKey = [GMSm4Utils ecbDecrypt:pwd Key:@""];
+    NSString *ecbDeNullKey = [GMSm4Utils ecbDecryptText:pwd key:@""];
     XCTAssertNil(ecbDeNullKey, @"解密字符串应为空");
-    NSData *ecbDeNullData = [GMSm4Utils ecbDecryptData:dataNull Key:sm4Key];
+    NSData *ecbDeNullData = [GMSm4Utils ecbDecryptData:dataNull key:sm4Key];
     XCTAssertNil(ecbDeNullData, @"Data 为空，解密 Data 应为空");
-    NSData *ecbDeDataNullKey = [GMSm4Utils ecbDecryptData:self.fileData Key:@""];
+    NSData *ecbDeDataNullKey = [GMSm4Utils ecbDecryptData:self.fileData key:@""];
     XCTAssertNil(ecbDeDataNullKey, @"key为空，解密 Data 应为空");
     
     // CBC 模式解密空
-    NSString *cbcDeNullStr = [GMSm4Utils cbcDecrypt:strNull Key:sm4Key IV:ivec];
+    NSString *cbcDeNullStr = [GMSm4Utils cbcDecryptText:strNull key:sm4Key IV:ivec];
     XCTAssertNil(cbcDeNullStr, @"解密字符串应为空");
-    NSString *cbcDeZeroStr = [GMSm4Utils cbcDecrypt:strLenZero Key:sm4Key IV:ivec];
+    NSString *cbcDeZeroStr = [GMSm4Utils cbcDecryptText:strLenZero key:sm4Key IV:ivec];
     XCTAssertNil(cbcDeZeroStr, @"解密字符串应为空");
-    NSString *cbcDeNullKey = [GMSm4Utils cbcDecrypt:pwd Key:@"" IV:ivec];
+    NSString *cbcDeNullKey = [GMSm4Utils cbcDecryptText:pwd key:@"" IV:ivec];
     XCTAssertNil(cbcDeNullKey, @"解密字符串应为空");
-    NSData *cbcDeNullData = [GMSm4Utils cbcDecryptData:dataNull Key:sm4Key IV:ivec];
+    NSData *cbcDeNullData = [GMSm4Utils cbcDecryptData:dataNull key:sm4Key IV:ivec];
     XCTAssertNil(cbcDeNullData, @"Data 为空，解密 Data 应为空");
-    NSData *cbcDeDataNullKey = [GMSm4Utils cbcDecryptData:self.fileData Key:@"" IV:ivec];
+    NSData *cbcDeDataNullKey = [GMSm4Utils cbcDecryptData:self.fileData key:@"" IV:ivec];
     XCTAssertNil(cbcDeDataNullKey, @"key为空，解密 Data 应为空");
-    NSString *cbcDeNullIv = [GMSm4Utils cbcDecrypt:pwd Key:sm4Key IV:strNull];
+    NSString *cbcDeNullIv = [GMSm4Utils cbcDecryptText:pwd key:sm4Key IV:strNull];
     XCTAssertNil(cbcDeNullIv, @"IV 为空，解密 String 应为空");
-    NSData *cbcDeDataNullIv = [GMSm4Utils cbcDecryptData:self.fileData Key:sm4Key IV:strNull];
+    NSData *cbcDeDataNullIv = [GMSm4Utils cbcDecryptData:self.fileData key:sm4Key IV:strNull];
     XCTAssertNil(cbcDeDataNullIv, @"IV为空，解密 Data 应为空");
-    NSString *cbcDeZeroIv = [GMSm4Utils cbcDecrypt:pwd Key:sm4Key IV:strLenZero];
+    NSString *cbcDeZeroIv = [GMSm4Utils cbcDecryptText:pwd key:sm4Key IV:strLenZero];
     XCTAssertNil(cbcDeZeroIv, @"IV 为空，解密 String 应为空");
-    NSData *cbcDeDataZeroIv = [GMSm4Utils cbcDecryptData:self.fileData Key:sm4Key IV:strLenZero];
+    NSData *cbcDeDataZeroIv = [GMSm4Utils cbcDecryptData:self.fileData key:sm4Key IV:strLenZero];
     XCTAssertNil(cbcDeDataZeroIv, @"IV为空，解密 Data 应为空");
 }
 
@@ -114,16 +114,16 @@
         XCTAssertNotNil(sm4Key, @"生成 sm4 密钥不为空");
         
         // ECB 模式
-        NSData *cipherDataByEcb = [GMSm4Utils ecbEncryptData:self.fileData Key:sm4Key];
+        NSData *cipherDataByEcb = [GMSm4Utils ecbEncryptData:self.fileData key:sm4Key];
         XCTAssertTrue(cipherDataByEcb.length > 0, @"加密后数据不为空");
-        NSData *decryptDataByEcb = [GMSm4Utils ecbDecryptData:cipherDataByEcb Key:sm4Key];
+        NSData *decryptDataByEcb = [GMSm4Utils ecbDecryptData:cipherDataByEcb key:sm4Key];
         XCTAssertTrue(decryptDataByEcb.length > 0, @"解密后数据不为空");
         
         // CBC 模式
         NSString *ivec = [GMSm4Utils createSm4Key];
-        NSData *cipherDataByCbc = [GMSm4Utils cbcEncryptData:self.fileData Key:sm4Key IV:ivec];
+        NSData *cipherDataByCbc = [GMSm4Utils cbcEncryptData:self.fileData key:sm4Key IV:ivec];
         XCTAssertTrue(cipherDataByCbc.length > 0, @"加密后数据不为空");
-        NSData *decryptDataByCbc = [GMSm4Utils cbcDecryptData:cipherDataByCbc Key:sm4Key IV:ivec];
+        NSData *decryptDataByCbc = [GMSm4Utils cbcDecryptData:cipherDataByCbc key:sm4Key IV:ivec];
         XCTAssertTrue(decryptDataByCbc.length > 0, @"解密后数据不为空");
         
         // 加解密后与原数据相同
@@ -154,15 +154,15 @@
         NSString *sm4Key = [GMSm4Utils createSm4Key];
         XCTAssertNotNil(sm4Key, @"生成 sm4 密钥不为空");
         // ECB 模式
-        NSString *encryptByEcb = [GMSm4Utils ecbEncrypt:plaintext Key:sm4Key];
+        NSString *encryptByEcb = [GMSm4Utils ecbEncryptText:plaintext key:sm4Key];
         XCTAssertNotNil(encryptByEcb, @"加密字符串不为空");
-        NSString *decryptByEcb = [GMSm4Utils ecbDecrypt:encryptByEcb Key:sm4Key];
+        NSString *decryptByEcb = [GMSm4Utils ecbDecryptText:encryptByEcb key:sm4Key];
         XCTAssertNotNil(decryptByEcb, @"解密结果不为空");
         // CBC 模式
         NSString *ivec = [GMSm4Utils createSm4Key];
-        NSString *encryptByCbc = [GMSm4Utils cbcEncrypt:plaintext Key:sm4Key IV:ivec];
+        NSString *encryptByCbc = [GMSm4Utils cbcEncryptText:plaintext key:sm4Key IV:ivec];
         XCTAssertNotNil(encryptByCbc, @"加密字符串不为空");
-        NSString *decryptByCbc = [GMSm4Utils cbcDecrypt:encryptByCbc Key:sm4Key IV:ivec];
+        NSString *decryptByCbc = [GMSm4Utils cbcDecryptText:encryptByCbc key:sm4Key IV:ivec];
         XCTAssertNotNil(decryptByCbc, @"解密结果不为空");
         
         BOOL isSameByEcb = [decryptByEcb isEqualToString:plaintext];
@@ -181,7 +181,7 @@
     NSString *sm4Key = @"CCDEE6FB253E1CBCD40B12D5E230D0F4";
     // 加密耗时
     [self measureBlock:^{
-        NSString *encryptStr = [GMSm4Utils ecbEncrypt:plaintext Key:sm4Key];
+        NSString *encryptStr = [GMSm4Utils ecbEncryptText:plaintext key:sm4Key];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");
     }];
 }
@@ -194,7 +194,7 @@
     NSString *sm4Key = @"CCDEE6FB253E1CBCD40B12D5E230D0F4";
     // 解密耗时
     [self measureBlock:^{
-        NSString *decryptStr = [GMSm4Utils ecbDecrypt:encryptStr Key:sm4Key];
+        NSString *decryptStr = [GMSm4Utils ecbDecryptText:encryptStr key:sm4Key];
         XCTAssertNotNil(decryptStr, @"解密结果不为空");
     }];
 }
@@ -208,7 +208,7 @@
     NSString *ivec = @"685E7C9D456A5093C83606D94FE67AA5";
     // 加密耗时
     [self measureBlock:^{
-        NSString *encryptStr = [GMSm4Utils cbcEncrypt:plaintext Key:sm4Key IV:ivec];
+        NSString *encryptStr = [GMSm4Utils cbcEncryptText:plaintext key:sm4Key IV:ivec];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");
     }];
 }
@@ -222,7 +222,7 @@
     NSString *ivec = @"685E7C9D456A5093C83606D94FE67AA5";
     // 解密耗时
     [self measureBlock:^{
-        NSString *decryptStr = [GMSm4Utils cbcEncrypt:encryptStr Key:sm4Key IV:ivec];
+        NSString *decryptStr = [GMSm4Utils cbcEncryptText:encryptStr key:sm4Key IV:ivec];
         XCTAssertNotNil(decryptStr, @"解密结果不为空");
     }];
 }

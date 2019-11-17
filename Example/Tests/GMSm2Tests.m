@@ -30,31 +30,31 @@
     NSString *strLenZero = @"";
     
     // 加密
-    NSString *encryptNullStr = [GMSm2Utils encrypt:strNull PublicKey:GMPubKey];
+    NSString *encryptNullStr = [GMSm2Utils encrypt:strNull publicKey:GMPubKey];
     XCTAssertNil(encryptNullStr, @"加密字符串应为空");
-    NSString *encryptLenZeroStr = [GMSm2Utils encrypt:strLenZero PublicKey:GMPubKey];
+    NSString *encryptLenZeroStr = [GMSm2Utils encrypt:strLenZero publicKey:GMPubKey];
     XCTAssertNil(encryptLenZeroStr, @"加密字符串应为空");
-    NSString *encryptNullKey = [GMSm2Utils encrypt:@"123456" PublicKey:@""];
+    NSString *encryptNullKey = [GMSm2Utils encrypt:@"123456" publicKey:@""];
     XCTAssertNil(encryptNullKey, @"加密字符串应为空");
     
     // 解密
-    NSString *decryptNullStr = [GMSm2Utils decrypt:strNull PrivateKey:GMPriKey];
+    NSString *decryptNullStr = [GMSm2Utils decrypt:strNull privateKey:GMPriKey];
     XCTAssertNil(decryptNullStr, @"解密字符串应为空");
-    NSString *decryptLenZeroStr = [GMSm2Utils decrypt:strLenZero PrivateKey:GMPriKey];
+    NSString *decryptLenZeroStr = [GMSm2Utils decrypt:strLenZero privateKey:GMPriKey];
     XCTAssertNil(decryptLenZeroStr, @"解密字符串应为空");
-    NSString *decryptNullKey = [GMSm2Utils decrypt:@"123456" PrivateKey:@""];
+    NSString *decryptNullKey = [GMSm2Utils decrypt:@"123456" privateKey:@""];
     XCTAssertNil(decryptNullKey, @"解密字符串应为空");
     
     // ASN1 解码
-    NSString *decodeNullStr = [GMSm2Utils decodeWithASN1:strNull];
+    NSString *decodeNullStr = [GMSm2Utils asn1Decode:strNull];
     XCTAssertNil(decodeNullStr, @"解码字符串应为空");
-    NSString *decodeLenZeroStr = [GMSm2Utils decodeWithASN1:strLenZero];
+    NSString *decodeLenZeroStr = [GMSm2Utils asn1Decode:strLenZero];
     XCTAssertNil(decodeLenZeroStr, @"解码字符串应为空");
     
     // ASN1 编码
-    NSString *encodeNullStr = [GMSm2Utils encodeWithASN1:strNull];
+    NSString *encodeNullStr = [GMSm2Utils asn1Encode:strNull];
     XCTAssertNil(encodeNullStr, @"编码字符串应为空");
-    NSString *encodeLenZeroStr = [GMSm2Utils encodeWithASN1:strLenZero];
+    NSString *encodeLenZeroStr = [GMSm2Utils asn1Encode:strLenZero];
     XCTAssertNil(encodeLenZeroStr, @"编码字符串应为空");
 }
 
@@ -67,47 +67,47 @@
     // 签名为空
     NSString *userID = GMTestUserID;
     
-    NSString *signNullStr = [GMSm2Utils sign:strNull PrivateKey:GMPriKey UserID:userID];
+    NSString *signNullStr = [GMSm2Utils sign:strNull privateKey:GMPriKey userID:userID];
     XCTAssertNil(signNullStr, @"签名字符串应为空");
-    NSString *signZeroStr = [GMSm2Utils sign:strZero PrivateKey:GMPriKey UserID:userID];
+    NSString *signZeroStr = [GMSm2Utils sign:strZero privateKey:GMPriKey userID:userID];
     XCTAssertNil(signZeroStr, @"签名字符串应为空");
     
     // 签名私钥为空
     NSString *plaintext = @"123456";
-    NSString *signPriKeyNull = [GMSm2Utils sign:plaintext PrivateKey:strNull UserID:userID];
+    NSString *signPriKeyNull = [GMSm2Utils sign:plaintext privateKey:strNull userID:userID];
     XCTAssertNil(signPriKeyNull, @"签名字符串应为空");
-    NSString *signPriKeyZero = [GMSm2Utils sign:plaintext PrivateKey:strZero UserID:userID];
+    NSString *signPriKeyZero = [GMSm2Utils sign:plaintext privateKey:strZero userID:userID];
     XCTAssertNil(signPriKeyZero, @"签名字符串应为空");
     
     // 签名的 UserID 为空
-    NSString *signUserNull = [GMSm2Utils sign:plaintext PrivateKey:GMPriKey UserID:strNull];
+    NSString *signUserNull = [GMSm2Utils sign:plaintext privateKey:GMPriKey userID:strNull];
     XCTAssertNotNil(signUserNull, @"签名字符串不应为空");
-    NSString *signUserZero = [GMSm2Utils sign:plaintext PrivateKey:GMPriKey UserID:strZero];
+    NSString *signUserZero = [GMSm2Utils sign:plaintext privateKey:GMPriKey userID:strZero];
     XCTAssertNotNil(signUserZero, @"签名字符串不应为空");
     
     // 生成一个签名
-    NSString *signNormal = [GMSm2Utils sign:plaintext PrivateKey:GMPriKey UserID:userID];
+    NSString *signNormal = [GMSm2Utils sign:plaintext privateKey:GMPriKey userID:userID];
     // 测试明文为空
-    BOOL isMsgNullOK = [GMSm2Utils verify:strNull Sign:signNormal PublicKey:GMPubKey UserID:userID];
-    BOOL isMsgZeroOK = [GMSm2Utils verify:strZero Sign:signNormal PublicKey:GMPubKey UserID:userID];
+    BOOL isMsgNullOK = [GMSm2Utils verify:strNull sign:signNormal publicKey:GMPubKey userID:userID];
+    BOOL isMsgZeroOK = [GMSm2Utils verify:strZero sign:signNormal publicKey:GMPubKey userID:userID];
     XCTAssertFalse(isMsgNullOK, @"明文为空验证不通过");
     XCTAssertFalse(isMsgZeroOK, @"明文为空验证不通过");
     
     // 测试签名为空
-    BOOL isSignNullOK = [GMSm2Utils verify:plaintext Sign:strNull PublicKey:GMPubKey UserID:userID];
-    BOOL isSignZeroOK = [GMSm2Utils verify:plaintext Sign:strZero PublicKey:GMPubKey UserID:userID];
+    BOOL isSignNullOK = [GMSm2Utils verify:plaintext sign:strNull publicKey:GMPubKey userID:userID];
+    BOOL isSignZeroOK = [GMSm2Utils verify:plaintext sign:strZero publicKey:GMPubKey userID:userID];
     XCTAssertFalse(isSignNullOK, @"签名为空验证不通过");
     XCTAssertFalse(isSignZeroOK, @"签名为空验证不通过");
     
     // 测试公钥为空
-    BOOL isPubNullOK = [GMSm2Utils verify:plaintext Sign:signNormal PublicKey:strNull UserID:userID];
-    BOOL isPubZeroOK = [GMSm2Utils verify:plaintext Sign:signNormal PublicKey:strZero UserID:userID];
+    BOOL isPubNullOK = [GMSm2Utils verify:plaintext sign:signNormal publicKey:strNull userID:userID];
+    BOOL isPubZeroOK = [GMSm2Utils verify:plaintext sign:signNormal publicKey:strZero userID:userID];
     XCTAssertFalse(isPubNullOK, @"公钥为空验证不通过");
     XCTAssertFalse(isPubZeroOK, @"公钥为空验证不通过");
     
     // 测试用户ID为空，不同用户
-    BOOL isUserNullOK = [GMSm2Utils verify:plaintext Sign:signNormal PublicKey:strNull UserID:strNull];
-    BOOL isUserZeroOK = [GMSm2Utils verify:plaintext Sign:signNormal PublicKey:strZero UserID:strZero];
+    BOOL isUserNullOK = [GMSm2Utils verify:plaintext sign:signNormal publicKey:strNull userID:strNull];
+    BOOL isUserZeroOK = [GMSm2Utils verify:plaintext sign:signNormal publicKey:strZero userID:strZero];
     XCTAssertFalse(isUserNullOK, @"用户 ID 不同验证不通过");
     XCTAssertFalse(isUserZeroOK, @"用户 ID 不同验证不通过");
 }
@@ -119,32 +119,32 @@
     NSString *strZero = @"";
     
     // 测试公钥为空
-    NSString *ecdhNullPub = [GMSm2Utils computeECDH:strNull PrivateKey:GMPriKey];
+    NSString *ecdhNullPub = [GMSm2Utils computeECDH:strNull privateKey:GMPriKey];
     XCTAssertNil(ecdhNullPub, @"协商密钥应为空");
-    NSString *ecdhZeroPub = [GMSm2Utils computeECDH:strZero PrivateKey:GMPriKey];
+    NSString *ecdhZeroPub = [GMSm2Utils computeECDH:strZero privateKey:GMPriKey];
     XCTAssertNil(ecdhZeroPub, @"协商密钥应为空");
     
     // 测试私钥为空
-    NSString *ecdhNullPri = [GMSm2Utils computeECDH:GMPubKey PrivateKey:strNull];
+    NSString *ecdhNullPri = [GMSm2Utils computeECDH:GMPubKey privateKey:strNull];
     XCTAssertNil(ecdhNullPri, @"协商密钥应为空");
-    NSString *ecdhZeroPri = [GMSm2Utils computeECDH:GMPubKey PrivateKey:strZero];
+    NSString *ecdhZeroPri = [GMSm2Utils computeECDH:GMPubKey privateKey:strZero];
     XCTAssertNil(ecdhZeroPri, @"协商密钥应为空");
     
     // 测试公私钥都为空情况
-    NSString *ecdhNullKey = [GMSm2Utils computeECDH:strNull PrivateKey:strNull];
+    NSString *ecdhNullKey = [GMSm2Utils computeECDH:strNull privateKey:strNull];
     XCTAssertNil(ecdhNullKey, @"协商密钥应为空");
-    NSString *ecdhZeroKey = [GMSm2Utils computeECDH:strZero PrivateKey:strZero];
+    NSString *ecdhZeroKey = [GMSm2Utils computeECDH:strZero privateKey:strZero];
     XCTAssertNil(ecdhZeroKey, @"协商密钥应为空");
 }
 
 /// 测试 ECDH 密钥协商
 - (void)testECDH {
     for (NSInteger i = 0; i < 1000; i++) {
-        NSArray *clientKey = [GMSm2Utils createPublicAndPrivateKey];
+        NSArray *clientKey = [GMSm2Utils createKeyPair];
         NSString *cPubKey = clientKey[0];
         NSString *cPriKey = clientKey[1];
         
-        NSArray *serverKey = [GMSm2Utils createPublicAndPrivateKey];
+        NSArray *serverKey = [GMSm2Utils createKeyPair];
         NSString *sPubKey = serverKey[0];
         NSString *sPriKey = serverKey[1];
         
@@ -154,10 +154,10 @@
         XCTAssertNotNil(sPriKey, @"服务端私钥不为空");
         
         // 客户端client从服务端server获取公钥sPubKey，client协商出32字节对称密钥clientECDH，转HEX为64字节
-        NSString *clientECDH = [GMSm2Utils computeECDH:sPubKey PrivateKey:cPriKey];
+        NSString *clientECDH = [GMSm2Utils computeECDH:sPubKey privateKey:cPriKey];
         XCTAssertTrue(clientECDH.length==64, @"client 协商出 32 字节对称密钥");
         // 客户端client将公钥cPubKey发送给服务端server，server协商出32字节对称密钥serverECDH，转HEX为64字节
-        NSString *serverECDH = [GMSm2Utils computeECDH:cPubKey PrivateKey:sPriKey];
+        NSString *serverECDH = [GMSm2Utils computeECDH:cPubKey privateKey:sPriKey];
         XCTAssertTrue(serverECDH.length==64, @"server 协商出 32 字节对称密钥");
         
         BOOL isSameECDH = [clientECDH isEqualToString:serverECDH];
@@ -172,21 +172,21 @@
                              "BC9C624537215DE9507BC0E2DD276CF74695C924F28E9004CDE4678F63D698";
     NSString *privErrorKey = @"6666662B9FE24AB196305F82E647616C3A3694441FB3422E7838E24DEAE";
     
-    NSString *enTrueStr = [GMSm2Utils encrypt:plaintext PublicKey:GMPubKey];
+    NSString *enTrueStr = [GMSm2Utils encrypt:plaintext publicKey:GMPubKey];
     XCTAssertNotNil(enTrueStr, @"加密字符串不为空");
 
-    NSString *signTrueStr = [GMSm2Utils sign:plaintext PrivateKey:GMPriKey UserID:nil];
+    NSString *signTrueStr = [GMSm2Utils sign:plaintext privateKey:GMPriKey userID:nil];
     XCTAssertNotNil(signTrueStr, @"签名结果不为为空");
     
-    NSString *enWithErrorPubKey = [GMSm2Utils encrypt:plaintext PublicKey:pubErrorKey];
+    NSString *enWithErrorPubKey = [GMSm2Utils encrypt:plaintext publicKey:pubErrorKey];
     XCTAssertNil(enWithErrorPubKey, @"加密结果为空");
     
-    NSString *deWithErrorPri = [GMSm2Utils decrypt:enTrueStr PrivateKey:privErrorKey];
+    NSString *deWithErrorPri = [GMSm2Utils decrypt:enTrueStr privateKey:privErrorKey];
     XCTAssertNil(deWithErrorPri, @"解密结果为空");
     
-    NSString *signWithErrorPriv = [GMSm2Utils sign:plaintext PrivateKey:privErrorKey UserID:nil];
-    BOOL isOKErrorPub = [GMSm2Utils verify:plaintext Sign:signTrueStr PublicKey:pubErrorKey UserID:nil];
-    BOOL isOKErrorSign = [GMSm2Utils verify:plaintext Sign:signWithErrorPriv PublicKey:pubErrorKey UserID:nil];
+    NSString *signWithErrorPriv = [GMSm2Utils sign:plaintext privateKey:privErrorKey userID:nil];
+    BOOL isOKErrorPub = [GMSm2Utils verify:plaintext sign:signTrueStr publicKey:pubErrorKey userID:nil];
+    BOOL isOKErrorSign = [GMSm2Utils verify:plaintext sign:signWithErrorPriv publicKey:pubErrorKey userID:nil];
     XCTAssertFalse(isOKErrorPub, @"签名结果应该校验失败");
     XCTAssertFalse(isOKErrorSign, @"签名结果应该校验失败");
 }
@@ -197,7 +197,7 @@
 - (void)testSm2CreateKeys {
     for (NSInteger i = 0; i < 1000; i++) {
         // 生成一对新的公私钥
-        NSArray *newKey = [GMSm2Utils createPublicAndPrivateKey];
+        NSArray *newKey = [GMSm2Utils createKeyPair];
         XCTAssertNotNil(newKey[0], @"生成公钥不为空");
         XCTAssertNotNil(newKey[1], @"生成私钥不为空");
     }
@@ -210,21 +210,21 @@
     int randLen = arc4random_uniform((int)10000);
     NSString *plaintext = [self randomEn:randLen];
     XCTAssertNotNil(plaintext, @"生成字符串不为空");
-    NSString *encryptStr = [GMSm2Utils encrypt:plaintext PublicKey:GMPubKey];
+    NSString *encryptStr = [GMSm2Utils encrypt:plaintext publicKey:GMPubKey];
     XCTAssertNotNil(encryptStr, @"加密字符串不为空");
     
-    NSString *decodeStr = [GMSm2Utils decodeWithASN1:encryptStr];
+    NSString *decodeStr = [GMSm2Utils asn1Decode:encryptStr];
     XCTAssertNotNil(decodeStr, @"ASN1解码后字符串不为空");
     for (NSInteger i = 0; i < 1000; i++) {
-        NSString *newDecodeStr = [GMSm2Utils decodeWithASN1:encryptStr];
+        NSString *newDecodeStr = [GMSm2Utils asn1Decode:encryptStr];
         BOOL isSame_decode = [newDecodeStr isEqualToString:decodeStr];
         XCTAssertTrue(isSame_decode, @"多次解码应该相同");
     }
     
-    NSString *encodeStr = [GMSm2Utils encodeWithASN1:decodeStr];
+    NSString *encodeStr = [GMSm2Utils asn1Encode:decodeStr];
     XCTAssertNotNil(encodeStr, @"ASN1编码后字符串不为空");
     for (NSInteger i = 0; i < 1000; i++) {
-        NSString *newEncodeStr = [GMSm2Utils encodeWithASN1:decodeStr];
+        NSString *newEncodeStr = [GMSm2Utils asn1Encode:decodeStr];
         BOOL isSame_encode = [newEncodeStr isEqualToString:encodeStr];
         XCTAssertTrue(isSame_encode, @"多次编码应该相同");
     }
@@ -232,7 +232,7 @@
     BOOL isSame_Ctext = [encodeStr isEqualToString:encryptStr];
     XCTAssertTrue(isSame_Ctext, @"编码后和原始密文相同");
     
-    NSString *decryptStr = [GMSm2Utils decrypt:encryptStr PrivateKey:GMPriKey];
+    NSString *decryptStr = [GMSm2Utils decrypt:encryptStr privateKey:GMPriKey];
     XCTAssertNotNil(decryptStr, @"解密结果不为空");
     BOOL isSame_plain = [decryptStr isEqualToString:plaintext];
     XCTAssertTrue(isSame_plain, @"加解密结果应该相同");
@@ -247,15 +247,15 @@
         NSString *plaintext = [self randomEn:randLen];
         XCTAssertNotNil(plaintext, @"生成字符串不为空");
         
-        NSString *encryptStr = [GMSm2Utils encrypt:plaintext PublicKey:GMPubKey];
+        NSString *encryptStr = [GMSm2Utils encrypt:plaintext publicKey:GMPubKey];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");
         
-        NSString *decodeStr = [GMSm2Utils decodeWithASN1:encryptStr];
+        NSString *decodeStr = [GMSm2Utils asn1Decode:encryptStr];
         XCTAssertNotNil(decodeStr, @"ASN1解码后字符串不为空");
-        NSString *encodeStr = [GMSm2Utils encodeWithASN1:decodeStr];
+        NSString *encodeStr = [GMSm2Utils asn1Encode:decodeStr];
         XCTAssertNotNil(encodeStr, @"ASN1编码后字符串不为空");
         
-        NSString *decryptStr = [GMSm2Utils decrypt:encryptStr PrivateKey:GMPriKey];
+        NSString *decryptStr = [GMSm2Utils decrypt:encryptStr privateKey:GMPriKey];
         XCTAssertNotNil(decryptStr, @"解密结果不为空");
         BOOL isSame_plain = [decryptStr isEqualToString:plaintext];
         XCTAssertTrue(isSame_plain, @"加解密结果应该相同");
@@ -278,10 +278,10 @@
         }
         XCTAssertNotNil(plaintext, @"生成字符串不为空");
         
-        NSString *encryptStr = [GMSm2Utils encrypt:plaintext PublicKey:GMPubKey];
+        NSString *encryptStr = [GMSm2Utils encrypt:plaintext publicKey:GMPubKey];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");
         
-        NSString *decryptStr = [GMSm2Utils decrypt:encryptStr PrivateKey:GMPriKey];
+        NSString *decryptStr = [GMSm2Utils decrypt:encryptStr privateKey:GMPriKey];
         XCTAssertNotNil(decryptStr, @"解密结果不为空");
         
         BOOL isSame = [decryptStr isEqualToString:plaintext];
@@ -305,16 +305,16 @@
             tempUserID = @"";
         }
         
-        NSString *signStr = [GMSm2Utils sign:plaintext PrivateKey:GMPriKey UserID:tempUserID];
+        NSString *signStr = [GMSm2Utils sign:plaintext privateKey:GMPriKey userID:tempUserID];
         XCTAssertNotNil(signStr, @"签名结果不为空");
         
-        BOOL isOK = [GMSm2Utils verify:plaintext Sign:signStr PublicKey:GMPubKey UserID:tempUserID];
+        BOOL isOK = [GMSm2Utils verify:plaintext sign:signStr publicKey:GMPubKey userID:tempUserID];
         XCTAssertTrue(isOK, @"签名结果应该校验成功");
         
-        NSString *derStr = [GMSm2Utils encodeWithDer:signStr];
+        NSString *derStr = [GMSm2Utils derEncode:signStr];
         XCTAssertNotNil(derStr, @"Der 签名结果不为空");
         
-        NSString *orginSign = [GMSm2Utils decodeWithDer:derStr];
+        NSString *orginSign = [GMSm2Utils derDecode:derStr];
         XCTAssertNotNil(orginSign, @"Der 解析结果不为空");
         
         BOOL isSame = [signStr isEqualToString:orginSign];
@@ -329,7 +329,7 @@
     // 加密耗时
     [self measureBlock:^{
         NSString *plaintext = @"123456";
-        NSString *encryptStr = [GMSm2Utils encrypt:plaintext PublicKey:GMPubKey];
+        NSString *encryptStr = [GMSm2Utils encrypt:plaintext publicKey:GMPubKey];
         XCTAssertNotNil(encryptStr, @"加密字符串不为空");
     }];
 }
@@ -341,7 +341,7 @@
     NSString *ctext = @"30:6F:02:21:00:D4:F1:B3:2E:29:50:1E:94:44:46:7F:9E:2E:51:36:1E:91:F5:EC:0B:96:F3:34:94:E5:50:82:9F:00:CC:B5:B7:02:20:04:42:83:DF:76:21:B2:9C:EB:7F:64:8B:B4:7A:3C:BF:FE:97:47:E4:D2:BD:47:44:C9:DA:1D:68:12:23:43:D6:04:20:45:F6:AB:54:22:71:63:93:95:3B:58:E3:8D:90:32:B7:A1:D8:76:2B:B8:16:F2:6A:83:51:77:44:2D:28:2C:D2:04:06:62:9F:38:6A:77:76";
     // 解密耗时
     [self measureBlock:^{
-        NSString *decryptStr = [GMSm2Utils decrypt:ctext PrivateKey:GMPriKey];
+        NSString *decryptStr = [GMSm2Utils decrypt:ctext privateKey:GMPriKey];
         XCTAssertNotNil(decryptStr, @"解密结果不为空");
     }];
 }
@@ -354,7 +354,7 @@
     
     // 编码耗时
     [self measureBlock:^{
-        NSString *encodeStr = [GMSm2Utils encodeWithASN1:dCodeCtext];
+        NSString *encodeStr = [GMSm2Utils asn1Encode:dCodeCtext];
         XCTAssertNotNil(encodeStr, @"ASN1编码后字符串不为空");
     }];
 }
@@ -366,7 +366,7 @@
     NSString *ctext = @"30:6F:02:21:00:D4:F1:B3:2E:29:50:1E:94:44:46:7F:9E:2E:51:36:1E:91:F5:EC:0B:96:F3:34:94:E5:50:82:9F:00:CC:B5:B7:02:20:04:42:83:DF:76:21:B2:9C:EB:7F:64:8B:B4:7A:3C:BF:FE:97:47:E4:D2:BD:47:44:C9:DA:1D:68:12:23:43:D6:04:20:45:F6:AB:54:22:71:63:93:95:3B:58:E3:8D:90:32:B7:A1:D8:76:2B:B8:16:F2:6A:83:51:77:44:2D:28:2C:D2:04:06:62:9F:38:6A:77:76";
     // 解码耗时
     [self measureBlock:^{
-        NSString *decodeStr = [GMSm2Utils decodeWithASN1:ctext];
+        NSString *decodeStr = [GMSm2Utils asn1Decode:ctext];
         XCTAssertNotNil(decodeStr, @"ASN1解码后字符串不为空");
     }];
 }

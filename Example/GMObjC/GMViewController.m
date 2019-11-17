@@ -55,15 +55,15 @@
 // sm2 加解密
 - (void)testSm2EnDe{
     // 加密
-    NSString *ctext = [GMSm2Utils encrypt:self.gPwd PublicKey:self.gPubkey];
+    NSString *ctext = [GMSm2Utils encrypt:self.gPwd publicKey:self.gPubkey];
     // OpenSSL 加密密文默认 ASN1 编码，有些后台无法解密，对密文解码
-    NSString *dcodeCtext = [GMSm2Utils decodeWithASN1:ctext];
+    NSString *dcodeCtext = [GMSm2Utils asn1Decode:ctext];
     // 解码的密文为 C1C3C2 拼接格式，解密需要转换为 ASN1 标准格式
-    NSString *encodeCtext = [GMSm2Utils encodeWithASN1:dcodeCtext];
+    NSString *encodeCtext = [GMSm2Utils asn1Encode:dcodeCtext];
     // 对 ASN1 标准格式的密文进行解密
-    NSString *plaintext = [GMSm2Utils decrypt:encodeCtext PrivateKey:self.gPrikey];
+    NSString *plaintext = [GMSm2Utils decrypt:encodeCtext privateKey:self.gPrikey];
     // 生成一对新的公私钥
-    NSArray *newKey = [GMSm2Utils createPublicAndPrivateKey];
+    NSArray *newKey = [GMSm2Utils createKeyPair];
     NSString *pubKey = newKey[0];
     NSString *priKey = newKey[1];
     
@@ -77,7 +77,7 @@
     // 传入 nil 或空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
     NSString *userID = @"lifei_zdjl@126.com";
     // 签名结果r,s，格式为r和s逗号分割的 16 进制字符串
-    NSString *signStr = [GMSm2Utils sign:self.gPwd PrivateKey:self.gPrikey UserID:userID];
+    NSString *signStr = [GMSm2Utils sign:self.gPwd privateKey:self.gPrikey userID:userID];
     // 若后端验签【明文】前进行了 16 进制解码，传给后端的数据前要进行 16 进制编码
     NSString *hexPwd = [GMUtils stringToHex:self.gPwd];
     // 模拟服务端 16 进制解码，解码出【明文】再进行验签
@@ -85,12 +85,12 @@
     /**
      * 模拟服务端验证签名，传入【明文】，签名，公钥，用户 ID
      */
-    BOOL isOK = [GMSm2Utils verify:plainPwd Sign:signStr PublicKey:self.gPubkey UserID:userID];
+    BOOL isOK = [GMSm2Utils verify:plainPwd sign:signStr publicKey:self.gPubkey userID:userID];
     NSString *result = isOK ? @"通过" : @"未通过";
     // 对签名结果 Der 编码
-    NSString *derSign = [GMSm2Utils encodeWithDer:signStr];
+    NSString *derSign = [GMSm2Utils derEncode:signStr];
     // 对 Der 编码解码
-    NSString *originStr = [GMSm2Utils decodeWithDer:derSign];
+    NSString *originStr = [GMSm2Utils derDecode:derSign];
     
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
     [mStr appendFormat:@"\n-------SM2签名验签-------\nSM2签名：\n%@\n验签结果：\n%@\nDer编码SM2签名：\n%@\nDer解码SM2签名：\n%@", signStr, result, derSign, originStr];
@@ -115,14 +115,14 @@
 - (void)testSm4{
     NSString *sm4Key = [GMSm4Utils createSm4Key]; // 生成16位密钥
     // ECB 加解密模式
-    NSString *sm4EcbCipertext = [GMSm4Utils ecbEncrypt:self.gPwd Key:sm4Key];
-    NSString *sm4EcbPlaintext = [GMSm4Utils ecbDecrypt:sm4EcbCipertext Key:sm4Key];
+    NSString *sm4EcbCipertext = [GMSm4Utils ecbEncryptText:self.gPwd key:sm4Key];
+    NSString *sm4EcbPlaintext = [GMSm4Utils ecbDecryptText:sm4EcbCipertext key:sm4Key];
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
     [mStr appendFormat:@"\n-------SM4加解密-------\nSM4密钥：\n%@\nECB 模式加密密文：\n%@\nECB模式解密结果：\n%@", sm4Key, sm4EcbCipertext, sm4EcbPlaintext];
     // CBC 加解密模式
     NSString *ivec = [GMSm4Utils createSm4Key]; // 生成16位初始化向量
-    NSString *sm4CbcCipertext = [GMSm4Utils cbcEncrypt:self.gPwd Key:sm4Key IV:ivec];
-    NSString *sm4CbcPlaintext = [GMSm4Utils cbcDecrypt:sm4CbcCipertext Key:sm4Key IV:ivec];
+    NSString *sm4CbcCipertext = [GMSm4Utils cbcEncryptText:self.gPwd key:sm4Key IV:ivec];
+    NSString *sm4CbcPlaintext = [GMSm4Utils cbcDecryptText:sm4CbcCipertext key:sm4Key IV:ivec];
     [mStr appendFormat:@"\nCBC模式需要的16字节向量：\n%@\nCBC模式加密密文：\n%@\nCBC模式解密结果：\n%@", ivec, sm4CbcCipertext, sm4CbcPlaintext];
     self.gTextView.text = mStr;
     
@@ -134,11 +134,11 @@
     NSLog(@"文本文件原文：\n%@", orginStr);
     
     // ECB 模式加解密
-    NSData *ecbCipherData = [GMSm4Utils ecbEncryptData:fileData Key:sm4Key];
-    NSData *ecbDecryptData = [GMSm4Utils ecbDecryptData:ecbCipherData Key:sm4Key];
+    NSData *ecbCipherData = [GMSm4Utils ecbEncryptData:fileData key:sm4Key];
+    NSData *ecbDecryptData = [GMSm4Utils ecbDecryptData:ecbCipherData key:sm4Key];
     // CBC 模式加解密
-    NSData *cbcCipherData = [GMSm4Utils cbcEncryptData:fileData Key:sm4Key IV:ivec];
-    NSData *cbcDecryptData = [GMSm4Utils cbcDecryptData:cbcCipherData Key:sm4Key IV:ivec];
+    NSData *cbcCipherData = [GMSm4Utils cbcEncryptData:fileData key:sm4Key IV:ivec];
+    NSData *cbcDecryptData = [GMSm4Utils cbcDecryptData:cbcCipherData key:sm4Key IV:ivec];
     // 加解密后台文本不变
     NSString *sm4EcbFileStr = [[NSString alloc] initWithData:ecbDecryptData encoding:NSUTF8StringEncoding];
     NSString *sm4CbcFileStr = [[NSString alloc] initWithData:cbcDecryptData encoding:NSUTF8StringEncoding];
@@ -149,19 +149,19 @@
 // ECDH 密钥协商
 - (void)testECDH{
     // 客户端client生成一对公私钥
-    NSArray *clientKey = [GMSm2Utils createPublicAndPrivateKey];
+    NSArray *clientKey = [GMSm2Utils createKeyPair];
     NSString *cPubKey = clientKey[0];
     NSString *cPriKey = clientKey[1];
     
     // 服务端server生成一对公私钥
-    NSArray *serverKey = [GMSm2Utils createPublicAndPrivateKey];
+    NSArray *serverKey = [GMSm2Utils createKeyPair];
     NSString *sPubKey = serverKey[0];
     NSString *sPriKey = serverKey[1];
     
     // 客户端client从服务端server获取公钥sPubKey，client协商出32字节对称密钥clientECDH，转Hex后为64字节
-    NSString *clientECDH = [GMSm2Utils computeECDH:sPubKey PrivateKey:cPriKey];
+    NSString *clientECDH = [GMSm2Utils computeECDH:sPubKey privateKey:cPriKey];
     // 客户端client将公钥cPubKey发送给服务端server，server协商出32字节对称密钥serverECDH，转Hex后为64字节
-    NSString *serverECDH = [GMSm2Utils computeECDH:cPubKey PrivateKey:sPriKey];
+    NSString *serverECDH = [GMSm2Utils computeECDH:cPubKey privateKey:sPriKey];
     
     // 在全部明文传输的情况下，client与server协商出相等的对称密钥，clientECDH==serverECDH 成立
     if ([clientECDH isEqualToString:serverECDH]) {
