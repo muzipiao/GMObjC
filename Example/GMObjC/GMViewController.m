@@ -55,13 +55,13 @@
 // sm2 加解密
 - (void)testSm2EnDe{
     // 加密
-    NSString *ctext = [GMSm2Utils encrypt:self.gPwd publicKey:self.gPubkey];
+    NSString *ctext = [GMSm2Utils encryptText:self.gPwd publicKey:self.gPubkey];
     // OpenSSL 加密密文默认 ASN1 编码，有些后台无法解密，对密文解码
-    NSString *dcodeCtext = [GMSm2Utils asn1Decode:ctext];
+    NSString *dcodeCtext = [GMSm2Utils asn1DecodeToC1C3C2:ctext];
     // 解码的密文为 C1C3C2 拼接格式，解密需要转换为 ASN1 标准格式
-    NSString *encodeCtext = [GMSm2Utils asn1Encode:dcodeCtext];
+    NSString *encodeCtext = [GMSm2Utils asn1EncodeWithC1C3C2:dcodeCtext];
     // 对 ASN1 标准格式的密文进行解密
-    NSString *plaintext = [GMSm2Utils decrypt:encodeCtext privateKey:self.gPrikey];
+    NSString *plaintext = [GMSm2Utils decryptToText:encodeCtext privateKey:self.gPrikey];
     // 生成一对新的公私钥
     NSArray *newKey = [GMSm2Utils createKeyPair];
     NSString *pubKey = newKey[0];
@@ -77,7 +77,7 @@
     // 传入 nil 或空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
     NSString *userID = @"lifei_zdjl@126.com";
     // 签名结果r,s，格式为r和s逗号分割的 16 进制字符串
-    NSString *signStr = [GMSm2Utils sign:self.gPwd privateKey:self.gPrikey userID:userID];
+    NSString *signStr = [GMSm2Utils signText:self.gPwd privateKey:self.gPrikey userID:userID];
     // 若后端验签【明文】前进行了 16 进制解码，传给后端的数据前要进行 16 进制编码
     NSString *hexPwd = [GMUtils stringToHex:self.gPwd];
     // 模拟服务端 16 进制解码，解码出【明文】再进行验签
@@ -85,7 +85,7 @@
     /**
      * 模拟服务端验证签名，传入【明文】，签名，公钥，用户 ID
      */
-    BOOL isOK = [GMSm2Utils verify:plainPwd sign:signStr publicKey:self.gPubkey userID:userID];
+    BOOL isOK = [GMSm2Utils verifyText:plainPwd signRS:signStr publicKey:self.gPubkey userID:userID];
     NSString *result = isOK ? @"通过" : @"未通过";
     // 对签名结果 Der 编码
     NSString *derSign = [GMSm2Utils derEncode:signStr];

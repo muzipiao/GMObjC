@@ -34,9 +34,6 @@ NSString *const GMTestUserID = @"lifei_zdjl@126.com";
     NSString *plaintext = [self randomEn:randLen];
     XCTAssertNotNil(plaintext, @"生成字符串不为空");
     
-    NSString *colonStr = [GMUtils addColon:plaintext];
-    XCTAssertNotNil(colonStr, @"添加冒号字符串不为空");
-    
     NSString *hexStr = [GMUtils stringToHex:plaintext];
     XCTAssertNotNil(hexStr, @"16 进制字符串不为空");
     

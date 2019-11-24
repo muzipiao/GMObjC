@@ -14,21 +14,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GMUtils : NSObject
 
-/// 字符串每两位加一个冒号(:)。返回值：加冒号后的字符串
-/// @param str 原字符串
-+ (nullable NSString *)addColon:(NSString *)str;
+///MARK: - Hex 编码
 
 /// 字符串 16 进制编码。返回值：16 进制编码的字符串
 /// @param str 待编码的字符串
 + (nullable NSString *)stringToHex:(NSString *)str;
 
+/// NSData 16 进制编码。返回值：16 进制编码的字符串
+/// @param data 原数据（NSData 格式）
++ (nullable NSString *)dataToHex:(NSData *)data;
+
+///MARK: - Hex 解码
+
 /// 16 进制字符串解码。返回值：解码后的原文
 /// @param hexStr 16 编码进制字符串
 + (nullable NSString *)hexToString:(NSString *)hexStr;
 
-/// 16 进制字符串解码为 uint8_t 。返回值：解码后的 uint8_t 类型原文
+/// 16 进制字符串解码为 NSData。返回值：解码后的 NSData 对象
 /// @param hexStr 16 编码进制字符串
-+ (uint8_t *)hexToBytes:(NSString *)hexStr;
++ (nullable NSData *)hexToData:(NSString *)hexStr;
 
 @end
 

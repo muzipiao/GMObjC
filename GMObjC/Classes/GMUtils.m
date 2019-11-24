@@ -7,10 +7,12 @@
 //
 
 #import "GMUtils.h"
+#import <openssl/crypto.h>
 
 @implementation GMUtils
 
-///MARK: - 编码为 16 进制字符串
+///MARK: - Hex 编码
+
 + (nullable NSString *)stringToHex:(NSString *)str{
     if (!str || str.length == 0) {
         return nil;
@@ -33,7 +35,28 @@
     return hexStr;
 }
 
-///MARK: - 16 字符串解码
++ (nullable NSString *)dataToHex:(NSData *)data{
+    if (!data || data.length == 0) {
+        return nil;
+    }
+    Byte *strBytes = (Byte *)[data bytes];
+    NSString *hexStr=@"";
+    for(int i=0;i<[data length];i++)
+    {
+        @autoreleasepool{
+            NSString *newHexStr = [NSString stringWithFormat:@"%X",strBytes[i]&0xff];///16进制数
+            if([newHexStr length]==1){
+                hexStr = [NSString stringWithFormat:@"%@0%@",hexStr,newHexStr];
+            }else{
+                hexStr = [NSString stringWithFormat:@"%@%@",hexStr,newHexStr];
+            }
+        }
+    }
+    return hexStr;
+}
+
+///MARK: - Hex 解码
+
 + (nullable NSString *)hexToString:(NSString *)hexStr{
     if (!hexStr || hexStr.length == 0) {
         return nil;
@@ -49,18 +72,20 @@
             myBuffer[i / 2] = (char)anInt;
         }
     }
+    
     NSString *utfStr = [NSString stringWithCString:myBuffer encoding:NSUTF8StringEncoding];
     free(myBuffer);
+    
     return utfStr;
 }
 
-///MARK: - 16 字符串解码为 uint8_t
-+ (uint8_t *)hexToBytes:(NSString *)hexStr{
-    if (hexStr.length == 0) {
-        return (uint8_t *)@"".UTF8String;
++ (nullable NSData *)hexToData:(NSString *)hexStr{
+    if (!hexStr || hexStr.length == 0) {
+        return nil;
     }
-    uint8_t *myBuffer = (uint8_t *)malloc((int)(hexStr.length / 2) + 1);
-    bzero(myBuffer, hexStr.length / 2 + 1);
+    size_t result_len = hexStr.length / 2;
+    uint8_t *myBuffer = (uint8_t *)malloc((int)(result_len) + 1);
+    bzero(myBuffer, result_len + 1);
     for (int i = 0; i < hexStr.length - 1; i += 2) {
         @autoreleasepool{
             unsigned int anInt;
@@ -70,37 +95,12 @@
             myBuffer[i / 2] = (uint8_t)anInt;
         }
     }
-    return myBuffer;
+    
+    NSData *data = [NSData dataWithBytes:myBuffer length:result_len];
+    free(myBuffer);
+    
+    return data;
 }
 
-///MARK: - 字符串每两位加冒号
-+(nullable NSString *)addColon:(NSString *)str{
-    if (!str || str.length == 0) {
-        return nil;
-    }
-    if (str.length < 3) {
-        return str;
-    }
-    NSString *lastStr = @"";
-    if (str.length % 2 != 0) {
-        lastStr = [str substringFromIndex:str.length - 1];
-        str = [str substringToIndex:str.length - 1];
-    }
-    NSUInteger len = str.length + (NSUInteger)(str.length / 2);
-    NSMutableString *mstr = [NSMutableString stringWithCapacity:len];
-    for (NSInteger i = 0; i < str.length - 1; i+=2) {
-        @autoreleasepool{
-            NSString *sub = [str substringWithRange:NSMakeRange(i, 2)];
-            [mstr appendString:sub];
-            if (i < str.length - 2) {
-                [mstr appendString:@":"];
-            }
-        }
-    }
-    if (lastStr.length > 0) {
-        [mstr appendFormat:@":%@", lastStr];
-    }
-    return mstr.copy;
-}
 
 @end

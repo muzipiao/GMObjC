@@ -6,6 +6,7 @@
 //  Copyright © 2019 PacteraLF. All rights reserved.
 /**
  * SM2 加解密及签名的 OC 封装
+ * Hex 编码格式代表 16 进制编码格式
  */
 
 #import <Foundation/Foundation.h>
@@ -14,49 +15,79 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GMSm2Utils : NSObject
 
-/// 创建 SM2 公私钥(基于 NID_sm2 推荐曲线)。返回值：数组元素 1 为公钥，2 为私钥
+///MARK: - 创建秘钥对
+
+/// 创建 SM2 公私钥（基于官方文档 NID_sm2 推荐曲线）。返回值：数组元素 1 为公钥，2 为私钥
 + (NSArray<NSString *> *)createKeyPair;
 
-/// SM2 加密。使用 SM2 公钥加密字符串，返回值：加密后的字符串(ASN1编码格式)，失败返回 nil
-/// @param plaintext 待加密的原始字符串
-/// @param publicKey 04 开头的公钥
-+ (nullable NSString *)encrypt:(NSString *)plaintext publicKey:(NSString *)publicKey;
+///MARK: - SM2 加密
 
-/// SM2 解密。使用 SM2 私钥解密，返回值：解密后的明文，解密失败返回 nil
-/// @param ciphertext 密文(ASN1编码格式)
-/// @param privateKey 私钥
-+ (nullable NSString *)decrypt:(NSString *)ciphertext privateKey:(NSString *)privateKey;
+/// SM2 加密。返回值：加密后的字符串或 NSData（密文都为 ASN1 编码格式），失败返回 nil
+/// @param plaintext 明文（普通字符串格式）；plainHex 明文（ Hex 编码格式）；plainData 明文（NSData 格式）
+/// @param publicKey 04 开头的公钥（ Hex 编码格式）
++ (nullable NSString *)encryptText:(NSString *)plaintext publicKey:(NSString *)publicKey;
++ (nullable NSString *)encryptHex:(NSString *)plainHex publicKey:(NSString *)publicKey;
++ (nullable NSData *)encryptData:(NSData *)plainData publicKey:(NSString *)publicKey;
 
-/// ASN1  编码。对 C1C3C2 拼接的原始密文进行 ASN1 编码，返回值：ASN1 编码后的密文
-/// @param ciphertext 原始密文(C1C3C2 直接拼接)
-+ (nullable NSString *)asn1Encode:(NSString *)ciphertext;
+///MARK: - SM2 解密
 
-/// ASN1  解码。对 ASN1 格式的密文解码，返回值：解码后的密文(C1C3C2 直接拼接)
-/// @param ciphertext ASN1 编码格式的密文
-+ (nullable NSString *)asn1Decode:(NSString *)ciphertext;
+/// SM2 解密。返回值：decryptToText 返回普通明文；decryptToHex 返回 Hex 格式明文；decryptToData 返回 NSData 格式明文，解密失败返回 nil
+/// @param ciphertext 密文（ASN1 编码格式）；cipherData 密文（NSData 格式）
+/// @param privateKey 私钥（ Hex 编码格式）
++ (nullable NSString *)decryptToText:(NSString *)ciphertext privateKey:(NSString *)privateKey;
++ (nullable NSString *)decryptToHex:(NSString *)ciphertext privateKey:(NSString *)privateKey;
++ (nullable NSData *)decryptToData:(NSData *)cipherData privateKey:(NSString *)privateKey;
+
+///MARK: - ASN1 编码
+
+/// ASN1  编码。对 c1c3c2 格式密文进行 ASN1 编码，返回值：ASN1 编码后的密文。
+/// 参数：c1c3c2Hex 密文（字符串拼接 c1c3c2）；c1c3c2Array 密文数组（@[c1,c3,c2]）；c1c3c2Data 密文 Data（NSData 类型拼接的 c1c3c2）
+/// @param c1c3c2Hex 原始密文（c1c3c2 直接拼接的密文字符串， Hex 格式）
++ (nullable NSString *)asn1EncodeWithC1C3C2:(NSString *)c1c3c2Hex;
++ (nullable NSString *)asn1EncodeWithC1C3C2Array:(NSArray<NSString *> *)c1c3c2Array;
++ (nullable NSData *)asn1EncodeWithC1C3C2Data:(NSData *)c1c3c2Data;
+
+/// ASN1  解码。对 ASN1 格式的密文解码，返回值：解码后的密文
+/// 返回值样式：c1c3c2 直接拼接；数组依次存放 @[c1,c3,c2]；NSData 类型拼接的c1c3c2
+/// @param asn1Hex ASN1 编码格式的密文（Hex 格式）；asn1Data ASN1 编码格式的密文（NSData 格式）
++ (nullable NSString *)asn1DecodeToC1C3C2:(NSString *)asn1Hex;
++ (nullable NSArray<NSString *> *)asn1DecodeToC1C3C2Array:(NSString *)asn1Hex;
++ (nullable NSData *)asn1DecodeToC1C3C2Data:(NSData *)asn1Data;
+
+///MARK: - 签名验签
 
 /// SM2 数字签名。返回值：数字签名，格式为(r,s)逗号分隔的 16 进制字符串
-/// @param plaintext 明文
-/// @param priKey SM2 私钥
-/// @param userID 用户ID，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
-+ (nullable NSString *)sign:(NSString *)plaintext privateKey:(NSString *)priKey userID:(nullable NSString *)userID;
+/// userID 或 hexUserID，用户ID 可传空值，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
+/// @param plaintext 明文（普通字符串）；hexPlaintext 明文（Hex 编码格式）；plainData 明文（NSData 格式）
+/// @param priKey SM2 私钥（Hex 编码格式）
+/// @param userID 用户 ID（普通字符串）；hexUserID 用户 ID（Hex 编码格式）；userID 用户 ID（NSData 格式）
++ (nullable NSString *)signText:(NSString *)plaintext privateKey:(NSString *)priKey userID:(nullable NSString *)userID;
++ (nullable NSString *)signHex:(NSString *)hexPlaintext privateKey:(NSString *)priKey userID:(nullable NSString *)hexUserID;
++ (nullable NSString *)signData:(NSData *)plainData priKey:(NSString *)priKey userID:(nullable NSData *)userID;
 
 /// SM2 验证数字签名。返回值：验签结果，YES 为通过，NO 为不通过
-/// @param plaintext 明文
-/// @param sign 数字签名，格式为(r,s)拼接的 16 进制字符串
-/// @param pubKey SM2 公钥
-/// @param userID 用户ID，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
-+ (BOOL)verify:(NSString *)plaintext sign:(NSString *)sign publicKey:(NSString *)pubKey userID:(nullable NSString *)userID;
+/// userID 或 hexUserID，用户ID 可传空值，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
+/// @param plaintext 明文（普通字符串）；hexPlaintext 明文（Hex 编码格式）；plainData 明文（NSData 格式）
+/// @param signRS 数字签名，格式为(r,s)拼接的 16 进制字符串
+/// @param pubKey SM2 公钥（Hex 编码格式）
+/// @param userID 用户 ID（普通字符串）；hexUserID 用户 ID（Hex 编码格式）；userID 用户 ID（NSData 格式）
++ (BOOL)verifyText:(NSString *)plaintext signRS:(NSString *)signRS publicKey:(NSString *)pubKey userID:(nullable NSString *)userID;
++ (BOOL)verifyHex:(NSString *)hexPlaintext signRS:(NSString *)signRS publicKey:(NSString *)pubKey userID:(nullable NSString *)hexUserID;
++ (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS pubKey:(NSString *)pubKey userID:(nullable NSData *)userID;
+
+///MARK: - Der 编码解码
 
 /// Der 编码。返回值：SM2 数字签名， Der 编码格式
-/// @param originSign 格式为(r,s)逗号分隔的 16 进制字符串
-+ (nullable NSString *)derEncode:(NSString *)originSign;
+/// @param signRS 格式为(r,s)逗号分隔的 16 进制字符串
++ (nullable NSString *)derEncode:(NSString *)signRS;
 
 /// Der 解码。SM2 数字签名 Der 解码，返回值：数字签名，(r,s)逗号分隔 16 进制字符串格式
 /// @param derSign Der 编码格式的数字签名
 + (nullable NSString *)derDecode:(NSString *)derSign;
 
-/// 椭圆曲线Diffie-Hellman密钥协商（ECDH），返回 64 字节 16 进制编码格式密钥
+///MARK: - ECDH 密钥协商
+
+/// 椭圆曲线 Diffie-Hellman 密钥协商（ECDH），返回 64 字节 16 进制编码格式密钥
 /// @param publicKey 临时公钥（其他端传入的公钥）
 /// @param privateKey 临时私钥（当前端生成的私钥）
 + (nullable NSString *)computeECDH:(NSString *)publicKey privateKey:(NSString *)privateKey;
