@@ -42,10 +42,8 @@
         OPENSSL_free(hex_pri);
     } while (NO);
     
+    if (group != NULL) EC_GROUP_free(group);
     EC_KEY_free(key);
-    if (group != NULL){
-        EC_GROUP_free(group);
-    }
     
     return keyArray;
 }
@@ -97,7 +95,7 @@
 
 // 加密普通格式明文字符串
 + (nullable NSString *)encryptText:(NSString *)plaintext publicKey:(NSString *)publicKey{
-    if (!plaintext || plaintext.length == 0 || !publicKey || publicKey.length == 0) {
+    if (plaintext.length == 0 || publicKey.length == 0) {
         return nil;
     }
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
@@ -109,7 +107,7 @@
 
 // 加密 Hex 编码格式明文字符串
 + (nullable NSString *)encryptHex:(NSString *)plainHex publicKey:(NSString *)publicKey{
-    if (!plainHex || plainHex.length == 0 || !publicKey || publicKey.length == 0) {
+    if (plainHex.length == 0 || publicKey.length == 0) {
         return nil;
     }
     NSData *plainData = [GMUtils hexToData:plainHex];
@@ -121,7 +119,7 @@
 
 // 加密 NSData 格式明文
 + (nullable NSData *)encryptData:(NSData *)plainData publicKey:(NSString *)publicKey{
-    if (!plainData || plainData.length == 0 || !publicKey || publicKey.length == 0) {
+    if (plainData.length == 0 || publicKey.length == 0) {
         return nil;
     }
     NSData *cipherData = [self enData:plainData hexPubKey:publicKey];
@@ -263,7 +261,6 @@
     
     ASN1_OCTET_STRING_free(ctext_st.C2);
     ASN1_OCTET_STRING_free(ctext_st.C3);
-//    SM2_Ciphertext_1_free(ctext_st);
     BN_free(x1);
     BN_free(y1);
     
@@ -407,13 +404,12 @@
 
 ///MARK: - SM2 签名
 
-+ (nullable NSString *)signData:(NSData *)plainData priKey:(NSString *)priKey userID:(nullable NSData *)userID{
++ (nullable NSString *)signData:(NSData *)plainData priKey:(NSString *)priKey userData:(nullable NSData *)userData{
     if (plainData.length == 0 || priKey.length == 0) {
         return nil;
     }
     
-    NSData *userData = userID;
-    if (userID.length == 0) {
+    if (userData.length == 0) {
         userData = [NSData dataWithBytes:SM2_DEFAULT_USERID length:strlen(SM2_DEFAULT_USERID)];
     }
     const char *private_key = priKey.UTF8String;
@@ -478,14 +474,14 @@
 }
 
 // 16进制字符串签名
-+ (nullable NSString *)signHex:(NSString *)hexPlaintext privateKey:(NSString *)priKey userID:(nullable NSString *)hexUserID{
-    if (hexPlaintext.length == 0 || priKey.length == 0) {
++ (nullable NSString *)signHex:(NSString *)plainHex privateKey:(NSString *)priKey userHex:(nullable NSString *)userHex{
+    if (plainHex.length == 0 || priKey.length == 0) {
         return nil;
     }
     
-    NSData *plainData = [GMUtils hexToData:hexPlaintext];
-    NSData *userData = [GMUtils hexToData:hexUserID];
-    NSString *signRS = [self signData:plainData priKey:priKey userID:userData];
+    NSData *plainData = [GMUtils hexToData:plainHex];
+    NSData *userData = [GMUtils hexToData:userHex];
+    NSString *signRS = [self signData:plainData priKey:priKey userData:userData];
     
     return signRS;
 }
@@ -498,20 +494,19 @@
     
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
     NSData *userData = [userID dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *signRS = [self signData:plainData priKey:priKey userID:userData];
+    NSString *signRS = [self signData:plainData priKey:priKey userData:userData];
     
     return signRS;
 }
 
 ///MARK: - SM2 验签
 
-+ (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS pubKey:(NSString *)pubKey userID:(nullable NSData *)userID{
++ (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS pubKey:(NSString *)pubKey userData:(nullable NSData *)userData{
     if (plainData.length == 0 || signRS.length == 0 || pubKey.length == 0) {
-        return nil;
+        return NO;
     }
     
-    NSData *userData = userID;
-    if (userID.length == 0) {
+    if (userData.length == 0) {
         userData = [NSData dataWithBytes:SM2_DEFAULT_USERID length:strlen(SM2_DEFAULT_USERID)];
     }
     const char *pub_key = pubKey.UTF8String;
@@ -575,15 +570,15 @@
 }
 
 // 16 进制明文和 UserID 验签
-+ (BOOL)verifyHex:(NSString *)hexPlaintext signRS:(NSString *)signRS publicKey:(NSString *)pubKey userID:(nullable NSString *)hexUserID{
-    if (hexPlaintext.length == 0 || signRS.length == 0 || pubKey.length == 0) {
-        return nil;
++ (BOOL)verifyHex:(NSString *)plainHex signRS:(NSString *)signRS publicKey:(NSString *)pubKey userHex:(nullable NSString *)userHex{
+    if (plainHex.length == 0 || signRS.length == 0 || pubKey.length == 0) {
+        return NO;
     }
     
-    NSData *plainData = [GMUtils hexToData:hexPlaintext];
-    NSData *userData = [GMUtils hexToData:hexUserID];
+    NSData *plainData = [GMUtils hexToData:plainHex];
+    NSData *userData = [GMUtils hexToData:userHex];
     
-    BOOL isOK = [self verifyData:plainData signRS:signRS pubKey:pubKey userID:userData];
+    BOOL isOK = [self verifyData:plainData signRS:signRS pubKey:pubKey userData:userData];
     return isOK;
 }
 
@@ -595,7 +590,7 @@
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
     NSData *userData = [userID dataUsingEncoding:NSUTF8StringEncoding];
     
-    BOOL isOK = [self verifyData:plainData signRS:signRS pubKey:pubKey userID:userData];
+    BOOL isOK = [self verifyData:plainData signRS:signRS pubKey:pubKey userData:userData];
     return isOK;
 }
 
@@ -637,11 +632,10 @@
         if (der_sig_len < 0) {
             break;
         }
-        char *der_sig_hex = OPENSSL_buf2hexstr((uint8_t *)der_sig, der_sig_len);
-        derEncode = [NSString stringWithCString:der_sig_hex encoding:NSUTF8StringEncoding];
+        NSData *derData = [NSData dataWithBytes:der_sig length:der_sig_len];
+        derEncode = [GMUtils dataToHex:derData];
         
         OPENSSL_free(der_sig);
-        OPENSSL_free(der_sig_hex);
     } while (NO);
     
     ECDSA_SIG_free(sig);
@@ -655,13 +649,13 @@
     if (derSign.length == 0) {
         return nil;
     }
-    const char *sign_hex = derSign.UTF8String;
-    long sign_len = 0;
-    uint8_t *sign_buffer = OPENSSL_hexstr2buf(sign_hex, &sign_len);
-    const uint8_t *sign_char = sign_buffer;
+    
+    NSData *derData = [GMUtils hexToData:derSign];
+    size_t sign_len = derData.length;
+    const uint8_t *sign_char = (uint8_t *)derData.bytes; // 明文
     // 复制一份，对比验证
-    long sign_copy_len = 0;
-    uint8_t *sign_copy = OPENSSL_hexstr2buf(sign_hex, &sign_copy_len);
+    NSData *derCopy = derData.mutableCopy;
+    uint8_t *sign_copy = (uint8_t *)derCopy.bytes;
     
     ECDSA_SIG *sig = NULL;
     const BIGNUM *sig_r = NULL;
@@ -700,8 +694,6 @@
     
     ECDSA_SIG_free(sig);
     OPENSSL_free(der);
-    OPENSSL_free(sign_buffer);
-    OPENSSL_free(sign_copy);
     
     return originSign;
 }
@@ -753,12 +745,10 @@
         
     } while (NO);
     
+    if (group != NULL) EC_GROUP_free(group);
     EC_POINT_free(pub_point);
     BN_free(pri_big_num);
     EC_KEY_free(key);
-    if (group != NULL){
-        EC_GROUP_free(group);
-    }
     
     return ecdhStr;
 }

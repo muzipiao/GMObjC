@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSString *)decryptToHex:(NSString *)ciphertext privateKey:(NSString *)privateKey;
 + (nullable NSData *)decryptToData:(NSData *)cipherData privateKey:(NSString *)privateKey;
 
-///MARK: - ASN1 编码
+///MARK: - ASN1 编码解码
 
 /// ASN1  编码。对 c1c3c2 格式密文进行 ASN1 编码，返回值：ASN1 编码后的密文。
 /// 参数：c1c3c2Hex 密文（字符串拼接 c1c3c2）；c1c3c2Array 密文数组（@[c1,c3,c2]）；c1c3c2Data 密文 Data（NSData 类型拼接的 c1c3c2）
@@ -57,23 +57,23 @@ NS_ASSUME_NONNULL_BEGIN
 ///MARK: - 签名验签
 
 /// SM2 数字签名。返回值：数字签名，格式为(r,s)逗号分隔的 16 进制字符串
-/// userID 或 hexUserID，用户ID 可传空值，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
-/// @param plaintext 明文（普通字符串）；hexPlaintext 明文（Hex 编码格式）；plainData 明文（NSData 格式）
+/// userID 或 userHex，用户ID 可传空值，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
+/// @param plaintext 明文（普通字符串）；plainHex 明文（Hex 编码格式）；plainData 明文（NSData 格式）
 /// @param priKey SM2 私钥（Hex 编码格式）
-/// @param userID 用户 ID（普通字符串）；hexUserID 用户 ID（Hex 编码格式）；userID 用户 ID（NSData 格式）
+/// @param userID 用户 ID（普通字符串）；userHex 用户 ID（Hex 编码格式）；userID 用户 ID（NSData 格式）
 + (nullable NSString *)signText:(NSString *)plaintext privateKey:(NSString *)priKey userID:(nullable NSString *)userID;
-+ (nullable NSString *)signHex:(NSString *)hexPlaintext privateKey:(NSString *)priKey userID:(nullable NSString *)hexUserID;
-+ (nullable NSString *)signData:(NSData *)plainData priKey:(NSString *)priKey userID:(nullable NSData *)userID;
++ (nullable NSString *)signHex:(NSString *)plainHex privateKey:(NSString *)priKey userHex:(nullable NSString *)userHex;
++ (nullable NSString *)signData:(NSData *)plainData priKey:(NSString *)priKey userData:(nullable NSData *)userData;
 
 /// SM2 验证数字签名。返回值：验签结果，YES 为通过，NO 为不通过
-/// userID 或 hexUserID，用户ID 可传空值，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
-/// @param plaintext 明文（普通字符串）；hexPlaintext 明文（Hex 编码格式）；plainData 明文（NSData 格式）
+/// userID 或 userHex，用户ID 可传空值，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
+/// @param plaintext 明文（普通字符串）；plainHex 明文（Hex 编码格式）；plainData 明文（NSData 格式）
 /// @param signRS 数字签名，格式为(r,s)拼接的 16 进制字符串
 /// @param pubKey SM2 公钥（Hex 编码格式）
-/// @param userID 用户 ID（普通字符串）；hexUserID 用户 ID（Hex 编码格式）；userID 用户 ID（NSData 格式）
+/// @param userID 用户 ID（普通字符串）；userHex 用户 ID（Hex 编码格式）；userID 用户 ID（NSData 格式）
 + (BOOL)verifyText:(NSString *)plaintext signRS:(NSString *)signRS publicKey:(NSString *)pubKey userID:(nullable NSString *)userID;
-+ (BOOL)verifyHex:(NSString *)hexPlaintext signRS:(NSString *)signRS publicKey:(NSString *)pubKey userID:(nullable NSString *)hexUserID;
-+ (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS pubKey:(NSString *)pubKey userID:(nullable NSData *)userID;
++ (BOOL)verifyHex:(NSString *)plainHex signRS:(NSString *)signRS publicKey:(NSString *)pubKey userHex:(nullable NSString *)userHex;
++ (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS pubKey:(NSString *)pubKey userData:(nullable NSData *)userData;
 
 ///MARK: - Der 编码解码
 

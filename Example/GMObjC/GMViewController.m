@@ -11,9 +11,9 @@
 
 @interface GMViewController ()
 
-@property (nonatomic, copy) NSString *gPwd;
-@property (nonatomic, copy) NSString *gPubkey; // 公钥
-@property (nonatomic, copy) NSString *gPrikey; // 私钥
+@property (nonatomic, copy) NSString *gPwd;    // 测试用密码
+@property (nonatomic, copy) NSString *gPubkey; // 测试用公钥
+@property (nonatomic, copy) NSString *gPrikey; // 测试用私钥
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UITextView *gTextView;
 
@@ -21,22 +21,18 @@
 
 @implementation GMViewController
 
+///MARK: - Life
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.scrollView = [[UIScrollView alloc]initWithFrame:self.view.bounds];
-    [self.view addSubview:self.scrollView];
-    
-    self.gTextView = [[UITextView alloc]initWithFrame:self.view.bounds];
-    self.gTextView.editable = NO;
-    self.gTextView.font = [UIFont systemFontOfSize:11];
-    [self.scrollView addSubview:self.gTextView];
-    self.gPwd = @"123456";  // 测试用密码
-    // 测试用的固定公私钥
-    self.gPubkey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9C624537215DE9507BC0E2DD276CF74695C99DF42424F28E9004CDE4678F63D698";
+    // 初始化测试用密码、公钥，私钥
+    self.gPwd = @"123456";
+    self.gPubkey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9"
+                    "C624537215DE9507BC0E2DD276CF74695C99DF42424F28E9004CDE4678F63D698";
     self.gPrikey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB3422E7838E24DEAE";
+    
+    [self createUI];     // UI
     
     [self testSm2EnDe];  // sm2 加解密及 ASN1 编码解码
     [self testSm2Sign];  // sm2 签名验签及 Der 编码解码
@@ -46,56 +42,144 @@
     [self adjustText];   // 调整显示范围
 }
 
+///MARK: - UI
+
+- (void)createUI{
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.scrollView = [[UIScrollView alloc]initWithFrame:self.view.bounds];
+    [self.view addSubview:self.scrollView];
+    
+    self.gTextView = [[UITextView alloc]initWithFrame:self.view.bounds];
+    self.gTextView.editable = NO;
+    self.gTextView.font = [UIFont systemFontOfSize:11];
+    self.gTextView.text = @"国密 Demo 实例";
+    [self.scrollView addSubview:self.gTextView];
+}
+
 - (void)adjustText{
     CGFloat SW = [UIScreen mainScreen].bounds.size.width;
     CGSize contentSize = [self.gTextView sizeThatFits:CGSizeMake(SW, CGFLOAT_MAX)];
     self.scrollView.frame = CGRectMake(0, 0, SW, contentSize.height);
 }
 
-// sm2 加解密
+///MARK: - SM2
+
+// sm2 加解密及 ASN1 编码解码
 - (void)testSm2EnDe{
-    // 加密
-    NSString *ctext = [GMSm2Utils encryptText:self.gPwd publicKey:self.gPubkey];
-    // OpenSSL 加密密文默认 ASN1 编码，有些后台无法解密，对密文解码
-    NSString *dcodeCtext = [GMSm2Utils asn1DecodeToC1C3C2:ctext];
-    // 解码的密文为 C1C3C2 拼接格式，解密需要转换为 ASN1 标准格式
-    NSString *encodeCtext = [GMSm2Utils asn1EncodeWithC1C3C2:dcodeCtext];
-    // 对 ASN1 标准格式的密文进行解密
-    NSString *plaintext = [GMSm2Utils decryptToText:encodeCtext privateKey:self.gPrikey];
     // 生成一对新的公私钥
-    NSArray *newKey = [GMSm2Utils createKeyPair];
-    NSString *pubKey = newKey[0];
-    NSString *priKey = newKey[1];
+    NSArray *keyPair = [GMSm2Utils createKeyPair];
+    NSString *pubKey = keyPair[0]; // 测试用 04 开头公钥，Hex 编码格式
+    NSString *priKey = keyPair[1]; // 测试用私钥，Hex 编码格式
+    
+    NSString *plaintext = self.gPwd; // 明文原文 123456;
+    NSString *plainHex = [GMUtils stringToHex:plaintext]; // 明文 123456 的 Hex 编码格式 313233343536
+    NSData *plainData = [self.gPwd dataUsingEncoding:NSUTF8StringEncoding]; // 明文 123456 的 NSData 格式
+    
+    // sm2 加密，依次是普通明文，Hex 格式明文，NSData 格式明文
+    NSString *enResult1 = [GMSm2Utils encryptText:plaintext publicKey:pubKey]; // 加密普通字符串
+    NSString *enResult2 = [GMSm2Utils encryptHex:plainHex publicKey:pubKey]; // 加密 Hex 编码格式字符串
+    NSData *enResult3 = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // 加密 NSData 类型数据
+
+    // sm2 解密
+    NSString *deResult1 = [GMSm2Utils decryptToText:enResult1 privateKey:priKey]; // 解密为普通字符串明文
+    NSString *deResult2 = [GMSm2Utils decryptToHex:enResult2 privateKey:priKey]; // 解密为 Hex 格式明文
+    NSData *deResult3 = [GMSm2Utils decryptToData:enResult3 privateKey:priKey]; // 解密为 NSData 格式明文
+    
+    // 判断 sm2 加解密结果
+    if ([deResult1 isEqualToString:plaintext] || [deResult2 isEqualToString:plainHex] || [deResult3 isEqualToData:plainData]) {
+        NSLog(@"sm2 加密解密成功");
+    }else{
+        NSLog(@"sm2 加密解密失败");
+    }
+    
+    // ASN1 解码
+    NSString *c1c3c2Result1 = [GMSm2Utils asn1DecodeToC1C3C2:enResult1]; // 解码为 c1c3c2字符串
+    NSArray<NSString *> *c1c3c2Result2 = [GMSm2Utils asn1DecodeToC1C3C2Array:enResult2]; // 解码为 @[c1,c3,c2]
+    NSData *c1c3c2Result3 = [GMSm2Utils asn1DecodeToC1C3C2Data:enResult3]; // 解码为 c1c3c2拼接的Data
+    
+    // ASN1 编码
+    NSString *asn1Result1 = [GMSm2Utils asn1EncodeWithC1C3C2:c1c3c2Result1];
+    NSString *asn1Result2 = [GMSm2Utils asn1EncodeWithC1C3C2Array:c1c3c2Result2];
+    NSData *asn1Result3 = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Result3];
+    
+    // 判断 ASN1 解码编码结果，应相等
+    if ([asn1Result1 isEqualToString:enResult1] || [asn1Result2 isEqualToString:enResult2] || [asn1Result3 isEqualToData:enResult3]) {
+        NSLog(@"ASN1 解码编码成功");
+    }else{
+        NSLog(@"ASN1 解码编码失败");
+    }
     
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
-    [mStr appendFormat:@"\n-------SM2加解密及编码-------\nSM2加密密文：\n%@\nASN1 解码SM2密文：\n%@\nASN1编码SM2密文：\n%@\nSM2解密结果：\n%@\n生成SM2公钥：\n%@\n生成SM2私钥：\n%@", ctext, dcodeCtext, encodeCtext, plaintext, pubKey, priKey];
+    [mStr appendString:@"\n-------SM2加解密及编码-------"];
+    [mStr appendFormat:@"\n生成SM2公钥：\n%@", pubKey];
+    [mStr appendFormat:@"\n生成SM2私钥：\n%@", priKey];
+    [mStr appendFormat:@"\nSM2加密密文：\n%@", enResult1];
+    [mStr appendFormat:@"\nASN1 解码SM2密文：\n%@", c1c3c2Result1];
+    [mStr appendFormat:@"\nASN1编码SM2密文：\n%@", asn1Result1];
+    [mStr appendFormat:@"\nSM2解密结果：\n%@", deResult1];
     self.gTextView.text = mStr;
 }
 
 // sm2 签名验签
 - (void)testSm2Sign{
-    // 传入 nil 或空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
-    NSString *userID = @"lifei_zdjl@126.com";
+    // 生成一对新的公私钥
+    NSArray *keyPair = [GMSm2Utils createKeyPair];
+    NSString *pubKey = keyPair[0]; // 测试用 04 开头公钥，Hex 编码格式
+    NSString *priKey = keyPair[1]; // 测试用私钥，Hex 编码格式
+    
+    NSString *plaintext = self.gPwd; // 明文原文 123456;
+    NSString *plainHex = [GMUtils stringToHex:plaintext]; // 明文 123456 的 Hex 编码格式 313233343536
+    NSData *plainData = [self.gPwd dataUsingEncoding:NSUTF8StringEncoding]; // 明文 123456 的 NSData 格式
+    
+    // userID 传入 nil 或空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
+    NSString *userID = @"lifei_zdjl@126.com"; // 普通字符串的 userID
+    NSString *userHex = [GMUtils stringToHex:userID]; // Hex 格式的 userID
+    NSData *userData = [userID dataUsingEncoding:NSUTF8StringEncoding]; // NSData 格式的 userID
+    
     // 签名结果r,s，格式为r和s逗号分割的 16 进制字符串
-    NSString *signStr = [GMSm2Utils signText:self.gPwd privateKey:self.gPrikey userID:userID];
-    // 若后端验签【明文】前进行了 16 进制解码，传给后端的数据前要进行 16 进制编码
-    NSString *hexPwd = [GMUtils stringToHex:self.gPwd];
-    // 模拟服务端 16 进制解码，解码出【明文】再进行验签
-    NSString *plainPwd = [GMUtils hexToString:hexPwd];
-    /**
-     * 模拟服务端验证签名，传入【明文】，签名，公钥，用户 ID
-     */
-    BOOL isOK = [GMSm2Utils verifyText:plainPwd signRS:signStr publicKey:self.gPubkey userID:userID];
-    NSString *result = isOK ? @"通过" : @"未通过";
-    // 对签名结果 Der 编码
-    NSString *derSign = [GMSm2Utils derEncode:signStr];
-    // 对 Der 编码解码
-    NSString *originStr = [GMSm2Utils derDecode:derSign];
+    NSString *signStr1 = [GMSm2Utils signText:plaintext privateKey:priKey userID:userID];
+    NSString *signStr2 = [GMSm2Utils signHex:plainHex privateKey:priKey userHex:userHex];
+    NSString *signStr3 = [GMSm2Utils signData:plainData priKey:priKey userData:userData];
+    
+    // 验证签名
+    BOOL isOK1 = [GMSm2Utils verifyText:plaintext signRS:signStr1 publicKey:pubKey userID:userID];
+    BOOL isOK2 = [GMSm2Utils verifyHex:plainHex signRS:signStr2 publicKey:pubKey userHex:userHex];
+    BOOL isOK3 = [GMSm2Utils verifyData:plainData signRS:signStr3 pubKey:pubKey userData:userData];
+    
+    if (isOK1 && isOK2 && isOK3) {
+        NSLog(@"SM2 签名验签成功");
+    }else{
+        NSLog(@"SM2 签名验签失败");
+    }
+    
+    // 编码为 Der 格式
+    NSString *derSign1 = [GMSm2Utils derEncode:signStr1];
+    NSString *derSign2 = [GMSm2Utils derEncode:signStr2];
+    NSString *derSign3 = [GMSm2Utils derEncode:signStr3];
+    // 解码为 (r,s) 字符串格式
+    NSString *rs1 = [GMSm2Utils derDecode:derSign1];
+    NSString *rs2 = [GMSm2Utils derDecode:derSign2];
+    NSString *rs3 = [GMSm2Utils derDecode:derSign3];
+    
+    // Der 解码编码后与原文相同
+    if ([rs1 isEqualToString:signStr1] && [rs2 isEqualToString:signStr2] && [rs3 isEqualToString:signStr3]) {
+        NSLog(@"SM2 Der 编码解码成功");
+    }else{
+        NSLog(@"SM2 Der 编码解码失败");
+    }
     
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
-    [mStr appendFormat:@"\n-------SM2签名验签-------\nSM2签名：\n%@\n验签结果：\n%@\nDer编码SM2签名：\n%@\nDer解码SM2签名：\n%@", signStr, result, derSign, originStr];
+    [mStr appendString:@"\n-------SM2签名验签-------"];
+    [mStr appendFormat:@"\nSM2签名：\n%@", signStr1];
+    NSString *isSuccess = isOK1 ? @"签名验签成功":@"签名验签失败";
+    [mStr appendFormat:@"\n验签结果：\n%@", isSuccess];
+    [mStr appendFormat:@"\nDer编码SM2签名：\n%@", derSign1];
+    [mStr appendFormat:@"\nDer解码SM2签名：\n%@", rs1];
     self.gTextView.text = mStr;
 }
+
+///MARK: - SM3
 
 // sm3 摘要
 - (void)testSm3{
@@ -107,9 +191,13 @@
     NSString *sm3DigFile = [GMSm3Utils hashWithData:fileData];
     
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
-    [mStr appendFormat:@"\n-------SM3摘要-------\n字符串 123456 SM3摘要：\n%@\n文件 sm4TestFile.txt SM3摘要：\n%@", sm3DigPwd, sm3DigFile];
+    [mStr appendString:@"\n-------SM3摘要-------"];
+    [mStr appendFormat:@"\n字符串 123456 SM3摘要：\n%@", sm3DigPwd];
+    [mStr appendFormat:@"\n文件 sm4TestFile.txt SM3摘要：\n%@", sm3DigFile];
     self.gTextView.text = mStr;
 }
+
+///MARK: - SM4
 
 // sm4 加解密测试
 - (void)testSm4{
@@ -117,13 +205,21 @@
     // ECB 加解密模式
     NSString *sm4EcbCipertext = [GMSm4Utils ecbEncryptText:self.gPwd key:sm4Key];
     NSString *sm4EcbPlaintext = [GMSm4Utils ecbDecryptText:sm4EcbCipertext key:sm4Key];
+    
     NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
-    [mStr appendFormat:@"\n-------SM4加解密-------\nSM4密钥：\n%@\nECB 模式加密密文：\n%@\nECB模式解密结果：\n%@", sm4Key, sm4EcbCipertext, sm4EcbPlaintext];
+    [mStr appendString:@"\n-------SM4加解密-------"];
+    [mStr appendFormat:@"\nSM4密钥：\n%@", sm4Key];
+    [mStr appendFormat:@"\nECB 模式加密密文：\n%@", sm4EcbCipertext];
+    [mStr appendFormat:@"\nECB模式解密结果：\n%@", sm4EcbPlaintext];
+    
     // CBC 加解密模式
     NSString *ivec = [GMSm4Utils createSm4Key]; // 生成16位初始化向量
     NSString *sm4CbcCipertext = [GMSm4Utils cbcEncryptText:self.gPwd key:sm4Key IV:ivec];
     NSString *sm4CbcPlaintext = [GMSm4Utils cbcDecryptText:sm4CbcCipertext key:sm4Key IV:ivec];
-    [mStr appendFormat:@"\nCBC模式需要的16字节向量：\n%@\nCBC模式加密密文：\n%@\nCBC模式解密结果：\n%@", ivec, sm4CbcCipertext, sm4CbcPlaintext];
+    
+    [mStr appendFormat:@"\nCBC模式需要的16字节向量：\n%@", ivec];
+    [mStr appendFormat:@"\nCBC模式加密密文：\n%@", sm4CbcCipertext];
+    [mStr appendFormat:@"\nCBC模式解密结果：\n%@", sm4CbcPlaintext];
     self.gTextView.text = mStr;
     
     // 加解密文件，任意文件可读取为 NSData 格式
@@ -145,6 +241,8 @@
     NSLog(@"SM4 ECB 模式加解密后文本：\n%@", sm4EcbFileStr);
     NSLog(@"SM4 CBC 模式加解密后文本：\n%@", sm4CbcFileStr);
 }
+
+///MARK: - ECDH
 
 // ECDH 密钥协商
 - (void)testECDH{

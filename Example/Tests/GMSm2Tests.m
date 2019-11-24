@@ -22,40 +22,68 @@
     [super tearDown];
 }
 
-/**
- * 测试 sm2 出现空的情况
- */
-- (void)testSm2Null {
-    NSString *strNull = nil;
-    NSString *strLenZero = @"";
-    
-    // 加密
-    NSString *encryptNullStr = [GMSm2Utils encryptText:strNull publicKey:GMPubKey];
-    XCTAssertNil(encryptNullStr, @"加密字符串应为空");
-    NSString *encryptLenZeroStr = [GMSm2Utils encryptText:strLenZero publicKey:GMPubKey];
-    XCTAssertNil(encryptLenZeroStr, @"加密字符串应为空");
-    NSString *encryptNullKey = [GMSm2Utils encryptText:@"123456" publicKey:@""];
-    XCTAssertNil(encryptNullKey, @"加密字符串应为空");
-    
-    // 解密
-    NSString *decryptNullStr = [GMSm2Utils decryptToText:strNull privateKey:GMPriKey];
-    XCTAssertNil(decryptNullStr, @"解密字符串应为空");
-    NSString *decryptLenZeroStr = [GMSm2Utils decryptToText:strLenZero privateKey:GMPriKey];
-    XCTAssertNil(decryptLenZeroStr, @"解密字符串应为空");
-    NSString *decryptNullKey = [GMSm2Utils decryptToText:@"123456" privateKey:@""];
-    XCTAssertNil(decryptNullKey, @"解密字符串应为空");
-    
-    // ASN1 解码
-    NSString *decodeNullStr = [GMSm2Utils asn1DecodeToC1C3C2:strNull];
-    XCTAssertNil(decodeNullStr, @"解码字符串应为空");
-    NSString *decodeLenZeroStr = [GMSm2Utils asn1DecodeToC1C3C2:strLenZero];
-    XCTAssertNil(decodeLenZeroStr, @"解码字符串应为空");
-    
-    // ASN1 编码
-    NSString *encodeNullStr = [GMSm2Utils asn1EncodeWithC1C3C2:strNull];
-    XCTAssertNil(encodeNullStr, @"编码字符串应为空");
-    NSString *encodeLenZeroStr = [GMSm2Utils asn1EncodeWithC1C3C2:strLenZero];
-    XCTAssertNil(encodeLenZeroStr, @"编码字符串应为空");
+- (void)testSm2EncryptNull {
+    for (NSInteger i = 0; i < 100; i++) {
+        NSString *randStr = nil;
+        NSString *randKey = nil;
+        NSData *randData = nil;
+        int rand = arc4random_uniform((int)1000);
+        if (rand%2 == 0) randStr = @"";
+        if (rand%3 == 0) randKey = GMPubKey;
+        if (rand%5 == 0) randData = [NSData new];
+        
+        NSString *enNullStr = [GMSm2Utils encryptText:randStr publicKey:randKey];
+        XCTAssertNil(enNullStr, @"加密字符串应为空");
+        NSString *enNullHex = [GMSm2Utils encryptHex:randStr publicKey:randKey];
+        XCTAssertNil(enNullHex, @"加密字符串应为空");
+        NSData *enNullData = [GMSm2Utils encryptData:randData publicKey:randKey];
+        XCTAssertNil(enNullData, @"加密字符串应为空");
+    }
+}
+
+- (void)testSm2DecryptNull {
+    for (NSInteger i = 0; i < 100; i++) {
+        NSString *randStr = nil;
+        NSString *randKey = nil;
+        NSData *randData = nil;
+        int rand = arc4random_uniform((int)1000);
+        if (rand%2 == 0) randStr = @"";
+        if (rand%3 == 0) randKey = GMPriKey;
+        if (rand%5 == 0) randData = [NSData new];
+        
+        NSString *deNullStr = [GMSm2Utils decryptToText:randStr privateKey:randKey];
+        XCTAssertNil(deNullStr, @"解密字符串应为空");
+        NSString *deNullHex = [GMSm2Utils decryptToHex:randStr privateKey:randKey];
+        XCTAssertNil(deNullHex, @"解密字符串应为空");
+        NSData *deNullData = [GMSm2Utils decryptToData:randData privateKey:randKey];
+        XCTAssertNil(deNullData, @"解密字符串应为空");
+    }
+}
+
+- (void)testSm2ASN1Null {
+    for (NSInteger i = 0; i < 100; i++) {
+        NSString *randStr = nil;
+        NSData *randData = nil;
+        NSArray *randArray = nil;
+        int rand = arc4random_uniform((int)1000);
+        if (rand%2 == 0) randStr = @"";
+        if (rand%3 == 0) randArray = [NSArray new];
+        if (rand%5 == 0) randData = [NSData new];
+        
+        NSString *asn1NullStr = [GMSm2Utils asn1EncodeWithC1C3C2:randStr];
+        XCTAssertNil(asn1NullStr, @"编码字符串应为空");
+        NSString *asn1NullArray = [GMSm2Utils asn1EncodeWithC1C3C2Array:randArray];
+        XCTAssertNil(asn1NullArray, @"编码字符串应为空");
+        NSData *asn1NullData = [GMSm2Utils asn1EncodeWithC1C3C2Data:randData];
+        XCTAssertNil(asn1NullData, @"编码字符串应为空");
+        
+        NSString *asn1DeNullStr = [GMSm2Utils asn1DecodeToC1C3C2:randStr];
+        XCTAssertNil(asn1DeNullStr, @"解码字符串应为空");
+        NSArray *asn1DeNullArray = [GMSm2Utils asn1DecodeToC1C3C2Array:randStr];
+        XCTAssertNil(asn1DeNullArray, @"解码字符串应为空");
+        NSData *asn1DeNullData = [GMSm2Utils asn1DecodeToC1C3C2Data:randData];
+        XCTAssertNil(asn1DeNullData, @"解码字符串应为空");
+    }
 }
 
 /**
