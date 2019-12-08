@@ -176,7 +176,9 @@
     NSData *ivecData = [GMUtils hexToData:ivec];
     uint8_t *iv_text = (uint8_t *)ivecData.bytes;
     uint8_t ivec_block[SM4_BLOCK_SIZE] = {0};
-    memcpy(ivec_block, iv_text, SM4_BLOCK_SIZE);
+    if (iv_text != NULL) {
+        memcpy(ivec_block, iv_text, SM4_BLOCK_SIZE);
+    }
     // cbc 加密
     CRYPTO_cbc128_encrypt(p_text, result, result_len, &sm4Key, ivec_block,
                           (block128_f)SM4_encrypt);
@@ -220,7 +222,9 @@
     NSData *ivecData = [GMUtils hexToData:ivec];
     uint8_t *iv_text = (uint8_t *)ivecData.bytes;
     uint8_t ivec_block[SM4_BLOCK_SIZE] = {0};
-    memcpy(ivec_block, iv_text, SM4_BLOCK_SIZE);
+    if (iv_text != NULL) {
+        memcpy(ivec_block, iv_text, SM4_BLOCK_SIZE);
+    }
     // CBC 解密
     CRYPTO_cbc128_decrypt(c_obj, result, c_obj_len, &sm4Key, ivec_block,
                           (block128_f)SM4_decrypt);
