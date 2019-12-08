@@ -147,7 +147,7 @@
         }else if (i>=1000 && i< 2000){
             plaintext = [self randomZh:randLen]; // 中文字符
         }else{
-            plaintext = [self randomZhEnString:randLen]; //中英文混合
+            plaintext = [self randomZhEn:randLen]; //中英文混合
         }
         XCTAssertNotNil(plaintext, @"生成字符串不为空");
         // 生产密钥不为空

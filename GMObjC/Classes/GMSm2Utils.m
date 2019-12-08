@@ -33,10 +33,11 @@
         char *hex_pub = EC_POINT_point2hex(group, pub_key, EC_KEY_get_conv_form(key), NULL);
         char *hex_pri = BN_bn2hex(pri_key);
         
-        NSString *hexPubStr = [NSString stringWithCString:hex_pub encoding:NSUTF8StringEncoding];
-        NSString *hexPriStr = [NSString stringWithCString:hex_pri encoding:NSUTF8StringEncoding];
-        if (hexPubStr.length > 0 && hexPriStr.length > 0) {
-            keyArray = @[hexPubStr, hexPriStr];
+        NSString *pubHex = [NSString stringWithCString:hex_pub encoding:NSUTF8StringEncoding];
+        NSString *priHex = [NSString stringWithCString:hex_pri encoding:NSUTF8StringEncoding];
+        if (pubHex.length > 0 && priHex.length > 0) {
+            NSString *priHexWithPadding = [self bnToHexPadding:priHex];
+            keyArray = @[pubHex, priHexWithPadding];
         }
         OPENSSL_free(hex_pub);
         OPENSSL_free(hex_pri);
@@ -332,7 +333,10 @@
     char *c1y_text = BN_bn2hex(sm2_st->C1y);
     NSString *c1xStr = [NSString stringWithCString:c1x_text encoding:NSUTF8StringEncoding];
     NSString *c1yStr = [NSString stringWithCString:c1y_text encoding:NSUTF8StringEncoding];
-    NSString *c1Hex = [NSString stringWithFormat:@"%@%@", c1xStr, c1yStr];
+    // 如果转 Hex 不足 64 位前面补 0
+    NSString *paddingC1X = [self bnToHexPadding:c1xStr];
+    NSString *paddingC1Y = [self bnToHexPadding:c1yStr];
+    NSString *c1Hex = [NSString stringWithFormat:@"%@%@", paddingC1X, paddingC1Y];
     NSData *c1Data = [GMUtils hexToData:c1Hex];
     // C3
     const int c3_len = EVP_MD_size(digest);
@@ -461,7 +465,10 @@
         if (rStr.length == 0 || sStr.length == 0) {
             break;
         }
-        sigStr = [NSString stringWithFormat:@"%@,%@", rStr, sStr];
+        // 如果转 Hex 不足 64 位前面补 0
+        NSString *paddingR = [self bnToHexPadding:rStr];
+        NSString *paddingS = [self bnToHexPadding:sStr];
+        sigStr = [NSString stringWithFormat:@"%@%@", paddingR, paddingS];
     } while (NO);
     
     if (group != NULL) EC_GROUP_free(group);
@@ -515,11 +522,9 @@
     uint8_t *user_id = (uint8_t *)userData.bytes;
     size_t user_len = userData.length;
     
-    NSArray<NSString *> *rsArray = [signRS componentsSeparatedByString:@","];
-    if (rsArray.count < 2) return NO;
-    
-    NSString *r_hex = rsArray[0];
-    NSString *s_hex = rsArray[1];
+    NSInteger signLen = signRS.length;
+    NSString *r_hex = [signRS substringToIndex:signLen/2];
+    NSString *s_hex = [signRS substringFromIndex:signLen/2];
     
     ECDSA_SIG *sig = NULL;  // 签名结果
     BIGNUM *sig_r = NULL;
@@ -600,12 +605,9 @@
     if (signRS.length == 0) {
         return nil;
     }
-    NSArray<NSString *> *rsArray = [signRS componentsSeparatedByString:@","];
-    if (rsArray.count < 2) {
-        return nil;
-    }
-    NSString *r_hex = rsArray[0];
-    NSString *s_hex = rsArray[1];
+    NSInteger signLen = signRS.length;
+    NSString *r_hex = [signRS substringToIndex:signLen/2];
+    NSString *s_hex = [signRS substringFromIndex:signLen/2];
     
     ECDSA_SIG *sig = NULL;  // 签名结果
     BIGNUM *sig_r = NULL;
@@ -689,7 +691,10 @@
         if (rStr.length == 0 || sStr.length == 0) {
             break;
         }
-        originSign = [NSString stringWithFormat:@"%@,%@", rStr, sStr];
+        // 如果转 Hex 不足 64 位前面补 0
+        NSString *paddingR = [self bnToHexPadding:rStr];
+        NSString *paddingS = [self bnToHexPadding:sStr];
+        originSign = [NSString stringWithFormat:@"%@%@", paddingR, paddingS];
     } while (NO);
     
     ECDSA_SIG_free(sig);
@@ -736,13 +741,10 @@
         if (ret <= 0) {
             break;
         }
-        char *hex_ctext = OPENSSL_buf2hexstr((const uint8_t *)ecdh_text, outlen);
-        NSString *hexCtext = [NSString stringWithCString:hex_ctext encoding:NSUTF8StringEncoding];
-        ecdhStr = [hexCtext stringByReplacingOccurrencesOfString:@":" withString:@""];
+        NSData *ecdhData = [NSData dataWithBytes:ecdh_text length:outlen];
+        ecdhStr = [GMUtils dataToHex:ecdhData];
         
         OPENSSL_free(ecdh_text);
-        OPENSSL_free(hex_ctext);
-        
     } while (NO);
     
     if (group != NULL) EC_GROUP_free(group);
@@ -751,6 +753,17 @@
     EC_KEY_free(key);
     
     return ecdhStr;
+}
+
+/// BIGNUM 转 Hex 时，不足 64 位前面补 0
+/// @param orginHex 原 Hex 字符串
++ (NSString *)bnToHexPadding:(NSString *)orginHex{
+    if (orginHex.length == 0 || orginHex.length >= 64) {
+        return orginHex;
+    }
+    static NSString *paddingZero = @"0000000000000000000000000000000000000000000000000000000000000000";
+    NSString *padding = [paddingZero substringToIndex:(64 - orginHex.length)];
+    return [NSString stringWithFormat:@"%@%@", padding, orginHex];
 }
 
 @end

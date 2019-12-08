@@ -14,9 +14,28 @@
 
 @implementation GMSm3Tests
 
-/**
- * 测试 sm3 出现空的情况
- */
+/// 测试工具类
+- (void)testGMUtils {
+    for (NSInteger i = 0; i < 1000; i++) {
+        NSString *plaintext = [self randomAny:10000];
+        XCTAssertNotNil(plaintext, @"生成字符串不为空");
+        NSString *hexStr = [GMUtils stringToHex:plaintext];
+        XCTAssertNotNil(hexStr, @"16 进制字符串不为空");
+        NSString *originStr = [GMUtils hexToString:hexStr];
+        BOOL isSameStr = [originStr isEqualToString:plaintext];
+        XCTAssertTrue(isSameStr, @"明文转 Hex 可逆");
+        
+        NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
+        XCTAssertNotNil(plainData, @"明文 Data 不为空");
+        NSString *hexData = [GMUtils dataToHex:plainData];
+        XCTAssertNotNil(hexData, @"明文 Data 转 Hex 不为空");
+        NSData *originData = [GMUtils hexToData:hexData];
+        BOOL isSameData = [originData isEqualToData:plainData];
+        XCTAssertTrue(isSameData, @"明文 Data 转 Hex 可逆");
+    }
+}
+
+/// 测试 sm3 出现空的情况
 - (void)testSm3Null {
     NSString *strNull = nil;
     NSString *strLenZero = @"";
@@ -94,7 +113,7 @@
 - (void)testSm3ZhEnStr {
     for (NSInteger i = 0; i < 1000; i++) {
         int randLen = arc4random_uniform((int)1000);
-        NSString *plaintext = [self randomZhEnString:randLen];
+        NSString *plaintext = [self randomZhEn:randLen];
         XCTAssertNotNil(plaintext, @"生成字符串不为空");
         
         NSString *tempDigStr = [GMSm3Utils hashWithString:plaintext];
@@ -102,7 +121,7 @@
     }
     // 多次摘要相同
     int randLen = arc4random_uniform((int)1000);
-    NSString *plaintext = [self randomZhEnString:randLen];
+    NSString *plaintext = [self randomZhEn:randLen];
     NSString *digStr = nil;
     for (NSInteger i = 0; i < 1000; i++) {
         XCTAssertNotNil(plaintext, @"生成字符串不为空");

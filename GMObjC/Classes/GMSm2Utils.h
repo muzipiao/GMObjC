@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///MARK: - SM2 加密
 
-/// SM2 加密。返回值：加密后的字符串或 NSData（密文都为 ASN1 编码格式），失败返回 nil
+/// SM2 加密。返回值：加密后的字符串或 NSData（密文都为 ASN1 编码格式，可解码为 C1C3C2 格式），失败返回 nil
 /// @param plaintext 明文（普通字符串格式）；plainHex 明文（ Hex 编码格式）；plainData 明文（NSData 格式）
 /// @param publicKey 04 开头的公钥（ Hex 编码格式）
 + (nullable NSString *)encryptText:(NSString *)plaintext publicKey:(NSString *)publicKey;
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///MARK: - 签名验签
 
-/// SM2 数字签名。返回值：数字签名，格式为(r,s)逗号分隔的 16 进制字符串
+/// SM2 数字签名。返回值：数字签名，RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
 /// userID 或 userHex，用户ID 可传空值，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
 /// @param plaintext 明文（普通字符串）；plainHex 明文（Hex 编码格式）；plainData 明文（NSData 格式）
 /// @param priKey SM2 私钥（Hex 编码格式）
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// SM2 验证数字签名。返回值：验签结果，YES 为通过，NO 为不通过
 /// userID 或 userHex，用户ID 可传空值，为空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
 /// @param plaintext 明文（普通字符串）；plainHex 明文（Hex 编码格式）；plainData 明文（NSData 格式）
-/// @param signRS 数字签名，格式为(r,s)拼接的 16 进制字符串
+/// @param signRS 数字签名，RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
 /// @param pubKey SM2 公钥（Hex 编码格式）
 /// @param userID 用户 ID（普通字符串）；userHex 用户 ID（Hex 编码格式）；userID 用户 ID（NSData 格式）
 + (BOOL)verifyText:(NSString *)plaintext signRS:(NSString *)signRS publicKey:(NSString *)pubKey userID:(nullable NSString *)userID;
@@ -78,10 +78,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///MARK: - Der 编码解码
 
 /// Der 编码。返回值：SM2 数字签名， Der 编码格式
-/// @param signRS 格式为(r,s)逗号分隔的 16 进制字符串
+/// @param signRS RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
 + (nullable NSString *)derEncode:(NSString *)signRS;
 
-/// Der 解码。SM2 数字签名 Der 解码，返回值：数字签名，(r,s)逗号分隔 16 进制字符串格式
+/// Der 解码。SM2 数字签名 Der 解码，返回值：数字签名，RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
 /// @param derSign Der 编码格式的数字签名
 + (nullable NSString *)derDecode:(NSString *)derSign;
 

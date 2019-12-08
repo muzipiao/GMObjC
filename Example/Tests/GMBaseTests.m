@@ -26,27 +26,12 @@ NSString *const GMTestUserID = @"lifei_zdjl@126.com";
     [super tearDown];
 }
 
-/**
- * 测试工具类
- */
-- (void)testGMUtils {
-    int randLen = arc4random_uniform((int)10000);
-    NSString *plaintext = [self randomEn:randLen];
-    XCTAssertNotNil(plaintext, @"生成字符串不为空");
-    
-    NSString *hexStr = [GMUtils stringToHex:plaintext];
-    XCTAssertNotNil(hexStr, @"16 进制字符串不为空");
-    
-    NSString *originStr = [GMUtils hexToString:hexStr];
-    XCTAssertNotNil(originStr, @"16 进制转原文不为空");
-}
-
 // 生成中英文混合字符串
-- (NSString *)randomZhEnString:(NSInteger)maxLength{
+- (NSString *)randomZhEn:(NSInteger)maxLength{
     int zhEnLen = arc4random_uniform((int)maxLength);
-    zhEnLen = zhEnLen > 1 ? zhEnLen : 10;
+    zhEnLen = zhEnLen >= 1 ? zhEnLen : 10; // zhEnLen 需大于1
     NSMutableString *zhEnStr = [NSMutableString stringWithCapacity:zhEnLen];
-    for (NSInteger i = 0; i < zhEnLen - 1; i++) {
+    for (NSInteger i = 0; i < zhEnLen; i++) {
         if (zhEnStr.length >= zhEnLen) {
             break;
         }
@@ -66,7 +51,7 @@ NSString *const GMTestUserID = @"lifei_zdjl@126.com";
 
 // 随机生成ascii符串(由大小写字母、数字组成)
 - (NSString *)randomEn:(NSInteger)len {
-    len = len > 1 ? len : 10;
+    len = len >= 1 ? len : 10;
     // 33 至 126
     char ch[len];
     for (NSInteger index=0; index<len; index++) {
@@ -78,7 +63,7 @@ NSString *const GMTestUserID = @"lifei_zdjl@126.com";
 
 // 随机生成汉字字符串
 -(NSString *)randomZh:(NSInteger)len{
-    len = len > 1 ? len : 10;
+    len = len >= 1 ? len : 10;
     NSMutableString *mStr = [NSMutableString stringWithCapacity:len];
     NSStringEncoding gbkEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     for (NSInteger i = 0; i < len; i++) {
@@ -90,6 +75,21 @@ NSString *const GMTestUserID = @"lifei_zdjl@126.com";
         [mStr appendString:string];
     }
     return mStr.copy;
+}
+
+// 生成任意长度任意类型的字符串
+- (NSString *)randomAny:(NSInteger)maxLen{
+    int randKind = arc4random_uniform((int)3);
+    int randLen = arc4random_uniform((int)maxLen);
+    NSString *plaintext = nil;
+    if (randKind == 0) {
+        plaintext = [self randomEn:randLen]; // 数字英文
+    }else if (randKind == 1){
+        plaintext = [self randomZh:randLen]; // 中文字符
+    }else{
+        plaintext = [self randomZhEn:randLen]; //中英文混合
+    }
+    return plaintext;
 }
 
 @end

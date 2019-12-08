@@ -63,7 +63,7 @@
     self.scrollView.frame = CGRectMake(0, 0, SW, contentSize.height);
 }
 
-///MARK: - SM2
+///MARK: - SM2 加解密
 
 // sm2 加解密及 ASN1 编码解码
 - (void)testSm2EnDe{
@@ -121,7 +121,8 @@
     self.gTextView.text = mStr;
 }
 
-// sm2 签名验签
+///MARK: - SM2 签名验签
+
 - (void)testSm2Sign{
     // 生成一对新的公私钥
     NSArray *keyPair = [GMSm2Utils createKeyPair];
@@ -137,7 +138,7 @@
     NSString *userHex = [GMUtils stringToHex:userID]; // Hex 格式的 userID
     NSData *userData = [userID dataUsingEncoding:NSUTF8StringEncoding]; // NSData 格式的 userID
     
-    // 签名结果r,s，格式为r和s逗号分割的 16 进制字符串
+    // 签名结果是 RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
     NSString *signStr1 = [GMSm2Utils signText:plaintext privateKey:priKey userID:userID];
     NSString *signStr2 = [GMSm2Utils signHex:plainHex privateKey:priKey userHex:userHex];
     NSString *signStr3 = [GMSm2Utils signData:plainData priKey:priKey userData:userData];
@@ -157,7 +158,7 @@
     NSString *derSign1 = [GMSm2Utils derEncode:signStr1];
     NSString *derSign2 = [GMSm2Utils derEncode:signStr2];
     NSString *derSign3 = [GMSm2Utils derEncode:signStr3];
-    // 解码为 (r,s) 字符串格式
+    // 解码为 RS 字符串格式，RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
     NSString *rs1 = [GMSm2Utils derDecode:derSign1];
     NSString *rs2 = [GMSm2Utils derDecode:derSign2];
     NSString *rs3 = [GMSm2Utils derDecode:derSign3];
@@ -179,9 +180,8 @@
     self.gTextView.text = mStr;
 }
 
-///MARK: - SM3
+///MARK: - SM3 摘要计算
 
-// sm3 摘要
 - (void)testSm3{
     // sm3 字符串摘要
     NSString *sm3DigPwd = [GMSm3Utils hashWithString:self.gPwd];
@@ -197,11 +197,10 @@
     self.gTextView.text = mStr;
 }
 
-///MARK: - SM4
+///MARK: - SM4 加解密
 
-// sm4 加解密测试
 - (void)testSm4{
-    NSString *sm4Key = [GMSm4Utils createSm4Key]; // 生成16位密钥
+    NSString *sm4Key = [GMSm4Utils createSm4Key]; //  生成 32 字节 Hex 编码格式字符串密钥
     // ECB 加解密模式
     NSString *sm4EcbCipertext = [GMSm4Utils ecbEncryptText:self.gPwd key:sm4Key];
     NSString *sm4EcbPlaintext = [GMSm4Utils ecbDecryptText:sm4EcbCipertext key:sm4Key];
@@ -213,7 +212,7 @@
     [mStr appendFormat:@"\nECB模式解密结果：\n%@", sm4EcbPlaintext];
     
     // CBC 加解密模式
-    NSString *ivec = [GMSm4Utils createSm4Key]; // 生成16位初始化向量
+    NSString *ivec = [GMSm4Utils createSm4Key]; // 生成 32 字节初始化向量
     NSString *sm4CbcCipertext = [GMSm4Utils cbcEncryptText:self.gPwd key:sm4Key IV:ivec];
     NSString *sm4CbcPlaintext = [GMSm4Utils cbcDecryptText:sm4CbcCipertext key:sm4Key IV:ivec];
     
@@ -242,9 +241,8 @@
     NSLog(@"SM4 CBC 模式加解密后文本：\n%@", sm4CbcFileStr);
 }
 
-///MARK: - ECDH
+///MARK: - ECDH 密钥协商
 
-// ECDH 密钥协商
 - (void)testECDH{
     // 客户端client生成一对公私钥
     NSArray *clientKey = [GMSm2Utils createKeyPair];

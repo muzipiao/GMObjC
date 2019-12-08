@@ -1,4 +1,4 @@
-osx_image: xcode10.2
+osx_image: xcode11.2
 language: objective-c
 
 cache: cocoapods
@@ -26,7 +26,7 @@ before_install:
 script:
   - set -o pipefail
   - xcodebuild clean build -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -sdk iphonesimulator -configuration Debug | xcpretty -c
-  - xcodebuild clean build test -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 8,OS=latest" -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+  - xcodebuild clean build test -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11,OS=latest" -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
