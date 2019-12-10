@@ -24,7 +24,7 @@ open GMObjC.xcworkspace
 
 ## 环境需求
 
-OpenSSL 1.1.1 以上版本，已打包为 Framework，并上传 cocoapods，可拖入直接安装或使用 cocoapods 安装，导入系统框架 Security.framework。
+依赖 OpenSSL 1.1.1 以上版本，已打包为 Framework，并上传 cocoapods，可拖入项目直接安装，或使用 cocoapods 配置  Podfile 文件`pod GMOpenSSL`安装；并导入系统框架 Security.framework。
 
 * [GMOpenSSL.framework](https://github.com/muzipiao/GMOpenSSL)(openssl.framework)
 * Security.framework
@@ -245,6 +245,21 @@ NSData *c1c3c2Result3 = [GMSm2Utils asn1DecodeToC1C3C2Data:enResult3]; // 解码
 NSString *asn1Result1 = [GMSm2Utils asn1EncodeWithC1C3C2:c1c3c2Result1];
 NSString *asn1Result2 = [GMSm2Utils asn1EncodeWithC1C3C2Array:c1c3c2Result2];
 NSData *asn1Result3 = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Result3];
+```
+
+如何拆分密文字符串？假设 Hex 编码（16 进制编码）格式密文是按照 C1C2C3 排列的，已知 C1 长度固定为 128 字节，C3 长度固定为 64 字节，那 C2 长度 = 密文字符串总长度 - C1长度 128 - C3长度，这样就分别得到了 C1、C2、C3 字符串，自由拼接。
+
+假设 Hex 编码格式密文按照 C1C2C3 排列，可按照以下方式拆分 C1、C2、C3。
+
+```objc
+// Hex 编码格式密文必大于 192，截取字符串前注意判断长度
+NSString *C1C2C3 = @"1C03C16FEFB1...假设这里是按照C1C2C3排列的密文...0B8ECAE42AD68B";
+// 椭圆曲线随机点 C1 固定长度为 128 （Hex 编码格式）
+NSString *C1 = [C1C2C3 substringToIndex:128];
+// 密文摘要值 C3 固定长度为 64（Hex 编码格式）
+NSString *C3 = [C1C2C3 substringFromIndex:(C1C2C3.length - 64)];
+// 密文中 C2 长度 =  密文字符串总长度 - C1长度(128) - C3长度(64)
+NSString *C2 = [C1C2C3 substringWithRange:NSMakeRange(128, C1C2C3.length - C1.length - C3.length)];
 ```
 
 ### 生成公私钥
