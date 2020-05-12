@@ -4,6 +4,7 @@ platform :ios, '8.0'
 
 target 'GMObjC_Example' do
   pod 'GMObjC', :path => '../'
+  pod 'GMOpenSSL'
 
   target 'GMObjC_Tests' do
     inherit! :search_paths

@@ -7,9 +7,6 @@
 #import "GMSm2Utils.h"
 #import "GMSm2Def.h"
 #import "GMUtils.h"
-#import <openssl/sm2.h>
-#import <openssl/evp.h>
-#import <openssl/bn.h>
 
 @implementation GMSm2Utils
 

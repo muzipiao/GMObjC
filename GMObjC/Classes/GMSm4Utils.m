@@ -6,10 +6,25 @@
 //
 
 #import "GMSm4Utils.h"
-#import <openssl/sm4.h>
-#import <openssl/evp.h>
-#import <openssl/modes.h>
 #import "GMUtils.h"
+
+#if __has_include(<openssl/sm4.h>)
+#import <openssl/sm4.h>
+#else
+#import "GMOpenSSL/sm4.h"
+#endif // __has_include(<sm4.h>)
+
+#if __has_include(<openssl/evp.h>)
+#import <openssl/evp.h>
+#else
+#import "GMOpenSSL/evp.h"
+#endif // __has_include(<evp.h>)
+
+#if __has_include(<openssl/modes.h>)
+#import <openssl/modes.h>
+#else
+#import "GMOpenSSL/modes.h"
+#endif // __has_include(<modes.h>)
 
 @implementation GMSm4Utils
 
@@ -125,12 +140,17 @@
     // 移除填充
     int pad_len = (int)result[c_obj_len - 1];
     int end_len = (int)(c_obj_len - pad_len);
-    uint8_t *no_pad_result = (uint8_t *)OPENSSL_zalloc((int)(end_len + 1));
-    memcpy(no_pad_result, result, end_len);
-    NSData *plainData = [NSData dataWithBytes:no_pad_result length:end_len];
+    
+    NSData *plainData = nil;
+    if (pad_len > 0 && pad_len < SM4_BLOCK_SIZE + 1) {
+        uint8_t *no_pad_result = (uint8_t *)OPENSSL_zalloc((int)(end_len + 1));
+        memcpy(no_pad_result, result, end_len);
+        plainData = [NSData dataWithBytes:no_pad_result length:end_len];
+        
+        OPENSSL_free(no_pad_result);
+    }
     
     OPENSSL_free(result);
-    OPENSSL_free(no_pad_result);
     
     return plainData;
 }

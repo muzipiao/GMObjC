@@ -7,7 +7,12 @@
 //
 
 #import "GMUtils.h"
+
+#if __has_include(<openssl/crypto.h>)
 #import <openssl/crypto.h>
+#else
+#import "GMOpenSSL/crypto.h"
+#endif // __has_include(<crypto.h>)
 
 @implementation GMUtils
 
