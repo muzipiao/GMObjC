@@ -25,5 +25,8 @@
     "Foundation",
     "Security"
   ],
+  "xcconfig": {
+    "FRAMEWORK_SEARCH_PATHS": "\"$(PODS_ROOT)/GMOpenSSL/GMOpenSSL/.\""
+  },
   "requires_arc": true
 }

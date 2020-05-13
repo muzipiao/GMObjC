@@ -19,12 +19,13 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/muzipiao/GMObjC.git", :tag => "#{spec.version}" }
 
-
   spec.source_files  = "GMObjC/Classes/**/*.{h,m}"
   
   spec.public_header_files = "GMObjC/Classes/**/*.h"
 
   spec.frameworks  = "Foundation", "Security"
+  
+  spec.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/GMOpenSSL/GMOpenSSL/."' }
 
   spec.requires_arc = true
 
