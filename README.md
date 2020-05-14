@@ -41,6 +41,24 @@ pod 'GMObjC'
 
 然后执行 `pod install` 即可。
 
+### Carthage
+
+Carthage 可以自动将第三方框架编译为动态库（Dynamic framework），未安装的先执行 `brew update` 和 `brew install carthage` 安装，然后创建一个名称为 Cartfile 的文件（类似 Podfile），编辑添加想要编译的三方库名称如 `github "muzipiao/GMObjC"`，然后执行 `carthage update` 即可。
+
+```ruby
+# 安装 carthage
+brew update
+brew install carthage
+# 创建 Cartfile 文件，并写入文件 github "muzipiao/GMObjC"
+touch Cartfile
+# 拉取编译为动态库
+carthage update
+```
+
+编译成功后，打开 Carthage 查看生成的文件目录，Carthage/Build/iOS/GMObjC.framework 既是编译成功的动态库，将动态库拖入工程即可。
+
+注意：GMObjC.framework 为动态库，需要选择 `Embed & Sign` 模式，且不需要再单独导入 openssl.framework 库。若 Carthage 编译失败，下载项目源码，在 GMObjCFramework 文件夹下打开工程文件，执行 `command + b` 手动编译即可。
+
 ### 直接集成
 
 从 Git 下载最新代码，找到和 README 同级的 GMObjC 文件夹，将 GMObjC 文件夹拖入项目即可，在需要使用的地方导入头文件 `GMObjC.h` 即可使用 SM2、SM4 加解密，签名验签，计算 SM3 摘要等。
