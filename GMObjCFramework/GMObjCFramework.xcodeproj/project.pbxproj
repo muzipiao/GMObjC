@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1EAF50F7246E7FFD00E00FF8 /* GMSm3Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50ED246E7FFD00E00FF8 /* GMSm3Utils.h */; };
+		1EAF50F7246E7FFD00E00FF8 /* GMSm3Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50ED246E7FFD00E00FF8 /* GMSm3Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1EAF50F8246E7FFD00E00FF8 /* GMSm2Def.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50EE246E7FFD00E00FF8 /* GMSm2Def.h */; };
-		1EAF50F9246E7FFD00E00FF8 /* GMObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50EF246E7FFD00E00FF8 /* GMObjC.h */; };
+		1EAF50F9246E7FFD00E00FF8 /* GMObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50EF246E7FFD00E00FF8 /* GMObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1EAF50FA246E7FFD00E00FF8 /* GMSm3Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAF50F0246E7FFD00E00FF8 /* GMSm3Utils.m */; };
-		1EAF50FB246E7FFD00E00FF8 /* GMSm2Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50F1246E7FFD00E00FF8 /* GMSm2Utils.h */; };
+		1EAF50FB246E7FFD00E00FF8 /* GMSm2Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50F1246E7FFD00E00FF8 /* GMSm2Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1EAF50FC246E7FFD00E00FF8 /* GMSm4Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAF50F2246E7FFD00E00FF8 /* GMSm4Utils.m */; };
 		1EAF50FD246E7FFD00E00FF8 /* GMSm2Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAF50F3246E7FFD00E00FF8 /* GMSm2Utils.m */; };
-		1EAF50FE246E7FFD00E00FF8 /* GMSm4Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50F4246E7FFD00E00FF8 /* GMSm4Utils.h */; };
-		1EAF50FF246E7FFD00E00FF8 /* GMUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50F5246E7FFD00E00FF8 /* GMUtils.h */; };
+		1EAF50FE246E7FFD00E00FF8 /* GMSm4Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50F4246E7FFD00E00FF8 /* GMSm4Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1EAF50FF246E7FFD00E00FF8 /* GMUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50F5246E7FFD00E00FF8 /* GMUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1EAF5100246E7FFD00E00FF8 /* GMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAF50F6246E7FFD00E00FF8 /* GMUtils.m */; };
 		1EAF5102246E801700E00FF8 /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EAF5101246E801700E00FF8 /* openssl.framework */; };
 /* End PBXBuildFile section */
@@ -94,8 +94,8 @@
 				1EAF50FB246E7FFD00E00FF8 /* GMSm2Utils.h in Headers */,
 				1EAF50FF246E7FFD00E00FF8 /* GMUtils.h in Headers */,
 				1EAF50F9246E7FFD00E00FF8 /* GMObjC.h in Headers */,
-				1EAF50F8246E7FFD00E00FF8 /* GMSm2Def.h in Headers */,
 				1EAF50FE246E7FFD00E00FF8 /* GMSm4Utils.h in Headers */,
+				1EAF50F8246E7FFD00E00FF8 /* GMSm2Def.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +318,7 @@
 				PRODUCT_MODULE_NAME = GMObjC;
 				PRODUCT_NAME = GMObjC;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e";
 			};
@@ -348,6 +349,7 @@
 				PRODUCT_MODULE_NAME = GMObjC;
 				PRODUCT_NAME = GMObjC;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e";
 			};
