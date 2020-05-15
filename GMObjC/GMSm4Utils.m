@@ -7,24 +7,9 @@
 
 #import "GMSm4Utils.h"
 #import "GMUtils.h"
-
-#if __has_include(<openssl/sm4.h>)
 #import <openssl/sm4.h>
-#else
-#import "GMOpenSSL/sm4.h"
-#endif // __has_include(<sm4.h>)
-
-#if __has_include(<openssl/evp.h>)
 #import <openssl/evp.h>
-#else
-#import "GMOpenSSL/evp.h"
-#endif // __has_include(<evp.h>)
-
-#if __has_include(<openssl/modes.h>)
 #import <openssl/modes.h>
-#else
-#import "GMOpenSSL/modes.h"
-#endif // __has_include(<modes.h>)
 
 @implementation GMSm4Utils
 

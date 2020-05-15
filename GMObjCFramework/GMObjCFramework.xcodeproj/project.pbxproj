@@ -7,33 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E93C613246D74290066E503 /* GMSm3Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E93C609246D74290066E503 /* GMSm3Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1E93C614246D74290066E503 /* GMSm4Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E93C60A246D74290066E503 /* GMSm4Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1E93C615246D74290066E503 /* GMSm4Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E93C60B246D74290066E503 /* GMSm4Utils.m */; };
-		1E93C616246D74290066E503 /* GMUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E93C60C246D74290066E503 /* GMUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1E93C617246D74290066E503 /* GMObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E93C60D246D74290066E503 /* GMObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1E93C618246D74290066E503 /* GMSm2Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E93C60E246D74290066E503 /* GMSm2Utils.m */; };
-		1E93C619246D74290066E503 /* GMSm2Def.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E93C60F246D74290066E503 /* GMSm2Def.h */; };
-		1E93C61A246D74290066E503 /* GMSm2Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E93C610246D74290066E503 /* GMSm2Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1E93C61B246D74290066E503 /* GMSm3Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E93C611246D74290066E503 /* GMSm3Utils.m */; };
-		1E93C61C246D74290066E503 /* GMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E93C612246D74290066E503 /* GMUtils.m */; };
-		1E93C61E246D74560066E503 /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E93C61D246D74560066E503 /* openssl.framework */; };
+		1EAF50F7246E7FFD00E00FF8 /* GMSm3Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50ED246E7FFD00E00FF8 /* GMSm3Utils.h */; };
+		1EAF50F8246E7FFD00E00FF8 /* GMSm2Def.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50EE246E7FFD00E00FF8 /* GMSm2Def.h */; };
+		1EAF50F9246E7FFD00E00FF8 /* GMObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50EF246E7FFD00E00FF8 /* GMObjC.h */; };
+		1EAF50FA246E7FFD00E00FF8 /* GMSm3Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAF50F0246E7FFD00E00FF8 /* GMSm3Utils.m */; };
+		1EAF50FB246E7FFD00E00FF8 /* GMSm2Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50F1246E7FFD00E00FF8 /* GMSm2Utils.h */; };
+		1EAF50FC246E7FFD00E00FF8 /* GMSm4Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAF50F2246E7FFD00E00FF8 /* GMSm4Utils.m */; };
+		1EAF50FD246E7FFD00E00FF8 /* GMSm2Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAF50F3246E7FFD00E00FF8 /* GMSm2Utils.m */; };
+		1EAF50FE246E7FFD00E00FF8 /* GMSm4Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50F4246E7FFD00E00FF8 /* GMSm4Utils.h */; };
+		1EAF50FF246E7FFD00E00FF8 /* GMUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50F5246E7FFD00E00FF8 /* GMUtils.h */; };
+		1EAF5100246E7FFD00E00FF8 /* GMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAF50F6246E7FFD00E00FF8 /* GMUtils.m */; };
+		1EAF5102246E801700E00FF8 /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EAF5101246E801700E00FF8 /* openssl.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1E93C5FE246D73910066E503 /* GMObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E93C602246D73910066E503 /* GMObjCFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GMObjCFramework-Info.plist"; sourceTree = "<group>"; };
-		1E93C609246D74290066E503 /* GMSm3Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm3Utils.h; path = ../../GMObjC/Classes/GMSm3Utils.h; sourceTree = "<group>"; };
-		1E93C60A246D74290066E503 /* GMSm4Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm4Utils.h; path = ../../GMObjC/Classes/GMSm4Utils.h; sourceTree = "<group>"; };
-		1E93C60B246D74290066E503 /* GMSm4Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMSm4Utils.m; path = ../../GMObjC/Classes/GMSm4Utils.m; sourceTree = "<group>"; };
-		1E93C60C246D74290066E503 /* GMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUtils.h; path = ../../GMObjC/Classes/GMUtils.h; sourceTree = "<group>"; };
-		1E93C60D246D74290066E503 /* GMObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMObjC.h; path = ../../GMObjC/Classes/GMObjC.h; sourceTree = "<group>"; };
-		1E93C60E246D74290066E503 /* GMSm2Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMSm2Utils.m; path = ../../GMObjC/Classes/GMSm2Utils.m; sourceTree = "<group>"; };
-		1E93C60F246D74290066E503 /* GMSm2Def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm2Def.h; path = ../../GMObjC/Classes/GMSm2Def.h; sourceTree = "<group>"; };
-		1E93C610246D74290066E503 /* GMSm2Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm2Utils.h; path = ../../GMObjC/Classes/GMSm2Utils.h; sourceTree = "<group>"; };
-		1E93C611246D74290066E503 /* GMSm3Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMSm3Utils.m; path = ../../GMObjC/Classes/GMSm3Utils.m; sourceTree = "<group>"; };
-		1E93C612246D74290066E503 /* GMUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUtils.m; path = ../../GMObjC/Classes/GMUtils.m; sourceTree = "<group>"; };
-		1E93C61D246D74560066E503 /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openssl.framework; sourceTree = "<group>"; };
+		1EAF50ED246E7FFD00E00FF8 /* GMSm3Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm3Utils.h; path = ../../GMObjC/GMSm3Utils.h; sourceTree = "<group>"; };
+		1EAF50EE246E7FFD00E00FF8 /* GMSm2Def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm2Def.h; path = ../../GMObjC/GMSm2Def.h; sourceTree = "<group>"; };
+		1EAF50EF246E7FFD00E00FF8 /* GMObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMObjC.h; path = ../../GMObjC/GMObjC.h; sourceTree = "<group>"; };
+		1EAF50F0246E7FFD00E00FF8 /* GMSm3Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMSm3Utils.m; path = ../../GMObjC/GMSm3Utils.m; sourceTree = "<group>"; };
+		1EAF50F1246E7FFD00E00FF8 /* GMSm2Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm2Utils.h; path = ../../GMObjC/GMSm2Utils.h; sourceTree = "<group>"; };
+		1EAF50F2246E7FFD00E00FF8 /* GMSm4Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMSm4Utils.m; path = ../../GMObjC/GMSm4Utils.m; sourceTree = "<group>"; };
+		1EAF50F3246E7FFD00E00FF8 /* GMSm2Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMSm2Utils.m; path = ../../GMObjC/GMSm2Utils.m; sourceTree = "<group>"; };
+		1EAF50F4246E7FFD00E00FF8 /* GMSm4Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm4Utils.h; path = ../../GMObjC/GMSm4Utils.h; sourceTree = "<group>"; };
+		1EAF50F5246E7FFD00E00FF8 /* GMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMUtils.h; path = ../../GMObjC/GMUtils.h; sourceTree = "<group>"; };
+		1EAF50F6246E7FFD00E00FF8 /* GMUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMUtils.m; path = ../../GMObjC/GMUtils.m; sourceTree = "<group>"; };
+		1EAF5101246E801700E00FF8 /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openssl.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E93C61E246D74560066E503 /* openssl.framework in Frameworks */,
+				1EAF5102246E801700E00FF8 /* openssl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,17 +67,17 @@
 		1E93C600246D73910066E503 /* GMObjCFramework */ = {
 			isa = PBXGroup;
 			children = (
-				1E93C60D246D74290066E503 /* GMObjC.h */,
-				1E93C60F246D74290066E503 /* GMSm2Def.h */,
-				1E93C610246D74290066E503 /* GMSm2Utils.h */,
-				1E93C60E246D74290066E503 /* GMSm2Utils.m */,
-				1E93C609246D74290066E503 /* GMSm3Utils.h */,
-				1E93C611246D74290066E503 /* GMSm3Utils.m */,
-				1E93C60A246D74290066E503 /* GMSm4Utils.h */,
-				1E93C60B246D74290066E503 /* GMSm4Utils.m */,
-				1E93C60C246D74290066E503 /* GMUtils.h */,
-				1E93C612246D74290066E503 /* GMUtils.m */,
-				1E93C61D246D74560066E503 /* openssl.framework */,
+				1EAF50EF246E7FFD00E00FF8 /* GMObjC.h */,
+				1EAF50EE246E7FFD00E00FF8 /* GMSm2Def.h */,
+				1EAF50F1246E7FFD00E00FF8 /* GMSm2Utils.h */,
+				1EAF50F3246E7FFD00E00FF8 /* GMSm2Utils.m */,
+				1EAF50ED246E7FFD00E00FF8 /* GMSm3Utils.h */,
+				1EAF50F0246E7FFD00E00FF8 /* GMSm3Utils.m */,
+				1EAF50F4246E7FFD00E00FF8 /* GMSm4Utils.h */,
+				1EAF50F2246E7FFD00E00FF8 /* GMSm4Utils.m */,
+				1EAF50F5246E7FFD00E00FF8 /* GMUtils.h */,
+				1EAF50F6246E7FFD00E00FF8 /* GMUtils.m */,
+				1EAF5101246E801700E00FF8 /* openssl.framework */,
 				1E93C602246D73910066E503 /* GMObjCFramework-Info.plist */,
 			);
 			path = GMObjCFramework;
@@ -90,12 +90,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E93C616246D74290066E503 /* GMUtils.h in Headers */,
-				1E93C617246D74290066E503 /* GMObjC.h in Headers */,
-				1E93C61A246D74290066E503 /* GMSm2Utils.h in Headers */,
-				1E93C613246D74290066E503 /* GMSm3Utils.h in Headers */,
-				1E93C614246D74290066E503 /* GMSm4Utils.h in Headers */,
-				1E93C619246D74290066E503 /* GMSm2Def.h in Headers */,
+				1EAF50F7246E7FFD00E00FF8 /* GMSm3Utils.h in Headers */,
+				1EAF50FB246E7FFD00E00FF8 /* GMSm2Utils.h in Headers */,
+				1EAF50FF246E7FFD00E00FF8 /* GMUtils.h in Headers */,
+				1EAF50F9246E7FFD00E00FF8 /* GMObjC.h in Headers */,
+				1EAF50F8246E7FFD00E00FF8 /* GMSm2Def.h in Headers */,
+				1EAF50FE246E7FFD00E00FF8 /* GMSm4Utils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,10 +167,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E93C618246D74290066E503 /* GMSm2Utils.m in Sources */,
-				1E93C61C246D74290066E503 /* GMUtils.m in Sources */,
-				1E93C615246D74290066E503 /* GMSm4Utils.m in Sources */,
-				1E93C61B246D74290066E503 /* GMSm3Utils.m in Sources */,
+				1EAF50FC246E7FFD00E00FF8 /* GMSm4Utils.m in Sources */,
+				1EAF5100246E7FFD00E00FF8 /* GMUtils.m in Sources */,
+				1EAF50FA246E7FFD00E00FF8 /* GMSm3Utils.m in Sources */,
+				1EAF50FD246E7FFD00E00FF8 /* GMSm2Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

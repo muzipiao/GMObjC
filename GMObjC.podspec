@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
 
   spec.frameworks  = "Foundation", "Security"
   
-  spec.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/GMOpenSSL/GMOpenSSL/."' }
+  spec.dependency "GMOpenSSL"
 
   spec.requires_arc = true
 

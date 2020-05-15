@@ -7,12 +7,7 @@
 //
 
 #import "GMSm3Utils.h"
-
-#if __has_include(<openssl/sm3.h>)
 #import <openssl/sm3.h>
-#else
-#import "GMOpenSSL/sm3.h"
-#endif // __has_include(<sm3.h>)
 
 @implementation GMSm3Utils
 

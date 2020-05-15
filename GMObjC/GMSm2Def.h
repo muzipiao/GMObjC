@@ -11,29 +11,10 @@
 #ifndef GMSm2Def_h
 #define GMSm2Def_h
 
-#if __has_include(<openssl/asn1t.h>)
 #import <openssl/asn1t.h>
-#else
-#import "GMOpenSSL/asn1t.h"
-#endif // __has_include(<asn1t.h>)
-
-#if __has_include(<openssl/sm2.h>)
 #import <openssl/sm2.h>
-#else
-#import "GMOpenSSL/sm2.h"
-#endif // __has_include(<sm2.h>)
-
-#if __has_include(<openssl/evp.h>)
 #import <openssl/evp.h>
-#else
-#import "GMOpenSSL/evp.h"
-#endif // __has_include(<evp.h>)
-
-#if __has_include(<openssl/bn.h>)
 #import <openssl/bn.h>
-#else
-#import "GMOpenSSL/bn.h"
-#endif // __has_include(<bn.h>)
 
 // 定义 ASN1 编解码存储数据的结构体
 typedef struct SM2_Ciphertext_st_1 SM2_Ciphertext_1;

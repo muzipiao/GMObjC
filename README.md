@@ -37,8 +37,6 @@ CocoaPods 是最简单方便的集成方法，编辑 Podfile 文件，添加
 
 ```ruby
 pod 'GMObjC'
-# 可选，若项目中已存在 OpenSSL 1.1.1 以上版本，可不集成 GMOpenSSL
-pod 'GMOpenSSL'
 ```
 
 然后执行 `pod install` 即可。GMObjC 依赖 OpenSSL 1.1.1 以上版本，CocoaPods 不支持依赖同一静态库库的不同版本，如果遇到与三方库的 OpenSSL 冲突，例如百度地图（BaiduMapKit）依赖了低版本的 OpenSSL 静态库，会产生依赖冲突。解决办法，通过 Carthage 自动或下载工程手动将 GMObjC 编译动态库（静态库项目在 GMObjCFramework 文件夹中），拖入项目即可，注意需要手动集成百度地图。
