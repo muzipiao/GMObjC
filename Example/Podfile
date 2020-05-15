@@ -9,6 +9,7 @@ target 'GMObjC_Example' do
   target 'GMObjC_Tests' do
     inherit! :search_paths
     pod 'GMObjC', :path => '../'
+    pod 'GMOpenSSL'
 
     
   end

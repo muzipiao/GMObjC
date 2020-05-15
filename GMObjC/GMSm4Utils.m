@@ -251,12 +251,17 @@
     // 移除填充
     int pad_len = (int)result[c_obj_len - 1];
     int end_len = (int)(c_obj_len - pad_len);
-    uint8_t *no_pad_result = (uint8_t *)OPENSSL_zalloc((int)(end_len + 1));
-    memcpy(no_pad_result, result, end_len);
-    NSData *plainData = [NSData dataWithBytes:no_pad_result length:end_len];
+
+    NSData *plainData = nil;
+    if (pad_len > 0 && pad_len < SM4_BLOCK_SIZE + 1) {
+        uint8_t *no_pad_result = (uint8_t *)OPENSSL_zalloc((int)(end_len + 1));
+        memcpy(no_pad_result, result, end_len);
+        plainData = [NSData dataWithBytes:no_pad_result length:end_len];
+        
+        OPENSSL_free(no_pad_result);
+    }
 
     OPENSSL_free(result);
-    OPENSSL_free(no_pad_result);
     
     return plainData;
 }

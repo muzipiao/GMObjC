@@ -13,7 +13,7 @@
 		1E93C616246D74290066E503 /* GMUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E93C60C246D74290066E503 /* GMUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E93C617246D74290066E503 /* GMObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E93C60D246D74290066E503 /* GMObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E93C618246D74290066E503 /* GMSm2Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E93C60E246D74290066E503 /* GMSm2Utils.m */; };
-		1E93C619246D74290066E503 /* GMSm2Def.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E93C60F246D74290066E503 /* GMSm2Def.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E93C619246D74290066E503 /* GMSm2Def.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E93C60F246D74290066E503 /* GMSm2Def.h */; };
 		1E93C61A246D74290066E503 /* GMSm2Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E93C610246D74290066E503 /* GMSm2Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E93C61B246D74290066E503 /* GMSm3Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E93C611246D74290066E503 /* GMSm3Utils.m */; };
 		1E93C61C246D74290066E503 /* GMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E93C612246D74290066E503 /* GMUtils.m */; };
@@ -92,10 +92,10 @@
 			files = (
 				1E93C616246D74290066E503 /* GMUtils.h in Headers */,
 				1E93C617246D74290066E503 /* GMObjC.h in Headers */,
-				1E93C619246D74290066E503 /* GMSm2Def.h in Headers */,
 				1E93C61A246D74290066E503 /* GMSm2Utils.h in Headers */,
 				1E93C613246D74290066E503 /* GMSm3Utils.h in Headers */,
 				1E93C614246D74290066E503 /* GMSm4Utils.h in Headers */,
+				1E93C619246D74290066E503 /* GMSm2Def.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +313,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lf.GMObjCFramework;
 				PRODUCT_MODULE_NAME = GMObjC;
 				PRODUCT_NAME = GMObjC;
@@ -342,6 +343,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lf.GMObjCFramework;
 				PRODUCT_MODULE_NAME = GMObjC;
 				PRODUCT_NAME = GMObjC;
