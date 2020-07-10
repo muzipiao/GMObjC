@@ -6,7 +6,7 @@
 //  Copyright © 2019 lifei. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+#import "GMBaseTests.h"
 
 @interface GMSm3Tests : GMBaseTests
 

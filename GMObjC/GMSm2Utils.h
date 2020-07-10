@@ -10,6 +10,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <openssl/evp.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -91,6 +92,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param publicKey 临时公钥（其他端传入的公钥）
 /// @param privateKey 临时私钥（当前端生成的私钥）
 + (nullable NSString *)computeECDH:(NSString *)publicKey privateKey:(NSString *)privateKey;
+
+///MARK: - 椭圆曲线类型
+
+/// 常见椭圆曲线为 NID_sm2、NID_secp256k1、NID_X9_62_prime256v1
+/// 默认 NID_sm2，参考 GMSm2Def.h 中说明，一般不需更改
+/// 若需要其他曲线，在 OpenSSL 源码 crypto/ec/ec_curve.c 查找
++ (int)ellipticCurveType;
++ (void)setEllipticCurveType:(int)curveType;
 
 @end
 

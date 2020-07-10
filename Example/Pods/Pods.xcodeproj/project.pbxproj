@@ -86,161 +86,160 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00C9FB83D7FD5B4AB23728C1B1595DDD /* sha.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sha.h; path = GMOpenSSL/openssl.framework/Headers/sha.h; sourceTree = "<group>"; };
-		014FEBCDC3E0F12AE840711AA391EFD2 /* sm4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sm4.h; path = GMOpenSSL/openssl.framework/Headers/sm4.h; sourceTree = "<group>"; };
 		01836EEE81EA809523B39698C9E207DC /* GMObjC.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMObjC.h; path = GMObjC/GMObjC.h; sourceTree = "<group>"; };
-		05460E95C2315A8E671DDCE51156848C /* opensslconf_ios_i386.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf_ios_i386.h; path = GMOpenSSL/openssl.framework/Headers/opensslconf_ios_i386.h; sourceTree = "<group>"; };
+		043699A0C393B330E48BCB948329116C /* e_os2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = e_os2.h; path = GMOpenSSL/openssl.framework/Headers/e_os2.h; sourceTree = "<group>"; };
+		04DB80B4464345C2DADDAD38CFF86EC7 /* cms.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cms.h; path = GMOpenSSL/openssl.framework/Headers/cms.h; sourceTree = "<group>"; };
+		05F8389651E3C8B2E60ED3C697B153AE /* pkcs7.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs7.h; path = GMOpenSSL/openssl.framework/Headers/pkcs7.h; sourceTree = "<group>"; };
 		064527ADFAFEF0EF6B7EBC2F82E56E2B /* GMSm3Utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMSm3Utils.h; path = GMObjC/GMSm3Utils.h; sourceTree = "<group>"; };
-		06AB2BDF6353C66D8541F76D9358C00F /* ecerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ecerr.h; path = GMOpenSSL/openssl.framework/Headers/ecerr.h; sourceTree = "<group>"; };
-		087B8DC4262C9FF38E2DA50E69D7D6CF /* x509v3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509v3.h; path = GMOpenSSL/openssl.framework/Headers/x509v3.h; sourceTree = "<group>"; };
-		092CBC4F5244D0482A61C3BC3B72AC5A /* cmserr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cmserr.h; path = GMOpenSSL/openssl.framework/Headers/cmserr.h; sourceTree = "<group>"; };
-		0A7A035A2FF1CE8AA0015E336D8CC509 /* ocsperr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ocsperr.h; path = GMOpenSSL/openssl.framework/Headers/ocsperr.h; sourceTree = "<group>"; };
-		0E23AB66B76FB22AE230155D1DA4833F /* asyncerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asyncerr.h; path = GMOpenSSL/openssl.framework/Headers/asyncerr.h; sourceTree = "<group>"; };
-		117D8FA6A3AA0BDE5625789A14FAE348 /* bio.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bio.h; path = GMOpenSSL/openssl.framework/Headers/bio.h; sourceTree = "<group>"; };
-		11F6781BDC8C3B15E96836193A48EE09 /* ebcdic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ebcdic.h; path = GMOpenSSL/openssl.framework/Headers/ebcdic.h; sourceTree = "<group>"; };
-		124ED14543BB0414349DE46A5978D3F4 /* lhash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lhash.h; path = GMOpenSSL/openssl.framework/Headers/lhash.h; sourceTree = "<group>"; };
+		075CE245E5569B9DB1CA19EC4BBE61E0 /* ssl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl.h; path = GMOpenSSL/openssl.framework/Headers/ssl.h; sourceTree = "<group>"; };
+		08D2B5DBF0BF781344E1927E6AC4467C /* bio.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bio.h; path = GMOpenSSL/openssl.framework/Headers/bio.h; sourceTree = "<group>"; };
+		0A2A58D3D720E11571A7314347F8118E /* rc2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rc2.h; path = GMOpenSSL/openssl.framework/Headers/rc2.h; sourceTree = "<group>"; };
+		0B53B436F41FC571FD42E26DD8608E55 /* cryptoerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cryptoerr.h; path = GMOpenSSL/openssl.framework/Headers/cryptoerr.h; sourceTree = "<group>"; };
+		0B84E4E7A5D055DB8FCA425A260C4D64 /* ecdsa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ecdsa.h; path = GMOpenSSL/openssl.framework/Headers/ecdsa.h; sourceTree = "<group>"; };
+		0BEA907331D6D542CDF1627740D3540A /* dh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dh.h; path = GMOpenSSL/openssl.framework/Headers/dh.h; sourceTree = "<group>"; };
+		0D28B191E627CDED8D040D864EED9A06 /* err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = err.h; path = GMOpenSSL/openssl.framework/Headers/err.h; sourceTree = "<group>"; };
+		0EA97B1BA54004C2302C0862BE6991A4 /* md5.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = md5.h; path = GMOpenSSL/openssl.framework/Headers/md5.h; sourceTree = "<group>"; };
+		10D05827B089BCF74E7FB83C11943371 /* asn1t.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1t.h; path = GMOpenSSL/openssl.framework/Headers/asn1t.h; sourceTree = "<group>"; };
+		128A8A8BB4FE34B56C3AE33BA1730322 /* dtls1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dtls1.h; path = GMOpenSSL/openssl.framework/Headers/dtls1.h; sourceTree = "<group>"; };
+		14D4E6765B60E6A2153B0A4B06C321F1 /* x509.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509.h; path = GMOpenSSL/openssl.framework/Headers/x509.h; sourceTree = "<group>"; };
 		15CFFFAE921F525B99156C3F072D4A96 /* GMObjC.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = GMObjC.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		16A808D612F8535A970C58C2CF606917 /* safestack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = safestack.h; path = GMOpenSSL/openssl.framework/Headers/safestack.h; sourceTree = "<group>"; };
 		16FBE839F2C8823EAADC25FCE9BCBCDA /* Pods-GMObjC_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GMObjC_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		17DADFB3BF004B2BCBF5286FE72199DE /* des.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = des.h; path = GMOpenSSL/openssl.framework/Headers/des.h; sourceTree = "<group>"; };
 		18609A1C6D2DCA6B8B196AC545C4B137 /* Pods-GMObjC_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GMObjC_Example-Info.plist"; sourceTree = "<group>"; };
-		1AA8848021D3CEE74569198582DA7FF3 /* cast.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cast.h; path = GMOpenSSL/openssl.framework/Headers/cast.h; sourceTree = "<group>"; };
+		19CB70CD3CC5C2ECC622F1E4B67044B4 /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = GMOpenSSL/openssl.framework; sourceTree = "<group>"; };
+		1C7B6F5A4DE3A38B4776D64D1F8FAAAB /* opensslconf_ios_arm64e.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf_ios_arm64e.h; path = GMOpenSSL/openssl.framework/Headers/opensslconf_ios_arm64e.h; sourceTree = "<group>"; };
 		1D1DC9DD5236A12DA9E99DBFCA08B04D /* GMObjC-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GMObjC-umbrella.h"; sourceTree = "<group>"; };
-		1DDB5B869EDD53764AAE1D5CE8A788AA /* dherr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dherr.h; path = GMOpenSSL/openssl.framework/Headers/dherr.h; sourceTree = "<group>"; };
 		1E7D838CC56325F132EB7C483FDCFB2D /* GMUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMUtils.h; path = GMObjC/GMUtils.h; sourceTree = "<group>"; };
-		1EB58CA0605CE0D1A57E53940423A000 /* randerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = randerr.h; path = GMOpenSSL/openssl.framework/Headers/randerr.h; sourceTree = "<group>"; };
-		1F478F200D0C96D6C8EFA037F7387A19 /* safestack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = safestack.h; path = GMOpenSSL/openssl.framework/Headers/safestack.h; sourceTree = "<group>"; };
-		1FD1B77137615021716AB7750B2D0D2D /* ssl3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl3.h; path = GMOpenSSL/openssl.framework/Headers/ssl3.h; sourceTree = "<group>"; };
-		2207527A4A7AA3A3213487D37B9100F9 /* crypto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto.h; path = GMOpenSSL/openssl.framework/Headers/crypto.h; sourceTree = "<group>"; };
-		228DB94D0BB76E1D0F9E9D3191816DE8 /* seed.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = seed.h; path = GMOpenSSL/openssl.framework/Headers/seed.h; sourceTree = "<group>"; };
+		1F5936879F3E91D36025C949C5D9637A /* srp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = srp.h; path = GMOpenSSL/openssl.framework/Headers/srp.h; sourceTree = "<group>"; };
 		23B003F20D597F10D50956D50CDEF86F /* GMObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GMObjC.framework; path = GMObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		25483585719CF62BA81F97AB796FB275 /* storeerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = storeerr.h; path = GMOpenSSL/openssl.framework/Headers/storeerr.h; sourceTree = "<group>"; };
-		2808D73D8A702B5C217CB5F09CBEF4B2 /* rsa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rsa.h; path = GMOpenSSL/openssl.framework/Headers/rsa.h; sourceTree = "<group>"; };
-		28A2FDFD0E6A2EAFE565F51CC791A7F1 /* x509.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509.h; path = GMOpenSSL/openssl.framework/Headers/x509.h; sourceTree = "<group>"; };
-		28D9E4B91FA6548DE071545D7DD91D27 /* modes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = modes.h; path = GMOpenSSL/openssl.framework/Headers/modes.h; sourceTree = "<group>"; };
-		2A68852D8DAFFE8EA24765825D119879 /* rc4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rc4.h; path = GMOpenSSL/openssl.framework/Headers/rc4.h; sourceTree = "<group>"; };
-		2DF05F452C850A1FD2E3BFBEA6F46DFA /* txt_db.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = txt_db.h; path = GMOpenSSL/openssl.framework/Headers/txt_db.h; sourceTree = "<group>"; };
-		2EAD6738E9FB0F7B1F9977E5CD3BA484 /* cms.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cms.h; path = GMOpenSSL/openssl.framework/Headers/cms.h; sourceTree = "<group>"; };
-		2F2BC5D453B5767FF4D85DEF897E9958 /* pkcs7err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs7err.h; path = GMOpenSSL/openssl.framework/Headers/pkcs7err.h; sourceTree = "<group>"; };
+		23CC112C98ADF86ADF074C49E64F7227 /* ripemd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ripemd.h; path = GMOpenSSL/openssl.framework/Headers/ripemd.h; sourceTree = "<group>"; };
+		254B4A648672032F662B8C3F99625E36 /* kdf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = kdf.h; path = GMOpenSSL/openssl.framework/Headers/kdf.h; sourceTree = "<group>"; };
+		271A20DB42DE3084DF5E49B255038405 /* ocsperr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ocsperr.h; path = GMOpenSSL/openssl.framework/Headers/ocsperr.h; sourceTree = "<group>"; };
+		277AF81547791E7750A039F902655277 /* pemerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pemerr.h; path = GMOpenSSL/openssl.framework/Headers/pemerr.h; sourceTree = "<group>"; };
+		288E67CF9F59C25F83A7BB94BE5535F3 /* opensslconf_ios_x86_64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf_ios_x86_64.h; path = GMOpenSSL/openssl.framework/Headers/opensslconf_ios_x86_64.h; sourceTree = "<group>"; };
+		2A181029855A26BF3D90E60A27AEDA7C /* tserr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = tserr.h; path = GMOpenSSL/openssl.framework/Headers/tserr.h; sourceTree = "<group>"; };
+		2ABCE48EFE6FF66D04A0FAA5C5BE80FF /* ssl2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl2.h; path = GMOpenSSL/openssl.framework/Headers/ssl2.h; sourceTree = "<group>"; };
+		2E6FB0C4836F27B67829BCBDF95EE621 /* ecerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ecerr.h; path = GMOpenSSL/openssl.framework/Headers/ecerr.h; sourceTree = "<group>"; };
+		2F4CA0B9D1367932E4BF53FB8834D614 /* txt_db.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = txt_db.h; path = GMOpenSSL/openssl.framework/Headers/txt_db.h; sourceTree = "<group>"; };
+		310B45D08D348EB0FF725E04F837303A /* bioerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bioerr.h; path = GMOpenSSL/openssl.framework/Headers/bioerr.h; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3279AF43BAC807A164A70B5A236B58A7 /* ocsp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ocsp.h; path = GMOpenSSL/openssl.framework/Headers/ocsp.h; sourceTree = "<group>"; };
-		36E70509BE3EB4F39B3C93DAAF58F766 /* dtls1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dtls1.h; path = GMOpenSSL/openssl.framework/Headers/dtls1.h; sourceTree = "<group>"; };
+		353E64F07C75E0CC0EE17D5A09A623D5 /* lhash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = lhash.h; path = GMOpenSSL/openssl.framework/Headers/lhash.h; sourceTree = "<group>"; };
 		37E3E76B5D5DDFCD68A24666D457DBE0 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		39DA2B66CED2A2C06005A9DE3501E5F9 /* mdc2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mdc2.h; path = GMOpenSSL/openssl.framework/Headers/mdc2.h; sourceTree = "<group>"; };
-		3B8A2F00A3665E519A626DD9573A44DA /* idea.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = idea.h; path = GMOpenSSL/openssl.framework/Headers/idea.h; sourceTree = "<group>"; };
+		38232E17F91AC9EA673DEEBED68AEBD3 /* engineerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = engineerr.h; path = GMOpenSSL/openssl.framework/Headers/engineerr.h; sourceTree = "<group>"; };
+		39E831EBFE779716E9CCA41BBE3C4861 /* rand.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rand.h; path = GMOpenSSL/openssl.framework/Headers/rand.h; sourceTree = "<group>"; };
+		3B3E54AFC78580AF49ECB12B76E1C3A5 /* GMOpenSSL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GMOpenSSL.debug.xcconfig; sourceTree = "<group>"; };
+		3CC6377A288129B22205053530361371 /* conf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = conf.h; path = GMOpenSSL/openssl.framework/Headers/conf.h; sourceTree = "<group>"; };
+		3E50F3202BE6AF00139CD3E10E14A58C /* dherr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dherr.h; path = GMOpenSSL/openssl.framework/Headers/dherr.h; sourceTree = "<group>"; };
+		3F7F6045360A7914AD90B1F40657C329 /* engine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = engine.h; path = GMOpenSSL/openssl.framework/Headers/engine.h; sourceTree = "<group>"; };
 		3FC4A571D6871053C3DE76C99B73ABE6 /* Pods-GMObjC_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GMObjC_Example-dummy.m"; sourceTree = "<group>"; };
+		3FDC15AD8A94FBABD8227EA3D53A16BA /* seed.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = seed.h; path = GMOpenSSL/openssl.framework/Headers/seed.h; sourceTree = "<group>"; };
 		427A22B8426999E8361A64C49D82CA7C /* GMObjC.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = GMObjC.modulemap; sourceTree = "<group>"; };
-		427D5368FE4CEE1A8FCCAAF41A04EDDA /* asn1_mac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1_mac.h; path = GMOpenSSL/openssl.framework/Headers/asn1_mac.h; sourceTree = "<group>"; };
+		427E3C085685F7C9AB053E8AEA4D5BE8 /* cterr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cterr.h; path = GMOpenSSL/openssl.framework/Headers/cterr.h; sourceTree = "<group>"; };
 		432E8F1FB8EC815F096B2628732FAB6A /* GMObjC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GMObjC.debug.xcconfig; sourceTree = "<group>"; };
-		433457169F7EF22A7E497846E33325B8 /* ssl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl.h; path = GMOpenSSL/openssl.framework/Headers/ssl.h; sourceTree = "<group>"; };
-		455C4ECC46F4FAD18031DF7C2D9B2E49 /* tserr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = tserr.h; path = GMOpenSSL/openssl.framework/Headers/tserr.h; sourceTree = "<group>"; };
 		467AAA7875D3D613859886A2D479E049 /* Pods-GMObjC_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GMObjC_Tests.modulemap"; sourceTree = "<group>"; };
+		47AAD42CF82F5F098E8A06C2CF96AFA2 /* randerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = randerr.h; path = GMOpenSSL/openssl.framework/Headers/randerr.h; sourceTree = "<group>"; };
 		47ABBCB7033FE315F9DD99FB85EB87EF /* Pods-GMObjC_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GMObjC_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		483DDA52809DAC70200629DD99926B15 /* asn1err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1err.h; path = GMOpenSSL/openssl.framework/Headers/asn1err.h; sourceTree = "<group>"; };
-		4884399A9567A88BFA5E67BF1FE8E400 /* ssl2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl2.h; path = GMOpenSSL/openssl.framework/Headers/ssl2.h; sourceTree = "<group>"; };
-		4890A32A69366618BB20AD2D09A37613 /* engine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = engine.h; path = GMOpenSSL/openssl.framework/Headers/engine.h; sourceTree = "<group>"; };
-		4D6177E634DBFCBFA989D5AD09326C7D /* ts.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ts.h; path = GMOpenSSL/openssl.framework/Headers/ts.h; sourceTree = "<group>"; };
-		4DD74CD8E5D82D5C53CCA88D3CF60EAD /* sslerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sslerr.h; path = GMOpenSSL/openssl.framework/Headers/sslerr.h; sourceTree = "<group>"; };
-		4DFE7AB9A50187DB28352274B696AC07 /* rsaerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rsaerr.h; path = GMOpenSSL/openssl.framework/Headers/rsaerr.h; sourceTree = "<group>"; };
+		4859B886FC441AAC33CA5E77AF1490F2 /* storeerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = storeerr.h; path = GMOpenSSL/openssl.framework/Headers/storeerr.h; sourceTree = "<group>"; };
+		49E536FFDBABE3473D59207C835AD3EC /* opensslconf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf.h; path = GMOpenSSL/openssl.framework/Headers/opensslconf.h; sourceTree = "<group>"; };
+		49F3D315117E6764A09B6633B8FCFCC2 /* tls1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = tls1.h; path = GMOpenSSL/openssl.framework/Headers/tls1.h; sourceTree = "<group>"; };
+		4CC8783EA04F8097A47B6EA522F43CA5 /* sm3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sm3.h; path = GMOpenSSL/openssl.framework/Headers/sm3.h; sourceTree = "<group>"; };
+		4D03C603310557BF989EEC1709BB1774 /* srtp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = srtp.h; path = GMOpenSSL/openssl.framework/Headers/srtp.h; sourceTree = "<group>"; };
+		4EE49109D3F2759DEF48AFAA08BB50CF /* rc4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rc4.h; path = GMOpenSSL/openssl.framework/Headers/rc4.h; sourceTree = "<group>"; };
+		52099C8C5E49B40307E3BFA42DC156E8 /* sslerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sslerr.h; path = GMOpenSSL/openssl.framework/Headers/sslerr.h; sourceTree = "<group>"; };
 		535D9C7FED5CB80985D51DA782CA7BFF /* Pods-GMObjC_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GMObjC_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		536B1ED3FFDB56A8A06FCE214D20099B /* hmac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = hmac.h; path = GMOpenSSL/openssl.framework/Headers/hmac.h; sourceTree = "<group>"; };
-		53A38474C19E3F46153AF5B5C16342EC /* objects.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = objects.h; path = GMOpenSSL/openssl.framework/Headers/objects.h; sourceTree = "<group>"; };
-		53DDE9B17C8FA3A58372A6182DFDC139 /* rc5.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rc5.h; path = GMOpenSSL/openssl.framework/Headers/rc5.h; sourceTree = "<group>"; };
-		57CDCFBD7423257A0E266342F2760162 /* conf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = conf.h; path = GMOpenSSL/openssl.framework/Headers/conf.h; sourceTree = "<group>"; };
-		583B0DE3EC3649C0E9FB5BC6105CF0B0 /* symhacks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = symhacks.h; path = GMOpenSSL/openssl.framework/Headers/symhacks.h; sourceTree = "<group>"; };
-		5B74BCA1C9C103486235974800C1F16E /* engineerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = engineerr.h; path = GMOpenSSL/openssl.framework/Headers/engineerr.h; sourceTree = "<group>"; };
-		5C2BEE1E1276310504E4D712AA90C0D0 /* camellia.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = camellia.h; path = GMOpenSSL/openssl.framework/Headers/camellia.h; sourceTree = "<group>"; };
-		5D6D0DF292A0908AD92797A5A3234345 /* conferr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = conferr.h; path = GMOpenSSL/openssl.framework/Headers/conferr.h; sourceTree = "<group>"; };
-		5DF6FBD5CB85E6B1108CAC52A7E3A7D3 /* asn1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1.h; path = GMOpenSSL/openssl.framework/Headers/asn1.h; sourceTree = "<group>"; };
+		5854C1DD414C33792107135965AE2DEA /* uierr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = uierr.h; path = GMOpenSSL/openssl.framework/Headers/uierr.h; sourceTree = "<group>"; };
+		5AED0E7AAAACD5247FBE6C3B22EF54BE /* rand_drbg.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rand_drbg.h; path = GMOpenSSL/openssl.framework/Headers/rand_drbg.h; sourceTree = "<group>"; };
 		60049E8DAFF5B10B03C01CC63385D9E2 /* Pods-GMObjC_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GMObjC_Example-umbrella.h"; sourceTree = "<group>"; };
-		60514915566651753747D3C37B84D0A9 /* opensslconf_ios_armv7.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf_ios_armv7.h; path = GMOpenSSL/openssl.framework/Headers/opensslconf_ios_armv7.h; sourceTree = "<group>"; };
+		60282C1A50C50D1282CAB700089A9A37 /* buffer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = buffer.h; path = GMOpenSSL/openssl.framework/Headers/buffer.h; sourceTree = "<group>"; };
 		608C396E29870721AB45395E8587170A /* GMObjC-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GMObjC-prefix.pch"; sourceTree = "<group>"; };
 		614D1D450183E99484433AF7A3FA9C99 /* GMSm2Utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMSm2Utils.h; path = GMObjC/GMSm2Utils.h; sourceTree = "<group>"; };
-		61E6B36D3BA5D77C8AFD94B69CE545B1 /* cmac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cmac.h; path = GMOpenSSL/openssl.framework/Headers/cmac.h; sourceTree = "<group>"; };
+		6210F8C05E07E9BF2DAFE0833F55FB45 /* x509err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509err.h; path = GMOpenSSL/openssl.framework/Headers/x509err.h; sourceTree = "<group>"; };
+		62D633B616DC08F48BCFA1BF1E2E42C8 /* dsaerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dsaerr.h; path = GMOpenSSL/openssl.framework/Headers/dsaerr.h; sourceTree = "<group>"; };
 		635F1349FA69F693E3A42C70C783AFF9 /* Pods-GMObjC_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GMObjC_Tests-Info.plist"; sourceTree = "<group>"; };
-		64A150187C94647DF4626A9FBB144148 /* ecdsa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ecdsa.h; path = GMOpenSSL/openssl.framework/Headers/ecdsa.h; sourceTree = "<group>"; };
-		65377D796146E4A2F9180C1C5E39A97D /* kdferr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = kdferr.h; path = GMOpenSSL/openssl.framework/Headers/kdferr.h; sourceTree = "<group>"; };
-		662DFA55D53AC5A6E3A6689DC3398B62 /* GMOpenSSL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GMOpenSSL.debug.xcconfig; sourceTree = "<group>"; };
-		68BCB21F953B8CB31C69EC6EC96C6330 /* store.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = store.h; path = GMOpenSSL/openssl.framework/Headers/store.h; sourceTree = "<group>"; };
-		74667CEDCF12C02BD1DC2CDB00736816 /* buffererr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = buffererr.h; path = GMOpenSSL/openssl.framework/Headers/buffererr.h; sourceTree = "<group>"; };
-		74AEBAE6EFE8877C07EAA0E45323CA6B /* pkcs12.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs12.h; path = GMOpenSSL/openssl.framework/Headers/pkcs12.h; sourceTree = "<group>"; };
+		6478A183B6E2DA6F40163D7EE6480DB9 /* ecdh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ecdh.h; path = GMOpenSSL/openssl.framework/Headers/ecdh.h; sourceTree = "<group>"; };
+		658A2D6F8FCFAC9CD8EBEA0744E8DCF6 /* pem2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pem2.h; path = GMOpenSSL/openssl.framework/Headers/pem2.h; sourceTree = "<group>"; };
+		6818E367B86EF69B7C7CC4AB8E22D3FA /* cmac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cmac.h; path = GMOpenSSL/openssl.framework/Headers/cmac.h; sourceTree = "<group>"; };
+		69B2080F3E561BC53E9E8BECA027F0D1 /* pkcs12.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs12.h; path = GMOpenSSL/openssl.framework/Headers/pkcs12.h; sourceTree = "<group>"; };
+		6E92ED5A59E5A8E28B97B69071EF402A /* asn1_mac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1_mac.h; path = GMOpenSSL/openssl.framework/Headers/asn1_mac.h; sourceTree = "<group>"; };
+		721E09EA85148386DAE6613E1AB3FA1F /* asn1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1.h; path = GMOpenSSL/openssl.framework/Headers/asn1.h; sourceTree = "<group>"; };
 		75B7F991E9754AD92C740FE5DC975919 /* Pods-GMObjC_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GMObjC_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		77AB0B7192F3520D6950CFC96A32BC82 /* evperr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = evperr.h; path = GMOpenSSL/openssl.framework/Headers/evperr.h; sourceTree = "<group>"; };
+		77E65E8A0E58C7E007D621F125FADE7C /* des.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = des.h; path = GMOpenSSL/openssl.framework/Headers/des.h; sourceTree = "<group>"; };
 		7837903C0AB051B66005CDF86831C304 /* GMObjC-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "GMObjC-Info.plist"; sourceTree = "<group>"; };
 		79110D17C03FACA2D4CD9D425B995BB9 /* GMSm2Def.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMSm2Def.h; path = GMObjC/GMSm2Def.h; sourceTree = "<group>"; };
-		791301F34C4AF8866BBA2F538F980498 /* x509err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509err.h; path = GMOpenSSL/openssl.framework/Headers/x509err.h; sourceTree = "<group>"; };
-		7AB498E81987D24DE1302EDD50E707D1 /* pkcs12err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs12err.h; path = GMOpenSSL/openssl.framework/Headers/pkcs12err.h; sourceTree = "<group>"; };
-		7C6080D49C2C6A13FAE4B6A733B2F34D /* ecdh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ecdh.h; path = GMOpenSSL/openssl.framework/Headers/ecdh.h; sourceTree = "<group>"; };
-		7D314F267B2709CA0C92E145BAE8D7A5 /* srp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = srp.h; path = GMOpenSSL/openssl.framework/Headers/srp.h; sourceTree = "<group>"; };
-		7F3B0ADD8583A6CF35BFFEDE3C0151CD /* sm2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sm2.h; path = GMOpenSSL/openssl.framework/Headers/sm2.h; sourceTree = "<group>"; };
-		809ED60D47F30DA1D610009F014BBBFA /* e_os2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = e_os2.h; path = GMOpenSSL/openssl.framework/Headers/e_os2.h; sourceTree = "<group>"; };
-		83517FC184CF774332F88A8F55958C3A /* sm3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sm3.h; path = GMOpenSSL/openssl.framework/Headers/sm3.h; sourceTree = "<group>"; };
-		84CE09F588366EBD0929716283DF024F /* ct.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ct.h; path = GMOpenSSL/openssl.framework/Headers/ct.h; sourceTree = "<group>"; };
+		791BC428E26D4794E5B1A117BFBDFDA1 /* blowfish.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = blowfish.h; path = GMOpenSSL/openssl.framework/Headers/blowfish.h; sourceTree = "<group>"; };
+		7DD10E6757C29D3A3928C1A49B8D7661 /* aes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = aes.h; path = GMOpenSSL/openssl.framework/Headers/aes.h; sourceTree = "<group>"; };
+		7F65B5688B2362C310C250C882CB579B /* bnerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bnerr.h; path = GMOpenSSL/openssl.framework/Headers/bnerr.h; sourceTree = "<group>"; };
+		82A18BE799E8A7F49D1F51FAF3EC9B1B /* GMOpenSSL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GMOpenSSL.release.xcconfig; sourceTree = "<group>"; };
+		858B3097327F09C612EFCEC55B2D5591 /* pkcs12err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs12err.h; path = GMOpenSSL/openssl.framework/Headers/pkcs12err.h; sourceTree = "<group>"; };
 		85F723FC6A6C3653113A01DA58170338 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		8A3D3046160AC0E0FF6B744E5ADB0EF7 /* pem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pem.h; path = GMOpenSSL/openssl.framework/Headers/pem.h; sourceTree = "<group>"; };
-		8D106F54BA63250A70DD65252E86D446 /* bnerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bnerr.h; path = GMOpenSSL/openssl.framework/Headers/bnerr.h; sourceTree = "<group>"; };
-		90112F533FA686571578ADB07496626C /* comp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = comp.h; path = GMOpenSSL/openssl.framework/Headers/comp.h; sourceTree = "<group>"; };
-		9016AA34AD80E4F904AF1879DE714B79 /* dh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dh.h; path = GMOpenSSL/openssl.framework/Headers/dh.h; sourceTree = "<group>"; };
+		86125CBCED129BAE396428DBBE7E04AF /* x509v3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509v3.h; path = GMOpenSSL/openssl.framework/Headers/x509v3.h; sourceTree = "<group>"; };
+		8D987611E8452B77CAFE9CD928ADDF13 /* pem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pem.h; path = GMOpenSSL/openssl.framework/Headers/pem.h; sourceTree = "<group>"; };
+		8EDBFE36F849368C889B19664FD765FD /* bn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bn.h; path = GMOpenSSL/openssl.framework/Headers/bn.h; sourceTree = "<group>"; };
+		8EE57A89E03673951C575C79211A40E8 /* rsaerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rsaerr.h; path = GMOpenSSL/openssl.framework/Headers/rsaerr.h; sourceTree = "<group>"; };
 		90235DD095E4E9C7E585FCE0480379A6 /* Pods-GMObjC_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GMObjC_Tests-dummy.m"; sourceTree = "<group>"; };
-		96926209D08CA01D6C19D90976DE4207 /* asn1t.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1t.h; path = GMOpenSSL/openssl.framework/Headers/asn1t.h; sourceTree = "<group>"; };
+		92F08F78201644B4FD555DE61BC546D9 /* ec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ec.h; path = GMOpenSSL/openssl.framework/Headers/ec.h; sourceTree = "<group>"; };
+		94D09EB3AA94E5485F2402DAE52FFA22 /* asyncerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asyncerr.h; path = GMOpenSSL/openssl.framework/Headers/asyncerr.h; sourceTree = "<group>"; };
+		96B026364FBCB491CE8D2483E2CF2D17 /* cmserr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cmserr.h; path = GMOpenSSL/openssl.framework/Headers/cmserr.h; sourceTree = "<group>"; };
+		971262EEBB7092054CB7810DD9B84AFC /* opensslv.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslv.h; path = GMOpenSSL/openssl.framework/Headers/opensslv.h; sourceTree = "<group>"; };
 		971B3460945ABC116CB5A3F7BC02FCBE /* GMSm4Utils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMSm4Utils.m; path = GMObjC/GMSm4Utils.m; sourceTree = "<group>"; };
-		97F3CE3509FB671D76F33EF7F2CEA2BB /* ui.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ui.h; path = GMOpenSSL/openssl.framework/Headers/ui.h; sourceTree = "<group>"; };
+		97E29E180F346E319B49CFA6BCD3F204 /* comperr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = comperr.h; path = GMOpenSSL/openssl.framework/Headers/comperr.h; sourceTree = "<group>"; };
+		9A7CE29C8DDFCF5D4DB6CA751238848E /* ct.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ct.h; path = GMOpenSSL/openssl.framework/Headers/ct.h; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9EDC01D3C46679C519EAB6982B7306D5 /* ossl_typ.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ossl_typ.h; path = GMOpenSSL/openssl.framework/Headers/ossl_typ.h; sourceTree = "<group>"; };
-		A025433746C905BCB2CED1B957139625 /* md5.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = md5.h; path = GMOpenSSL/openssl.framework/Headers/md5.h; sourceTree = "<group>"; };
-		A1DFB3A2AD38FEE507E26E6CEB7336FB /* cryptoerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cryptoerr.h; path = GMOpenSSL/openssl.framework/Headers/cryptoerr.h; sourceTree = "<group>"; };
-		A337ED29FECB47BF46810FF50F044717 /* tls1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = tls1.h; path = GMOpenSSL/openssl.framework/Headers/tls1.h; sourceTree = "<group>"; };
-		A6661CBCE46D767CE963FA0D6866636F /* opensslv.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslv.h; path = GMOpenSSL/openssl.framework/Headers/opensslv.h; sourceTree = "<group>"; };
-		A67E94302B9CBB639BA8A3AEFB51D4C5 /* async.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = async.h; path = GMOpenSSL/openssl.framework/Headers/async.h; sourceTree = "<group>"; };
+		9FC0C19A7D19CEE8DE7F7109E7015BC9 /* ocsp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ocsp.h; path = GMOpenSSL/openssl.framework/Headers/ocsp.h; sourceTree = "<group>"; };
+		A6736FF578A0C85FFE2167D120D5FA9F /* ossl_typ.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ossl_typ.h; path = GMOpenSSL/openssl.framework/Headers/ossl_typ.h; sourceTree = "<group>"; };
+		A7E469F417257E5E7D3423C18811CF39 /* comp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = comp.h; path = GMOpenSSL/openssl.framework/Headers/comp.h; sourceTree = "<group>"; };
+		A8C643289B22EC494C1A1F15A0099999 /* crypto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto.h; path = GMOpenSSL/openssl.framework/Headers/crypto.h; sourceTree = "<group>"; };
 		AA18F08F397E5BE3A4A48C0936A54501 /* Pods-GMObjC_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GMObjC_Example.modulemap"; sourceTree = "<group>"; };
+		AA80846440BA2A49BE4EFD8F43E5356A /* store.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = store.h; path = GMOpenSSL/openssl.framework/Headers/store.h; sourceTree = "<group>"; };
+		AC2D9F2CF3637E666F1B8E16ED2D4EDD /* symhacks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = symhacks.h; path = GMOpenSSL/openssl.framework/Headers/symhacks.h; sourceTree = "<group>"; };
 		AC80078EDDB617889F901654DA868795 /* GMSm4Utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMSm4Utils.h; path = GMObjC/GMSm4Utils.h; sourceTree = "<group>"; };
-		ACA4FBF59E4C2811901807344BB6B827 /* comperr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = comperr.h; path = GMOpenSSL/openssl.framework/Headers/comperr.h; sourceTree = "<group>"; };
-		B0E9214A50D8CE51CADCBD50D5B1BF6D /* GMOpenSSL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GMOpenSSL.release.xcconfig; sourceTree = "<group>"; };
-		B349103842AA05C9CD362782E73D905F /* srtp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = srtp.h; path = GMOpenSSL/openssl.framework/Headers/srtp.h; sourceTree = "<group>"; };
-		B40271BC347A5018D596F6D1C7FF6B01 /* buffer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = buffer.h; path = GMOpenSSL/openssl.framework/Headers/buffer.h; sourceTree = "<group>"; };
 		B42D062BC19D01F70F68FBFBBA783524 /* Pods-GMObjC_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GMObjC_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		B4DF8257CA7AC56A5061B6335D88C43C /* whrlpool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = whrlpool.h; path = GMOpenSSL/openssl.framework/Headers/whrlpool.h; sourceTree = "<group>"; };
-		B6CF9989BA5D75F0F16FBC536B70DA27 /* pkcs7.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs7.h; path = GMOpenSSL/openssl.framework/Headers/pkcs7.h; sourceTree = "<group>"; };
+		B7172323969F209EC5AF81F6E23128EF /* opensslconf_ios_arm64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf_ios_arm64.h; path = GMOpenSSL/openssl.framework/Headers/opensslconf_ios_arm64.h; sourceTree = "<group>"; };
+		B87FEE7EFCF922E4AD50603AF03DE095 /* buffererr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = buffererr.h; path = GMOpenSSL/openssl.framework/Headers/buffererr.h; sourceTree = "<group>"; };
 		B906E82A0047B6605E8133CEAB5DFB09 /* GMObjC-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GMObjC-dummy.m"; sourceTree = "<group>"; };
-		B9467F260824B169814AB88FD6F4B65B /* kdf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = kdf.h; path = GMOpenSSL/openssl.framework/Headers/kdf.h; sourceTree = "<group>"; };
-		B9B2DA65F44E2C1A0C470DB464F977E1 /* pemerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pemerr.h; path = GMOpenSSL/openssl.framework/Headers/pemerr.h; sourceTree = "<group>"; };
-		BC27AEE0D6E7073127D584490FCFA6F3 /* obj_mac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = obj_mac.h; path = GMOpenSSL/openssl.framework/Headers/obj_mac.h; sourceTree = "<group>"; };
+		B93B271B5A7D05E65EEE7D4FFD94B2F5 /* camellia.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = camellia.h; path = GMOpenSSL/openssl.framework/Headers/camellia.h; sourceTree = "<group>"; };
+		B94FA533A43971E5A01D916DB305EFDF /* evperr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = evperr.h; path = GMOpenSSL/openssl.framework/Headers/evperr.h; sourceTree = "<group>"; };
 		BD2AA35F2AFCD9E6FC28BE6D6DDF06AD /* GMSm3Utils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMSm3Utils.m; path = GMObjC/GMSm3Utils.m; sourceTree = "<group>"; };
-		BEA8B07C7316491200E3723EA0CE2872 /* x509v3err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509v3err.h; path = GMOpenSSL/openssl.framework/Headers/x509v3err.h; sourceTree = "<group>"; };
-		C3686D060BCC9AEA42694A95AAA28A7D /* conf_api.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = conf_api.h; path = GMOpenSSL/openssl.framework/Headers/conf_api.h; sourceTree = "<group>"; };
+		BE2DADDC74597A52FEB0366DF09FDD05 /* stack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = stack.h; path = GMOpenSSL/openssl.framework/Headers/stack.h; sourceTree = "<group>"; };
 		C42528B609772A59815256E8864C555A /* Pods-GMObjC_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GMObjC_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C61796F5D25217564B4EC98B5DD9732B /* GMObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GMObjC.release.xcconfig; sourceTree = "<group>"; };
-		C67F54EC03310C7F0DD05DC78DAE3DE4 /* x509_vfy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509_vfy.h; path = GMOpenSSL/openssl.framework/Headers/x509_vfy.h; sourceTree = "<group>"; };
-		C7C0F03C6A50D3D038CD4301066064AD /* md4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = md4.h; path = GMOpenSSL/openssl.framework/Headers/md4.h; sourceTree = "<group>"; };
-		C85F062FC6B9575124D055E7FB201331 /* objectserr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = objectserr.h; path = GMOpenSSL/openssl.framework/Headers/objectserr.h; sourceTree = "<group>"; };
-		C8B8CC3A3CC47D849240A5DD13659664 /* dsa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dsa.h; path = GMOpenSSL/openssl.framework/Headers/dsa.h; sourceTree = "<group>"; };
-		CC753D8996E72A48892260B57071007A /* rand.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rand.h; path = GMOpenSSL/openssl.framework/Headers/rand.h; sourceTree = "<group>"; };
-		CDA86AE2F58F6C10C9AD4CFF7C0B76D3 /* blowfish.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = blowfish.h; path = GMOpenSSL/openssl.framework/Headers/blowfish.h; sourceTree = "<group>"; };
-		CE36ED9EEC4A810F8A6DF156E697D776 /* bn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bn.h; path = GMOpenSSL/openssl.framework/Headers/bn.h; sourceTree = "<group>"; };
-		CF471F3F09370079448C947DFF5CEEC7 /* opensslconf_ios_x86_64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf_ios_x86_64.h; path = GMOpenSSL/openssl.framework/Headers/opensslconf_ios_x86_64.h; sourceTree = "<group>"; };
+		C7016228C296B4285AE33D682A0D5E02 /* hmac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = hmac.h; path = GMOpenSSL/openssl.framework/Headers/hmac.h; sourceTree = "<group>"; };
+		C9334A0F1532D49D30B6E4520C1C690B /* md2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = md2.h; path = GMOpenSSL/openssl.framework/Headers/md2.h; sourceTree = "<group>"; };
+		CB83B9E99680643AEEDC6048B76F1010 /* md4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = md4.h; path = GMOpenSSL/openssl.framework/Headers/md4.h; sourceTree = "<group>"; };
+		CD0765DC2A691CD473F89EC5277BF534 /* idea.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = idea.h; path = GMOpenSSL/openssl.framework/Headers/idea.h; sourceTree = "<group>"; };
+		CD67CDE3C4F0A641D4943E2BA50C694D /* ebcdic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ebcdic.h; path = GMOpenSSL/openssl.framework/Headers/ebcdic.h; sourceTree = "<group>"; };
+		CD9C004867046DDFE4C7DBD2129736A5 /* dsa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dsa.h; path = GMOpenSSL/openssl.framework/Headers/dsa.h; sourceTree = "<group>"; };
+		D07192F5A15B149C3454F398E0ABEC5A /* cast.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cast.h; path = GMOpenSSL/openssl.framework/Headers/cast.h; sourceTree = "<group>"; };
 		D2579BFCCBE33F243CBF546579803843 /* GMSm2Utils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMSm2Utils.m; path = GMObjC/GMSm2Utils.m; sourceTree = "<group>"; };
-		D2C9C51014C17779C4C9D88E9D2504BD /* rc2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rc2.h; path = GMOpenSSL/openssl.framework/Headers/rc2.h; sourceTree = "<group>"; };
-		D2FCEAB48E41D9E8819E181404C17A1D /* rand_drbg.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rand_drbg.h; path = GMOpenSSL/openssl.framework/Headers/rand_drbg.h; sourceTree = "<group>"; };
-		D3D383A812FF1B8923B42B6F61815222 /* stack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = stack.h; path = GMOpenSSL/openssl.framework/Headers/stack.h; sourceTree = "<group>"; };
-		D5CC68E3B2B2626E96CD04C4AB5C4F3E /* err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = err.h; path = GMOpenSSL/openssl.framework/Headers/err.h; sourceTree = "<group>"; };
+		D484A9B4FCC656966F4C36A4DF907756 /* evp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = evp.h; path = GMOpenSSL/openssl.framework/Headers/evp.h; sourceTree = "<group>"; };
+		D4E0E69BCA38BEC23990A2E682D8DDA8 /* asn1err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = asn1err.h; path = GMOpenSSL/openssl.framework/Headers/asn1err.h; sourceTree = "<group>"; };
+		D5CB17C86B7F7E898CF17BF08B39CC08 /* ssl3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ssl3.h; path = GMOpenSSL/openssl.framework/Headers/ssl3.h; sourceTree = "<group>"; };
 		D66C273EE518ED25AE081D9770512FEA /* Pods-GMObjC_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GMObjC_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		D6C0391615D894783CF80359100104F7 /* Pods_GMObjC_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GMObjC_Example.framework; path = "Pods-GMObjC_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD2553FF69E072C482E37B4C813900E5 /* pem2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pem2.h; path = GMOpenSSL/openssl.framework/Headers/pem2.h; sourceTree = "<group>"; };
+		D7451E70343C68E3B207BCF93E3986B4 /* x509v3err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509v3err.h; path = GMOpenSSL/openssl.framework/Headers/x509v3err.h; sourceTree = "<group>"; };
+		D82917EB17E8D8E071BCD1B40739D5DA /* x509_vfy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x509_vfy.h; path = GMOpenSSL/openssl.framework/Headers/x509_vfy.h; sourceTree = "<group>"; };
+		D8A33976FC2F3BC77617F52B1FF89F01 /* sm4.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sm4.h; path = GMOpenSSL/openssl.framework/Headers/sm4.h; sourceTree = "<group>"; };
+		DDBCA248DA1A3D721A5EB2D213B34CF0 /* ts.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ts.h; path = GMOpenSSL/openssl.framework/Headers/ts.h; sourceTree = "<group>"; };
+		DDBE5868E5F5AD5966F75E62F3182ACA /* sha.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sha.h; path = GMOpenSSL/openssl.framework/Headers/sha.h; sourceTree = "<group>"; };
+		DEBCF9AE7555C96497815E640AD2500D /* conferr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = conferr.h; path = GMOpenSSL/openssl.framework/Headers/conferr.h; sourceTree = "<group>"; };
+		E0EC144807DF721DBDC08F54A8EFFACB /* ui.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ui.h; path = GMOpenSSL/openssl.framework/Headers/ui.h; sourceTree = "<group>"; };
+		E1FE0611F8C70622833873FAFB0D2F49 /* async.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = async.h; path = GMOpenSSL/openssl.framework/Headers/async.h; sourceTree = "<group>"; };
 		E530B9D12E6673745F8B2C2A63E79003 /* Pods_GMObjC_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GMObjC_Tests.framework; path = "Pods-GMObjC_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E57849BC66E0009CCD3A34523FE08A2C /* ripemd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ripemd.h; path = GMOpenSSL/openssl.framework/Headers/ripemd.h; sourceTree = "<group>"; };
-		E82082EA0AF7FCEE103F4FD9C8A7DE35 /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = openssl.framework; path = GMOpenSSL/openssl.framework; sourceTree = "<group>"; };
-		E87AEAC05DED4F91180EF14434F728F0 /* md2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = md2.h; path = GMOpenSSL/openssl.framework/Headers/md2.h; sourceTree = "<group>"; };
+		E704338CDCA2A8828ACB39D9DC498EE6 /* rsa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rsa.h; path = GMOpenSSL/openssl.framework/Headers/rsa.h; sourceTree = "<group>"; };
 		E8AC9A4B2E56E0036B96CA392F486103 /* Pods-GMObjC_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GMObjC_Tests-umbrella.h"; sourceTree = "<group>"; };
-		EA924AB7EDB6713B36989B983B184D91 /* ec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ec.h; path = GMOpenSSL/openssl.framework/Headers/ec.h; sourceTree = "<group>"; };
+		EBF7369CA19844C38FAFAC5DF634CA95 /* conf_api.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = conf_api.h; path = GMOpenSSL/openssl.framework/Headers/conf_api.h; sourceTree = "<group>"; };
 		ECCE4C70561378EB1B883056A559D302 /* Pods-GMObjC_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GMObjC_Example.release.xcconfig"; sourceTree = "<group>"; };
-		ED5844A57D65DD666C051B27851280CB /* opensslconf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf.h; path = GMOpenSSL/openssl.framework/Headers/opensslconf.h; sourceTree = "<group>"; };
-		EF42A3E6FF3F8302CDFAC9A7829E1BDE /* evp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = evp.h; path = GMOpenSSL/openssl.framework/Headers/evp.h; sourceTree = "<group>"; };
+		ECDAC42BDBA0FB838CBC6B833A56356B /* whrlpool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = whrlpool.h; path = GMOpenSSL/openssl.framework/Headers/whrlpool.h; sourceTree = "<group>"; };
 		EF8A80DA432F74F9E439128943B97915 /* GMUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GMUtils.m; path = GMObjC/GMUtils.m; sourceTree = "<group>"; };
-		EF9F49D0E3E1A094FBC75DAF295D9DA5 /* cterr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cterr.h; path = GMOpenSSL/openssl.framework/Headers/cterr.h; sourceTree = "<group>"; };
-		F0D3A305FF78831C9AAFE1B27D1195B7 /* opensslconf_ios_arm64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = opensslconf_ios_arm64.h; path = GMOpenSSL/openssl.framework/Headers/opensslconf_ios_arm64.h; sourceTree = "<group>"; };
-		F2DC11E70CF0F930B644903CC7482AB2 /* dsaerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dsaerr.h; path = GMOpenSSL/openssl.framework/Headers/dsaerr.h; sourceTree = "<group>"; };
-		F7409CB78EF53F90A4CA22835E8D0BFA /* aes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = aes.h; path = GMOpenSSL/openssl.framework/Headers/aes.h; sourceTree = "<group>"; };
-		FB71365A7FEAEC710D66870E08CCA453 /* bioerr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bioerr.h; path = GMOpenSSL/openssl.framework/Headers/bioerr.h; sourceTree = "<group>"; };
-		FC79CFD5955562C9EE4F02D8BEFC887C /* uierr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = uierr.h; path = GMOpenSSL/openssl.framework/Headers/uierr.h; sourceTree = "<group>"; };
+		EFFA8ECF76ADD742C511839652EA5436 /* objectserr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = objectserr.h; path = GMOpenSSL/openssl.framework/Headers/objectserr.h; sourceTree = "<group>"; };
+		F08498096A34BF97233825C6A524BE54 /* mdc2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mdc2.h; path = GMOpenSSL/openssl.framework/Headers/mdc2.h; sourceTree = "<group>"; };
+		F0913C87B5E7F16C3596B4FBE653C47A /* pkcs7err.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pkcs7err.h; path = GMOpenSSL/openssl.framework/Headers/pkcs7err.h; sourceTree = "<group>"; };
+		F1672B441199DC2255139CFE2F85A5AA /* sm2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sm2.h; path = GMOpenSSL/openssl.framework/Headers/sm2.h; sourceTree = "<group>"; };
+		F3932292F8656A6FE3879E798A228C21 /* obj_mac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = obj_mac.h; path = GMOpenSSL/openssl.framework/Headers/obj_mac.h; sourceTree = "<group>"; };
+		F40BCCE0D927B7480F87FEC7D6AB024E /* modes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = modes.h; path = GMOpenSSL/openssl.framework/Headers/modes.h; sourceTree = "<group>"; };
+		F935F8F009B9CF5B5F9E21FCD0C68288 /* rc5.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rc5.h; path = GMOpenSSL/openssl.framework/Headers/rc5.h; sourceTree = "<group>"; };
+		FA3BE94B1ABBFA58FAA4B145C5477096 /* kdferr.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = kdferr.h; path = GMOpenSSL/openssl.framework/Headers/kdferr.h; sourceTree = "<group>"; };
+		FD3F3C7B5BF71586FCB2646400004398 /* objects.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = objects.h; path = GMOpenSSL/openssl.framework/Headers/objects.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,137 +270,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00C466D7CAB3D876D408F59B375B0353 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				662DFA55D53AC5A6E3A6689DC3398B62 /* GMOpenSSL.debug.xcconfig */,
-				B0E9214A50D8CE51CADCBD50D5B1BF6D /* GMOpenSSL.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/GMOpenSSL";
-			sourceTree = "<group>";
-		};
-		0C1424A43638DEC9F05460F3A3A10908 /* GMOpenSSL */ = {
-			isa = PBXGroup;
-			children = (
-				F7409CB78EF53F90A4CA22835E8D0BFA /* aes.h */,
-				5DF6FBD5CB85E6B1108CAC52A7E3A7D3 /* asn1.h */,
-				427D5368FE4CEE1A8FCCAAF41A04EDDA /* asn1_mac.h */,
-				483DDA52809DAC70200629DD99926B15 /* asn1err.h */,
-				96926209D08CA01D6C19D90976DE4207 /* asn1t.h */,
-				A67E94302B9CBB639BA8A3AEFB51D4C5 /* async.h */,
-				0E23AB66B76FB22AE230155D1DA4833F /* asyncerr.h */,
-				117D8FA6A3AA0BDE5625789A14FAE348 /* bio.h */,
-				FB71365A7FEAEC710D66870E08CCA453 /* bioerr.h */,
-				CDA86AE2F58F6C10C9AD4CFF7C0B76D3 /* blowfish.h */,
-				CE36ED9EEC4A810F8A6DF156E697D776 /* bn.h */,
-				8D106F54BA63250A70DD65252E86D446 /* bnerr.h */,
-				B40271BC347A5018D596F6D1C7FF6B01 /* buffer.h */,
-				74667CEDCF12C02BD1DC2CDB00736816 /* buffererr.h */,
-				5C2BEE1E1276310504E4D712AA90C0D0 /* camellia.h */,
-				1AA8848021D3CEE74569198582DA7FF3 /* cast.h */,
-				61E6B36D3BA5D77C8AFD94B69CE545B1 /* cmac.h */,
-				2EAD6738E9FB0F7B1F9977E5CD3BA484 /* cms.h */,
-				092CBC4F5244D0482A61C3BC3B72AC5A /* cmserr.h */,
-				90112F533FA686571578ADB07496626C /* comp.h */,
-				ACA4FBF59E4C2811901807344BB6B827 /* comperr.h */,
-				57CDCFBD7423257A0E266342F2760162 /* conf.h */,
-				C3686D060BCC9AEA42694A95AAA28A7D /* conf_api.h */,
-				5D6D0DF292A0908AD92797A5A3234345 /* conferr.h */,
-				2207527A4A7AA3A3213487D37B9100F9 /* crypto.h */,
-				A1DFB3A2AD38FEE507E26E6CEB7336FB /* cryptoerr.h */,
-				84CE09F588366EBD0929716283DF024F /* ct.h */,
-				EF9F49D0E3E1A094FBC75DAF295D9DA5 /* cterr.h */,
-				17DADFB3BF004B2BCBF5286FE72199DE /* des.h */,
-				9016AA34AD80E4F904AF1879DE714B79 /* dh.h */,
-				1DDB5B869EDD53764AAE1D5CE8A788AA /* dherr.h */,
-				C8B8CC3A3CC47D849240A5DD13659664 /* dsa.h */,
-				F2DC11E70CF0F930B644903CC7482AB2 /* dsaerr.h */,
-				36E70509BE3EB4F39B3C93DAAF58F766 /* dtls1.h */,
-				809ED60D47F30DA1D610009F014BBBFA /* e_os2.h */,
-				11F6781BDC8C3B15E96836193A48EE09 /* ebcdic.h */,
-				EA924AB7EDB6713B36989B983B184D91 /* ec.h */,
-				7C6080D49C2C6A13FAE4B6A733B2F34D /* ecdh.h */,
-				64A150187C94647DF4626A9FBB144148 /* ecdsa.h */,
-				06AB2BDF6353C66D8541F76D9358C00F /* ecerr.h */,
-				4890A32A69366618BB20AD2D09A37613 /* engine.h */,
-				5B74BCA1C9C103486235974800C1F16E /* engineerr.h */,
-				D5CC68E3B2B2626E96CD04C4AB5C4F3E /* err.h */,
-				EF42A3E6FF3F8302CDFAC9A7829E1BDE /* evp.h */,
-				77AB0B7192F3520D6950CFC96A32BC82 /* evperr.h */,
-				536B1ED3FFDB56A8A06FCE214D20099B /* hmac.h */,
-				3B8A2F00A3665E519A626DD9573A44DA /* idea.h */,
-				B9467F260824B169814AB88FD6F4B65B /* kdf.h */,
-				65377D796146E4A2F9180C1C5E39A97D /* kdferr.h */,
-				124ED14543BB0414349DE46A5978D3F4 /* lhash.h */,
-				E87AEAC05DED4F91180EF14434F728F0 /* md2.h */,
-				C7C0F03C6A50D3D038CD4301066064AD /* md4.h */,
-				A025433746C905BCB2CED1B957139625 /* md5.h */,
-				39DA2B66CED2A2C06005A9DE3501E5F9 /* mdc2.h */,
-				28D9E4B91FA6548DE071545D7DD91D27 /* modes.h */,
-				BC27AEE0D6E7073127D584490FCFA6F3 /* obj_mac.h */,
-				53A38474C19E3F46153AF5B5C16342EC /* objects.h */,
-				C85F062FC6B9575124D055E7FB201331 /* objectserr.h */,
-				3279AF43BAC807A164A70B5A236B58A7 /* ocsp.h */,
-				0A7A035A2FF1CE8AA0015E336D8CC509 /* ocsperr.h */,
-				ED5844A57D65DD666C051B27851280CB /* opensslconf.h */,
-				F0D3A305FF78831C9AAFE1B27D1195B7 /* opensslconf_ios_arm64.h */,
-				60514915566651753747D3C37B84D0A9 /* opensslconf_ios_armv7.h */,
-				05460E95C2315A8E671DDCE51156848C /* opensslconf_ios_i386.h */,
-				CF471F3F09370079448C947DFF5CEEC7 /* opensslconf_ios_x86_64.h */,
-				A6661CBCE46D767CE963FA0D6866636F /* opensslv.h */,
-				9EDC01D3C46679C519EAB6982B7306D5 /* ossl_typ.h */,
-				8A3D3046160AC0E0FF6B744E5ADB0EF7 /* pem.h */,
-				DD2553FF69E072C482E37B4C813900E5 /* pem2.h */,
-				B9B2DA65F44E2C1A0C470DB464F977E1 /* pemerr.h */,
-				74AEBAE6EFE8877C07EAA0E45323CA6B /* pkcs12.h */,
-				7AB498E81987D24DE1302EDD50E707D1 /* pkcs12err.h */,
-				B6CF9989BA5D75F0F16FBC536B70DA27 /* pkcs7.h */,
-				2F2BC5D453B5767FF4D85DEF897E9958 /* pkcs7err.h */,
-				CC753D8996E72A48892260B57071007A /* rand.h */,
-				D2FCEAB48E41D9E8819E181404C17A1D /* rand_drbg.h */,
-				1EB58CA0605CE0D1A57E53940423A000 /* randerr.h */,
-				D2C9C51014C17779C4C9D88E9D2504BD /* rc2.h */,
-				2A68852D8DAFFE8EA24765825D119879 /* rc4.h */,
-				53DDE9B17C8FA3A58372A6182DFDC139 /* rc5.h */,
-				E57849BC66E0009CCD3A34523FE08A2C /* ripemd.h */,
-				2808D73D8A702B5C217CB5F09CBEF4B2 /* rsa.h */,
-				4DFE7AB9A50187DB28352274B696AC07 /* rsaerr.h */,
-				1F478F200D0C96D6C8EFA037F7387A19 /* safestack.h */,
-				228DB94D0BB76E1D0F9E9D3191816DE8 /* seed.h */,
-				00C9FB83D7FD5B4AB23728C1B1595DDD /* sha.h */,
-				7F3B0ADD8583A6CF35BFFEDE3C0151CD /* sm2.h */,
-				83517FC184CF774332F88A8F55958C3A /* sm3.h */,
-				014FEBCDC3E0F12AE840711AA391EFD2 /* sm4.h */,
-				7D314F267B2709CA0C92E145BAE8D7A5 /* srp.h */,
-				B349103842AA05C9CD362782E73D905F /* srtp.h */,
-				433457169F7EF22A7E497846E33325B8 /* ssl.h */,
-				4884399A9567A88BFA5E67BF1FE8E400 /* ssl2.h */,
-				1FD1B77137615021716AB7750B2D0D2D /* ssl3.h */,
-				4DD74CD8E5D82D5C53CCA88D3CF60EAD /* sslerr.h */,
-				D3D383A812FF1B8923B42B6F61815222 /* stack.h */,
-				68BCB21F953B8CB31C69EC6EC96C6330 /* store.h */,
-				25483585719CF62BA81F97AB796FB275 /* storeerr.h */,
-				583B0DE3EC3649C0E9FB5BC6105CF0B0 /* symhacks.h */,
-				A337ED29FECB47BF46810FF50F044717 /* tls1.h */,
-				4D6177E634DBFCBFA989D5AD09326C7D /* ts.h */,
-				455C4ECC46F4FAD18031DF7C2D9B2E49 /* tserr.h */,
-				2DF05F452C850A1FD2E3BFBEA6F46DFA /* txt_db.h */,
-				97F3CE3509FB671D76F33EF7F2CEA2BB /* ui.h */,
-				FC79CFD5955562C9EE4F02D8BEFC887C /* uierr.h */,
-				B4DF8257CA7AC56A5061B6335D88C43C /* whrlpool.h */,
-				28A2FDFD0E6A2EAFE565F51CC791A7F1 /* x509.h */,
-				C67F54EC03310C7F0DD05DC78DAE3DE4 /* x509_vfy.h */,
-				791301F34C4AF8866BBA2F538F980498 /* x509err.h */,
-				087B8DC4262C9FF38E2DA50E69D7D6CF /* x509v3.h */,
-				BEA8B07C7316491200E3723EA0CE2872 /* x509v3err.h */,
-				5FACE3DD3E67BE286F286B45809C4AA4 /* Frameworks */,
-				00C466D7CAB3D876D408F59B375B0353 /* Support Files */,
-			);
-			name = GMOpenSSL;
-			path = GMOpenSSL;
-			sourceTree = "<group>";
-		};
 		0EFC99A8614D4D6B3A90E8E350BB9925 /* Pods-GMObjC_Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,12 +311,134 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5FACE3DD3E67BE286F286B45809C4AA4 /* Frameworks */ = {
+		47F4D7DACF249A035B3CDCEDBEFC754A /* GMOpenSSL */ = {
 			isa = PBXGroup;
 			children = (
-				E82082EA0AF7FCEE103F4FD9C8A7DE35 /* openssl.framework */,
+				7DD10E6757C29D3A3928C1A49B8D7661 /* aes.h */,
+				721E09EA85148386DAE6613E1AB3FA1F /* asn1.h */,
+				6E92ED5A59E5A8E28B97B69071EF402A /* asn1_mac.h */,
+				D4E0E69BCA38BEC23990A2E682D8DDA8 /* asn1err.h */,
+				10D05827B089BCF74E7FB83C11943371 /* asn1t.h */,
+				E1FE0611F8C70622833873FAFB0D2F49 /* async.h */,
+				94D09EB3AA94E5485F2402DAE52FFA22 /* asyncerr.h */,
+				08D2B5DBF0BF781344E1927E6AC4467C /* bio.h */,
+				310B45D08D348EB0FF725E04F837303A /* bioerr.h */,
+				791BC428E26D4794E5B1A117BFBDFDA1 /* blowfish.h */,
+				8EDBFE36F849368C889B19664FD765FD /* bn.h */,
+				7F65B5688B2362C310C250C882CB579B /* bnerr.h */,
+				60282C1A50C50D1282CAB700089A9A37 /* buffer.h */,
+				B87FEE7EFCF922E4AD50603AF03DE095 /* buffererr.h */,
+				B93B271B5A7D05E65EEE7D4FFD94B2F5 /* camellia.h */,
+				D07192F5A15B149C3454F398E0ABEC5A /* cast.h */,
+				6818E367B86EF69B7C7CC4AB8E22D3FA /* cmac.h */,
+				04DB80B4464345C2DADDAD38CFF86EC7 /* cms.h */,
+				96B026364FBCB491CE8D2483E2CF2D17 /* cmserr.h */,
+				A7E469F417257E5E7D3423C18811CF39 /* comp.h */,
+				97E29E180F346E319B49CFA6BCD3F204 /* comperr.h */,
+				3CC6377A288129B22205053530361371 /* conf.h */,
+				EBF7369CA19844C38FAFAC5DF634CA95 /* conf_api.h */,
+				DEBCF9AE7555C96497815E640AD2500D /* conferr.h */,
+				A8C643289B22EC494C1A1F15A0099999 /* crypto.h */,
+				0B53B436F41FC571FD42E26DD8608E55 /* cryptoerr.h */,
+				9A7CE29C8DDFCF5D4DB6CA751238848E /* ct.h */,
+				427E3C085685F7C9AB053E8AEA4D5BE8 /* cterr.h */,
+				77E65E8A0E58C7E007D621F125FADE7C /* des.h */,
+				0BEA907331D6D542CDF1627740D3540A /* dh.h */,
+				3E50F3202BE6AF00139CD3E10E14A58C /* dherr.h */,
+				CD9C004867046DDFE4C7DBD2129736A5 /* dsa.h */,
+				62D633B616DC08F48BCFA1BF1E2E42C8 /* dsaerr.h */,
+				128A8A8BB4FE34B56C3AE33BA1730322 /* dtls1.h */,
+				043699A0C393B330E48BCB948329116C /* e_os2.h */,
+				CD67CDE3C4F0A641D4943E2BA50C694D /* ebcdic.h */,
+				92F08F78201644B4FD555DE61BC546D9 /* ec.h */,
+				6478A183B6E2DA6F40163D7EE6480DB9 /* ecdh.h */,
+				0B84E4E7A5D055DB8FCA425A260C4D64 /* ecdsa.h */,
+				2E6FB0C4836F27B67829BCBDF95EE621 /* ecerr.h */,
+				3F7F6045360A7914AD90B1F40657C329 /* engine.h */,
+				38232E17F91AC9EA673DEEBED68AEBD3 /* engineerr.h */,
+				0D28B191E627CDED8D040D864EED9A06 /* err.h */,
+				D484A9B4FCC656966F4C36A4DF907756 /* evp.h */,
+				B94FA533A43971E5A01D916DB305EFDF /* evperr.h */,
+				C7016228C296B4285AE33D682A0D5E02 /* hmac.h */,
+				CD0765DC2A691CD473F89EC5277BF534 /* idea.h */,
+				254B4A648672032F662B8C3F99625E36 /* kdf.h */,
+				FA3BE94B1ABBFA58FAA4B145C5477096 /* kdferr.h */,
+				353E64F07C75E0CC0EE17D5A09A623D5 /* lhash.h */,
+				C9334A0F1532D49D30B6E4520C1C690B /* md2.h */,
+				CB83B9E99680643AEEDC6048B76F1010 /* md4.h */,
+				0EA97B1BA54004C2302C0862BE6991A4 /* md5.h */,
+				F08498096A34BF97233825C6A524BE54 /* mdc2.h */,
+				F40BCCE0D927B7480F87FEC7D6AB024E /* modes.h */,
+				F3932292F8656A6FE3879E798A228C21 /* obj_mac.h */,
+				FD3F3C7B5BF71586FCB2646400004398 /* objects.h */,
+				EFFA8ECF76ADD742C511839652EA5436 /* objectserr.h */,
+				9FC0C19A7D19CEE8DE7F7109E7015BC9 /* ocsp.h */,
+				271A20DB42DE3084DF5E49B255038405 /* ocsperr.h */,
+				49E536FFDBABE3473D59207C835AD3EC /* opensslconf.h */,
+				B7172323969F209EC5AF81F6E23128EF /* opensslconf_ios_arm64.h */,
+				1C7B6F5A4DE3A38B4776D64D1F8FAAAB /* opensslconf_ios_arm64e.h */,
+				288E67CF9F59C25F83A7BB94BE5535F3 /* opensslconf_ios_x86_64.h */,
+				971262EEBB7092054CB7810DD9B84AFC /* opensslv.h */,
+				A6736FF578A0C85FFE2167D120D5FA9F /* ossl_typ.h */,
+				8D987611E8452B77CAFE9CD928ADDF13 /* pem.h */,
+				658A2D6F8FCFAC9CD8EBEA0744E8DCF6 /* pem2.h */,
+				277AF81547791E7750A039F902655277 /* pemerr.h */,
+				69B2080F3E561BC53E9E8BECA027F0D1 /* pkcs12.h */,
+				858B3097327F09C612EFCEC55B2D5591 /* pkcs12err.h */,
+				05F8389651E3C8B2E60ED3C697B153AE /* pkcs7.h */,
+				F0913C87B5E7F16C3596B4FBE653C47A /* pkcs7err.h */,
+				39E831EBFE779716E9CCA41BBE3C4861 /* rand.h */,
+				5AED0E7AAAACD5247FBE6C3B22EF54BE /* rand_drbg.h */,
+				47AAD42CF82F5F098E8A06C2CF96AFA2 /* randerr.h */,
+				0A2A58D3D720E11571A7314347F8118E /* rc2.h */,
+				4EE49109D3F2759DEF48AFAA08BB50CF /* rc4.h */,
+				F935F8F009B9CF5B5F9E21FCD0C68288 /* rc5.h */,
+				23CC112C98ADF86ADF074C49E64F7227 /* ripemd.h */,
+				E704338CDCA2A8828ACB39D9DC498EE6 /* rsa.h */,
+				8EE57A89E03673951C575C79211A40E8 /* rsaerr.h */,
+				16A808D612F8535A970C58C2CF606917 /* safestack.h */,
+				3FDC15AD8A94FBABD8227EA3D53A16BA /* seed.h */,
+				DDBE5868E5F5AD5966F75E62F3182ACA /* sha.h */,
+				F1672B441199DC2255139CFE2F85A5AA /* sm2.h */,
+				4CC8783EA04F8097A47B6EA522F43CA5 /* sm3.h */,
+				D8A33976FC2F3BC77617F52B1FF89F01 /* sm4.h */,
+				1F5936879F3E91D36025C949C5D9637A /* srp.h */,
+				4D03C603310557BF989EEC1709BB1774 /* srtp.h */,
+				075CE245E5569B9DB1CA19EC4BBE61E0 /* ssl.h */,
+				2ABCE48EFE6FF66D04A0FAA5C5BE80FF /* ssl2.h */,
+				D5CB17C86B7F7E898CF17BF08B39CC08 /* ssl3.h */,
+				52099C8C5E49B40307E3BFA42DC156E8 /* sslerr.h */,
+				BE2DADDC74597A52FEB0366DF09FDD05 /* stack.h */,
+				AA80846440BA2A49BE4EFD8F43E5356A /* store.h */,
+				4859B886FC441AAC33CA5E77AF1490F2 /* storeerr.h */,
+				AC2D9F2CF3637E666F1B8E16ED2D4EDD /* symhacks.h */,
+				49F3D315117E6764A09B6633B8FCFCC2 /* tls1.h */,
+				DDBCA248DA1A3D721A5EB2D213B34CF0 /* ts.h */,
+				2A181029855A26BF3D90E60A27AEDA7C /* tserr.h */,
+				2F4CA0B9D1367932E4BF53FB8834D614 /* txt_db.h */,
+				E0EC144807DF721DBDC08F54A8EFFACB /* ui.h */,
+				5854C1DD414C33792107135965AE2DEA /* uierr.h */,
+				ECDAC42BDBA0FB838CBC6B833A56356B /* whrlpool.h */,
+				14D4E6765B60E6A2153B0A4B06C321F1 /* x509.h */,
+				D82917EB17E8D8E071BCD1B40739D5DA /* x509_vfy.h */,
+				6210F8C05E07E9BF2DAFE0833F55FB45 /* x509err.h */,
+				86125CBCED129BAE396428DBBE7E04AF /* x509v3.h */,
+				D7451E70343C68E3B207BCF93E3986B4 /* x509v3err.h */,
+				B58DB8938E4505459CDDBB5BAC84892F /* Frameworks */,
+				5040223906214D0A0B09C59745394C1E /* Support Files */,
 			);
-			name = Frameworks;
+			name = GMOpenSSL;
+			path = GMOpenSSL;
+			sourceTree = "<group>";
+		};
+		5040223906214D0A0B09C59745394C1E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3B3E54AFC78580AF49ECB12B76E1C3A5 /* GMOpenSSL.debug.xcconfig */,
+				82A18BE799E8A7F49D1F51FAF3EC9B1B /* GMOpenSSL.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/GMOpenSSL";
 			sourceTree = "<group>";
 		};
 		71180EA1977F6348C0CA5C0861F9E170 /* Pod */ = {
@@ -497,6 +487,14 @@
 			path = "Target Support Files/Pods-GMObjC_Example";
 			sourceTree = "<group>";
 		};
+		B58DB8938E4505459CDDBB5BAC84892F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				19CB70CD3CC5C2ECC622F1E4B67044B4 /* openssl.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BC0A9C4011F04AED83BA26F8481529BF /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,6 +502,14 @@
 				0EFC99A8614D4D6B3A90E8E350BB9925 /* Pods-GMObjC_Tests */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		BED56ED02CEA4A5FBFA8087A2E0682B2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				47F4D7DACF249A035B3CDCEDBEFC754A /* GMOpenSSL */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
@@ -514,21 +520,13 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		CE3D09CB88B7E09DA9CED569DB3B6362 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0C1424A43638DEC9F05460F3A3A10908 /* GMOpenSSL */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				CF995623B50B609EA412C2329D316F14 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				CE3D09CB88B7E09DA9CED569DB3B6362 /* Pods */,
+				BED56ED02CEA4A5FBFA8087A2E0682B2 /* Pods */,
 				46C3FDA7964208FE9C9E1A85A5AF0912 /* Products */,
 				BC0A9C4011F04AED83BA26F8481529BF /* Targets Support Files */,
 			);
@@ -901,7 +899,7 @@
 		};
 		60023BEC264C73D6D040867774A00516 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B0E9214A50D8CE51CADCBD50D5B1BF6D /* GMOpenSSL.release.xcconfig */;
+			baseConfigurationReference = 82A18BE799E8A7F49D1F51FAF3EC9B1B /* GMOpenSSL.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1077,7 +1075,7 @@
 		};
 		B97E82DDF3877BE797DD8FE90A444487 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 662DFA55D53AC5A6E3A6689DC3398B62 /* GMOpenSSL.debug.xcconfig */;
+			baseConfigurationReference = 3B3E54AFC78580AF49ECB12B76E1C3A5 /* GMOpenSSL.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

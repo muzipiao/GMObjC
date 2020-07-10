@@ -8,13 +8,26 @@
 #import "GMSm2Def.h"
 #import "GMUtils.h"
 
+// 默认椭圆曲线类型 NID_sm2
+static int kDefaultEllipticCurveType = NID_sm2;
+
 @implementation GMSm2Utils
+
+///MARK: - 椭圆曲线类型
+
++ (int)ellipticCurveType {
+    return kDefaultEllipticCurveType;
+}
+
++ (void)setEllipticCurveType:(int)curveType {
+    kDefaultEllipticCurveType = curveType;
+}
 
 ///MARK: - 创建公私钥对
 
 + (NSArray<NSString *> *)createKeyPair{
     NSArray<NSString *> *keyArray = @[@"", @""];
-    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(kDefaultEllipticCurveType); // 椭圆曲线
     EC_KEY *key = NULL; // 密钥对
     do {
         key = EC_KEY_new();
@@ -54,7 +67,7 @@
     size_t msg_len = plainData.length; // 明文长度
     
     const EVP_MD *digest = EVP_sm3(); // 摘要算法
-    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(kDefaultEllipticCurveType); // 椭圆曲线
     EC_KEY *key = NULL; // 密钥对
     EC_POINT *pub_point = NULL; // 坐标
     uint8_t *ctext = NULL; // 密文
@@ -131,7 +144,7 @@
     size_t ctext_len = cipherData.length;
     
     const EVP_MD *digest = EVP_sm3(); // 摘要算法
-    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(kDefaultEllipticCurveType); // 椭圆曲线
     BIGNUM *pri_big_num = NULL; // 私钥
     EC_KEY *key = NULL; // 密钥对
     EC_POINT *pub_point = NULL; // 坐标
@@ -423,7 +436,7 @@
     const BIGNUM *sig_r = NULL;
     const BIGNUM *sig_s = NULL;
     const EVP_MD *digest = EVP_sm3();  // 摘要算法
-    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2);
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(kDefaultEllipticCurveType);
     BIGNUM *pri_num = NULL;  // 私钥
     EC_KEY *key = NULL; // 密钥对
     EC_POINT *pub_point = NULL; // 公钥坐标
@@ -529,7 +542,7 @@
     const EVP_MD *digest = EVP_sm3();  // 摘要算法
     EC_POINT *pub_point = NULL;  // 公钥坐标
     EC_KEY *key = NULL;  // 密钥key
-    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2);
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(kDefaultEllipticCurveType);
     BOOL isOK = NO;  // 验签结果
     
     do {
@@ -709,7 +722,7 @@
     
     const char *public_key = publicKey.UTF8String;
     const char *private_key = privateKey.UTF8String; // 私钥
-    EC_GROUP *group = EC_GROUP_new_by_curve_name(NID_sm2); // 椭圆曲线
+    EC_GROUP *group = EC_GROUP_new_by_curve_name(kDefaultEllipticCurveType); // 椭圆曲线
     
     EC_POINT *pub_point = NULL;  // 公钥
     BIGNUM *pri_big_num = NULL; // 私钥

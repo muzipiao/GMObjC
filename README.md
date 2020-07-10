@@ -105,7 +105,7 @@ NSData *deResult3 = [GMSm2Utils decryptToData:enResult3 privateKey:priKey]; // �
 
 **注意：**
 
-1. OpenSSL 所用公钥是 04 开头的，后台返回公钥可能是不带 04 的，需要手动拼接。
+1. OpenSSL 所用公钥是 04 开头的，表示非压缩公钥格式，后台返回公钥可能是不带 04 的，需要手动拼接。
 2. 后台返回的解密结果可能是没有标准编码的原始密文 C1C3C2 格式，而 OpenSSL 的加解密都是需要 ASN1 编码格式，所以与后台交互过程中，可能需要 ASN1 编码解码。
 
 ### SM2 签名验签

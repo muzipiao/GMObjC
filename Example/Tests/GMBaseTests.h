@@ -9,8 +9,6 @@
 #import <XCTest/XCTest.h>
 #import "GMObjC.h"
 
-FOUNDATION_EXPORT NSString *const GMPubKey;     // 公钥
-FOUNDATION_EXPORT NSString *const GMPriKey;     // 私钥
 FOUNDATION_EXPORT NSString *const GMTestUserID; // 测试 ID
 
 @interface GMBaseTests : XCTestCase

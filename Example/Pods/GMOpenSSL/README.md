@@ -12,7 +12,7 @@ cocoapods 不支持直接集成 OpenSSL，将 OpenSSL 源码编译为 framework�
 |:---:|:---:|:---:|:---:|:---:|
 |2.0.2|1.1.1c|i386 armv7 x86_64 arm64|包含|>= iOS 8.0|
 |2.0.3|1.1.1g|i386 armv7 x86_64 arm64|包含|>= iOS 8.0|
-|2.1.0|1.1.1g|i386 x86_64 arm64|包含|>= iOS 8.0|
+|2.1.1|1.1.1g|x86_64 arm64 arm64e|包含|>= iOS 8.0|
 
 ## CocoaPods
 
@@ -29,3 +29,14 @@ pod 'GMOpenSSL'
 如果编译的静态库不能满足需求，可以自行运行脚本编译。工程目录下有一个名称为 OpenSSL_BUILD 的文件夹，依次执行 cd 切换到当前目录下，然后执行`./build-libssl.sh`，待执行完毕再执行`./create-openssl-framework.sh`，即可看到编译完成的 openssl.framwork。
 
 打包完成的静态库并未暴露国密的头文件，打开下载的源码，将 crypto/include/internal 路径下的 sm2.h、sm3.h，sm4.h 都拖到 openssl.framework/Headers 文件夹下即可。
+
+opensslconf.h 头文件条件编译末尾做如下修改
+
+```sh
+# error Unable to determine target or target not included in OpenSSL build
+```
+修改为：
+
+```sh
+# include <openssl/opensslconf_ios_arm64.h>
+```

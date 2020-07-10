@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E7C80BF24B87C8700047115 /* GMSm2k1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C80BE24B87C8700047115 /* GMSm2k1Tests.m */; };
+		1E7C80C224B8800E00047115 /* GMSm2r1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C80C124B8800E00047115 /* GMSm2r1Tests.m */; };
 		31143611794565FAA2CA0C09 /* Pods_GMObjC_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB234605A0669710AC7FEB9 /* Pods_GMObjC_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -21,7 +23,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		9C1E255A230964AE00332EB6 /* GMBaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C1E2559230964AE00332EB6 /* GMBaseTests.m */; };
-		9C1E255C2309658D00332EB6 /* GMSm2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C1E255B2309658D00332EB6 /* GMSm2Tests.m */; };
+		9C1E255C2309658D00332EB6 /* GMSm2v1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C1E255B2309658D00332EB6 /* GMSm2v1Tests.m */; };
 		9C36EEEB22F420DE002203E9 /* sm4TestFile.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9C36EEEA22F420DE002203E9 /* sm4TestFile.txt */; };
 		9C36EEEC22F420E3002203E9 /* sm4TestFile.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9C36EEEA22F420DE002203E9 /* sm4TestFile.txt */; };
 		9C97272B23096BE400A39090 /* GMSm3Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C97272A23096BE400A39090 /* GMSm3Tests.m */; };
@@ -42,6 +44,9 @@
 
 /* Begin PBXFileReference section */
 		05F4109CE706901DBCBA9E6C /* Pods_GMObjC_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMObjC_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E7C80BE24B87C8700047115 /* GMSm2k1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm2k1Tests.m; sourceTree = "<group>"; };
+		1E7C80C024B87D2200047115 /* GMSm2v1Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMSm2v1Tests.h; sourceTree = "<group>"; };
+		1E7C80C124B8800E00047115 /* GMSm2r1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm2r1Tests.m; sourceTree = "<group>"; };
 		2BAEE7A162291C88241027FF /* GMObjC.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GMObjC.podspec; path = ../GMObjC.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3C64D8FFF5C0179DFD89DC7C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* GMObjC_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GMObjC_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,7 +69,7 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		68788533A01750D2A2469344 /* Pods-GMObjC_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC_Example.release.xcconfig"; path = "Target Support Files/Pods-GMObjC_Example/Pods-GMObjC_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9C1E2559230964AE00332EB6 /* GMBaseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMBaseTests.m; sourceTree = "<group>"; };
-		9C1E255B2309658D00332EB6 /* GMSm2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm2Tests.m; sourceTree = "<group>"; };
+		9C1E255B2309658D00332EB6 /* GMSm2v1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm2v1Tests.m; sourceTree = "<group>"; };
 		9C36EEEA22F420DE002203E9 /* sm4TestFile.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sm4TestFile.txt; sourceTree = "<group>"; };
 		9C97272A23096BE400A39090 /* GMSm3Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm3Tests.m; sourceTree = "<group>"; };
 		9C97272C23096C4900A39090 /* GMSm4Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm4Tests.m; sourceTree = "<group>"; };
@@ -180,7 +185,10 @@
 			children = (
 				9CBBFDB72309693E00873B67 /* GMBaseTests.h */,
 				9C1E2559230964AE00332EB6 /* GMBaseTests.m */,
-				9C1E255B2309658D00332EB6 /* GMSm2Tests.m */,
+				1E7C80C024B87D2200047115 /* GMSm2v1Tests.h */,
+				9C1E255B2309658D00332EB6 /* GMSm2v1Tests.m */,
+				1E7C80BE24B87C8700047115 /* GMSm2k1Tests.m */,
+				1E7C80C124B8800E00047115 /* GMSm2r1Tests.m */,
 				9C97272A23096BE400A39090 /* GMSm3Tests.m */,
 				9C97272C23096C4900A39090 /* GMSm4Tests.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
@@ -375,7 +383,9 @@
 				9C1E255A230964AE00332EB6 /* GMBaseTests.m in Sources */,
 				9C97272B23096BE400A39090 /* GMSm3Tests.m in Sources */,
 				9C97272D23096C4900A39090 /* GMSm4Tests.m in Sources */,
-				9C1E255C2309658D00332EB6 /* GMSm2Tests.m in Sources */,
+				1E7C80C224B8800E00047115 /* GMSm2r1Tests.m in Sources */,
+				9C1E255C2309658D00332EB6 /* GMSm2v1Tests.m in Sources */,
+				1E7C80BF24B87C8700047115 /* GMSm2k1Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

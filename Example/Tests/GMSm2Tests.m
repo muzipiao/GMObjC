@@ -6,13 +6,10 @@
 //  Copyright © 2019 lifei. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+#import "GMSm2v1Tests.h"
 
-@interface GMSm2Tests : GMBaseTests
 
-@end
-
-@implementation GMSm2Tests
+@implementation GMSm2v1Tests
 
 - (void)setUp {
     [super setUp];
