@@ -16,6 +16,8 @@ Pod::Spec.new do |spec|
   spec.platform     = :ios, "8.0"
 
   spec.static_framework = true
+  
+  spec.pod_target_xcconfig = { 'ARCHS[sdk=iphonesimulator*]' => '$(ARCHS_STANDARD_64_BIT)' }
 
   spec.source       = { :git => "https://github.com/muzipiao/GMObjC.git", :tag => "#{spec.version}" }
 

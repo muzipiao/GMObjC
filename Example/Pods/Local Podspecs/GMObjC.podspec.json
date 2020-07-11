@@ -15,6 +15,9 @@
     "ios": "8.0"
   },
   "static_framework": true,
+  "pod_target_xcconfig": {
+    "ARCHS[sdk=iphonesimulator*]": "$(ARCHS_STANDARD_64_BIT)"
+  },
   "source": {
     "git": "https://github.com/muzipiao/GMObjC.git",
     "tag": "3.1.1"
