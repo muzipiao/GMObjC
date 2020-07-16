@@ -10,9 +10,15 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <openssl/evp.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+// 常用标准椭圆曲线，默认 NID_sm2，一般不需更改
+typedef NS_ENUM(int, GMCurveType) {
+    GMCurveType_sm2p256v1 = 1172,   // NID_sm2
+    GMCurveType_secp256k1 = 714,    // NID_secp256k1
+    GMCurveType_secp256r1 = 415     // NID_X9_62_prime256v1
+};
 
 @interface GMSm2Utils : NSObject
 
@@ -97,6 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 常见椭圆曲线为 NID_sm2、NID_secp256k1、NID_X9_62_prime256v1
 /// 默认 NID_sm2，参考 GMSm2Def.h 中说明，一般不需更改
+/// 若需要更改，传入枚举 GMCurveType 枚举值即可
 /// 若需要其他曲线，在 OpenSSL 源码 crypto/ec/ec_curve.c 查找
 + (int)ellipticCurveType;
 + (void)setEllipticCurveType:(int)curveType;

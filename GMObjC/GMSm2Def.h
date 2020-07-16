@@ -39,6 +39,7 @@
 #import <openssl/asn1t.h>
 #import <openssl/sm2.h>
 #import <openssl/bn.h>
+#import <openssl/evp.h>
 
 // 定义 ASN1 编解码存储数据的结构体
 typedef struct SM2_Ciphertext_st_1 SM2_Ciphertext_1;

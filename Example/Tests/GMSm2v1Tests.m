@@ -12,7 +12,7 @@
 
 - (void)setUp {
     [super setUp];
-    [GMSm2Utils setEllipticCurveType:NID_sm2];
+    [GMSm2Utils setEllipticCurveType:GMCurveType_sm2p256v1];
     
     self.gPubKey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9"
                     "C624537215DE9507BC0E2DD276CF74695C99DF42424F28E9004CDE4678F63D698";
@@ -48,7 +48,7 @@
 ///MARK: - 椭圆曲线类型
 - (void)testEllipticCurveType {
     int currentType = [GMSm2Utils ellipticCurveType];
-    XCTAssertTrue(currentType == NID_sm2, @"当前椭圆曲线应为 NID_sm2");
+    XCTAssertTrue(currentType == GMCurveType_sm2p256v1, @"当前椭圆曲线应为 NID_sm2");
 }
 
 

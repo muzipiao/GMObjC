@@ -1,5 +1,5 @@
 PODS:
-  - GMObjC (3.1.1):
+  - GMObjC (3.1.2):
     - GMOpenSSL
   - GMOpenSSL (2.1.1)
 
@@ -16,7 +16,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  GMObjC: d58cba907a544900d759600dbfb4583cb2d13e17
+  GMObjC: 19aec07bbfcde3d41e00afbea224efa89cab9ba7
   GMOpenSSL: c042674e45e028fdef281d6bb9c4f68c71b83878
 
 PODFILE CHECKSUM: 520eaad2564c30a00896cfee4a23f4ffd7b561a9
