@@ -91,7 +91,7 @@
 }
 
 /**
- * 测试大量生产 sm2 公私钥
+ * 测试大量生产 sm4 公私钥
  */
 - (void)testSm4CreateKeys {
     for (NSInteger i = 0; i < 1000; i++) {

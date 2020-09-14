@@ -6,11 +6,13 @@
 [![License](https://img.shields.io/cocoapods/l/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 [![Platform](https://img.shields.io/cocoapods/p/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 
-OpenSSL 1.1.1 以上版本增加了对中国 SM2/SM3/SM4 加密算法的支持，基于 OpenSSL 对国密 SM2 非对称加密、SM2 签名验签、ECDH 密钥协商、SM3 摘要算法，SM4 对称加密做 OC 封装。
+[简体中文](https://github.com/muzipiao/GMObjC/blob/master/README-CN.md)
 
-## 快速开始
+OpenSSL 1.1.1 and above adds support for chinese SM2/SM3/SM4 encryption algorithm, based on OpenSSL, SM2 asymmetric encryption, SM2 signature verification, ECDH key agreement, SM3 digest algorithm, and SM4 symmetric encryption are used for OC encapsulation.
 
-在终端运行以下命令:
+## Getting Started
+
+Run the following command in the terminal:
 
 ```ruby
 git clone https://github.com/muzipiao/GMObjC.git
@@ -22,279 +24,285 @@ pod install
 open GMObjC.xcworkspace
 ```
 
-## 环境需求
+## Requirements
 
-依赖 OpenSSL 1.1.1 以上版本，已打包为 Framework，并上传 cocoapods，可拖入项目直接安装，或使用 cocoapods 配置  Podfile 文件`pod GMOpenSSL`安装；并导入系统框架 Security.framework。
+Depends on OpenSSL 1.1.1 or above, has been packaged as a Framework, and uploaded cocoapods, can be dragged into the project to install directly, or use cocoapods to configure the Podfile file `pod GMOpenSSL` installation; and import the system framework Security.framework.
 
 * [GMOpenSSL.framework](https://github.com/muzipiao/GMOpenSSL)(openssl.framework)
 * Security.framework
 
-## 集成
+## Installation
+
+There are three ways to use GMObjC in your project:
+
+* using CocoaPods
+* using Carthage
+* manual install (build frameworks or embed Xcode Project)
 
 ### CocoaPods
 
-CocoaPods 是最简单方便的集成方法，编辑 Podfile 文件，添加
+CocoaPods is the easiest and most convenient way to integrate. Edit Podfile, add
 
 ```ruby
-pod 'GMObjC'
+pod'GMObjC'
 ```
 
-然后执行 `pod install` 即可。GMObjC 依赖 OpenSSL 1.1.1 以上版本，CocoaPods 不支持依赖同一静态库库的不同版本，如果遇到与三方库的 OpenSSL 冲突，例如百度地图（BaiduMapKit）依赖了低版本的 OpenSSL 静态库，会产生依赖冲突。
+Then execute `pod install`. GMObjC relies on OpenSSL 1.1.1 and above. CocoaPods does not support different versions of the same static library. If you encounter OpenSSL conflicts with third-party libraries, for example, Baidu MapKit depends on a lower version of the OpenSSL static library, a dependency conflict will occur. .
 
-OpenSSL 冲突常见解决办法：
+Common solutions to OpenSSL conflicts:
 
-方法1：将三方库使用 OpenSSL 升级为 1.1.1 以上版本，GMObjC 直接共用此 OpenSSL 库，不需要再为 GMObjC 单独增加 OpenSSL 依赖库，手动集成 GMObjC 即可；
+Method 1: Upgrade the third party library using OpenSSL to version 1.1.1 or higher. GMObjC directly shares this OpenSSL library. There is no need to add an OpenSSL dependent library for GMObjC separately, just manually integrate GMObjC;
 
-方法2：将 GMObjC 编译为动态库可解决此类冲突。动态库项目在 GMObjCFramework 文件夹中，打开项目执行  `command + b`  编译为真机/模拟器版本动态库，根据需要合并；也可以通过 Carthage 自动将 GMObjC 编译动态库，具体操作看下一步。
+Method 2: Compiling GMObjC into a dynamic library can resolve such conflicts. The dynamic library project is in the GMObjCFramework folder, open the project and execute `command + b` to compile it into a real machine/emulator version dynamic library, and merge as needed; you can also automatically compile GMObjC into a dynamic library through Carthage. See the next step for specific operations.
 
 ### Carthage
 
-Carthage 可以自动将第三方框架编译为动态库（Dynamic framework），未安装的先执行 `brew update` 和 `brew install carthage` 安装，然后创建一个名称为 Cartfile 的文件（类似 Podfile），编辑添加想要编译的三方库名称如 `github "muzipiao/GMObjC"`，然后执行 `carthage update` 即可。
+Carthage can automatically compile a third-party framework into a dynamic framework (Dynamic framework). If it is not installed, execute `brew update` and `brew install carthage` to install, and then create a file named Cartfile (similar to Podfile), edit and add The name of the compiled third party library is like `github "muzipiao/GMObjC"`, and then execute `carthage update`.
 
 ```ruby
-# 安装 carthage
+# Install carthage
 brew update && brew install carthage
-# 创建 Cartfile 文件，并写入文件 github "muzipiao/GMObjC"
-touch Cartfile && echo 'github "muzipiao/GMObjC"' >> Cartfile
-# 拉取编译为动态库，在当前执行命令目录下 Carthage/Build/iOS/ 可找到 GMObjC.framework
+# Create Cartfile file and write it to github "muzipiao/GMObjC"
+touch Cartfile && echo'github "muzipiao/GMObjC"' >> Cartfile
+# Pull and compile into a dynamic library, and you can find GMObjC.framework in Carthage/Build/iOS/ under the current command directory
 carthage update
 ```
 
-编译成功后，打开 Carthage 查看生成的文件目录，Carthage/Build/iOS/GMObjC.framework 既是编译成功的动态库，将动态库拖入工程即可。
+After the compilation is successful, open Carthage to view the generated file directory. Carthage/Build/iOS/GMObjC.framework is the compiled dynamic library. Just drag the dynamic library into the project.
 
-注意：GMObjC.framework 为动态库，需要选择 `Embed & Sign` 模式，且不需要再单独导入 openssl.framework 库。若 Carthage 编译失败，下载项目源码，在 GMObjCFramework 文件夹下打开工程文件，执行 `command + b` 手动编译即可。
+Note: GMObjC.framework is a dynamic library, you need to select the `Embed & Sign` mode, and you do not need to import the openssl.framework library separately. If Carthage fails to compile, download the project source code, open the project file in the GMObjCFramework folder, and execute `command + b` to compile manually.
 
-### 直接集成
+### Direct integration
 
-从 Git 下载最新代码，找到和 README 同级的 GMObjC 文件夹，将 GMObjC 文件夹拖入项目即可，在需要使用的地方导入头文件 `GMObjC.h` 即可使用 SM2、SM4 加解密，签名验签，计算 SM3 摘要等。
+Download the latest code from Git, find the GMObjC folder at the same level as the README, drag the GMObjC folder into the project, and import the header file `GMObjC.h` where you need to use SM2, SM4 encryption, decryption, and signature verification. Sign, calculate SM3 summary, etc.
 
-集成 OpenSSL 的注意事项：
+Points to note when integrating OpenSSL:
 
-1. 工具类依赖 OpenSSL，可通过`pod GMOpenSSL`安装 OpenSSL，或者下载 [openssl.framework](https://github.com/muzipiao/GMOpenSSL)，找到`GMOpenSSL/openssl.framework`，拖入项目即可。
-2. 如果需要自编译 OpenSSL，在 [GMOpenSSL](https://github.com/muzipiao/GMOpenSSL) 项目目录下有一个`OpenSSL_BUILD`文件夹，终端 cd 切换到该目录下，先执行`./build-libssl.sh`命令编译生成 .a 文件，等待结束后再执行`./create-openssl-framework.sh`命令打包为 framework，这时该目录下就出现了 openssl.framework。
-3. 打包完成的静态库并未暴露国密的头文件，打开下载的源码，将 crypto/include/internal 路径下的 sm2.h、sm3.h，sm4.h 都拖到 openssl.framework/Headers 文件夹下即可。
+1. Tools depend on OpenSSL. You can install OpenSSL through `pod GMOpenSSL`, or download [openssl.framework](https://github.com/muzipiao/GMOpenSSL), find `GMOpenSSL/openssl.framework`, and drag into the project. can.
+2. If you need to self-compile OpenSSL, there is an `OpenSSL_BUILD` folder in the [GMOpenSSL](https://github.com/muzipiao/GMOpenSSL) project directory, terminal cd switch to this directory, first execute `./build -libssl.sh` command to compile and generate .a file, after waiting, execute `./create-openssl-framework.sh` command to package as framework, then openssl.framework appears in the directory.
+3. The packaged static library does not expose the national secret header files. Open the downloaded source code and drag sm2.h, sm3.h, and sm4.h under the crypto/include/internal path to the openssl.framework/Headers file Just clip it.
 
-## 用法
+## How To Use
 
-### SM2 加解密
+### SM2 encryption and decryption
 
-SM2 加解密都很简单，加密传入待加密明文和公钥，解密传入密文和私钥即可，代码：
+SM2 encryption and decryption are very simple, encrypt the incoming plaintext and public key to be encrypted, and decrypt the incoming ciphertext and private key. The code:
 
 ```objc
-// 公钥
+// public key
 NSString *pubKey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9"
                     "C624537215DE9507BC0E2DD276CF74695C99DF42424F28E9004CDE4678F63D698";
-// 私钥
+// private key
 NSString *prikey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB3422E7838E24DEAE";
 
-// 明文
-NSString *plaintext = @"123456"; // 普通明文
-NSString *plainHex = @"313233343536"; // Hex 格式字明文（123456 的 Hex 编码为 313233343536）
-NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData 格式明文
+// plaintext
+NSString *plaintext = @"123456"; // ordinary plaintext
+NSString *plainHex = @"313233343536"; // Hex format character plain text (The Hex code of 123456 is 313233343536)
+NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData format plain text
 
-// sm2 加密
-NSString *enResult1 = [GMSm2Utils encryptText:plaintext publicKey:pubKey]; // 加密普通字符串
-NSString *enResult2 = [GMSm2Utils encryptHex:plainHex publicKey:pubKey]; // 加密 Hex 编码格式字符串
-NSData *enResult3 = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // 加密 NSData 类型数据
+// sm2 encryption
+NSString *enResult1 = [GMSm2Utils encryptText:plaintext publicKey:pubKey]; // encrypt ordinary string
+NSString *enResult2 = [GMSm2Utils encryptHex:plainHex publicKey:pubKey]; // Encrypted Hex encoding format string
+NSData *enResult3 = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // Encrypt NSData type data
 
-// sm2 解密
-NSString *deResult1 = [GMSm2Utils decryptToText:enResult1 privateKey:priKey]; // 解密为普通字符串明文
-NSString *deResult2 = [GMSm2Utils decryptToHex:enResult2 privateKey:priKey]; // 解密为 Hex 格式明文
-NSData *deResult3 = [GMSm2Utils decryptToData:enResult3 privateKey:priKey]; // 解密为 NSData 格式明文
+// sm2 decrypt
+NSString *deResult1 = [GMSm2Utils decryptToText:enResult1 privateKey:priKey]; // Decrypt to plain text of ordinary string
+NSString *deResult2 = [GMSm2Utils decryptToHex:enResult2 privateKey:priKey]; // Decrypt to plain text in Hex format
+NSData *deResult3 = [GMSm2Utils decryptToData:enResult3 privateKey:priKey]; // Decrypt to plain text in NSData format
 ```
 
-**注意：**
+**note:**
 
-1. OpenSSL 所用公钥是 04 开头的，表示非压缩公钥格式，后台返回公钥可能是不带 04 的，需要手动拼接。
-2. 后台返回的解密结果可能是没有标准编码的原始密文 C1C3C2 格式，而 OpenSSL 的加解密都是需要 ASN1 编码格式，所以与后台交互过程中，可能需要 ASN1 编码解码。
+1. The public key used by OpenSSL starts with 04, which means the uncompressed public key format. The public key returned in the background may not carry 04, and manual splicing is required.
+2. The decryption result returned by the background may be the original ciphertext C1C3C2 format without standard encoding, and the encryption and decryption of OpenSSL requires the ASN1 encoding format, so in the process of interacting with the background, ASN1 encoding and decoding may be required.
 
-### SM2 签名验签
+### SM2 Signature Verification
 
-SM2 私钥签名，公钥验签，可防篡改或验证身份。签名时传入明文、私钥和用户 ID；验签时传入明文、签名、公钥和用户 ID，代码：
+SM2 private key signature, public key verification, anti-tampering or identity verification. Pass in plain text, private key and user ID when signing; pass in plain text, signature, public key and user ID when signing, code:
 
 ```objc
-// 公钥
+// public key
 NSString *pubKey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9"
                     "C624537215DE9507BC0E2DD276CF74695C99DF42424F28E9004CDE4678F63D698";
-// 私钥
+// private key
 NSString *prikey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB3422E7838E24DEAE";
 
-// 明文
-NSString *plaintext = @"123456"; // 普通明文
-NSString *plainHex = @"313233343536"; // Hex 格式字明文（123456 的 Hex 编码为 313233343536）
-NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData 格式明文
+// plaintext
+NSString *plaintext = @"123456"; // ordinary plaintext
+NSString *plainHex = @"313233343536"; // Hex format character plain text (The Hex code of 123456 is 313233343536)
+NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData format plain text
 
-// userID 传入 nil 或空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
-NSString *userID = @"lifei_zdjl@126.com"; // 普通字符串的 userID
-NSString *userHex = [GMUtils stringToHex:userID]; // Hex 格式的 userID
-NSData *userData = [userID dataUsingEncoding:NSUTF8StringEncoding]; // NSData 格式的 userID
+// When userID is passed in nil or empty, the default is 1234567812345678; when it is not empty, the signature and verification need the same ID
+NSString *userID = @"lifei_zdjl@126.com"; // userID of ordinary string
+NSString *userHex = [GMUtils stringToHex:userID]; // userID in Hex format
+NSData *userData = [userID dataUsingEncoding:NSUTF8StringEncoding]; // userID in NSData format
 
-// 签名结果是 RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
+// The signature result is a 128-byte Hex format string spliced ​​by RS, the first 64 bytes are R, and the last 64 bytes are S
 NSString *signStr1 = [GMSm2Utils signText:plaintext privateKey:priKey userID:userID];
 NSString *signStr2 = [GMSm2Utils signHex:plainHex privateKey:priKey userHex:userHex];
 NSString *signStr3 = [GMSm2Utils signData:plainData priKey:priKey userData:userData];
 
-// 验证签名，YES 为验签通过
+// Verify the signature, YES means the verification passed
 BOOL isOK1 = [GMSm2Utils verifyText:plaintext signRS:signStr1 publicKey:pubKey userID:userID];
 BOOL isOK2 = [GMSm2Utils verifyHex:plainHex signRS:signStr2 publicKey:pubKey userHex:userHex];
 BOOL isOK3 = [GMSm2Utils verifyData:plainData signRS:signStr3 pubKey:pubKey userData:userData];
 
-// 编码为 Der 格式，Der 编码解码后应该与原值相同
+// Encoded in Der format, Der encoding and decoding should be the same as the original value
 NSString *derSign1 = [GMSm2Utils derEncode:signStr1];
 NSString *derSign2 = [GMSm2Utils derEncode:signStr2];
 NSString *derSign3 = [GMSm2Utils derEncode:signStr3];
 
-// 解码为 RS 字符串格式，RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
+// Decode into RS string format, RS spliced ​​128-byte Hex format string, the first 64 bytes are R, the last 64 bytes are S
 NSString *rs1 = [GMSm2Utils derDecode:derSign1];
 NSString *rs2 = [GMSm2Utils derDecode:derSign2];
 NSString *rs3 = [GMSm2Utils derDecode:derSign3];
 ```
 
-注意：
+note:
 
-1. 用户 ID 可传空值，当传空值时使用 OpenSSL 默认用户 ID，OpenSSL 中默认用户定义为`#define SM2_DEFAULT_USERID "1234567812345678"` ，客户端和服务端用户 ID 要保持一致。
-2. 客户端和后台交互的过程中，假设后台签名，客户端验签，后台返回的签名是 DER 编码格式，就需要先对签名进行 DER 解码，然后再进行验签。同理，若客户端签名，后台验签，根据后台是需要 RS 拼接格式签名，还是 DER 格式，进行编码解码。
+1. The user ID can be passed a null value. When passing a null value, the OpenSSL default user ID is used. The default user definition in OpenSSL is `#define SM2_DEFAULT_USERID "1234567812345678"`. The client and server user IDs must be consistent.
+2. During the interaction between the client and the background, assuming the background signature, the client verifies the signature, and the signature returned by the background is in DER encoding format, the signature needs to be DER decoded first, and then the signature is verified. In the same way, if the client signs, the background verifies the signature, and encodes and decodes according to whether the background requires RS splicing format signature or DER format.
 
-### ECDH 密钥协商
+### ECDH key agreement
 
-OpenSSL 中的 `ECDH_compute_key()`执行椭圆曲线 Diffie-Hellman 密钥协商，可在双方都是明文传输的情况下，协商出一个相同的密钥。
+The `ECDH_compute_key()` in OpenSSL performs elliptic curve Diffie-Hellman key agreement, which can negotiate the same key when both parties are transmitting in plain text.
 
-协商流程：
+Negotiation process:
 
-1. 客户端随机生成一对公私钥 clientPublicKey，clientPrivateKey；
-2. 服务端随机生成一对公私钥 serverPublicKey，serverPrivateKey；
-3. 双方利用网络请求或其他方式交换公钥 clientPublicKey 和 serverPublicKey，私钥自己保存；
-4. 客户端计算`clientKey = ECDH_compute_key(clientPrivateKey，serverPublicKey)`；
-5. 服务端计算`serverKey = ECDH_compute_key(serverPrivateKey，clientPublicKey)`；
-6. 双方各自计算出的 clientKey 和 serverKey 应该是相等的，这个 key 可以作为对称加密的密钥。
+1. The client randomly generates a pair of public and private keys clientPublicKey, clientPrivateKey;
+2. The server randomly generates a pair of public and private keys serverPublicKey, serverPrivateKey;
+3. The two parties exchange public keys clientPublicKey and serverPublicKey using network requests or other methods, and the private keys are kept by themselves;
+4. Client calculation `clientKey = ECDH_compute_key(clientPrivateKey, serverPublicKey)`;
+5. Server-side calculation `serverKey = ECDH_compute_key(serverPrivateKey, clientPublicKey)`;
+6. The clientKey and serverKey calculated by both parties should be equal, and this key can be used as the key for symmetric encryption.
 
 ```objc
-// 客户端client生成一对公私钥
+// The client generates a pair of public and private keys
 NSArray *clientKey = [GMSm2Utils createKeyPair];
 NSString *cPubKey = clientKey[0];
 NSString *cPriKey = clientKey[1];
 
-// 服务端server生成一对公私钥
+// The server generates a pair of public and private keys
 NSArray *serverKey = [GMSm2Utils createKeyPair];
 NSString *sPubKey = serverKey[0];
 NSString *sPriKey = serverKey[1];
 
-// 客户端client从服务端server获取公钥sPubKey，client协商出32字节对称密钥clientECDH，转Hex后为64字节
+// The client obtains the public key sPubKey from the server, and the client negotiates a 32-byte symmetric key clientECDH, which is 64 bytes after being converted to Hex
 NSString *clientECDH = [GMSm2Utils computeECDH:sPubKey privateKey:cPriKey];
-// 客户端client将公钥cPubKey发送给服务端server，server协商出32字节对称密钥serverECDH，转Hex后为64字节
+// The client sends the public key cPubKey to the server, and the server negotiates a 32-byte symmetric key serverECDH, which is 64 bytes after being converted to Hex
 NSString *serverECDH = [GMSm2Utils computeECDH:cPubKey privateKey:sPriKey];
 
-// 在全部明文传输的情况下，client与server协商出相等的对称密钥，clientECDH==serverECDH 成立
+// In the case of all plaintext transmission, the client and the server negotiate an equal symmetric key, clientECDH==serverECDH is established
 if ([clientECDH isEqualToString:serverECDH]) {
-    NSLog(@"ECDH 密钥协商成功，协商出的对称密钥为：\n%@", clientECDH);
+    NSLog(@"ECDH key negotiation is successful, the negotiated symmetric key is:\n%@", clientECDH);
 }else{
-    NSLog(@"ECDH 密钥协商失败");
+    NSLog(@"ECDH key negotiation failed");
 }
 ```
 
-### SM4 加解密
+### SM4 encryption and decryption
 
-SM4 加解密都很简单，加密传入待加密字符串和密钥，解密传入密文和密钥即可，代码：
+SM4 encryption and decryption are very simple, encrypt the incoming string and key to be encrypted, and decrypt the incoming ciphertext and key, the code:
 
-* ECB 电子密码本模式，密文分割成长度相等的块（不足补齐），逐个块加密。
-* CBC 密文分组链接模式，前一个分组的密文和当前分组的明文异或或操作后再加密。
+* ECB electronic codebook mode, the ciphertext is divided into blocks of equal length (not enough to fill), and block by block is encrypted.
+* CBC ciphertext grouping link mode, the ciphertext of the previous group and the plaintext of the current group are XORed and then encrypted.
 
 ```objc
 
-NSString *sm4Key = @"EA4EBDC1DCEAEC733FFD358BA15E8DCD"; // 32 字节 Hex 编码格式字符串密钥
-NSString *ivec = @"1AFE5CC82D2DE304343FED0AF5FDE7FA"; // 32 字节初始化向量，CBC 加密模式需要
+NSString *sm4Key = @"EA4EBDC1DCEAEC733FFD358BA15E8DCD"; // 32-byte Hex encoding format string key
+NSString *ivec = @"1AFE5CC82D2DE304343FED0AF5FDE7FA"; // 32-byte initialization vector, required for CBC encryption mode
 
-// 明文
-NSString *plaintext = @"123456"; // 普通明文
-NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData 格式明文
+// plaintext
+NSString *plaintext = @"123456"; // ordinary plaintext
+NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData format plain text
 
-// ECB 加密模式
-NSString *ecbCipertext = [GMSm4Utils ecbEncryptText:plaintext key:sm4Key]; // 加密普通字符串明文
-NSData *ecbCipherData = [GMSm4Utils ecbEncryptData:plainData key:sm4Key]; // 加密 NSData 类型明文
-// ECB 解密模式
+// ECB encryption mode
+NSString *ecbCipertext = [GMSm4Utils ecbEncryptText:plaintext key:sm4Key]; // Encrypt plain text of ordinary string
+NSData *ecbCipherData = [GMSm4Utils ecbEncryptData:plainData key:sm4Key]; // Encrypt NSData type plaintext
+// ECB decryption mode
 NSString *ecbPlaintext = [GMSm4Utils ecbDecryptText:ecbCipertext key:sm4Key];
 NSData *ecbDecryptData = [GMSm4Utils ecbDecryptData:ecbCipherData key:sm4Key];
 
-// CBC 加密模式
+// CBC encryption mode
 NSString *cbcCipertext = [GMSm4Utils cbcEncryptText:plaintext key:sm4Key IV:ivec];
 NSData *cbcCipherData = [GMSm4Utils cbcEncryptData:plainData key:sm4Key IV:ivec];
-// CBC 解密模式
+// CBC decryption mode
 NSString *cbcPlaintext = [GMSm4Utils cbcDecryptText:cbcCipertext key:sm4Key IV:ivec];
 NSData *cbcDecryptData = [GMSm4Utils cbcDecryptData:cbcCipherData key:sm4Key IV:ivec];
 ```
 
-### SM3 摘要
+### SM3 Summary
 
-类似于 hash、md5，SM3 摘要算法可对文本文件进行摘要计算，摘要长度为 64 字节的 Hex 编码格式字符串。
+Similar to hash and md5, SM3 digest algorithm can perform digest calculation on text files, and the digest length is a 64-byte Hex encoding format string.
 
 ```objc
-// 原文
-NSString *plaintext = @"123456"; // 普通原文
-NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData 格式原文
+// Original
+NSString *plaintext = @"123456"; // normal original text
+NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData format original text
 
-// 字符串摘要
+// String summary
 NSString *textDigest = [GMSm3Utils hashWithString:plaintext];
-// NSData 的摘要
+// Summary of NSData
 NSString *dataDigest = [GMSm3Utils hashWithData:plainData];
 ```
 
-### ASN1 编码解码
+### ASN1 encoding and decoding
 
-OpenSSL 对 SM2 加密结果进行了 ASN1 编码，解密时也是要求密文编码格式为 ASN1 格式，其他平台加解密可能需要 C1C3C2 拼接的原始密文，所以需要编码解码。个别后端加解密是按照 C1C2C3 来拼接的，也可能是其他顺序，若无法加解密，与后台确认拼接顺序，自行拼接即可。
+OpenSSL performs ASN1 encoding on the SM2 encryption result, and the ciphertext encoding format is also required to be ASN1 format when decrypting. Encryption and decryption on other platforms may require the original ciphertext spliced ​​by C1C3C2, so encoding and decoding is required. Individual back-end encryption and decryption are spliced ​​according to C1C2C3, or other orders. If encryption and decryption is not possible, confirm the splicing order with the background and splice by yourself.
 
 ```objc
-// 公钥
+// public key
 NSString *pubKey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9"
                     "C624537215DE9507BC0E2DD276CF74695C99DF42424F28E9004CDE4678F63D698";
-// 私钥
+// private key
 NSString *prikey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB3422E7838E24DEAE";
 
-// 明文
-NSString *plaintext = @"123456"; // 普通明文
-NSString *plainHex = @"313233343536"; // Hex 格式字明文（123456 的 Hex 编码为 313233343536）
-NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData 格式明文
+// plaintext
+NSString *plaintext = @"123456"; // ordinary plaintext
+NSString *plainHex = @"313233343536"; // Hex format character plain text (The Hex code of 123456 is 313233343536)
+NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData format plain text
 
-// sm2 加密结果，ASN1 编码的密文
-NSString *enResult1 = [GMSm2Utils encryptText:plaintext publicKey:pubKey]; // 加密普通字符串
-NSString *enResult2 = [GMSm2Utils encryptHex:plainHex publicKey:pubKey]; // 加密 Hex 编码格式字符串
-NSData *enResult3 = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // 加密 NSData 类型数据
+// sm2 encryption result, ASN1 encoded cipher text
+NSString *enResult1 = [GMSm2Utils encryptText:plaintext publicKey:pubKey]; // encrypt ordinary string
+NSString *enResult2 = [GMSm2Utils encryptHex:plainHex publicKey:pubKey]; // Encrypted Hex encoding format string
+NSData *enResult3 = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // Encrypt NSData type data
 
-// ASN1 解码，将 ASN1 编码格式的密文解码字符串，数组或者 NSData
-NSString *c1c3c2Result1 = [GMSm2Utils asn1DecodeToC1C3C2:enResult1]; // 解码为 c1c3c2字符串
-NSArray<NSString *> *c1c3c2Result2 = [GMSm2Utils asn1DecodeToC1C3C2Array:enResult2]; // 解码为 @[c1,c3,c2]
-NSData *c1c3c2Result3 = [GMSm2Utils asn1DecodeToC1C3C2Data:enResult3]; // 解码为 c1c3c2拼接的Data
+// ASN1 decoding, decode the ciphertext in ASN1 encoding format string, array or NSData
+NSString *c1c3c2Result1 = [GMSm2Utils asn1DecodeToC1C3C2:enResult1]; // Decode to c1c3c2 string
+NSArray<NSString *> *c1c3c2Result2 = [GMSm2Utils asn1DecodeToC1C3C2Array:enResult2]; // decoded as @[c1,c3,c2]
+NSData *c1c3c2Result3 = [GMSm2Utils asn1DecodeToC1C3C2Data:enResult3]; // decoded as data spliced ​​by c1c3c2
 
-// ASN1 编码，将解码后 c1c3c2 密文重新编码为 ASN1 格式，应该与 enResult1，enResult2，enResult3 完全相同
+// ASN1 encoding, re-encoding the decoded c1c3c2 ciphertext into ASN1 format, which should be exactly the same as enResult1, enResult2, and enResult3
 NSString *asn1Result1 = [GMSm2Utils asn1EncodeWithC1C3C2:c1c3c2Result1];
 NSString *asn1Result2 = [GMSm2Utils asn1EncodeWithC1C3C2Array:c1c3c2Result2];
 NSData *asn1Result3 = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Result3];
 ```
 
-如何拆分密文字符串？假设 Hex 编码（16 进制编码）格式密文是按照 C1C2C3 排列的，已知 C1 长度固定为 128 字节，C3 长度固定为 64 字节，那 C2 长度 = 密文字符串总长度 - C1长度 128 - C3长度，这样就分别得到了 C1、C2、C3 字符串，自由拼接。
+How to split a ciphertext string? Assuming that the Hex code (hexadecimal code) format ciphertext is arranged according to C1C2C3, it is known that the length of C1 is fixed to 128 bytes, and the length of C3 is fixed to 64 bytes, then C2 length = total length of ciphertext string-C1 length 128 -C3 length, in this way, C1, C2, and C3 strings are obtained respectively, which can be spliced ​​freely.
 
-假设 Hex 编码格式密文按照 C1C2C3 排列，可按照以下方式拆分 C1、C2、C3。
+Assuming that the ciphertext of the Hex encoding format is arranged in C1C2C3, C1, C2, and C3 can be split in the following way.
 
 ```objc
-// Hex 编码格式密文必大于 192，截取字符串前注意判断长度
-NSString *C1C2C3 = @"1C03C16FEFB1...假设这里是按照C1C2C3排列的密文...0B8ECAE42AD68B";
-// 椭圆曲线随机点 C1 固定长度为 128 （Hex 编码格式）
+// Hex encoding format ciphertext must be greater than 192, pay attention to judge the length before intercepting the string
+NSString *C1C2C3 = @"1C03C16FEFB1...Assuming here is the ciphertext arranged in C1C2C3...0B8ECAE42AD68B";
+// Random point C1 of elliptic curve has a fixed length of 128 (Hex encoding format)
 NSString *C1 = [C1C2C3 substringToIndex:128];
-// 密文摘要值 C3 固定长度为 64（Hex 编码格式）
-NSString *C3 = [C1C2C3 substringFromIndex:(C1C2C3.length - 64)];
-// 密文中 C2 长度 =  密文字符串总长度 - C1长度(128) - C3长度(64)
-NSString *C2 = [C1C2C3 substringWithRange:NSMakeRange(128, C1C2C3.length - C1.length - C3.length)];
+// The ciphertext digest value C3 has a fixed length of 64 (Hex encoding format)
+NSString *C3 = [C1C2C3 substringFromIndex:(C1C2C3.length-64)];
+// Length of C2 in ciphertext = total length of ciphertext string-C1 length (128)-C3 length (64)
+NSString *C2 = [C1C2C3 substringWithRange:NSMakeRange(128, C1C2C3.length-C1.length-C3.length)];
 ```
 
-### 生成公私钥
+### Generate public and private keys
 
-基于 SM2 推荐曲线（素数域 256 位椭圆曲线），生成公私钥。
+Based on the SM2 recommended curve (a 256-bit elliptic curve in the prime field), a public and private key is generated.
 
 ```objc
 NSArray *keyPair = [GMSm2Utils createKeyPair];
-NSString *pubKey = keyPair[0]; // 04 开头公钥，Hex 编码格式
-NSString *priKey = keyPair[1]; // 私钥，Hex 编码格式
+NSString *pubKey = keyPair[0]; // The public key at the beginning of 04, Hex encoding format
+NSString *priKey = keyPair[1]; // Private key, Hex encoding format
 ```
 
-## 其他
+## Other
 
-如果您觉得有所帮助，请在 [GitHub GMObjC](https://github.com/muzipiao/GMObjC) 上赏个Star ⭐️，您的鼓励是我前进的动力
+If you find it helpful, please give a Star ⭐️ on [GitHub GMObjC](https://github.com/muzipiao/GMObjC), your encouragement is my motivation
