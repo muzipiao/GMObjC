@@ -82,6 +82,23 @@ Points to note when integrating OpenSSL:
 2. If you need to self-compile OpenSSL, there is an `OpenSSL_BUILD` folder in the [GMOpenSSL](https://github.com/muzipiao/GMOpenSSL) project directory, terminal cd switch to this directory, first execute `./build -libssl.sh` command to compile and generate .a file, after waiting, execute `./create-openssl-framework.sh` command to package as framework, then openssl.framework appears in the directory.
 3. The packaged static library does not expose the national secret header files. Open the downloaded source code and drag sm2.h, sm3.h, and sm4.h under the crypto/include/internal path to the openssl.framework/Headers file Just clip it.
 
+### Xcode compilation errors that may be encountered during integration
+
+Error 1：
+
+```text
+Building for iOS, but the linked and embedded framework 'GMObjC.framework' was built for iOS + iOS Simulator.
+```
+
+As a solution, select the project path `Build Settings-Build Options-Validate Workspace` and change it to YES/NO, and change it once.
+
+Error 2：
+
+```text
+building for iOS Simulator, but linking in object file built for iOS, for architecture arm64
+```
+The solution, select the project path `Build Settings-Architectures-Excluded Architecture`, select `Any iOS Simulator SDK` to add arm64, refer to [stackoverflow solution](https://stackoverflow.com/questions/63607158/xcode-12-building-for-ios-simulator-but-linking-in-object-file-built-for-ios)。
+
 ## How To Use
 
 ### SM2 encryption and decryption
@@ -301,6 +318,40 @@ Based on the SM2 recommended curve (a 256-bit elliptic curve in the prime field)
 NSArray *keyPair = [GMSm2Utils createKeyPair];
 NSString *pubKey = keyPair[0]; // The public key at the beginning of 04, Hex encoding format
 NSString *priKey = keyPair[1]; // Private key, Hex encoding format
+```
+## SM2 曲线
+
+1. GM/T 0003-2012 standard recommended parameters sm2p256v1 (NID_sm2);
+2. SM2 If you need to use other curves, call `[GMSm2Utils setEllipticCurveType:*]` and pass in the int type;
+3. How to find the required curve, the three most common curves sm2p256v1, secp256k1, secp256r1 are listed in the GMSm2Utils header file enumeration;
+4. If it is another curve, you can find it in the OpenSSL source code crypto/ec/ec_curve.c and input the int type.
+
+GMCurveType in GMSm2Utils.h file corresponds to curve parameters:
+
+```text
+ECC recommended parameters: sm2p256v1 (corresponding to NID_sm2 in OpenSSL)
+p   = FFFFFFFE FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 00000000 FFFFFFFF FFFFFFFF
+a   = FFFFFFFE FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 00000000 FFFFFFFF FFFFFFFC
+b   = 28E9FA9E 9D9F5E34 4D5A9E4B CF6509A7 F39789F5 15AB8F92 DDBCBD41 4D940E93
+n   = FFFFFFFE FFFFFFFF FFFFFFFF FFFFFFFF 7203DF6B 21C6052B 53BBF409 39D54123
+Gx =  32C4AE2C 1F198119 5F990446 6A39C994 8FE30BBF F2660BE1 715A4589 334C74C7
+Gy =  BC3736A2 F4F6779C 59BDCEE3 6B692153 D0A9877C C62A4740 02DF32E5 2139F0A0
+
+ECC recommended parameters: secp256k1 (corresponding to NID_secp256k1 in OpenSSL)
+p   = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFFC2F
+a   = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+b   = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000007
+n   = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE BAAEDCE6 AF48A03B BFD25E8C D0364141
+Gx =  79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798
+Gy =  483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8
+
+ECC recommended parameters: secp256r1 (corresponding to NID_X9_62_prime256v1 in OpenSSL)
+p   = FFFFFFFF 00000001 00000000 00000000 00000000 FFFFFFFF FFFFFFFF FFFFFFFF
+a   = FFFFFFFF 00000001 00000000 00000000 00000000 FFFFFFFF FFFFFFFF FFFFFFFC
+b   = 5AC635D8 AA3A93E7 B3EBBD55 769886BC 651D06B0 CC53B0F6 3BCE3C3E 27D2604B
+n   = FFFFFFFF 00000000 FFFFFFFF FFFFFFFF BCE6FAAD A7179E84 F3B9CAC2 FC632551
+Gx  = 6B17D1F2 E12C4247 F8BCE6E5 63A440F2 77037D81 2DEB33A0 F4A13945 D898C296
+Gy  = 4FE342E2 FE1A7F9B 8EE7EB4A 7C0F9E16 2BCE3357 6B315ECE CBB64068 37BF51F5
 ```
 
 ## Other

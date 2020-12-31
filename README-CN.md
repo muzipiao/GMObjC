@@ -82,6 +82,23 @@ carthage update
 2. 如果需要自编译 OpenSSL，在 [GMOpenSSL](https://github.com/muzipiao/GMOpenSSL) 项目目录下有一个`OpenSSL_BUILD`文件夹，终端 cd 切换到该目录下，先执行`./build-libssl.sh`命令编译生成 .a 文件，等待结束后再执行`./create-openssl-framework.sh`命令打包为 framework，这时该目录下就出现了 openssl.framework。
 3. 打包完成的静态库并未暴露国密的头文件，打开下载的源码，将 crypto/include/internal 路径下的 sm2.h、sm3.h，sm4.h 都拖到 openssl.framework/Headers 文件夹下即可。
 
+### 集成可能遇到的 Xcode 编译错误
+
+错误1：
+
+```text
+Building for iOS, but the linked and embedded framework 'GMObjC.framework' was built for iOS + iOS Simulator.
+```
+
+解决办法，选择工程路径 `Build Settings - Build Options - Validate Workspace` 更改为 YES/NO，更改一次即可。
+
+错误2：
+
+```text
+building for iOS Simulator, but linking in object file built for iOS, for architecture arm64
+```
+解决办法，选择工程 路径`Build Settings - Architectures - Excluded Architecture` 选择 `Any iOS Simulator SDK` 添加 arm64，参考[stackoverflow 方案](https://stackoverflow.com/questions/63607158/xcode-12-building-for-ios-simulator-but-linking-in-object-file-built-for-ios)。
+
 ## 用法
 
 ### SM2 加解密
@@ -301,6 +318,41 @@ NSString *C2 = [C1C2C3 substringWithRange:NSMakeRange(128, C1C2C3.length - C1.le
 NSArray *keyPair = [GMSm2Utils createKeyPair];
 NSString *pubKey = keyPair[0]; // 04 开头公钥，Hex 编码格式
 NSString *priKey = keyPair[1]; // 私钥，Hex 编码格式
+```
+
+## SM2 曲线
+
+1. GM/T 0003-2012 标准推荐参数  sm2p256v1（NID_sm2）；
+2. SM2 如果需要使用其他曲线，调用`[GMSm2Utils setEllipticCurveType:*]`，传入 int 类型即可；
+3. 如何查找到需要的曲线，GMSm2Utils 头文件枚举中列出最常见 3 种曲线 sm2p256v1、secp256k1，secp256r1；
+4. 如果是其他曲线，可在 OpenSSL 源码 crypto/ec/ec_curve.c 中查找，传入 int 类型即可。
+
+GMSm2Utils.h 文件中 GMCurveType 对应曲线参数：
+
+```text
+ECC推荐参数：sm2p256v1（对应 OpenSSL 中 NID_sm2）
+p   = FFFFFFFE FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 00000000 FFFFFFFF FFFFFFFF
+a   = FFFFFFFE FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 00000000 FFFFFFFF FFFFFFFC
+b   = 28E9FA9E 9D9F5E34 4D5A9E4B CF6509A7 F39789F5 15AB8F92 DDBCBD41 4D940E93
+n   = FFFFFFFE FFFFFFFF FFFFFFFF FFFFFFFF 7203DF6B 21C6052B 53BBF409 39D54123
+Gx =  32C4AE2C 1F198119 5F990446 6A39C994 8FE30BBF F2660BE1 715A4589 334C74C7
+Gy =  BC3736A2 F4F6779C 59BDCEE3 6B692153 D0A9877C C62A4740 02DF32E5 2139F0A0
+
+ECC推荐参数：secp256k1（对应 OpenSSL 中 NID_secp256k1）
+p   = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFFC2F
+a   = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+b   = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000007
+n   = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE BAAEDCE6 AF48A03B BFD25E8C D0364141
+Gx =  79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798
+Gy =  483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8
+
+ECC推荐参数：secp256r1（对应 OpenSSL 中 NID_X9_62_prime256v1）
+p   = FFFFFFFF 00000001 00000000 00000000 00000000 FFFFFFFF FFFFFFFF FFFFFFFF
+a   = FFFFFFFF 00000001 00000000 00000000 00000000 FFFFFFFF FFFFFFFF FFFFFFFC
+b   = 5AC635D8 AA3A93E7 B3EBBD55 769886BC 651D06B0 CC53B0F6 3BCE3C3E 27D2604B
+n   = FFFFFFFF 00000000 FFFFFFFF FFFFFFFF BCE6FAAD A7179E84 F3B9CAC2 FC632551
+Gx  = 6B17D1F2 E12C4247 F8BCE6E5 63A440F2 77037D81 2DEB33A0 F4A13945 D898C296
+Gy  = 4FE342E2 FE1A7F9B 8EE7EB4A 7C0F9E16 2BCE3357 6B315ECE CBB64068 37BF51F5
 ```
 
 ## 其他

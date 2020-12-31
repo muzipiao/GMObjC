@@ -44,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		05F4109CE706901DBCBA9E6C /* Pods_GMObjC_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMObjC_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E1EC4B7259DE97A00461662 /* README-CN.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "README-CN.md"; path = "../README-CN.md"; sourceTree = "<group>"; };
 		1E7C80BE24B87C8700047115 /* GMSm2k1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm2k1Tests.m; sourceTree = "<group>"; };
 		1E7C80C024B87D2200047115 /* GMSm2v1Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMSm2v1Tests.h; sourceTree = "<group>"; };
 		1E7C80C124B8800E00047115 /* GMSm2r1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm2r1Tests.m; sourceTree = "<group>"; };
@@ -211,6 +212,7 @@
 			children = (
 				2BAEE7A162291C88241027FF /* GMObjC.podspec */,
 				3C64D8FFF5C0179DFD89DC7C /* README.md */,
+				1E1EC4B7259DE97A00461662 /* README-CN.md */,
 				DCB385E32425ACA4FA411973 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
