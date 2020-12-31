@@ -1,7 +1,7 @@
 PODS:
   - GMObjC (3.1.2):
     - GMOpenSSL
-  - GMOpenSSL (2.1.1)
+  - GMOpenSSL (2.2.3)
 
 DEPENDENCIES:
   - GMObjC (from `../`)
@@ -16,8 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   GMObjC: 19aec07bbfcde3d41e00afbea224efa89cab9ba7
-  GMOpenSSL: c042674e45e028fdef281d6bb9c4f68c71b83878
+  GMOpenSSL: 31e201eaebdf4dd876cdd95a4be9ed02686d86ce
 
 PODFILE CHECKSUM: 0772608182b0dceae96f72c66f93c05b3b14ddf2
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0
