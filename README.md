@@ -319,7 +319,7 @@ NSArray *keyPair = [GMSm2Utils createKeyPair];
 NSString *pubKey = keyPair[0]; // The public key at the beginning of 04, Hex encoding format
 NSString *priKey = keyPair[1]; // Private key, Hex encoding format
 ```
-## SM2 曲线
+## SM2 Curves
 
 1. GM/T 0003-2012 standard recommended parameters sm2p256v1 (NID_sm2);
 2. SM2 If you need to use other curves, call `[GMSm2Utils setEllipticCurveType:*]` and pass in the int type;
