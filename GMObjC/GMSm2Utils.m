@@ -776,4 +776,67 @@ static int kDefaultEllipticCurveType = NID_sm2;
     return [NSString stringWithFormat:@"%@%@", padding, orginHex];
 }
 
+
++ (NSString *)publickeyFrom:(NSString *)privateKey compressed:(BOOL) compressed{
+    EC_KEY *k = NULL;
+    BIGNUM *priv = NULL;
+    EC_POINT *pub = NULL;
+    const EC_GROUP *grp;
+    k = EC_KEY_new_by_curve_name(kDefaultEllipticCurveType);
+    if (!k) {
+        NSLog(@"create eckey failed");
+    }
+    if (!BN_hex2bn(&priv, privateKey.UTF8String)) {
+        NSLog(@"create private key failed");
+    }
+    if (!EC_KEY_set_private_key(k, priv)) {
+        NSLog(@"set priv failed");
+    }
+    grp = EC_KEY_get0_group(k);
+    pub = EC_POINT_new(grp);
+    if (!pub) {
+        NSLog(@"create pub failed");
+    }
+    if (!EC_POINT_mul(grp, pub, priv, NULL, NULL, NULL)) {
+        NSLog(@"calculate pub failed");
+    }
+    if (!EC_KEY_set_public_key(k, pub)) {
+        NSLog(@"set pub key failed");
+    }
+    
+    point_conversion_form_t form = compressed ? POINT_CONVERSION_COMPRESSED : POINT_CONVERSION_UNCOMPRESSED;
+    char *hex_pub = EC_POINT_point2hex(grp, pub, form, NULL);
+    NSString *pubHex = [NSString stringWithCString:hex_pub encoding:NSUTF8StringEncoding];
+    OPENSSL_free(hex_pub);
+    
+    BN_clear_free(priv);
+    EC_POINT_free(pub);
+    EC_KEY_free(k);
+    return  pubHex;
+}
+
++ (NSString *)compressPublicKey:(NSString *) pk{
+    const char *pubhex = pk.UTF8String;
+    EC_GROUP *grp = EC_GROUP_new_by_curve_name(kDefaultEllipticCurveType);
+    EC_POINT *p = EC_POINT_new(grp);
+    EC_POINT_hex2point(grp, pubhex, p, NULL);
+    const char *hex = EC_POINT_point2hex(grp, p, POINT_CONVERSION_COMPRESSED, NULL);
+    NSString *pubkey = [NSString stringWithCString:hex encoding:NSUTF8StringEncoding];
+    EC_GROUP_free(grp);
+    EC_POINT_free(p);
+    return  pubkey;
+}
+
++ (NSString *)decompressPublicKey:(NSString *) pk{
+    const char *pubhex = pk.UTF8String;
+    EC_GROUP *grp = EC_GROUP_new_by_curve_name(kDefaultEllipticCurveType);
+    EC_POINT *p = EC_POINT_new(grp);
+    EC_POINT_hex2point(grp, pubhex, p, NULL);
+    const char *hex = EC_POINT_point2hex(grp, p, POINT_CONVERSION_UNCOMPRESSED, NULL);
+    NSString *pubkey = [NSString stringWithCString:hex encoding:NSUTF8StringEncoding];
+    EC_GROUP_free(grp);
+    EC_POINT_free(p);
+    return  pubkey;
+}
+
 @end
