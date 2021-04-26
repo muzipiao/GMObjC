@@ -1,12 +1,11 @@
 //
-//  GMSm2Def.h
+//  GMObjCDef.h
 //  Created by lifei on 2019/7/17.
 //  Copyright © 2019 lifei. All rights reserved.
 
 /**
- 1. SM2 加密后密文为 ASN1 编码，此处定义编解码所用结构体；
- 2. GM/T 0003-2012 标准推荐参数  sm2p256v1（NID_sm2）；
- 3. 若需使用其他曲线，可在 OpenSSL 源码 crypto/ec/ec_curve.c 中查找。
+ 1. GM/T 0003-2012 标准推荐参数  sm2p256v1（NID_sm2）；
+ 2. 若需使用其他曲线，可在 OpenSSL 源码 crypto/ec/ec_curve.c 中查找。
  
  ECC推荐参数：sm2p256v1（对应 OpenSSL 中 NID_sm2）
  p   = FFFFFFFE FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 00000000 FFFFFFFF FFFFFFFF
@@ -33,33 +32,21 @@
  Gy  = 4FE342E2 FE1A7F9B 8EE7EB4A 7C0F9E16 2BCE3357 6B315ECE CBB64068 37BF51F5
  */
 
-#ifndef GMSm2Def_h
-#define GMSm2Def_h
+#ifndef GMObjCDef_h
+#define GMObjCDef_h
 
-#import <openssl/asn1t.h>
-#import <openssl/sm2.h>
-#import <openssl/bn.h>
-#import <openssl/evp.h>
+#ifdef DEBUG
+#define GMLog(...) NSLog(__VA_ARGS__)
+#else
+#define GMLog(...)
+#endif
 
-// 定义 ASN1 编解码存储数据的结构体
-typedef struct SM2_Ciphertext_st_1 SM2_Ciphertext_1;
-DECLARE_ASN1_FUNCTIONS(SM2_Ciphertext_1)
-
-struct SM2_Ciphertext_st_1 {
-    BIGNUM *C1x;
-    BIGNUM *C1y;
-    ASN1_OCTET_STRING *C3;
-    ASN1_OCTET_STRING *C2;
+// 常用标准椭圆曲线，默认 NID_sm2，一般不需更改
+typedef NS_ENUM(int, GMCurveType) {
+    GMCurveType_sm2p256v1 = 1172,   // NID_sm2
+    GMCurveType_secp256k1 = 714,    // NID_secp256k1
+    GMCurveType_secp256r1 = 415     // NID_X9_62_prime256v1
 };
 
-ASN1_SEQUENCE(SM2_Ciphertext_1) = {
-    ASN1_SIMPLE(SM2_Ciphertext_1, C1x, BIGNUM),
-    ASN1_SIMPLE(SM2_Ciphertext_1, C1y, BIGNUM),
-    ASN1_SIMPLE(SM2_Ciphertext_1, C3, ASN1_OCTET_STRING),
-    ASN1_SIMPLE(SM2_Ciphertext_1, C2, ASN1_OCTET_STRING),
-} ASN1_SEQUENCE_END(SM2_Ciphertext_1)
+#endif /* GMObjCDef_h */
 
-IMPLEMENT_ASN1_FUNCTIONS(SM2_Ciphertext_1)
-
-
-#endif /* GMSm2Def_h */

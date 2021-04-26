@@ -5,13 +5,51 @@
 //
 
 #import "GMSm2Utils.h"
-#import "GMSm2Def.h"
-#import "GMUtils.h"
+#import <openssl/sm2.h>
+#import <openssl/bn.h>
+#import <openssl/evp.h>
+#import <openssl/asn1t.h>
+
+//SM2 加密后密文为 ASN1 编码，此处定义 ASN1 编解码存储数据的结构体
+#ifndef GMSM2_CIPHERTEXT_ST_1
+#define GMSM2_CIPHERTEXT_ST_1
+
+typedef struct SM2_Ciphertext_st_1 SM2_Ciphertext_1;
+DECLARE_ASN1_FUNCTIONS(SM2_Ciphertext_1)
+
+struct SM2_Ciphertext_st_1 {
+    BIGNUM *C1x;
+    BIGNUM *C1y;
+    ASN1_OCTET_STRING *C3;
+    ASN1_OCTET_STRING *C2;
+};
+
+ASN1_SEQUENCE(SM2_Ciphertext_1) = {
+    ASN1_SIMPLE(SM2_Ciphertext_1, C1x, BIGNUM),
+    ASN1_SIMPLE(SM2_Ciphertext_1, C1y, BIGNUM),
+    ASN1_SIMPLE(SM2_Ciphertext_1, C3, ASN1_OCTET_STRING),
+    ASN1_SIMPLE(SM2_Ciphertext_1, C2, ASN1_OCTET_STRING),
+} ASN1_SEQUENCE_END(SM2_Ciphertext_1)
+
+IMPLEMENT_ASN1_FUNCTIONS(SM2_Ciphertext_1)
+
+#endif /* GMSM2_CIPHERTEXT_ST_1 */
 
 // 默认椭圆曲线类型 NID_sm2
 static int kDefaultEllipticCurveType = NID_sm2;
 
 @implementation GMSm2Utils
+
+// OpenSSL 1.1.1 以上版本支持国密
++ (void)initialize
+{
+    if (self == [GMSm2Utils class]) {
+        if (OPENSSL_VERSION_NUMBER < 0x1010100fL) {
+            GMLog(@"OpenSSL 当前版本：%s",OPENSSL_VERSION_TEXT);
+            NSAssert(NO, @"OpenSSL 版本低于 1.1.1，不支持国密");
+        }
+    }
+}
 
 ///MARK: - 椭圆曲线类型
 
@@ -417,7 +455,6 @@ static int kDefaultEllipticCurveType = NID_sm2;
 }
 
 ///MARK: - SM2 签名
-
 + (nullable NSString *)signData:(NSData *)plainData priKey:(NSString *)priKey userData:(nullable NSData *)userData{
     if (plainData.length == 0 || priKey.length == 0) {
         return nil;

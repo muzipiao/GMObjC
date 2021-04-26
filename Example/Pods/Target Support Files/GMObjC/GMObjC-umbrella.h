@@ -11,7 +11,8 @@
 #endif
 
 #import "GMObjC.h"
-#import "GMSm2Def.h"
+#import "GMObjCDef.h"
+#import "GMSm2Bio.h"
 #import "GMSm2Utils.h"
 #import "GMSm3Utils.h"
 #import "GMSm4Utils.h"

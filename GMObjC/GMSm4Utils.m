@@ -13,6 +13,17 @@
 
 @implementation GMSm4Utils
 
+// OpenSSL 1.1.1 以上版本支持国密
++ (void)initialize
+{
+    if (self == [GMSm4Utils class]) {
+        if (OPENSSL_VERSION_NUMBER < 0x1010100fL) {
+            GMLog(@"OpenSSL 当前版本：%s",OPENSSL_VERSION_TEXT);
+            NSAssert(NO, @"OpenSSL 版本低于 1.1.1，不支持国密");
+        }
+    }
+}
+
 ///MARK: - 生成 SM4 密钥
 + (nullable NSString *)createSm4Key{
     NSInteger len = SM4_BLOCK_SIZE;

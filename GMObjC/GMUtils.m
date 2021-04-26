@@ -63,5 +63,17 @@
     return tmpData;
 }
 
+///MARK: - Base64
+
++ (nullable NSString *)base64Encode:(NSData *)data {
+    NSData *baseData = [data base64EncodedDataWithOptions:0];
+    NSString *baseStr = [[NSString alloc] initWithData:baseData encoding:NSUTF8StringEncoding];
+    return baseStr;
+}
+
++ (nullable NSData *)base64Decode:(NSString *)base64Str {
+    NSData *data = [[NSData alloc] initWithBase64EncodedString:base64Str options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    return data;
+}
 
 @end

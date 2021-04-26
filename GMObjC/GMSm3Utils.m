@@ -8,8 +8,20 @@
 
 #import "GMSm3Utils.h"
 #import <openssl/sm3.h>
+#import "GMUtils.h"
 
 @implementation GMSm3Utils
+
+// OpenSSL 1.1.1 以上版本支持国密
++ (void)initialize
+{
+    if (self == [GMSm3Utils class]) {
+        if (OPENSSL_VERSION_NUMBER < 0x1010100fL) {
+            GMLog(@"OpenSSL 当前版本：%s",OPENSSL_VERSION_TEXT);
+            NSAssert(NO, @"OpenSSL 版本低于 1.1.1，不支持国密");
+        }
+    }
+}
 
 ///MARK: - 字符串的摘要值
 + (nullable NSString *)hashWithString:(NSString *)plaintext{
