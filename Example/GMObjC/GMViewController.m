@@ -7,7 +7,9 @@
 //
 
 #import "GMViewController.h"
-#import "GMObjC.h"
+#import "GMObjC/GMObjC.h"
+
+#define GMMainBundle(name) [[NSBundle mainBundle] pathForResource:name ofType:nil]
 
 @interface GMViewController ()
 
@@ -23,9 +25,9 @@
 
 ///MARK: - Life
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     // 初始化测试用密码、公钥，私钥
     self.gPwd = @"123456";
     self.gPubkey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9"
@@ -39,28 +41,32 @@
     [self testSm3];      // sm3 摘要计算文本或文件
     [self testSm4];      // sm4 加密文本或文件
     [self testECDH];     // ECDH 密钥协商
-    [self adjustText];   // 调整显示范围
+    [self readPemDerFiles];     // 测试读取PEM/DER文件
+    [self saveToPemDerFiles];   // 测试保存SM2公私钥为PEM/DER文件格式
+    [self createKeyPairFiles];  // 测试创建PEM/DER格式SM2密钥对
 }
 
 ///MARK: - UI
 
-- (void)createUI{
-    self.view.backgroundColor = [UIColor whiteColor];
+- (void)createUI {
+    CGFloat statusH = 20;
+    if (@available(iOS 11.0, *)) {
+        statusH = [UIApplication sharedApplication].delegate.window.safeAreaInsets.top;
+    } else {
+        statusH = [UIApplication sharedApplication].statusBarFrame.size.height;
+    }
+    CGSize size = self.view.bounds.size;
+    CGRect rect = CGRectMake(0, statusH, size.width, size.height - statusH);
     
-    self.scrollView = [[UIScrollView alloc]initWithFrame:self.view.bounds];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:rect];
     [self.view addSubview:self.scrollView];
     
-    self.gTextView = [[UITextView alloc]initWithFrame:self.view.bounds];
+    self.gTextView = [[UITextView alloc]initWithFrame:self.scrollView.bounds];
+    self.gTextView.scrollEnabled = YES;
     self.gTextView.editable = NO;
-    self.gTextView.font = [UIFont systemFontOfSize:11];
+    self.gTextView.font = [UIFont systemFontOfSize:14];
     self.gTextView.text = @"国密 Demo 实例";
     [self.scrollView addSubview:self.gTextView];
-}
-
-- (void)adjustText{
-    CGFloat SW = [UIScreen mainScreen].bounds.size.width;
-    CGSize contentSize = [self.gTextView sizeThatFits:CGSizeMake(SW, CGFLOAT_MAX)];
-    self.scrollView.frame = CGRectMake(0, 0, SW, contentSize.height);
 }
 
 ///MARK: - SM2 加解密
@@ -243,7 +249,7 @@
 
 ///MARK: - ECDH 密钥协商
 
-- (void)testECDH{
+- (void)testECDH {
     // 客户端client生成一对公私钥
     NSArray *clientKey = [GMSm2Utils createKeyPair];
     NSString *cPubKey = clientKey[0];
@@ -265,6 +271,97 @@
     }else{
         NSLog(@"ECDH 密钥协商失败");
     }
+}
+
+///MARK: - PEM/DER文件
+- (void)readPemDerFiles {
+    NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
+    [mStr appendString:@"\n-------PEM/DER密钥读取-------"];
+    // PEM/DER文件路径
+    NSString *publicPemPath = GMMainBundle(@"sm2pub-1.pem");
+    NSString *publicDerPath = GMMainBundle(@"sm2pub-1.der");
+    NSString *privatePemPath = GMMainBundle(@"sm2pri-1.pem");
+    NSString *privateDerPath = GMMainBundle(@"sm2pri-1.der");
+    NSString *private8PemPath = GMMainBundle(@"sm2pri8-1.pem");
+    // 从PEM/DER文件中读取公私钥
+    NSString *publicFromPem = [GMSm2Bio readPublicKeyFromPemFile:publicPemPath];
+    NSString *publicFromDer = [GMSm2Bio readPublicKeyFromDerFile:publicDerPath];
+    NSString *privateFromPem = [GMSm2Bio readPrivateKeyFromPemFile:privatePemPath];
+    NSString *privateFromDer = [GMSm2Bio readPrivateKeyFromDerFile:privateDerPath];
+    NSString *private8FromPem = [GMSm2Bio readPrivateKeyFromPemFile:private8PemPath];
+    // 同一密钥不同格式，读取结果相同
+    BOOL samePublic = [publicFromPem isEqualToString:publicFromDer];
+    BOOL samePrivate1 = [privateFromPem isEqualToString:privateFromDer];
+    BOOL samePrivate2 = [private8FromPem isEqualToString:privateFromDer];
+    NSAssert(samePublic && samePrivate1 && samePrivate2, @"不同格式密钥读取结果应一致");
+    
+    [mStr appendFormat:@"\nPEM格式公钥：\n%@", publicFromPem];
+    [mStr appendFormat:@"\nDER格式公钥：\n%@", publicFromDer];
+    [mStr appendFormat:@"\nPEM格式私钥：\n%@", privateFromPem];
+    [mStr appendFormat:@"\nDER格式私钥：\n%@", privateFromDer];
+    [mStr appendFormat:@"\nPKCS8-PEM格式私钥：\n%@", private8FromPem];
+    self.gTextView.text = mStr.copy;
+}
+
+- (void)saveToPemDerFiles {
+    NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
+    [mStr appendString:@"\n-------密钥保存为PEM/DER格式文件-------"];
+    
+    NSArray *keyPair = [GMSm2Utils createKeyPair];
+    NSString *pubKey = keyPair[0]; // 测试用 04 开头公钥，Hex 编码格式
+    NSString *priKey = keyPair[1]; // 测试用私钥，Hex 编码格式
+    NSAssert(pubKey && priKey, @"生成密钥不应为空！");
+    // 保存公私钥的文件路径
+    NSString *tmpDir = NSTemporaryDirectory();
+    NSString *publicPemPath = [tmpDir stringByAppendingPathComponent:@"t-public.pem"];
+    NSString *publicDerPath = [tmpDir stringByAppendingPathComponent:@"t-public.der"];
+    NSString *privatePemPath = [tmpDir stringByAppendingPathComponent:@"t-private.pem"];
+    NSString *privateDerPath = [tmpDir stringByAppendingPathComponent:@"t-private.der"];
+    // 将公私钥写入PEM/DER文件
+    BOOL success1 = [GMSm2Bio savePublicKeyToPemFile:pubKey filePath:publicPemPath];
+    BOOL success2 = [GMSm2Bio savePublicKeyToDerFile:pubKey filePath:publicDerPath];
+    BOOL success3 = [GMSm2Bio savePrivateKeyToPemFile:priKey filePath:privatePemPath];
+    BOOL success4 = [GMSm2Bio savePrivateKeyToDerFile:priKey filePath:privateDerPath];
+    // 保存成功返回YES，失败NO
+    if (success1 && success2 && success3 && success4) {
+        NSLog(@"密钥保存为PEM/DER格式文件成功!");
+    }
+    // 测试：读取保存的PEM/DER密钥，和传入的公私钥一致
+    NSString *publicFromPem = [GMSm2Bio readPublicKeyFromPemFile:publicPemPath];
+    NSString *publicFromDer = [GMSm2Bio readPublicKeyFromDerFile:publicDerPath];
+    NSString *privateFromPem = [GMSm2Bio readPrivateKeyFromPemFile:privatePemPath];
+    NSString *privateFromDer = [GMSm2Bio readPrivateKeyFromDerFile:privateDerPath];
+    
+    NSAssert(publicFromPem && privateFromPem, @"保存密钥文件不应为空！");
+    BOOL samePublic1 = [publicFromPem isEqualToString:pubKey];
+    BOOL samePublic2 = [publicFromDer isEqualToString:pubKey];
+    BOOL samePrivate1 = [privateFromPem isEqualToString:priKey];
+    BOOL samePrivate2 = [privateFromDer isEqualToString:priKey];
+    NSAssert(samePublic1&&samePublic2&&samePrivate1&&samePrivate2, @"保存读取结果应一致");
+    
+    [mStr appendFormat:@"\n生成的公钥：\n%@", pubKey];
+    [mStr appendFormat:@"\n保存后读取的公钥：\n%@", publicFromPem];
+    [mStr appendFormat:@"\n生成的私钥：\n%@", priKey];
+    [mStr appendFormat:@"\n保存后读取的私钥：\n%@", privateFromPem];
+    self.gTextView.text = mStr.copy;
+}
+
+- (void)createKeyPairFiles {
+    NSMutableString *mStr = [NSMutableString stringWithString:self.gTextView.text];
+    [mStr appendString:@"\n-------创建PEM/DER格式密钥对文件-------"];
+    
+    NSArray<NSString *> *pemKeyArray = [GMSm2Bio createPemKeyPairFiles];
+    NSArray<NSString *> *derKeyArray = [GMSm2Bio createDerKeyPairFiles];
+    NSString *publicFromPem = [GMSm2Bio readPublicKeyFromPemFile:pemKeyArray[0]];
+    NSString *privateFromPem = [GMSm2Bio readPrivateKeyFromPemFile:pemKeyArray[1]];
+    NSString *publicFromDer = [GMSm2Bio readPublicKeyFromDerFile:derKeyArray[0]];
+    NSString *privateFromDer = [GMSm2Bio readPrivateKeyFromDerFile:derKeyArray[1]];
+    
+    [mStr appendFormat:@"\n生成的PEM公钥：\n%@", publicFromPem];
+    [mStr appendFormat:@"\n生成的PEM私钥：\n%@", privateFromPem];
+    [mStr appendFormat:@"\n生成的DER公钥：\n%@", publicFromDer];
+    [mStr appendFormat:@"\n生成的DER私钥：\n%@", privateFromDer];
+    self.gTextView.text = mStr.copy;
 }
 
 @end

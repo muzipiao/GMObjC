@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "GMObjC.h"
+#import "GMObjC/GMObjC.h"
 
 FOUNDATION_EXPORT NSString *const GMTestUserID; // 测试 ID
 

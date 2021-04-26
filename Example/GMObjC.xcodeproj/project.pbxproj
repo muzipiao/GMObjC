@@ -7,6 +7,107 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E1572702636AA6200044F38 /* sm2pri-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723A2636AA6200044F38 /* sm2pri-4.pem */; };
+		1E1572712636AA6200044F38 /* sm2pri-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723A2636AA6200044F38 /* sm2pri-4.pem */; };
+		1E1572722636AA6200044F38 /* sm2pri-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723B2636AA6200044F38 /* sm2pri-5.pem */; };
+		1E1572732636AA6200044F38 /* sm2pri-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723B2636AA6200044F38 /* sm2pri-5.pem */; };
+		1E1572742636AA6200044F38 /* sm2pri-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723C2636AA6200044F38 /* sm2pri-7.pem */; };
+		1E1572752636AA6200044F38 /* sm2pri-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723C2636AA6200044F38 /* sm2pri-7.pem */; };
+		1E1572762636AA6200044F38 /* sm2pri-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723D2636AA6200044F38 /* sm2pri-6.pem */; };
+		1E1572772636AA6200044F38 /* sm2pri-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723D2636AA6200044F38 /* sm2pri-6.pem */; };
+		1E1572782636AA6200044F38 /* sm2pri-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723E2636AA6200044F38 /* sm2pri-2.pem */; };
+		1E1572792636AA6200044F38 /* sm2pri-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723E2636AA6200044F38 /* sm2pri-2.pem */; };
+		1E15727A2636AA6200044F38 /* sm2pri-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723F2636AA6200044F38 /* sm2pri-3.pem */; };
+		1E15727B2636AA6200044F38 /* sm2pri-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15723F2636AA6200044F38 /* sm2pri-3.pem */; };
+		1E15727C2636AA6200044F38 /* sm2pri-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572402636AA6200044F38 /* sm2pri-1.pem */; };
+		1E15727D2636AA6200044F38 /* sm2pri-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572402636AA6200044F38 /* sm2pri-1.pem */; };
+		1E15727E2636AA6200044F38 /* sm2pri-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572412636AA6200044F38 /* sm2pri-10.pem */; };
+		1E15727F2636AA6200044F38 /* sm2pri-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572412636AA6200044F38 /* sm2pri-10.pem */; };
+		1E1572802636AA6200044F38 /* sm2pri-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572422636AA6200044F38 /* sm2pri-8.pem */; };
+		1E1572812636AA6200044F38 /* sm2pri-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572422636AA6200044F38 /* sm2pri-8.pem */; };
+		1E1572822636AA6200044F38 /* sm2pri-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572432636AA6200044F38 /* sm2pri-9.pem */; };
+		1E1572832636AA6200044F38 /* sm2pri-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572432636AA6200044F38 /* sm2pri-9.pem */; };
+		1E1572842636AA6200044F38 /* sm2pri-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572452636AA6200044F38 /* sm2pri-1.der */; };
+		1E1572852636AA6200044F38 /* sm2pri-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572452636AA6200044F38 /* sm2pri-1.der */; };
+		1E1572862636AA6200044F38 /* sm2pri-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572462636AA6200044F38 /* sm2pri-3.der */; };
+		1E1572872636AA6200044F38 /* sm2pri-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572462636AA6200044F38 /* sm2pri-3.der */; };
+		1E1572882636AA6200044F38 /* sm2pri-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572472636AA6200044F38 /* sm2pri-2.der */; };
+		1E1572892636AA6200044F38 /* sm2pri-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572472636AA6200044F38 /* sm2pri-2.der */; };
+		1E15728A2636AA6200044F38 /* sm2pri-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572482636AA6200044F38 /* sm2pri-6.der */; };
+		1E15728B2636AA6200044F38 /* sm2pri-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572482636AA6200044F38 /* sm2pri-6.der */; };
+		1E15728C2636AA6200044F38 /* sm2pri-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572492636AA6200044F38 /* sm2pri-7.der */; };
+		1E15728D2636AA6200044F38 /* sm2pri-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572492636AA6200044F38 /* sm2pri-7.der */; };
+		1E15728E2636AA6200044F38 /* sm2pri-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15724A2636AA6200044F38 /* sm2pri-5.der */; };
+		1E15728F2636AA6200044F38 /* sm2pri-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15724A2636AA6200044F38 /* sm2pri-5.der */; };
+		1E1572902636AA6200044F38 /* sm2pri-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15724B2636AA6200044F38 /* sm2pri-4.der */; };
+		1E1572912636AA6200044F38 /* sm2pri-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15724B2636AA6200044F38 /* sm2pri-4.der */; };
+		1E1572922636AA6200044F38 /* sm2pri-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15724C2636AA6200044F38 /* sm2pri-9.der */; };
+		1E1572932636AA6200044F38 /* sm2pri-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15724C2636AA6200044F38 /* sm2pri-9.der */; };
+		1E1572942636AA6200044F38 /* sm2pri-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15724D2636AA6200044F38 /* sm2pri-8.der */; };
+		1E1572952636AA6200044F38 /* sm2pri-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15724D2636AA6200044F38 /* sm2pri-8.der */; };
+		1E1572962636AA6200044F38 /* sm2pri-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15724E2636AA6200044F38 /* sm2pri-10.der */; };
+		1E1572972636AA6200044F38 /* sm2pri-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15724E2636AA6200044F38 /* sm2pri-10.der */; };
+		1E1572982636AA6200044F38 /* sm2pri8-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572502636AA6200044F38 /* sm2pri8-9.pem */; };
+		1E1572992636AA6200044F38 /* sm2pri8-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572502636AA6200044F38 /* sm2pri8-9.pem */; };
+		1E15729A2636AA6200044F38 /* sm2pri8-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572512636AA6200044F38 /* sm2pri8-8.pem */; };
+		1E15729B2636AA6200044F38 /* sm2pri8-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572512636AA6200044F38 /* sm2pri8-8.pem */; };
+		1E15729C2636AA6200044F38 /* sm2pri8-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572522636AA6200044F38 /* sm2pri8-10.pem */; };
+		1E15729D2636AA6200044F38 /* sm2pri8-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572522636AA6200044F38 /* sm2pri8-10.pem */; };
+		1E15729E2636AA6200044F38 /* sm2pri8-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572532636AA6200044F38 /* sm2pri8-3.pem */; };
+		1E15729F2636AA6200044F38 /* sm2pri8-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572532636AA6200044F38 /* sm2pri8-3.pem */; };
+		1E1572A02636AA6200044F38 /* sm2pri8-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572542636AA6200044F38 /* sm2pri8-2.pem */; };
+		1E1572A12636AA6200044F38 /* sm2pri8-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572542636AA6200044F38 /* sm2pri8-2.pem */; };
+		1E1572A22636AA6200044F38 /* sm2pri8-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572552636AA6200044F38 /* sm2pri8-1.pem */; };
+		1E1572A32636AA6200044F38 /* sm2pri8-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572552636AA6200044F38 /* sm2pri8-1.pem */; };
+		1E1572A42636AA6200044F38 /* sm2pri8-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572562636AA6200044F38 /* sm2pri8-5.pem */; };
+		1E1572A52636AA6200044F38 /* sm2pri8-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572562636AA6200044F38 /* sm2pri8-5.pem */; };
+		1E1572A62636AA6200044F38 /* sm2pri8-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572572636AA6200044F38 /* sm2pri8-4.pem */; };
+		1E1572A72636AA6200044F38 /* sm2pri8-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572572636AA6200044F38 /* sm2pri8-4.pem */; };
+		1E1572A82636AA6200044F38 /* sm2pri8-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572582636AA6200044F38 /* sm2pri8-6.pem */; };
+		1E1572A92636AA6200044F38 /* sm2pri8-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572582636AA6200044F38 /* sm2pri8-6.pem */; };
+		1E1572AA2636AA6200044F38 /* sm2pri8-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572592636AA6200044F38 /* sm2pri8-7.pem */; };
+		1E1572AB2636AA6200044F38 /* sm2pri8-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572592636AA6200044F38 /* sm2pri8-7.pem */; };
+		1E1572AC2636AA6200044F38 /* sm2pub-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15725B2636AA6200044F38 /* sm2pub-1.der */; };
+		1E1572AD2636AA6200044F38 /* sm2pub-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15725B2636AA6200044F38 /* sm2pub-1.der */; };
+		1E1572AE2636AA6200044F38 /* sm2pub-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15725C2636AA6200044F38 /* sm2pub-2.der */; };
+		1E1572AF2636AA6200044F38 /* sm2pub-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15725C2636AA6200044F38 /* sm2pub-2.der */; };
+		1E1572B02636AA6200044F38 /* sm2pub-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15725D2636AA6200044F38 /* sm2pub-3.der */; };
+		1E1572B12636AA6200044F38 /* sm2pub-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15725D2636AA6200044F38 /* sm2pub-3.der */; };
+		1E1572B22636AA6200044F38 /* sm2pub-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15725E2636AA6200044F38 /* sm2pub-7.der */; };
+		1E1572B32636AA6200044F38 /* sm2pub-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15725E2636AA6200044F38 /* sm2pub-7.der */; };
+		1E1572B42636AA6200044F38 /* sm2pub-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15725F2636AA6200044F38 /* sm2pub-6.der */; };
+		1E1572B52636AA6300044F38 /* sm2pub-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E15725F2636AA6200044F38 /* sm2pub-6.der */; };
+		1E1572B62636AA6300044F38 /* sm2pub-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572602636AA6200044F38 /* sm2pub-4.der */; };
+		1E1572B72636AA6300044F38 /* sm2pub-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572602636AA6200044F38 /* sm2pub-4.der */; };
+		1E1572B82636AA6300044F38 /* sm2pub-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572612636AA6200044F38 /* sm2pub-5.der */; };
+		1E1572B92636AA6300044F38 /* sm2pub-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572612636AA6200044F38 /* sm2pub-5.der */; };
+		1E1572BA2636AA6300044F38 /* sm2pub-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572622636AA6200044F38 /* sm2pub-8.der */; };
+		1E1572BB2636AA6300044F38 /* sm2pub-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572622636AA6200044F38 /* sm2pub-8.der */; };
+		1E1572BC2636AA6300044F38 /* sm2pub-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572632636AA6200044F38 /* sm2pub-9.der */; };
+		1E1572BD2636AA6300044F38 /* sm2pub-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572632636AA6200044F38 /* sm2pub-9.der */; };
+		1E1572BE2636AA6300044F38 /* sm2pub-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572642636AA6200044F38 /* sm2pub-10.der */; };
+		1E1572BF2636AA6300044F38 /* sm2pub-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572642636AA6200044F38 /* sm2pub-10.der */; };
+		1E1572C02636AA6300044F38 /* sm2pub-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572662636AA6200044F38 /* sm2pub-5.pem */; };
+		1E1572C12636AA6300044F38 /* sm2pub-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572662636AA6200044F38 /* sm2pub-5.pem */; };
+		1E1572C22636AA6300044F38 /* sm2pub-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572672636AA6200044F38 /* sm2pub-4.pem */; };
+		1E1572C32636AA6300044F38 /* sm2pub-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572672636AA6200044F38 /* sm2pub-4.pem */; };
+		1E1572C42636AA6300044F38 /* sm2pub-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572682636AA6200044F38 /* sm2pub-6.pem */; };
+		1E1572C52636AA6300044F38 /* sm2pub-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572682636AA6200044F38 /* sm2pub-6.pem */; };
+		1E1572C62636AA6300044F38 /* sm2pub-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572692636AA6200044F38 /* sm2pub-7.pem */; };
+		1E1572C72636AA6300044F38 /* sm2pub-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E1572692636AA6200044F38 /* sm2pub-7.pem */; };
+		1E1572C82636AA6300044F38 /* sm2pub-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726A2636AA6200044F38 /* sm2pub-3.pem */; };
+		1E1572C92636AA6300044F38 /* sm2pub-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726A2636AA6200044F38 /* sm2pub-3.pem */; };
+		1E1572CA2636AA6300044F38 /* sm2pub-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726B2636AA6200044F38 /* sm2pub-2.pem */; };
+		1E1572CB2636AA6300044F38 /* sm2pub-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726B2636AA6200044F38 /* sm2pub-2.pem */; };
+		1E1572CC2636AA6300044F38 /* sm2pub-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726C2636AA6200044F38 /* sm2pub-1.pem */; };
+		1E1572CD2636AA6300044F38 /* sm2pub-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726C2636AA6200044F38 /* sm2pub-1.pem */; };
+		1E1572CE2636AA6300044F38 /* sm2pub-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726D2636AA6200044F38 /* sm2pub-10.pem */; };
+		1E1572CF2636AA6300044F38 /* sm2pub-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726D2636AA6200044F38 /* sm2pub-10.pem */; };
+		1E1572D02636AA6300044F38 /* sm2pub-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726E2636AA6200044F38 /* sm2pub-9.pem */; };
+		1E1572D12636AA6300044F38 /* sm2pub-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726E2636AA6200044F38 /* sm2pub-9.pem */; };
+		1E1572D22636AA6300044F38 /* sm2pub-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726F2636AA6200044F38 /* sm2pub-8.pem */; };
+		1E1572D32636AA6300044F38 /* sm2pub-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1E15726F2636AA6200044F38 /* sm2pub-8.pem */; };
+		1E15731F2636BD9D00044F38 /* GMSm2BioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15731E2636BD9D00044F38 /* GMSm2BioTests.m */; };
 		1E7C80BF24B87C8700047115 /* GMSm2k1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C80BE24B87C8700047115 /* GMSm2k1Tests.m */; };
 		1E7C80C224B8800E00047115 /* GMSm2r1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C80C124B8800E00047115 /* GMSm2r1Tests.m */; };
 		31143611794565FAA2CA0C09 /* Pods_GMObjC_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB234605A0669710AC7FEB9 /* Pods_GMObjC_Tests.framework */; };
@@ -44,6 +145,57 @@
 
 /* Begin PBXFileReference section */
 		05F4109CE706901DBCBA9E6C /* Pods_GMObjC_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMObjC_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E15723A2636AA6200044F38 /* sm2pri-4.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-4.pem"; sourceTree = "<group>"; };
+		1E15723B2636AA6200044F38 /* sm2pri-5.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-5.pem"; sourceTree = "<group>"; };
+		1E15723C2636AA6200044F38 /* sm2pri-7.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-7.pem"; sourceTree = "<group>"; };
+		1E15723D2636AA6200044F38 /* sm2pri-6.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-6.pem"; sourceTree = "<group>"; };
+		1E15723E2636AA6200044F38 /* sm2pri-2.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-2.pem"; sourceTree = "<group>"; };
+		1E15723F2636AA6200044F38 /* sm2pri-3.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-3.pem"; sourceTree = "<group>"; };
+		1E1572402636AA6200044F38 /* sm2pri-1.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-1.pem"; sourceTree = "<group>"; };
+		1E1572412636AA6200044F38 /* sm2pri-10.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-10.pem"; sourceTree = "<group>"; };
+		1E1572422636AA6200044F38 /* sm2pri-8.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-8.pem"; sourceTree = "<group>"; };
+		1E1572432636AA6200044F38 /* sm2pri-9.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-9.pem"; sourceTree = "<group>"; };
+		1E1572452636AA6200044F38 /* sm2pri-1.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-1.der"; sourceTree = "<group>"; };
+		1E1572462636AA6200044F38 /* sm2pri-3.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-3.der"; sourceTree = "<group>"; };
+		1E1572472636AA6200044F38 /* sm2pri-2.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-2.der"; sourceTree = "<group>"; };
+		1E1572482636AA6200044F38 /* sm2pri-6.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-6.der"; sourceTree = "<group>"; };
+		1E1572492636AA6200044F38 /* sm2pri-7.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-7.der"; sourceTree = "<group>"; };
+		1E15724A2636AA6200044F38 /* sm2pri-5.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-5.der"; sourceTree = "<group>"; };
+		1E15724B2636AA6200044F38 /* sm2pri-4.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-4.der"; sourceTree = "<group>"; };
+		1E15724C2636AA6200044F38 /* sm2pri-9.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-9.der"; sourceTree = "<group>"; };
+		1E15724D2636AA6200044F38 /* sm2pri-8.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-8.der"; sourceTree = "<group>"; };
+		1E15724E2636AA6200044F38 /* sm2pri-10.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-10.der"; sourceTree = "<group>"; };
+		1E1572502636AA6200044F38 /* sm2pri8-9.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-9.pem"; sourceTree = "<group>"; };
+		1E1572512636AA6200044F38 /* sm2pri8-8.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-8.pem"; sourceTree = "<group>"; };
+		1E1572522636AA6200044F38 /* sm2pri8-10.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-10.pem"; sourceTree = "<group>"; };
+		1E1572532636AA6200044F38 /* sm2pri8-3.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-3.pem"; sourceTree = "<group>"; };
+		1E1572542636AA6200044F38 /* sm2pri8-2.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-2.pem"; sourceTree = "<group>"; };
+		1E1572552636AA6200044F38 /* sm2pri8-1.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-1.pem"; sourceTree = "<group>"; };
+		1E1572562636AA6200044F38 /* sm2pri8-5.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-5.pem"; sourceTree = "<group>"; };
+		1E1572572636AA6200044F38 /* sm2pri8-4.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-4.pem"; sourceTree = "<group>"; };
+		1E1572582636AA6200044F38 /* sm2pri8-6.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-6.pem"; sourceTree = "<group>"; };
+		1E1572592636AA6200044F38 /* sm2pri8-7.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-7.pem"; sourceTree = "<group>"; };
+		1E15725B2636AA6200044F38 /* sm2pub-1.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-1.der"; sourceTree = "<group>"; };
+		1E15725C2636AA6200044F38 /* sm2pub-2.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-2.der"; sourceTree = "<group>"; };
+		1E15725D2636AA6200044F38 /* sm2pub-3.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-3.der"; sourceTree = "<group>"; };
+		1E15725E2636AA6200044F38 /* sm2pub-7.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-7.der"; sourceTree = "<group>"; };
+		1E15725F2636AA6200044F38 /* sm2pub-6.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-6.der"; sourceTree = "<group>"; };
+		1E1572602636AA6200044F38 /* sm2pub-4.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-4.der"; sourceTree = "<group>"; };
+		1E1572612636AA6200044F38 /* sm2pub-5.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-5.der"; sourceTree = "<group>"; };
+		1E1572622636AA6200044F38 /* sm2pub-8.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-8.der"; sourceTree = "<group>"; };
+		1E1572632636AA6200044F38 /* sm2pub-9.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-9.der"; sourceTree = "<group>"; };
+		1E1572642636AA6200044F38 /* sm2pub-10.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-10.der"; sourceTree = "<group>"; };
+		1E1572662636AA6200044F38 /* sm2pub-5.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-5.pem"; sourceTree = "<group>"; };
+		1E1572672636AA6200044F38 /* sm2pub-4.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-4.pem"; sourceTree = "<group>"; };
+		1E1572682636AA6200044F38 /* sm2pub-6.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-6.pem"; sourceTree = "<group>"; };
+		1E1572692636AA6200044F38 /* sm2pub-7.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-7.pem"; sourceTree = "<group>"; };
+		1E15726A2636AA6200044F38 /* sm2pub-3.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-3.pem"; sourceTree = "<group>"; };
+		1E15726B2636AA6200044F38 /* sm2pub-2.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-2.pem"; sourceTree = "<group>"; };
+		1E15726C2636AA6200044F38 /* sm2pub-1.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-1.pem"; sourceTree = "<group>"; };
+		1E15726D2636AA6200044F38 /* sm2pub-10.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-10.pem"; sourceTree = "<group>"; };
+		1E15726E2636AA6200044F38 /* sm2pub-9.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-9.pem"; sourceTree = "<group>"; };
+		1E15726F2636AA6200044F38 /* sm2pub-8.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-8.pem"; sourceTree = "<group>"; };
+		1E15731E2636BD9D00044F38 /* GMSm2BioTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm2BioTests.m; sourceTree = "<group>"; };
 		1E1EC4B7259DE97A00461662 /* README-CN.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "README-CN.md"; path = "../README-CN.md"; sourceTree = "<group>"; };
 		1E7C80BE24B87C8700047115 /* GMSm2k1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMSm2k1Tests.m; sourceTree = "<group>"; };
 		1E7C80C024B87D2200047115 /* GMSm2v1Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMSm2v1Tests.h; sourceTree = "<group>"; };
@@ -109,6 +261,103 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E1572382636AA6200044F38 /* PemPerFiles */ = {
+			isa = PBXGroup;
+			children = (
+				1E1572442636AA6200044F38 /* private_der */,
+				1E1572392636AA6200044F38 /* private_pem */,
+				1E15724F2636AA6200044F38 /* private_pkcs8_pem */,
+				1E15725A2636AA6200044F38 /* public_der */,
+				1E1572652636AA6200044F38 /* public_pem */,
+			);
+			path = PemPerFiles;
+			sourceTree = "<group>";
+		};
+		1E1572392636AA6200044F38 /* private_pem */ = {
+			isa = PBXGroup;
+			children = (
+				1E1572402636AA6200044F38 /* sm2pri-1.pem */,
+				1E15723E2636AA6200044F38 /* sm2pri-2.pem */,
+				1E15723F2636AA6200044F38 /* sm2pri-3.pem */,
+				1E15723A2636AA6200044F38 /* sm2pri-4.pem */,
+				1E15723B2636AA6200044F38 /* sm2pri-5.pem */,
+				1E15723D2636AA6200044F38 /* sm2pri-6.pem */,
+				1E15723C2636AA6200044F38 /* sm2pri-7.pem */,
+				1E1572422636AA6200044F38 /* sm2pri-8.pem */,
+				1E1572432636AA6200044F38 /* sm2pri-9.pem */,
+				1E1572412636AA6200044F38 /* sm2pri-10.pem */,
+			);
+			path = private_pem;
+			sourceTree = "<group>";
+		};
+		1E1572442636AA6200044F38 /* private_der */ = {
+			isa = PBXGroup;
+			children = (
+				1E1572452636AA6200044F38 /* sm2pri-1.der */,
+				1E1572472636AA6200044F38 /* sm2pri-2.der */,
+				1E1572462636AA6200044F38 /* sm2pri-3.der */,
+				1E15724B2636AA6200044F38 /* sm2pri-4.der */,
+				1E15724A2636AA6200044F38 /* sm2pri-5.der */,
+				1E1572482636AA6200044F38 /* sm2pri-6.der */,
+				1E1572492636AA6200044F38 /* sm2pri-7.der */,
+				1E15724D2636AA6200044F38 /* sm2pri-8.der */,
+				1E15724C2636AA6200044F38 /* sm2pri-9.der */,
+				1E15724E2636AA6200044F38 /* sm2pri-10.der */,
+			);
+			path = private_der;
+			sourceTree = "<group>";
+		};
+		1E15724F2636AA6200044F38 /* private_pkcs8_pem */ = {
+			isa = PBXGroup;
+			children = (
+				1E1572552636AA6200044F38 /* sm2pri8-1.pem */,
+				1E1572542636AA6200044F38 /* sm2pri8-2.pem */,
+				1E1572532636AA6200044F38 /* sm2pri8-3.pem */,
+				1E1572572636AA6200044F38 /* sm2pri8-4.pem */,
+				1E1572562636AA6200044F38 /* sm2pri8-5.pem */,
+				1E1572582636AA6200044F38 /* sm2pri8-6.pem */,
+				1E1572592636AA6200044F38 /* sm2pri8-7.pem */,
+				1E1572512636AA6200044F38 /* sm2pri8-8.pem */,
+				1E1572502636AA6200044F38 /* sm2pri8-9.pem */,
+				1E1572522636AA6200044F38 /* sm2pri8-10.pem */,
+			);
+			path = private_pkcs8_pem;
+			sourceTree = "<group>";
+		};
+		1E15725A2636AA6200044F38 /* public_der */ = {
+			isa = PBXGroup;
+			children = (
+				1E15725B2636AA6200044F38 /* sm2pub-1.der */,
+				1E15725C2636AA6200044F38 /* sm2pub-2.der */,
+				1E15725D2636AA6200044F38 /* sm2pub-3.der */,
+				1E1572602636AA6200044F38 /* sm2pub-4.der */,
+				1E1572612636AA6200044F38 /* sm2pub-5.der */,
+				1E15725F2636AA6200044F38 /* sm2pub-6.der */,
+				1E15725E2636AA6200044F38 /* sm2pub-7.der */,
+				1E1572622636AA6200044F38 /* sm2pub-8.der */,
+				1E1572632636AA6200044F38 /* sm2pub-9.der */,
+				1E1572642636AA6200044F38 /* sm2pub-10.der */,
+			);
+			path = public_der;
+			sourceTree = "<group>";
+		};
+		1E1572652636AA6200044F38 /* public_pem */ = {
+			isa = PBXGroup;
+			children = (
+				1E15726C2636AA6200044F38 /* sm2pub-1.pem */,
+				1E15726B2636AA6200044F38 /* sm2pub-2.pem */,
+				1E15726A2636AA6200044F38 /* sm2pub-3.pem */,
+				1E1572672636AA6200044F38 /* sm2pub-4.pem */,
+				1E1572662636AA6200044F38 /* sm2pub-5.pem */,
+				1E1572682636AA6200044F38 /* sm2pub-6.pem */,
+				1E1572692636AA6200044F38 /* sm2pub-7.pem */,
+				1E15726F2636AA6200044F38 /* sm2pub-8.pem */,
+				1E15726E2636AA6200044F38 /* sm2pub-9.pem */,
+				1E15726D2636AA6200044F38 /* sm2pub-10.pem */,
+			);
+			path = public_pem;
+			sourceTree = "<group>";
+		};
 		3BA6CB9E2ED416C269959A23 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +406,7 @@
 		6003F593195388D20070C39A /* Example for GMObjC */ = {
 			isa = PBXGroup;
 			children = (
+				1E1572382636AA6200044F38 /* PemPerFiles */,
 				9C36EEEA22F420DE002203E9 /* sm4TestFile.txt */,
 				6003F59C195388D20070C39A /* GMAppDelegate.h */,
 				6003F59D195388D20070C39A /* GMAppDelegate.m */,
@@ -190,6 +440,7 @@
 				9C1E255B2309658D00332EB6 /* GMSm2v1Tests.m */,
 				1E7C80BE24B87C8700047115 /* GMSm2k1Tests.m */,
 				1E7C80C124B8800E00047115 /* GMSm2r1Tests.m */,
+				1E15731E2636BD9D00044F38 /* GMSm2BioTests.m */,
 				9C97272A23096BE400A39090 /* GMSm3Tests.m */,
 				9C97272C23096C4900A39090 /* GMSm4Tests.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
@@ -302,10 +553,60 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E15728E2636AA6200044F38 /* sm2pri-5.der in Resources */,
+				1E1572802636AA6200044F38 /* sm2pri-8.pem in Resources */,
+				1E1572D22636AA6300044F38 /* sm2pub-8.pem in Resources */,
+				1E1572C42636AA6300044F38 /* sm2pub-6.pem in Resources */,
+				1E1572782636AA6200044F38 /* sm2pri-2.pem in Resources */,
+				1E1572B82636AA6300044F38 /* sm2pub-5.der in Resources */,
+				1E1572B02636AA6200044F38 /* sm2pub-3.der in Resources */,
+				1E1572862636AA6200044F38 /* sm2pri-3.der in Resources */,
+				1E1572902636AA6200044F38 /* sm2pri-4.der in Resources */,
+				1E1572A42636AA6200044F38 /* sm2pri8-5.pem in Resources */,
+				1E15727A2636AA6200044F38 /* sm2pri-3.pem in Resources */,
+				1E1572CA2636AA6300044F38 /* sm2pub-2.pem in Resources */,
+				1E1572882636AA6200044F38 /* sm2pri-2.der in Resources */,
+				1E1572CE2636AA6300044F38 /* sm2pub-10.pem in Resources */,
+				1E1572D02636AA6300044F38 /* sm2pub-9.pem in Resources */,
+				1E1572B42636AA6200044F38 /* sm2pub-6.der in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				1E1572C82636AA6300044F38 /* sm2pub-3.pem in Resources */,
+				1E1572A22636AA6200044F38 /* sm2pri8-1.pem in Resources */,
+				1E1572742636AA6200044F38 /* sm2pri-7.pem in Resources */,
+				1E1572A82636AA6200044F38 /* sm2pri8-6.pem in Resources */,
+				1E15729A2636AA6200044F38 /* sm2pri8-8.pem in Resources */,
+				1E1572702636AA6200044F38 /* sm2pri-4.pem in Resources */,
+				1E1572CC2636AA6300044F38 /* sm2pub-1.pem in Resources */,
+				1E1572BE2636AA6300044F38 /* sm2pub-10.der in Resources */,
 				9C36EEEB22F420DE002203E9 /* sm4TestFile.txt in Resources */,
+				1E1572B22636AA6200044F38 /* sm2pub-7.der in Resources */,
+				1E1572C02636AA6300044F38 /* sm2pub-5.pem in Resources */,
+				1E1572822636AA6200044F38 /* sm2pri-9.pem in Resources */,
+				1E1572982636AA6200044F38 /* sm2pri8-9.pem in Resources */,
+				1E1572BC2636AA6300044F38 /* sm2pub-9.der in Resources */,
+				1E15729C2636AA6200044F38 /* sm2pri8-10.pem in Resources */,
+				1E1572762636AA6200044F38 /* sm2pri-6.pem in Resources */,
+				1E1572AC2636AA6200044F38 /* sm2pub-1.der in Resources */,
+				1E1572722636AA6200044F38 /* sm2pri-5.pem in Resources */,
+				1E1572AA2636AA6200044F38 /* sm2pri8-7.pem in Resources */,
+				1E1572A62636AA6200044F38 /* sm2pri8-4.pem in Resources */,
+				1E1572922636AA6200044F38 /* sm2pri-9.der in Resources */,
+				1E15729E2636AA6200044F38 /* sm2pri8-3.pem in Resources */,
+				1E1572A02636AA6200044F38 /* sm2pri8-2.pem in Resources */,
+				1E1572942636AA6200044F38 /* sm2pri-8.der in Resources */,
+				1E1572842636AA6200044F38 /* sm2pri-1.der in Resources */,
+				1E1572962636AA6200044F38 /* sm2pri-10.der in Resources */,
+				1E1572C22636AA6300044F38 /* sm2pub-4.pem in Resources */,
+				1E1572BA2636AA6300044F38 /* sm2pub-8.der in Resources */,
+				1E15728A2636AA6200044F38 /* sm2pri-6.der in Resources */,
+				1E15728C2636AA6200044F38 /* sm2pri-7.der in Resources */,
+				1E1572C62636AA6300044F38 /* sm2pub-7.pem in Resources */,
+				1E15727E2636AA6200044F38 /* sm2pri-10.pem in Resources */,
 				ABBEF70B233E7928002A0B0B /* LaunchScreen.storyboard in Resources */,
+				1E1572AE2636AA6200044F38 /* sm2pub-2.der in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				1E15727C2636AA6200044F38 /* sm2pri-1.pem in Resources */,
+				1E1572B62636AA6300044F38 /* sm2pub-4.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,8 +614,58 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E1572CD2636AA6300044F38 /* sm2pub-1.pem in Resources */,
+				1E1572932636AA6200044F38 /* sm2pri-9.der in Resources */,
+				1E1572C72636AA6300044F38 /* sm2pub-7.pem in Resources */,
+				1E15727F2636AA6200044F38 /* sm2pri-10.pem in Resources */,
+				1E15727D2636AA6200044F38 /* sm2pri-1.pem in Resources */,
+				1E1572AF2636AA6200044F38 /* sm2pub-2.der in Resources */,
+				1E1572B12636AA6200044F38 /* sm2pub-3.der in Resources */,
+				1E1572792636AA6200044F38 /* sm2pri-2.pem in Resources */,
+				1E1572B32636AA6200044F38 /* sm2pub-7.der in Resources */,
+				1E1572832636AA6200044F38 /* sm2pri-9.pem in Resources */,
+				1E1572C12636AA6300044F38 /* sm2pub-5.pem in Resources */,
+				1E15728F2636AA6200044F38 /* sm2pri-5.der in Resources */,
+				1E15728D2636AA6200044F38 /* sm2pri-7.der in Resources */,
+				1E15727B2636AA6200044F38 /* sm2pri-3.pem in Resources */,
+				1E1572A12636AA6200044F38 /* sm2pri8-2.pem in Resources */,
+				1E15728B2636AA6200044F38 /* sm2pri-6.der in Resources */,
+				1E1572CF2636AA6300044F38 /* sm2pub-10.pem in Resources */,
+				1E1572772636AA6200044F38 /* sm2pri-6.pem in Resources */,
+				1E15729D2636AA6200044F38 /* sm2pri8-10.pem in Resources */,
+				1E1572AD2636AA6200044F38 /* sm2pub-1.der in Resources */,
+				1E1572D12636AA6300044F38 /* sm2pub-9.pem in Resources */,
+				1E1572712636AA6200044F38 /* sm2pri-4.pem in Resources */,
+				1E1572D32636AA6300044F38 /* sm2pub-8.pem in Resources */,
+				1E1572C92636AA6300044F38 /* sm2pub-3.pem in Resources */,
+				1E1572CB2636AA6300044F38 /* sm2pub-2.pem in Resources */,
+				1E1572752636AA6200044F38 /* sm2pri-7.pem in Resources */,
+				1E1572872636AA6200044F38 /* sm2pri-3.der in Resources */,
+				1E1572C52636AA6300044F38 /* sm2pub-6.pem in Resources */,
+				1E1572BB2636AA6300044F38 /* sm2pub-8.der in Resources */,
+				1E1572972636AA6200044F38 /* sm2pri-10.der in Resources */,
+				1E1572852636AA6200044F38 /* sm2pri-1.der in Resources */,
+				1E1572B92636AA6300044F38 /* sm2pub-5.der in Resources */,
+				1E1572A72636AA6200044F38 /* sm2pri8-4.pem in Resources */,
+				1E15729F2636AA6200044F38 /* sm2pri8-3.pem in Resources */,
+				1E1572892636AA6200044F38 /* sm2pri-2.der in Resources */,
+				1E1572912636AA6200044F38 /* sm2pri-4.der in Resources */,
+				1E1572BF2636AA6300044F38 /* sm2pub-10.der in Resources */,
+				1E1572A32636AA6200044F38 /* sm2pri8-1.pem in Resources */,
+				1E1572C32636AA6300044F38 /* sm2pub-4.pem in Resources */,
+				1E1572AB2636AA6200044F38 /* sm2pri8-7.pem in Resources */,
+				1E1572992636AA6200044F38 /* sm2pri8-9.pem in Resources */,
+				1E1572BD2636AA6300044F38 /* sm2pub-9.der in Resources */,
+				1E1572952636AA6200044F38 /* sm2pri-8.der in Resources */,
+				1E1572B52636AA6300044F38 /* sm2pub-6.der in Resources */,
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
+				1E1572812636AA6200044F38 /* sm2pri-8.pem in Resources */,
 				9C36EEEC22F420E3002203E9 /* sm4TestFile.txt in Resources */,
+				1E1572A52636AA6200044F38 /* sm2pri8-5.pem in Resources */,
+				1E1572732636AA6200044F38 /* sm2pri-5.pem in Resources */,
+				1E1572B72636AA6300044F38 /* sm2pub-4.der in Resources */,
+				1E15729B2636AA6200044F38 /* sm2pri8-8.pem in Resources */,
+				1E1572A92636AA6200044F38 /* sm2pri8-6.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +738,7 @@
 				9C97272D23096C4900A39090 /* GMSm4Tests.m in Sources */,
 				1E7C80C224B8800E00047115 /* GMSm2r1Tests.m in Sources */,
 				9C1E255C2309658D00332EB6 /* GMSm2v1Tests.m in Sources */,
+				1E15731F2636BD9D00044F38 /* GMSm2BioTests.m in Sources */,
 				1E7C80BF24B87C8700047115 /* GMSm2k1Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,9 +890,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GMObjC/GMObjC-Prefix.pch";
 				INFOPLIST_FILE = "GMObjC/GMObjC-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lf.gmobjc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.gmobjc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -566,9 +918,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GMObjC/GMObjC-Prefix.pch";
 				INFOPLIST_FILE = "GMObjC/GMObjC-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lf.gmobjc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.gmobjc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
