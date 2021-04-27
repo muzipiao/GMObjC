@@ -33,11 +33,12 @@ Depends on OpenSSL 1.1.1 or above, has been packaged as a Framework, and uploade
 
 ## Installation
 
-There are three ways to use GMObjC in your project:
+The method of using GMObjC in the project is as follows:
 
-* using CocoaPods
-* using Carthage
-* manual install (build frameworks or embed Xcode Project)
+* Use CocoaPods
+* Use Carthage
+* Compile to Framework/XCFramework
+* Drag into the project source code
 
 ### CocoaPods
 
@@ -215,6 +216,32 @@ if ([clientECDH isEqualToString:serverECDH]) {
 }else{
     NSLog(@"ECDH key negotiation failed");
 }
+```
+
+### SM2 key file read-write (PEM/DER)
+
+The SM2 public and private key format may be PEM or DER format, which can be operated with GMSm2Bio.
+
+```objc
+NSString *filePath = @"PEM or DER file address";
+// Read SM2 public and private key from PEM file
+NSString *pubPemKey = [GMSm2Bio readPublicKeyFromPemFile:filePath];
+NSString *priPemKey = [GMSm2Bio readPrivateKeyFromPemFile:filePath];
+// Read SM2 public and private key from DER file
+NSString *pubDerKey = [GMSm2Bio readPublicKeyFromDerFile:filePath];
+NSString *priDerKey = [GMSm2Bio readPrivateKeyFromDerFile:filePath];
+
+NSString *savePath = @"Save SM2 public or private keys to the sandbox of the PEM/DER file";
+// Save the public key string starting with 04 as a PEM or DER file, and return YES if the save is successful, otherwise NO
+BOOL success1 = [GMSm2Bio savePublicKeyToPemFile:pubKey filePath:pubPemPath];
+BOOL success2 = [GMSm2Bio savePublicKeyToDerFile:pubKey filePath:pubDerPath];
+// Save the private key string as a PEM or DER file, return YES if saved successfully, otherwise NO
+BOOL success3 = [GMSm2Bio savePrivateKeyToPemFile:priKey filePath:priPemPath];
+BOOL success4 = [GMSm2Bio savePrivateKeyToDerFile:priKey filePath:priDerPath];
+
+// Create a PEM or DER format key pair file, the array element 0 is the address of the public key file, and element 1 is the address of the private key file
+NSArray<NSString *> *derFilesArray = [GMSm2Bio createDerKeyPairFiles];
+NSArray<NSString *> *pemFilesArray = [GMSm2Bio createPemKeyPairFiles];
 ```
 
 ### SM4 encryption and decryption

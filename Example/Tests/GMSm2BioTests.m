@@ -40,7 +40,11 @@
         NSString *priPemPath = [[NSBundle mainBundle] pathForResource:priPem ofType:nil];
         NSString *priDerPath = [[NSBundle mainBundle] pathForResource:priDer ofType:nil];
         NSString *pri8PemPath = [[NSBundle mainBundle] pathForResource:pri8Pem ofType:nil];
-        XCTAssertTrue(pubPemPath&&pubDerPath&&priPemPath&&priDerPath&&pri8PemPath, @"不为空");
+        XCTAssertTrue(pubPemPath.length > 0, @"文件地址不为空");
+        XCTAssertTrue(pubDerPath.length > 0, @"文件地址不为空");
+        XCTAssertTrue(priPemPath.length > 0, @"文件地址不为空");
+        XCTAssertTrue(priDerPath.length > 0, @"文件地址不为空");
+        XCTAssertTrue(pri8PemPath.length > 0, @"文件地址不为空");
         
         [m1 addObject:pubPemPath];
         [m2 addObject:pubDerPath];
@@ -61,7 +65,7 @@
     XCTAssertTrue(currentType == GMCurveType_sm2p256v1, @"当前椭圆曲线应为 NID_sm2");
 }
 
-///MARK: - NULL
+///MARK: - 测试NULL
 - (void)testParameterNull {
     NSArray *strNilArray = @[[NSNull null], @""];
     NSArray *dataNilArray = @[[NSNull null], [NSData new]];
@@ -104,6 +108,7 @@
     }
 }
 
+///MARK: - 密钥文件读取
 - (void)testReadPemDerFiles {
     for (NSInteger i = 0; i < 10; i++) {
         NSString *pubPemPath = self.publicPemList[i];
@@ -111,28 +116,60 @@
         NSString *priPemPath = self.privatePemList[i];
         NSString *priDerPath = self.privateDerList[i];
         NSString *pri8PemPath = self.private8PemList[i];
+        // 从文件读取密钥 KEY
+        NSString *pubPemKey = [GMSm2Bio readPublicKeyFromPemFile:pubPemPath];
+        NSString *pubDerKey = [GMSm2Bio readPublicKeyFromDerFile:pubDerPath];
+        NSString *priPemKey = [GMSm2Bio readPrivateKeyFromPemFile:priPemPath];
+        NSString *priDerKey = [GMSm2Bio readPrivateKeyFromDerFile:priDerPath];
+        NSString *pri8PemKey = [GMSm2Bio readPrivateKeyFromPemFile:pri8PemPath];
+        XCTAssertTrue(pubPemKey.length > 0, @"读取密钥不为空");
+        XCTAssertTrue(pubDerKey.length > 0, @"读取密钥不为空");
+        XCTAssertTrue(priPemKey.length > 0, @"读取密钥不为空");
+        XCTAssertTrue(priDerKey.length > 0, @"读取密钥不为空");
+        XCTAssertTrue(pri8PemKey.length > 0, @"读取密钥不为空");
         
-        NSString *pubPem = [GMSm2Bio readPublicKeyFromPemFile:pubPemPath];
-        NSString *pubDer = [GMSm2Bio readPublicKeyFromDerFile:pubDerPath];
-        NSString *priPem = [GMSm2Bio readPrivateKeyFromPemFile:priPemPath];
-        NSString *priDer = [GMSm2Bio readPrivateKeyFromDerFile:priDerPath];
-        NSString *pri8Pem = [GMSm2Bio readPrivateKeyFromPemFile:pri8PemPath];
-        XCTAssertTrue(pubPem&&pubDer&&priPem&&priDer&&pri8Pem, @"读取密钥不为空！");
-        // 同一密钥不同格式，读取结果相同
-        BOOL samePub = [pubDer isEqualToString:pubPem];
-        BOOL samePri1 = [priDer isEqualToString:priPem];
-        BOOL samePri2 = [pri8Pem isEqualToString:priPem];
+        BOOL samePub = [pubDerKey isEqualToString:pubPemKey];
+        BOOL samePri1 = [priDerKey isEqualToString:priPemKey];
+        BOOL samePri2 = [pri8PemKey isEqualToString:priPemKey];
         XCTAssertTrue(samePub&&samePri1&&samePri2, @"不同格式密钥读取结果应一致");
+        // 读取文件内容
+        NSString *pubPemStr = [NSString stringWithContentsOfFile:pubPemPath encoding:NSUTF8StringEncoding error:nil];
+        NSString *priPemStr = [NSString stringWithContentsOfFile:priPemPath encoding:NSUTF8StringEncoding error:nil];
+        NSString *pri8PemStr = [NSString stringWithContentsOfFile:pri8PemPath encoding:NSUTF8StringEncoding error:nil];
+        NSData *pubDerData = [NSData dataWithContentsOfFile:pubDerPath];
+        NSData *priDerData = [NSData dataWithContentsOfFile:priDerPath];
+        XCTAssertTrue(pubPemStr.length > 0, @"从文件读取内容不为空");
+        XCTAssertTrue(priPemStr.length > 0, @"从文件读取内容不为空");
+        XCTAssertTrue(pri8PemStr.length > 0, @"从文件读取内容不为空");
+        XCTAssertTrue(pubDerData.length > 0, @"从文件读取内容不为空");
+        XCTAssertTrue(priDerData.length > 0, @"从文件读取内容不为空");
+        
+        NSString *pubPemStrKey = [GMSm2Bio readPublicKeyFromPemString:pubPemStr];
+        NSString *pubDerStrKey = [GMSm2Bio readPublicKeyFromDerData:pubDerData];
+        NSString *priPemStrKey = [GMSm2Bio readPrivateKeyFromPemString:priPemStr];
+        NSString *priDerStrKey = [GMSm2Bio readPrivateKeyFromDerData:priDerData];
+        NSString *pri8PemStrKey = [GMSm2Bio readPrivateKeyFromPemString:pri8PemStr];
+        XCTAssertTrue(pubPemStrKey.length > 0, @"解析字符串密钥不为空");
+        XCTAssertTrue(pubDerStrKey.length > 0, @"解析字符串密钥不为空");
+        XCTAssertTrue(priPemStrKey.length > 0, @"解析字符串密钥不为空");
+        XCTAssertTrue(priDerStrKey.length > 0, @"解析字符串密钥不为空");
+        XCTAssertTrue(pri8PemStrKey.length > 0, @"解析字符串密钥不为空");
+        
+        BOOL samePub1 = [pubDerStrKey isEqualToString:pubPemStrKey];
+        BOOL samePri3 = [priDerStrKey isEqualToString:priPemStrKey];
+        BOOL samePri4 = [pri8PemStrKey isEqualToString:priPemStrKey];
+        XCTAssertTrue(samePub1&&samePri3&&samePri4, @"不同格式密钥字符结果应一致");
     }
 }
 
+///MARK: - 密钥保存至文件
 - (void)testSaveToPemDerFiles {
     NSString *tmpDir = NSTemporaryDirectory();
     for (NSInteger i = 0; i < 100; i++) {
         NSArray *keyPair = [GMSm2Utils createKeyPair];
         NSString *pubKey = keyPair[0]; // 测试用 04 开头公钥，Hex 编码格式
         NSString *priKey = keyPair[1]; // 测试用私钥，Hex 编码格式
-        XCTAssertTrue(pubKey.length > 0 && priKey.length > 0, @"生成密钥不应为空！");
+        XCTAssertTrue(pubKey.length > 0 && priKey.length > 0, @"生成密钥不应为空");
         // 保存公私钥的文件路径
         NSString *pubPemName = [NSString stringWithFormat:@"t-pub-%d.pem", (int)i];
         NSString *pubDerName = [NSString stringWithFormat:@"t-pub-%d.der", (int)i];
@@ -155,13 +192,73 @@
         NSString *pubFromDer = [GMSm2Bio readPublicKeyFromDerFile:pubDerPath];
         NSString *priFromPem = [GMSm2Bio readPrivateKeyFromPemFile:priPemPath];
         NSString *priFromDer = [GMSm2Bio readPrivateKeyFromDerFile:priDerPath];
-        XCTAssertTrue(pubFromPem&&pubFromDer&&priFromPem&&priFromDer, @"保存密钥文件不应为空");
+        XCTAssertTrue(pubFromPem.length > 0, @"保存密钥文件内容不应为空");
+        XCTAssertTrue(pubFromDer.length > 0, @"保存密钥文件内容不应为空");
+        XCTAssertTrue(priFromPem.length > 0, @"保存密钥文件内容不应为空");
+        XCTAssertTrue(priFromDer.length > 0, @"保存密钥文件内容不应为空");
 
         BOOL samePub1 = [pubFromPem isEqualToString:pubKey];
         BOOL samePub2 = [pubFromDer isEqualToString:pubKey];
         BOOL samePri1 = [priFromPem isEqualToString:priKey];
         BOOL samePri2 = [priFromDer isEqualToString:priKey];
         XCTAssertTrue(samePub1&&samePub2&&samePri1&&samePri2, @"保存读取结果应一致");
+    }
+}
+
+///MARK: - PEM & DER 转换
+- (void)testConvertPemAndDer {
+    for (NSInteger i = 0; i < 10; i++) {
+        NSString *pubPemPath = self.publicPemList[i];
+        NSString *pubDerPath = self.publicDerList[i];
+        NSString *priPemPath = self.privatePemList[i];
+        NSString *priDerPath = self.privateDerList[i];
+        // 读取文件内容
+        NSString *pubPemStr = [NSString stringWithContentsOfFile:pubPemPath encoding:NSUTF8StringEncoding error:nil];
+        NSString *priPemStr = [NSString stringWithContentsOfFile:priPemPath encoding:NSUTF8StringEncoding error:nil];
+        NSData *pubDerData = [NSData dataWithContentsOfFile:pubDerPath];
+        NSData *priDerData = [NSData dataWithContentsOfFile:priDerPath];
+        XCTAssertTrue(pubPemStr.length > 0, @"从文件读取内容不为空");
+        XCTAssertTrue(priPemStr.length > 0, @"从文件读取内容不为空");
+        XCTAssertTrue(pubDerData.length > 0, @"从文件读取内容不为空");
+        XCTAssertTrue(priDerData.length > 0, @"从文件读取内容不为空");
+        // 相互转换
+        NSData *pubDerResult = [GMSm2Bio convertPemToDer:pubPemStr];
+        NSData *priDerResult = [GMSm2Bio convertPemToDer:priPemStr];
+        NSString *pubPemResult = [GMSm2Bio convertDerToPem:pubDerData public:YES];
+        NSString *priPemResult = [GMSm2Bio convertDerToPem:priDerData public:NO];
+        XCTAssertTrue(pubDerResult.length > 0, @"转换后内容不为空");
+        XCTAssertTrue(priDerResult.length > 0, @"转换后内容不为空");
+        XCTAssertTrue(pubPemResult.length > 0, @"转换后内容不为空");
+        XCTAssertTrue(priPemResult.length > 0, @"转换后内容不为空");
+        // 转换后结果相同
+        BOOL samePub1 = [pubDerResult isEqualToData:pubDerData];
+        BOOL samePub2 = [pubPemResult isEqualToString:pubPemStr];
+        BOOL samePri1 = [priDerResult isEqualToData:priDerData];
+        BOOL samePri2 = [priPemResult isEqualToString:priPemStr];
+        XCTAssertTrue(samePub1&&samePub2&&samePri1&&samePri2, @"转换结果应一致");
+    }
+}
+
+///MARK: - 创建密钥对文件
+- (void)testCreateKeyPairFiles {
+    for (NSInteger i = 0; i < 100; i++) {
+        NSArray<NSString *> *derArray = [GMSm2Bio createDerKeyPairFiles];
+        NSArray<NSString *> *pemArray = [GMSm2Bio createPemKeyPairFiles];
+        XCTAssertTrue(derArray.count == 2 && pemArray.count == 2, @"生成密钥不应为空");
+        
+        NSString *pubPemPath = pemArray[0];
+        NSString *priPemPath = pemArray[1];
+        NSString *pubDerPath = derArray[0];
+        NSString *priDerPath = derArray[1];
+        // 读取生成的PEM/DER密钥，确定生成成功
+        NSString *pubFromPem = [GMSm2Bio readPublicKeyFromPemFile:pubPemPath];
+        NSString *pubFromDer = [GMSm2Bio readPublicKeyFromDerFile:pubDerPath];
+        NSString *priFromPem = [GMSm2Bio readPrivateKeyFromPemFile:priPemPath];
+        NSString *priFromDer = [GMSm2Bio readPrivateKeyFromDerFile:priDerPath];
+        XCTAssertTrue(pubFromPem.length > 0, @"生成密钥文件内容不应为空");
+        XCTAssertTrue(pubFromDer.length > 0, @"生成密钥文件内容不应为空");
+        XCTAssertTrue(priFromPem.length > 0, @"生成密钥文件内容不应为空");
+        XCTAssertTrue(priFromDer.length > 0, @"生成密钥文件内容不应为空");
     }
 }
 

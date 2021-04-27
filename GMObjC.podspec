@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "GMObjC"
-  spec.version      = "3.1.3"
+  spec.version      = "3.2.0"
   spec.summary      = "国密 SM2、SM3、SM4 的 OC 封装，基于 OpenSSL。"
 
   spec.description  = <<-DESC
@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   
   spec.public_header_files = "GMObjC/**/*.h"
 
-  spec.frameworks  = "Foundation", "Security"
+  spec.frameworks  = "Security"
   
   spec.dependency "GMOpenSSL"
 

@@ -33,11 +33,12 @@ open GMObjC.xcworkspace
 
 ## 集成
 
-在项目中使用 GMObjC 的方法有三种：
+在项目中使用 GMObjC 的方法如下：
 
 * 使用 CocoaPods
 * 使用 Carthage
-* 手动安装（构建 Framework 或直接嵌入 Xcode 项目）
+* 编译为 Framework/XCFramework
+* 拖入项目源码
 
 ### CocoaPods
 
@@ -215,6 +216,32 @@ if ([clientECDH isEqualToString:serverECDH]) {
 }else{
     NSLog(@"ECDH 密钥协商失败");
 }
+```
+
+### SM2 密钥文件读写(PEM/DER)
+
+SM2 公私钥格式可能为 PEM 或 DER 格式，可使用 GMSm2Bio 进行操作。
+
+```objc
+NSString *filePath = @"PEM或DER文件地址";
+// 从PEM文件读取SM2公私钥
+NSString *pubPemKey = [GMSm2Bio readPublicKeyFromPemFile:filePath];
+NSString *priPemKey = [GMSm2Bio readPrivateKeyFromPemFile:filePath];
+// 从DER文件读取SM2公私钥
+NSString *pubDerKey = [GMSm2Bio readPublicKeyFromDerFile:filePath];
+NSString *priDerKey = [GMSm2Bio readPrivateKeyFromDerFile:filePath];
+
+NSString *savePath = @"保存SM2公私钥至PEM/DER文件的沙盒地址";
+// 保存04开头的公钥字符串为PEM或DER文件，保存成功返回YES，否则NO
+BOOL success1 = [GMSm2Bio savePublicKeyToPemFile:pubKey filePath:pubPemPath];
+BOOL success2 = [GMSm2Bio savePublicKeyToDerFile:pubKey filePath:pubDerPath];
+// 保存私钥字符串为PEM或DER文件，保存成功返回YES，否则NO
+BOOL success3 = [GMSm2Bio savePrivateKeyToPemFile:priKey filePath:priPemPath];
+BOOL success4 = [GMSm2Bio savePrivateKeyToDerFile:priKey filePath:priDerPath];
+
+// 创建PEM或DER格式秘钥对文件，数组元素0为公钥文件地址，元素1为私钥文件地址
+NSArray<NSString *> *derFilesArray = [GMSm2Bio createDerKeyPairFiles];
+NSArray<NSString *> *pemFilesArray = [GMSm2Bio createPemKeyPairFiles];
 ```
 
 ### SM4 加解密
