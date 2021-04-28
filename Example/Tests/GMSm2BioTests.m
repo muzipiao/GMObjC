@@ -61,7 +61,7 @@
 
 ///MARK: - 椭圆曲线类型
 - (void)testEllipticCurveType {
-    int currentType = [GMSm2Utils ellipticCurveType];
+    int currentType = [GMSm2Bio ellipticCurveType];
     XCTAssertTrue(currentType == GMCurveType_sm2p256v1, @"当前椭圆曲线应为 NID_sm2");
 }
 

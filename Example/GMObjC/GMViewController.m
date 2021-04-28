@@ -16,7 +16,6 @@
 @property (nonatomic, copy) NSString *gPwd;    // 测试用密码
 @property (nonatomic, copy) NSString *gPubkey; // 测试用公钥
 @property (nonatomic, copy) NSString *gPrikey; // 测试用私钥
-@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UITextView *gTextView;
 
 @end
@@ -47,26 +46,27 @@
 }
 
 ///MARK: - UI
-
 - (void)createUI {
-    CGFloat statusH = 20;
-    if (@available(iOS 11.0, *)) {
-        statusH = [UIApplication sharedApplication].delegate.window.safeAreaInsets.top;
-    } else {
-        statusH = [UIApplication sharedApplication].statusBarFrame.size.height;
-    }
-    CGSize size = self.view.bounds.size;
-    CGRect rect = CGRectMake(0, statusH, size.width, size.height - statusH);
-    
-    self.scrollView = [[UIScrollView alloc]initWithFrame:rect];
-    [self.view addSubview:self.scrollView];
-    
-    self.gTextView = [[UITextView alloc]initWithFrame:self.scrollView.bounds];
+    self.gTextView = [[UITextView alloc]initWithFrame:CGRectZero];
     self.gTextView.scrollEnabled = YES;
     self.gTextView.editable = NO;
     self.gTextView.font = [UIFont systemFontOfSize:14];
     self.gTextView.text = @"国密 Demo 实例";
-    [self.scrollView addSubview:self.gTextView];
+    [self.view addSubview:self.gTextView];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    CGFloat statusBarH = 20;
+    if (@available(iOS 11.0, *)) {
+        statusBarH = [UIApplication sharedApplication].delegate.window.safeAreaInsets.top;
+    } else {
+        statusBarH = [UIApplication sharedApplication].statusBarFrame.size.height;
+    }
+    CGSize size = self.view.bounds.size;
+    CGFloat margin = size.width > size.height ? 34 : 0;
+    CGRect rect = CGRectMake(margin, statusBarH, size.width-margin*2, size.height-statusBarH);
+    self.gTextView.frame = rect;
 }
 
 ///MARK: - SM2 加解密
