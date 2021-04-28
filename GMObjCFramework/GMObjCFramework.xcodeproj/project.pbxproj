@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E48EEC62639808E00700B41 /* GMObjCDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E48EEC52639808E00700B41 /* GMObjCDef.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E48EECD2639818A00700B41 /* GMSm2Bio.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E48EECB2639818A00700B41 /* GMSm2Bio.m */; };
+		1E48EECE2639818A00700B41 /* GMSm2Bio.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E48EECC2639818A00700B41 /* GMSm2Bio.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1EAF50F7246E7FFD00E00FF8 /* GMSm3Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50ED246E7FFD00E00FF8 /* GMSm3Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1EAF50F8246E7FFD00E00FF8 /* GMSm2Def.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50EE246E7FFD00E00FF8 /* GMSm2Def.h */; };
 		1EAF50F9246E7FFD00E00FF8 /* GMObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50EF246E7FFD00E00FF8 /* GMObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1EAF50FA246E7FFD00E00FF8 /* GMSm3Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAF50F0246E7FFD00E00FF8 /* GMSm3Utils.m */; };
 		1EAF50FB246E7FFD00E00FF8 /* GMSm2Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EAF50F1246E7FFD00E00FF8 /* GMSm2Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -21,10 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E48EEC52639808E00700B41 /* GMObjCDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMObjCDef.h; path = ../../GMObjC/GMObjCDef.h; sourceTree = "<group>"; };
+		1E48EECB2639818A00700B41 /* GMSm2Bio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMSm2Bio.m; path = ../../GMObjC/GMSm2Bio.m; sourceTree = "<group>"; };
+		1E48EECC2639818A00700B41 /* GMSm2Bio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm2Bio.h; path = ../../GMObjC/GMSm2Bio.h; sourceTree = "<group>"; };
 		1E93C5FE246D73910066E503 /* GMObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E93C602246D73910066E503 /* GMObjCFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GMObjCFramework-Info.plist"; sourceTree = "<group>"; };
 		1EAF50ED246E7FFD00E00FF8 /* GMSm3Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm3Utils.h; path = ../../GMObjC/GMSm3Utils.h; sourceTree = "<group>"; };
-		1EAF50EE246E7FFD00E00FF8 /* GMSm2Def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm2Def.h; path = ../../GMObjC/GMSm2Def.h; sourceTree = "<group>"; };
 		1EAF50EF246E7FFD00E00FF8 /* GMObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMObjC.h; path = ../../GMObjC/GMObjC.h; sourceTree = "<group>"; };
 		1EAF50F0246E7FFD00E00FF8 /* GMSm3Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMSm3Utils.m; path = ../../GMObjC/GMSm3Utils.m; sourceTree = "<group>"; };
 		1EAF50F1246E7FFD00E00FF8 /* GMSm2Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMSm2Utils.h; path = ../../GMObjC/GMSm2Utils.h; sourceTree = "<group>"; };
@@ -68,7 +72,9 @@
 			isa = PBXGroup;
 			children = (
 				1EAF50EF246E7FFD00E00FF8 /* GMObjC.h */,
-				1EAF50EE246E7FFD00E00FF8 /* GMSm2Def.h */,
+				1E48EEC52639808E00700B41 /* GMObjCDef.h */,
+				1E48EECC2639818A00700B41 /* GMSm2Bio.h */,
+				1E48EECB2639818A00700B41 /* GMSm2Bio.m */,
 				1EAF50F1246E7FFD00E00FF8 /* GMSm2Utils.h */,
 				1EAF50F3246E7FFD00E00FF8 /* GMSm2Utils.m */,
 				1EAF50ED246E7FFD00E00FF8 /* GMSm3Utils.h */,
@@ -90,12 +96,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EAF50F7246E7FFD00E00FF8 /* GMSm3Utils.h in Headers */,
-				1EAF50FB246E7FFD00E00FF8 /* GMSm2Utils.h in Headers */,
 				1EAF50FF246E7FFD00E00FF8 /* GMUtils.h in Headers */,
 				1EAF50F9246E7FFD00E00FF8 /* GMObjC.h in Headers */,
+				1E48EEC62639808E00700B41 /* GMObjCDef.h in Headers */,
+				1E48EECE2639818A00700B41 /* GMSm2Bio.h in Headers */,
+				1EAF50FB246E7FFD00E00FF8 /* GMSm2Utils.h in Headers */,
+				1EAF50F7246E7FFD00E00FF8 /* GMSm3Utils.h in Headers */,
 				1EAF50FE246E7FFD00E00FF8 /* GMSm4Utils.h in Headers */,
-				1EAF50F8246E7FFD00E00FF8 /* GMSm2Def.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E48EECD2639818A00700B41 /* GMSm2Bio.m in Sources */,
 				1EAF50FC246E7FFD00E00FF8 /* GMSm4Utils.m in Sources */,
 				1EAF5100246E7FFD00E00FF8 /* GMUtils.m in Sources */,
 				1EAF50FA246E7FFD00E00FF8 /* GMSm3Utils.m in Sources */,
