@@ -11,24 +11,24 @@
   "authors": {
     "lifei": "lifei_zdjl@126.com"
   },
-  "platforms": {
-    "ios": "8.0"
-  },
-  "static_framework": true,
-  "pod_target_xcconfig": {
-    "ARCHS[sdk=iphonesimulator*]": "$(ARCHS_STANDARD_64_BIT)"
-  },
   "source": {
     "git": "https://github.com/muzipiao/GMObjC.git",
     "tag": "3.2.0"
   },
+  "pod_target_xcconfig": {
+    "ARCHS[sdk=iphonesimulator*]": "$(ARCHS_STANDARD_64_BIT)"
+  },
   "source_files": "GMObjC/**/*.{h,m}",
   "public_header_files": "GMObjC/**/*.h",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "static_framework": true,
   "frameworks": "Security",
   "dependencies": {
     "GMOpenSSL": [
 
     ]
-  },
-  "requires_arc": true
+  }
 }

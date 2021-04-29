@@ -53,8 +53,7 @@ static int kDefaultBioEllipticCurveType = NID_sm2;
         return nil;
     }
     BOOL isHasPublic = [pemStr containsString:@"PUBLIC KEY"];
-    BOOL isHasPrivate = [pemStr containsString:@"PRIVATE KEY"];
-    NSAssert(isHasPublic || isHasPrivate, @"PEM 格式错误");
+    NSAssert(isHasPublic || [pemStr containsString:@"PRIVATE KEY"], @"PEM 格式错误");
     
     const char *pem_str = pemStr.UTF8String;
     BIO *bio_key = NULL;

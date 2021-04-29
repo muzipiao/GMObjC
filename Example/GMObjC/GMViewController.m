@@ -293,8 +293,11 @@
     BOOL samePublic = [publicFromPem isEqualToString:publicFromDer];
     BOOL samePrivate1 = [privateFromPem isEqualToString:privateFromDer];
     BOOL samePrivate2 = [private8FromPem isEqualToString:privateFromDer];
-    NSAssert(samePublic && samePrivate1 && samePrivate2, @"不同格式密钥读取结果应一致");
-    
+    if (samePublic && samePrivate1 && samePrivate2) {
+        [mStr appendFormat:@"\nSuccess：不同格式密钥文件读取结果一致"];
+    }else{
+        [mStr appendFormat:@"\nError: 不同格式密钥文件读取结果不一致"];
+    }
     [mStr appendFormat:@"\nPEM格式公钥：\n%@", publicFromPem];
     [mStr appendFormat:@"\nDER格式公钥：\n%@", publicFromDer];
     [mStr appendFormat:@"\nPEM格式私钥：\n%@", privateFromPem];
@@ -310,7 +313,6 @@
     NSArray *keyPair = [GMSm2Utils createKeyPair];
     NSString *pubKey = keyPair[0]; // 测试用 04 开头公钥，Hex 编码格式
     NSString *priKey = keyPair[1]; // 测试用私钥，Hex 编码格式
-    NSAssert(pubKey && priKey, @"生成密钥不应为空！");
     // 保存公私钥的文件路径
     NSString *tmpDir = NSTemporaryDirectory();
     NSString *publicPemPath = [tmpDir stringByAppendingPathComponent:@"t-public.pem"];
@@ -332,12 +334,15 @@
     NSString *privateFromPem = [GMSm2Bio readPrivateKeyFromPemFile:privatePemPath];
     NSString *privateFromDer = [GMSm2Bio readPrivateKeyFromDerFile:privateDerPath];
     
-    NSAssert(publicFromPem && privateFromPem, @"保存密钥文件不应为空！");
     BOOL samePublic1 = [publicFromPem isEqualToString:pubKey];
     BOOL samePublic2 = [publicFromDer isEqualToString:pubKey];
     BOOL samePrivate1 = [privateFromPem isEqualToString:priKey];
     BOOL samePrivate2 = [privateFromDer isEqualToString:priKey];
-    NSAssert(samePublic1&&samePublic2&&samePrivate1&&samePrivate2, @"保存读取结果应一致");
+    if (samePublic1 && samePublic2 && samePrivate1 && samePrivate2) {
+        [mStr appendFormat:@"\nSuccess：密钥保存为PEM/DER格式文件，读取与原密钥一致"];
+    }else{
+        [mStr appendFormat:@"\nError：密钥保存为PEM/DER格式文件，读取与原密钥不一致"];
+    }
     
     [mStr appendFormat:@"\n生成的公钥：\n%@", pubKey];
     [mStr appendFormat:@"\n保存后读取的公钥：\n%@", publicFromPem];
