@@ -94,6 +94,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (int)ellipticCurveType;
 + (void)setEllipticCurveType:(int)curveType;
 
+
+///MARK: - 私钥推导公钥
++ (NSString *)publickeyFrom:(NSString *)privateKey compressed:(BOOL) compressed;
+/// 压缩公钥
++ (NSString *)compressPublicKey:(NSString *) pk;
+/// 解压缩公钥
++ (NSString *)decompressPublicKey:(NSString *) pk;
+
 @end
 
 NS_ASSUME_NONNULL_END
