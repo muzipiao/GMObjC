@@ -67,6 +67,9 @@ fastlane/test_output
 
 iOSInjectionProject/
 
+# SwiftPM
+.build
+
 # custom ignore
 Pods/
 Podfile.lock

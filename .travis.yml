@@ -1,32 +1,58 @@
-osx_image: xcode12.2
-language: objective-c
 
-cache: cocoapods
-podfile: Example/Podfile
+language: objective-c
+osx_image: xcode13
 
 env:
   global:
     - LANG=en_US.UTF-8
     - LC_ALL=en_US.UTF-8
-    - XCODE_WORKSPACE=Example/GMObjC.xcworkspace
-  matrix:
-    - SCHEME="GMObjC-Example"
+
+notifications:
+  email: false
+
+addons:
+  homebrew:
+    packages:
+    - curl # Fix the codecov upload issue
+
+cache: cocoapods
+podfile: Podfile
 
 before_install:
-  - env
-  - locale
-  - gem install xcpretty --no-document --quiet
-  - gem install cocoapods --pre
-  - pod update --project-directory=Example
-  - xcpretty --version
-  - xcodebuild -version
-  - xcodebuild -showsdks
+    - env
+    - locale
+    - gem install cocoapods --no-document --quiet
+    - gem install xcpretty --no-document --quiet
+    - pod --version
+    - pod repo update --silent
+    - xcpretty --version
+    - xcodebuild -version
+    - xcodebuild -showsdks
 
 
 script:
-  - set -o pipefail
-  - xcodebuild clean build -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -sdk iphonesimulator -configuration Debug | xcpretty -c
-  - xcodebuild clean build test -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11,OS=latest" -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+    - set -o pipefail
+  
+    - echo Check if the library described by the podspec can be built
+    - pod lib lint --allow-warnings --skip-tests # Will run test below
+
+    - echo Build the SwiftPM
+    - swift build
+    - rm -rf ~/.build
+
+    - echo Build as frameworks
+    - xcodebuild build -project GMObjC.xcodeproj -scheme 'GMObjC' -sdk iphonesimulator PLATFORM_NAME=iphonesimulator -configuration Debug | xcpretty -c
+    
+    - echo Build the Demo apps
+    - pod install
+    - xcodebuild build -workspace GMObjC.xcworkspace -scheme 'GMObjC iOS Demo' -destination 'platform=iOS Simulator,name=iPhone 13' -configuration Debug CODE_SIGNING_ALLOWED=NO | xcpretty -c
+
+    - echo Clean DerivedData
+    - rm -rf ~/Library/Developer/Xcode/DerivedData/
+    
+    - echo Run the tests
+    - xcodebuild test -workspace GMObjC.xcworkspace -scheme 'Tests iOS' -destination 'platform=iOS Simulator,name=iPhone 13' -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+    - bash <(curl -s https://codecov.io/bash)

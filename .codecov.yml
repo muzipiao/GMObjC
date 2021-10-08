@@ -1,5 +1,8 @@
 ignore:
-- "国密官方文档"
-- "Carthage"
-- "Example"
-- "GMObjCFramework"
+  - "国密官方文档"
+  - "Example"
+  - "Tests"
+  - "XCFrameworks"
+  - "Pods"
+  - "Carthage"
+
