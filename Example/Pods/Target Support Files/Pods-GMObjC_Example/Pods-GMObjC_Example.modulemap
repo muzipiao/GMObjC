@@ -1,6 +1,0 @@
-framework module Pods_GMObjC_Example {
-  umbrella header "Pods-GMObjC_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

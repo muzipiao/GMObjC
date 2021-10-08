@@ -202,7 +202,7 @@ static int kDefaultEllipticCurveType = NID_sm2;
         }
         
         size_t ptext_len = 0;
-        if (!sm2_plaintext_size(key, digest, ctext_len, &ptext_len)) {
+        if (!sm2_plaintext_size(cipher_bytes, ctext_len, &ptext_len)) {
             break;
         }
         

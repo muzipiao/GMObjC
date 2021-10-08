@@ -1,0 +1,636 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		83F3FDCF62A931848E145BCE /* libPods-Tests iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1380B2C40121152963B734F /* libPods-Tests iOS.a */; };
+		9CBB893F27100E7D008411A1 /* GMSm4Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBB893627100E7C008411A1 /* GMSm4Tests.m */; };
+		9CBB894027100E7D008411A1 /* GMSm2r1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBB893827100E7C008411A1 /* GMSm2r1Tests.m */; };
+		9CBB894127100E7D008411A1 /* GMBaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBB893927100E7C008411A1 /* GMBaseTests.m */; };
+		9CBB894227100E7D008411A1 /* GMSm2k1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBB893A27100E7C008411A1 /* GMSm2k1Tests.m */; };
+		9CBB894327100E7D008411A1 /* GMSm3Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBB893B27100E7D008411A1 /* GMSm3Tests.m */; };
+		9CBB894427100E7D008411A1 /* GMSm2BioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBB893C27100E7D008411A1 /* GMSm2BioTests.m */; };
+		9CBB894527100E7D008411A1 /* GMSm2v1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBB893E27100E7D008411A1 /* GMSm2v1Tests.m */; };
+		9CBB897F271010DA008411A1 /* sm2pri-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8948271010DA008411A1 /* sm2pri-4.pem */; };
+		9CBB8980271010DA008411A1 /* sm2pri-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8949271010DA008411A1 /* sm2pri-5.pem */; };
+		9CBB8981271010DA008411A1 /* sm2pri-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB894A271010DA008411A1 /* sm2pri-7.pem */; };
+		9CBB8982271010DA008411A1 /* sm2pri-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB894B271010DA008411A1 /* sm2pri-6.pem */; };
+		9CBB8983271010DA008411A1 /* sm2pri-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB894C271010DA008411A1 /* sm2pri-2.pem */; };
+		9CBB8984271010DA008411A1 /* sm2pri-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB894D271010DA008411A1 /* sm2pri-3.pem */; };
+		9CBB8985271010DA008411A1 /* sm2pri-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB894E271010DA008411A1 /* sm2pri-1.pem */; };
+		9CBB8986271010DA008411A1 /* sm2pri-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB894F271010DA008411A1 /* sm2pri-10.pem */; };
+		9CBB8987271010DA008411A1 /* sm2pri-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8950271010DA008411A1 /* sm2pri-8.pem */; };
+		9CBB8988271010DA008411A1 /* sm2pri-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8951271010DA008411A1 /* sm2pri-9.pem */; };
+		9CBB8989271010DA008411A1 /* sm2pri-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8953271010DA008411A1 /* sm2pri-1.der */; };
+		9CBB898A271010DA008411A1 /* sm2pri-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8954271010DA008411A1 /* sm2pri-3.der */; };
+		9CBB898B271010DA008411A1 /* sm2pri-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8955271010DA008411A1 /* sm2pri-2.der */; };
+		9CBB898C271010DA008411A1 /* sm2pri-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8956271010DA008411A1 /* sm2pri-6.der */; };
+		9CBB898D271010DA008411A1 /* sm2pri-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8957271010DA008411A1 /* sm2pri-7.der */; };
+		9CBB898E271010DA008411A1 /* sm2pri-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8958271010DA008411A1 /* sm2pri-5.der */; };
+		9CBB898F271010DA008411A1 /* sm2pri-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8959271010DA008411A1 /* sm2pri-4.der */; };
+		9CBB8990271010DA008411A1 /* sm2pri-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB895A271010DA008411A1 /* sm2pri-9.der */; };
+		9CBB8991271010DA008411A1 /* sm2pri-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB895B271010DA008411A1 /* sm2pri-8.der */; };
+		9CBB8992271010DA008411A1 /* sm2pri-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB895C271010DA008411A1 /* sm2pri-10.der */; };
+		9CBB8993271010DA008411A1 /* sm2pri8-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB895E271010DA008411A1 /* sm2pri8-9.pem */; };
+		9CBB8994271010DA008411A1 /* sm2pri8-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB895F271010DA008411A1 /* sm2pri8-8.pem */; };
+		9CBB8995271010DA008411A1 /* sm2pri8-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8960271010DA008411A1 /* sm2pri8-10.pem */; };
+		9CBB8996271010DA008411A1 /* sm2pri8-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8961271010DA008411A1 /* sm2pri8-3.pem */; };
+		9CBB8997271010DA008411A1 /* sm2pri8-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8962271010DA008411A1 /* sm2pri8-2.pem */; };
+		9CBB8998271010DA008411A1 /* sm2pri8-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8963271010DA008411A1 /* sm2pri8-1.pem */; };
+		9CBB8999271010DA008411A1 /* sm2pri8-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8964271010DA008411A1 /* sm2pri8-5.pem */; };
+		9CBB899A271010DA008411A1 /* sm2pri8-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8965271010DA008411A1 /* sm2pri8-4.pem */; };
+		9CBB899B271010DA008411A1 /* sm2pri8-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8966271010DA008411A1 /* sm2pri8-6.pem */; };
+		9CBB899C271010DA008411A1 /* sm2pri8-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8967271010DA008411A1 /* sm2pri8-7.pem */; };
+		9CBB899D271010DA008411A1 /* sm2pub-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8969271010DA008411A1 /* sm2pub-1.der */; };
+		9CBB899E271010DA008411A1 /* sm2pub-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB896A271010DA008411A1 /* sm2pub-2.der */; };
+		9CBB899F271010DA008411A1 /* sm2pub-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB896B271010DA008411A1 /* sm2pub-3.der */; };
+		9CBB89A0271010DA008411A1 /* sm2pub-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB896C271010DA008411A1 /* sm2pub-7.der */; };
+		9CBB89A1271010DA008411A1 /* sm2pub-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB896D271010DA008411A1 /* sm2pub-6.der */; };
+		9CBB89A2271010DA008411A1 /* sm2pub-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB896E271010DA008411A1 /* sm2pub-4.der */; };
+		9CBB89A3271010DA008411A1 /* sm2pub-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB896F271010DA008411A1 /* sm2pub-5.der */; };
+		9CBB89A4271010DA008411A1 /* sm2pub-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8970271010DA008411A1 /* sm2pub-8.der */; };
+		9CBB89A5271010DA008411A1 /* sm2pub-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8971271010DA008411A1 /* sm2pub-9.der */; };
+		9CBB89A6271010DB008411A1 /* sm2pub-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8972271010DA008411A1 /* sm2pub-10.der */; };
+		9CBB89A7271010DB008411A1 /* sm2pub-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8974271010DA008411A1 /* sm2pub-5.pem */; };
+		9CBB89A8271010DB008411A1 /* sm2pub-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8975271010DA008411A1 /* sm2pub-4.pem */; };
+		9CBB89A9271010DB008411A1 /* sm2pub-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8976271010DA008411A1 /* sm2pub-6.pem */; };
+		9CBB89AA271010DB008411A1 /* sm2pub-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8977271010DA008411A1 /* sm2pub-7.pem */; };
+		9CBB89AB271010DB008411A1 /* sm2pub-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8978271010DA008411A1 /* sm2pub-3.pem */; };
+		9CBB89AC271010DB008411A1 /* sm2pub-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB8979271010DA008411A1 /* sm2pub-2.pem */; };
+		9CBB89AD271010DB008411A1 /* sm2pub-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB897A271010DA008411A1 /* sm2pub-1.pem */; };
+		9CBB89AE271010DB008411A1 /* sm2pub-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB897B271010DA008411A1 /* sm2pub-10.pem */; };
+		9CBB89AF271010DB008411A1 /* sm2pub-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB897C271010DA008411A1 /* sm2pub-9.pem */; };
+		9CBB89B0271010DB008411A1 /* sm2pub-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB897D271010DA008411A1 /* sm2pub-8.pem */; };
+		9CBB89B1271010DB008411A1 /* sm4TestFile.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB897E271010DA008411A1 /* sm4TestFile.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3F5276697B3B748C950DEB74 /* Pods-Tests iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests iOS.release.xcconfig"; path = "Target Support Files/Pods-Tests iOS/Pods-Tests iOS.release.xcconfig"; sourceTree = "<group>"; };
+		9C7219FF271008A100B86975 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CBB893627100E7C008411A1 /* GMSm4Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm4Tests.m; sourceTree = "<group>"; };
+		9CBB893727100E7C008411A1 /* GMSm2v1Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm2v1Tests.h; sourceTree = "<group>"; };
+		9CBB893827100E7C008411A1 /* GMSm2r1Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm2r1Tests.m; sourceTree = "<group>"; };
+		9CBB893927100E7C008411A1 /* GMBaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMBaseTests.m; sourceTree = "<group>"; };
+		9CBB893A27100E7C008411A1 /* GMSm2k1Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm2k1Tests.m; sourceTree = "<group>"; };
+		9CBB893B27100E7D008411A1 /* GMSm3Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm3Tests.m; sourceTree = "<group>"; };
+		9CBB893C27100E7D008411A1 /* GMSm2BioTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm2BioTests.m; sourceTree = "<group>"; };
+		9CBB893D27100E7D008411A1 /* GMBaseTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMBaseTests.h; sourceTree = "<group>"; };
+		9CBB893E27100E7D008411A1 /* GMSm2v1Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm2v1Tests.m; sourceTree = "<group>"; };
+		9CBB8948271010DA008411A1 /* sm2pri-4.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-4.pem"; sourceTree = "<group>"; };
+		9CBB8949271010DA008411A1 /* sm2pri-5.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-5.pem"; sourceTree = "<group>"; };
+		9CBB894A271010DA008411A1 /* sm2pri-7.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-7.pem"; sourceTree = "<group>"; };
+		9CBB894B271010DA008411A1 /* sm2pri-6.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-6.pem"; sourceTree = "<group>"; };
+		9CBB894C271010DA008411A1 /* sm2pri-2.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-2.pem"; sourceTree = "<group>"; };
+		9CBB894D271010DA008411A1 /* sm2pri-3.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-3.pem"; sourceTree = "<group>"; };
+		9CBB894E271010DA008411A1 /* sm2pri-1.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-1.pem"; sourceTree = "<group>"; };
+		9CBB894F271010DA008411A1 /* sm2pri-10.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-10.pem"; sourceTree = "<group>"; };
+		9CBB8950271010DA008411A1 /* sm2pri-8.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-8.pem"; sourceTree = "<group>"; };
+		9CBB8951271010DA008411A1 /* sm2pri-9.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-9.pem"; sourceTree = "<group>"; };
+		9CBB8953271010DA008411A1 /* sm2pri-1.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-1.der"; sourceTree = "<group>"; };
+		9CBB8954271010DA008411A1 /* sm2pri-3.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-3.der"; sourceTree = "<group>"; };
+		9CBB8955271010DA008411A1 /* sm2pri-2.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-2.der"; sourceTree = "<group>"; };
+		9CBB8956271010DA008411A1 /* sm2pri-6.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-6.der"; sourceTree = "<group>"; };
+		9CBB8957271010DA008411A1 /* sm2pri-7.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-7.der"; sourceTree = "<group>"; };
+		9CBB8958271010DA008411A1 /* sm2pri-5.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-5.der"; sourceTree = "<group>"; };
+		9CBB8959271010DA008411A1 /* sm2pri-4.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-4.der"; sourceTree = "<group>"; };
+		9CBB895A271010DA008411A1 /* sm2pri-9.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-9.der"; sourceTree = "<group>"; };
+		9CBB895B271010DA008411A1 /* sm2pri-8.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-8.der"; sourceTree = "<group>"; };
+		9CBB895C271010DA008411A1 /* sm2pri-10.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pri-10.der"; sourceTree = "<group>"; };
+		9CBB895E271010DA008411A1 /* sm2pri8-9.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-9.pem"; sourceTree = "<group>"; };
+		9CBB895F271010DA008411A1 /* sm2pri8-8.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-8.pem"; sourceTree = "<group>"; };
+		9CBB8960271010DA008411A1 /* sm2pri8-10.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-10.pem"; sourceTree = "<group>"; };
+		9CBB8961271010DA008411A1 /* sm2pri8-3.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-3.pem"; sourceTree = "<group>"; };
+		9CBB8962271010DA008411A1 /* sm2pri8-2.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-2.pem"; sourceTree = "<group>"; };
+		9CBB8963271010DA008411A1 /* sm2pri8-1.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-1.pem"; sourceTree = "<group>"; };
+		9CBB8964271010DA008411A1 /* sm2pri8-5.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-5.pem"; sourceTree = "<group>"; };
+		9CBB8965271010DA008411A1 /* sm2pri8-4.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-4.pem"; sourceTree = "<group>"; };
+		9CBB8966271010DA008411A1 /* sm2pri8-6.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-6.pem"; sourceTree = "<group>"; };
+		9CBB8967271010DA008411A1 /* sm2pri8-7.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri8-7.pem"; sourceTree = "<group>"; };
+		9CBB8969271010DA008411A1 /* sm2pub-1.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-1.der"; sourceTree = "<group>"; };
+		9CBB896A271010DA008411A1 /* sm2pub-2.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-2.der"; sourceTree = "<group>"; };
+		9CBB896B271010DA008411A1 /* sm2pub-3.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-3.der"; sourceTree = "<group>"; };
+		9CBB896C271010DA008411A1 /* sm2pub-7.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-7.der"; sourceTree = "<group>"; };
+		9CBB896D271010DA008411A1 /* sm2pub-6.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-6.der"; sourceTree = "<group>"; };
+		9CBB896E271010DA008411A1 /* sm2pub-4.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-4.der"; sourceTree = "<group>"; };
+		9CBB896F271010DA008411A1 /* sm2pub-5.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-5.der"; sourceTree = "<group>"; };
+		9CBB8970271010DA008411A1 /* sm2pub-8.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-8.der"; sourceTree = "<group>"; };
+		9CBB8971271010DA008411A1 /* sm2pub-9.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-9.der"; sourceTree = "<group>"; };
+		9CBB8972271010DA008411A1 /* sm2pub-10.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sm2pub-10.der"; sourceTree = "<group>"; };
+		9CBB8974271010DA008411A1 /* sm2pub-5.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-5.pem"; sourceTree = "<group>"; };
+		9CBB8975271010DA008411A1 /* sm2pub-4.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-4.pem"; sourceTree = "<group>"; };
+		9CBB8976271010DA008411A1 /* sm2pub-6.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-6.pem"; sourceTree = "<group>"; };
+		9CBB8977271010DA008411A1 /* sm2pub-7.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-7.pem"; sourceTree = "<group>"; };
+		9CBB8978271010DA008411A1 /* sm2pub-3.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-3.pem"; sourceTree = "<group>"; };
+		9CBB8979271010DA008411A1 /* sm2pub-2.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-2.pem"; sourceTree = "<group>"; };
+		9CBB897A271010DA008411A1 /* sm2pub-1.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-1.pem"; sourceTree = "<group>"; };
+		9CBB897B271010DA008411A1 /* sm2pub-10.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-10.pem"; sourceTree = "<group>"; };
+		9CBB897C271010DA008411A1 /* sm2pub-9.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-9.pem"; sourceTree = "<group>"; };
+		9CBB897D271010DA008411A1 /* sm2pub-8.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pub-8.pem"; sourceTree = "<group>"; };
+		9CBB897E271010DA008411A1 /* sm4TestFile.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sm4TestFile.txt; sourceTree = "<group>"; };
+		BECF4C9E4D3EF83E161B25F6 /* Pods-Tests iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests iOS.debug.xcconfig"; path = "Target Support Files/Pods-Tests iOS/Pods-Tests iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D1380B2C40121152963B734F /* libPods-Tests iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9C7219FC271008A100B86975 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83F3FDCF62A931848E145BCE /* libPods-Tests iOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9C7219F4270FF63E00B86975 = {
+			isa = PBXGroup;
+			children = (
+				9CBB8946271010DA008411A1 /* Tests Sources */,
+				9C721A01271008A100B86975 /* Tests iOS */,
+				9C721A00271008A100B86975 /* Products */,
+				F7F3B89A00674287AD4D0A06 /* Pods */,
+				DFDF7F1E0955C31AA6D47978 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9C721A00271008A100B86975 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9C7219FF271008A100B86975 /* Tests iOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9C721A01271008A100B86975 /* Tests iOS */ = {
+			isa = PBXGroup;
+			children = (
+				9CBB893D27100E7D008411A1 /* GMBaseTests.h */,
+				9CBB893927100E7C008411A1 /* GMBaseTests.m */,
+				9CBB893C27100E7D008411A1 /* GMSm2BioTests.m */,
+				9CBB893A27100E7C008411A1 /* GMSm2k1Tests.m */,
+				9CBB893827100E7C008411A1 /* GMSm2r1Tests.m */,
+				9CBB893727100E7C008411A1 /* GMSm2v1Tests.h */,
+				9CBB893E27100E7D008411A1 /* GMSm2v1Tests.m */,
+				9CBB893B27100E7D008411A1 /* GMSm3Tests.m */,
+				9CBB893627100E7C008411A1 /* GMSm4Tests.m */,
+			);
+			path = "Tests iOS";
+			sourceTree = "<group>";
+		};
+		9CBB8946271010DA008411A1 /* Tests Sources */ = {
+			isa = PBXGroup;
+			children = (
+				9CBB8947271010DA008411A1 /* private_pem */,
+				9CBB8952271010DA008411A1 /* private_der */,
+				9CBB895D271010DA008411A1 /* private_pkcs8_pem */,
+				9CBB8968271010DA008411A1 /* public_der */,
+				9CBB8973271010DA008411A1 /* public_pem */,
+				9CBB897E271010DA008411A1 /* sm4TestFile.txt */,
+			);
+			path = "Tests Sources";
+			sourceTree = "<group>";
+		};
+		9CBB8947271010DA008411A1 /* private_pem */ = {
+			isa = PBXGroup;
+			children = (
+				9CBB8948271010DA008411A1 /* sm2pri-4.pem */,
+				9CBB8949271010DA008411A1 /* sm2pri-5.pem */,
+				9CBB894A271010DA008411A1 /* sm2pri-7.pem */,
+				9CBB894B271010DA008411A1 /* sm2pri-6.pem */,
+				9CBB894C271010DA008411A1 /* sm2pri-2.pem */,
+				9CBB894D271010DA008411A1 /* sm2pri-3.pem */,
+				9CBB894E271010DA008411A1 /* sm2pri-1.pem */,
+				9CBB894F271010DA008411A1 /* sm2pri-10.pem */,
+				9CBB8950271010DA008411A1 /* sm2pri-8.pem */,
+				9CBB8951271010DA008411A1 /* sm2pri-9.pem */,
+			);
+			path = private_pem;
+			sourceTree = "<group>";
+		};
+		9CBB8952271010DA008411A1 /* private_der */ = {
+			isa = PBXGroup;
+			children = (
+				9CBB8953271010DA008411A1 /* sm2pri-1.der */,
+				9CBB8954271010DA008411A1 /* sm2pri-3.der */,
+				9CBB8955271010DA008411A1 /* sm2pri-2.der */,
+				9CBB8956271010DA008411A1 /* sm2pri-6.der */,
+				9CBB8957271010DA008411A1 /* sm2pri-7.der */,
+				9CBB8958271010DA008411A1 /* sm2pri-5.der */,
+				9CBB8959271010DA008411A1 /* sm2pri-4.der */,
+				9CBB895A271010DA008411A1 /* sm2pri-9.der */,
+				9CBB895B271010DA008411A1 /* sm2pri-8.der */,
+				9CBB895C271010DA008411A1 /* sm2pri-10.der */,
+			);
+			path = private_der;
+			sourceTree = "<group>";
+		};
+		9CBB895D271010DA008411A1 /* private_pkcs8_pem */ = {
+			isa = PBXGroup;
+			children = (
+				9CBB895E271010DA008411A1 /* sm2pri8-9.pem */,
+				9CBB895F271010DA008411A1 /* sm2pri8-8.pem */,
+				9CBB8960271010DA008411A1 /* sm2pri8-10.pem */,
+				9CBB8961271010DA008411A1 /* sm2pri8-3.pem */,
+				9CBB8962271010DA008411A1 /* sm2pri8-2.pem */,
+				9CBB8963271010DA008411A1 /* sm2pri8-1.pem */,
+				9CBB8964271010DA008411A1 /* sm2pri8-5.pem */,
+				9CBB8965271010DA008411A1 /* sm2pri8-4.pem */,
+				9CBB8966271010DA008411A1 /* sm2pri8-6.pem */,
+				9CBB8967271010DA008411A1 /* sm2pri8-7.pem */,
+			);
+			path = private_pkcs8_pem;
+			sourceTree = "<group>";
+		};
+		9CBB8968271010DA008411A1 /* public_der */ = {
+			isa = PBXGroup;
+			children = (
+				9CBB8969271010DA008411A1 /* sm2pub-1.der */,
+				9CBB896A271010DA008411A1 /* sm2pub-2.der */,
+				9CBB896B271010DA008411A1 /* sm2pub-3.der */,
+				9CBB896C271010DA008411A1 /* sm2pub-7.der */,
+				9CBB896D271010DA008411A1 /* sm2pub-6.der */,
+				9CBB896E271010DA008411A1 /* sm2pub-4.der */,
+				9CBB896F271010DA008411A1 /* sm2pub-5.der */,
+				9CBB8970271010DA008411A1 /* sm2pub-8.der */,
+				9CBB8971271010DA008411A1 /* sm2pub-9.der */,
+				9CBB8972271010DA008411A1 /* sm2pub-10.der */,
+			);
+			path = public_der;
+			sourceTree = "<group>";
+		};
+		9CBB8973271010DA008411A1 /* public_pem */ = {
+			isa = PBXGroup;
+			children = (
+				9CBB8974271010DA008411A1 /* sm2pub-5.pem */,
+				9CBB8975271010DA008411A1 /* sm2pub-4.pem */,
+				9CBB8976271010DA008411A1 /* sm2pub-6.pem */,
+				9CBB8977271010DA008411A1 /* sm2pub-7.pem */,
+				9CBB8978271010DA008411A1 /* sm2pub-3.pem */,
+				9CBB8979271010DA008411A1 /* sm2pub-2.pem */,
+				9CBB897A271010DA008411A1 /* sm2pub-1.pem */,
+				9CBB897B271010DA008411A1 /* sm2pub-10.pem */,
+				9CBB897C271010DA008411A1 /* sm2pub-9.pem */,
+				9CBB897D271010DA008411A1 /* sm2pub-8.pem */,
+			);
+			path = public_pem;
+			sourceTree = "<group>";
+		};
+		DFDF7F1E0955C31AA6D47978 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1380B2C40121152963B734F /* libPods-Tests iOS.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F7F3B89A00674287AD4D0A06 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BECF4C9E4D3EF83E161B25F6 /* Pods-Tests iOS.debug.xcconfig */,
+				3F5276697B3B748C950DEB74 /* Pods-Tests iOS.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9C7219FE271008A100B86975 /* Tests iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C721A04271008A100B86975 /* Build configuration list for PBXNativeTarget "Tests iOS" */;
+			buildPhases = (
+				3200F81DDCD9D1BD8B556199 /* [CP] Check Pods Manifest.lock */,
+				9C7219FB271008A100B86975 /* Sources */,
+				9C7219FC271008A100B86975 /* Frameworks */,
+				9C7219FD271008A100B86975 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Tests iOS";
+			productName = "Tests iOS";
+			productReference = 9C7219FF271008A100B86975 /* Tests iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9C7219F5270FF63E00B86975 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1300;
+				TargetAttributes = {
+					9C7219FE271008A100B86975 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+				};
+			};
+			buildConfigurationList = 9C7219F8270FF63E00B86975 /* Build configuration list for PBXProject "GMObjCTests" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9C7219F4270FF63E00B86975;
+			productRefGroup = 9C721A00271008A100B86975 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9C7219FE271008A100B86975 /* Tests iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9C7219FD271008A100B86975 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CBB89A9271010DB008411A1 /* sm2pub-6.pem in Resources */,
+				9CBB8987271010DA008411A1 /* sm2pri-8.pem in Resources */,
+				9CBB8992271010DA008411A1 /* sm2pri-10.der in Resources */,
+				9CBB89AF271010DB008411A1 /* sm2pub-9.pem in Resources */,
+				9CBB89A8271010DB008411A1 /* sm2pub-4.pem in Resources */,
+				9CBB8996271010DA008411A1 /* sm2pri8-3.pem in Resources */,
+				9CBB899A271010DA008411A1 /* sm2pri8-4.pem in Resources */,
+				9CBB8988271010DA008411A1 /* sm2pri-9.pem in Resources */,
+				9CBB8986271010DA008411A1 /* sm2pri-10.pem in Resources */,
+				9CBB898C271010DA008411A1 /* sm2pri-6.der in Resources */,
+				9CBB8993271010DA008411A1 /* sm2pri8-9.pem in Resources */,
+				9CBB89A7271010DB008411A1 /* sm2pub-5.pem in Resources */,
+				9CBB89A3271010DA008411A1 /* sm2pub-5.der in Resources */,
+				9CBB8990271010DA008411A1 /* sm2pri-9.der in Resources */,
+				9CBB899B271010DA008411A1 /* sm2pri8-6.pem in Resources */,
+				9CBB898F271010DA008411A1 /* sm2pri-4.der in Resources */,
+				9CBB89A5271010DA008411A1 /* sm2pub-9.der in Resources */,
+				9CBB898E271010DA008411A1 /* sm2pri-5.der in Resources */,
+				9CBB8982271010DA008411A1 /* sm2pri-6.pem in Resources */,
+				9CBB899E271010DA008411A1 /* sm2pub-2.der in Resources */,
+				9CBB89B0271010DB008411A1 /* sm2pub-8.pem in Resources */,
+				9CBB8997271010DA008411A1 /* sm2pri8-2.pem in Resources */,
+				9CBB89AB271010DB008411A1 /* sm2pub-3.pem in Resources */,
+				9CBB89A2271010DA008411A1 /* sm2pub-4.der in Resources */,
+				9CBB8983271010DA008411A1 /* sm2pri-2.pem in Resources */,
+				9CBB8981271010DA008411A1 /* sm2pri-7.pem in Resources */,
+				9CBB8984271010DA008411A1 /* sm2pri-3.pem in Resources */,
+				9CBB8985271010DA008411A1 /* sm2pri-1.pem in Resources */,
+				9CBB89B1271010DB008411A1 /* sm4TestFile.txt in Resources */,
+				9CBB897F271010DA008411A1 /* sm2pri-4.pem in Resources */,
+				9CBB89A0271010DA008411A1 /* sm2pub-7.der in Resources */,
+				9CBB8999271010DA008411A1 /* sm2pri8-5.pem in Resources */,
+				9CBB898D271010DA008411A1 /* sm2pri-7.der in Resources */,
+				9CBB8995271010DA008411A1 /* sm2pri8-10.pem in Resources */,
+				9CBB899D271010DA008411A1 /* sm2pub-1.der in Resources */,
+				9CBB899F271010DA008411A1 /* sm2pub-3.der in Resources */,
+				9CBB8991271010DA008411A1 /* sm2pri-8.der in Resources */,
+				9CBB898B271010DA008411A1 /* sm2pri-2.der in Resources */,
+				9CBB8980271010DA008411A1 /* sm2pri-5.pem in Resources */,
+				9CBB89AE271010DB008411A1 /* sm2pub-10.pem in Resources */,
+				9CBB898A271010DA008411A1 /* sm2pri-3.der in Resources */,
+				9CBB899C271010DA008411A1 /* sm2pri8-7.pem in Resources */,
+				9CBB89AA271010DB008411A1 /* sm2pub-7.pem in Resources */,
+				9CBB8989271010DA008411A1 /* sm2pri-1.der in Resources */,
+				9CBB8998271010DA008411A1 /* sm2pri8-1.pem in Resources */,
+				9CBB89A4271010DA008411A1 /* sm2pub-8.der in Resources */,
+				9CBB89A6271010DB008411A1 /* sm2pub-10.der in Resources */,
+				9CBB8994271010DA008411A1 /* sm2pri8-8.pem in Resources */,
+				9CBB89AC271010DB008411A1 /* sm2pub-2.pem in Resources */,
+				9CBB89A1271010DA008411A1 /* sm2pub-6.der in Resources */,
+				9CBB89AD271010DB008411A1 /* sm2pub-1.pem in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3200F81DDCD9D1BD8B556199 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tests iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9C7219FB271008A100B86975 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CBB893F27100E7D008411A1 /* GMSm4Tests.m in Sources */,
+				9CBB894427100E7D008411A1 /* GMSm2BioTests.m in Sources */,
+				9CBB894127100E7D008411A1 /* GMBaseTests.m in Sources */,
+				9CBB894527100E7D008411A1 /* GMSm2v1Tests.m in Sources */,
+				9CBB894227100E7D008411A1 /* GMSm2k1Tests.m in Sources */,
+				9CBB894327100E7D008411A1 /* GMSm3Tests.m in Sources */,
+				9CBB894027100E7D008411A1 /* GMSm2r1Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9C7219F9270FF63E00B86975 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		9C7219FA270FF63E00B86975 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		9C721A05271008A100B86975 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BECF4C9E4D3EF83E161B25F6 /* Pods-Tests iOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4BX77JHQHH;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lifei.Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9C721A06271008A100B86975 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F5276697B3B748C950DEB74 /* Pods-Tests iOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4BX77JHQHH;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lifei.Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9C7219F8270FF63E00B86975 /* Build configuration list for PBXProject "GMObjCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C7219F9270FF63E00B86975 /* Debug */,
+				9C7219FA270FF63E00B86975 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C721A04271008A100B86975 /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C721A05271008A100B86975 /* Debug */,
+				9C721A06271008A100B86975 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9C7219F5270FF63E00B86975 /* Project object */;
+}

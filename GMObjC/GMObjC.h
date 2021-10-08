@@ -8,8 +8,15 @@
  * GMUtils  工具类，16进制编码解码等
  */
 
-#ifndef GMObjC_h
-#define GMObjC_h
+#import <Foundation/Foundation.h>
+
+//! Project version number for GMObjC.
+FOUNDATION_EXPORT double GMObjCVersionNumber;
+
+//! Project version string for GMObjC.
+FOUNDATION_EXPORT const unsigned char GMObjCVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <GMObjC/PublicHeader.h>
 
 #import "GMUtils.h"
 #import "GMObjCDef.h"
@@ -17,5 +24,3 @@
 #import "GMSm2Utils.h"
 #import "GMSm3Utils.h"
 #import "GMSm4Utils.h"
-
-#endif /* GMSm_h */
