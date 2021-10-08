@@ -19,7 +19,7 @@ OpenSSL 1.1.1 以上版本增加了对中国 SM2/SM3/SM4 加密算法的支持�
 ```ruby
 git clone https://github.com/muzipiao/GMObjC.git
 
-cd GMObjC/Example
+cd GMObjC
 
 pod install
 
@@ -40,6 +40,7 @@ open GMObjC.xcworkspace
 * 使用 CocoaPods
 * 使用 Carthage
 * 编译为 Framework/XCFramework
+* 使用 Swift Package Manager
 * 拖入项目源码
 
 ### CocoaPods
@@ -56,11 +57,11 @@ OpenSSL 冲突常见解决办法：
 
 方法1：将三方库使用 OpenSSL 升级为 1.1.1 以上版本，GMObjC 直接共用此 OpenSSL 库，不需要再为 GMObjC 单独增加 OpenSSL 依赖库，手动集成 GMObjC 即可；
 
-方法2：将 GMObjC 编译为动态库可解决此类冲突。动态库项目在 GMObjCFramework 文件夹中，打开项目执行  `command + b`  编译为真机/模拟器版本动态库，根据需要合并；也可以通过 Carthage 自动将 GMObjC 编译动态库，具体操作看下一步。
+方法2：将 GMObjC 编译为动态库可解决此类冲突。通过 Carthage 自动将 GMObjC 编译动态库，具体操作看下一步。
 
 ### Carthage
 
-Carthage 可以自动将第三方框架编译为动态库（Dynamic framework），未安装的先执行 `brew update` 和 `brew install carthage` 安装，然后创建一个名称为 Cartfile 的文件（类似 Podfile），编辑添加想要编译的三方库名称如 `github "muzipiao/GMObjC"`，然后执行 `carthage update` 即可。
+Carthage 可以自动将第三方框架编译为动态库（Dynamic framework），未安装的先执行 `brew update` 和 `brew install carthage` 安装，然后创建一个名称为 Cartfile 的文件（类似 Podfile），编辑添加想要编译的三方库名称如 `github "muzipiao/GMObjC"`，然后执行 `carthage update --use-xcframeworks` 即可。
 
 ```ruby
 # 安装 carthage
@@ -68,12 +69,24 @@ brew update && brew install carthage
 # 创建 Cartfile 文件，并写入文件 github "muzipiao/GMObjC"
 touch Cartfile && echo 'github "muzipiao/GMObjC"' >> Cartfile
 # 拉取编译为动态库，在当前执行命令目录下 Carthage/Build/iOS/ 可找到 GMObjC.framework
-carthage update
+carthage update --use-xcframeworks
 ```
 
-编译成功后，打开 Carthage 查看生成的文件目录，Carthage/Build/iOS/GMObjC.framework 既是编译成功的动态库，将动态库拖入工程即可。
+编译成功后，打开 Carthage 查看生成的文件目录，Carthage/Build/iOS/GMObjC.xcframework 既是编译成功的动态库，将动态库拖入工程即可。
 
-注意：GMObjC.framework 为动态库，需要选择 `Embed & Sign` 模式，且不需要再单独导入 openssl.framework 库。若 Carthage 编译失败，下载项目源码，在 GMObjCFramework 文件夹下打开工程文件，执行 `command + b` 手动编译即可。
+注意：GMObjC.xcframework 为动态库，需要选择 `Embed & Sign` 模式，且不需要再单独导入 openssl.framework 库。若 Carthage 编译失败，下载项目源码，执行 `carthage build --no-skip-current --use-xcframeworks` 手动编译即可。
+
+### Swift Package Manager
+
+GMObjC 从 3.2.1 开始支持 SwiftPM，在工程中使用，点击 `File` -> `Swift Packages` -> `Add Package Dependency`，输入 [GMObjC 的 URL](https://github.com/muzipiao/GMObjC.git)，或者在 Xcode 中添加 GitHub 账号，搜索 `GMObjC` 即可。
+
+如果在组件库中使用，更新 `Package.swift` 文件：
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.2.1")
+],
+```
 
 ### 直接集成
 

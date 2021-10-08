@@ -36,10 +36,6 @@ script:
     - echo Check if the library described by the podspec can be built
     - pod lib lint --allow-warnings --skip-tests # Will run test below
 
-    - echo Build the SwiftPM
-    - swift build
-    - rm -rf ~/.build
-
     - echo Build as frameworks
     - xcodebuild build -project GMObjC.xcodeproj -scheme 'GMObjC' -sdk iphonesimulator PLATFORM_NAME=iphonesimulator -configuration Debug | xcpretty -c
     

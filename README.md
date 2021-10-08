@@ -19,7 +19,7 @@ Run the following command in the terminal:
 ```ruby
 git clone https://github.com/muzipiao/GMObjC.git
 
-cd GMObjC/Example
+cd GMObjC
 
 pod install
 
@@ -40,6 +40,7 @@ The method of using GMObjC in the project is as follows:
 * Use CocoaPods
 * Use Carthage
 * Compile to Framework/XCFramework
+* Use Swift Package Manager
 * Drag into the project source code
 
 ### CocoaPods
@@ -56,11 +57,11 @@ Common solutions to OpenSSL conflicts:
 
 Method 1: Upgrade the third party library using OpenSSL to version 1.1.1 or higher. GMObjC directly shares this OpenSSL library. There is no need to add an OpenSSL dependent library for GMObjC separately, just manually integrate GMObjC;
 
-Method 2: Compiling GMObjC into a dynamic library can resolve such conflicts. The dynamic library project is in the GMObjCFramework folder, open the project and execute `command + b` to compile it into a real machine/emulator version dynamic library, and merge as needed; you can also automatically compile GMObjC into a dynamic library through Carthage. See the next step for specific operations.
+Method 2: Compiling GMObjC into a dynamic library can resolve such conflicts. You can automatically compile GMObjC into a dynamic library through Carthage. See the next step for specific operations.
 
 ### Carthage
 
-Carthage can automatically compile a third-party framework into a dynamic framework (Dynamic framework). If it is not installed, execute `brew update` and `brew install carthage` to install, and then create a file named Cartfile (similar to Podfile), edit and add The name of the compiled third party library is like `github "muzipiao/GMObjC"`, and then execute `carthage update`.
+Carthage can automatically compile a third-party framework into a dynamic framework (Dynamic framework). If it is not installed, execute `brew update` and `brew install carthage` to install, and then create a file named Cartfile (similar to Podfile), edit and add The name of the compiled third party library is like `github "muzipiao/GMObjC"`, and then execute `carthage update --use-xcframeworks`.
 
 ```ruby
 # Install carthage
@@ -68,12 +69,26 @@ brew update && brew install carthage
 # Create Cartfile file and write it to github "muzipiao/GMObjC"
 touch Cartfile && echo'github "muzipiao/GMObjC"' >> Cartfile
 # Pull and compile into a dynamic library, and you can find GMObjC.framework in Carthage/Build/iOS/ under the current command directory
-carthage update
+carthage update --use-xcframeworks
 ```
 
-After the compilation is successful, open Carthage to view the generated file directory. Carthage/Build/iOS/GMObjC.framework is the compiled dynamic library. Just drag the dynamic library into the project.
+After the compilation is successful, open Carthage to view the generated file directory. Carthage/Build/iOS/GMObjC.xcframework is the compiled dynamic library. Just drag the dynamic library into the project.
 
-Note: GMObjC.framework is a dynamic library, you need to select the `Embed & Sign` mode, and you do not need to import the openssl.framework library separately. If Carthage fails to compile, download the project source code, open the project file in the GMObjCFramework folder, and execute `command + b` to compile manually.
+Note: GMObjC.xcframework is a dynamic library, you need to select the `Embed & Sign` mode, and you do not need to import the openssl.framework library separately. If Carthage fails to compile, download the project source code, open the project file in the GMObjCFramework folder, and execute `command + b` to compile manually.
+
+### Swift Package Manager
+
+GMObjC support SwiftPM from version 3.2.1. To use SwiftPM, you should use Xcode 11 to open your project. Click `File` -> `Swift Packages` -> `Add Package Dependency`, enter [GMObjC repo's URL](https://github.com/muzipiao/GMObjC.git). Or you can login Xcode with your GitHub account and just type `GMObjC` to search.
+
+After select the package, you can choose the dependency type (tagged version, branch or commit). Then Xcode will setup all the stuff for you.
+
+If you're a framework author and use GMObjC as a dependency, update your `Package.swift` file:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.2.1")
+],
+```
 
 ### Direct integration
 
