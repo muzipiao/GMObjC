@@ -30,6 +30,7 @@ open GMObjC.xcworkspace
 
 Depends on OpenSSL 1.1.1 or above, has been packaged as a Framework, and uploaded cocoapods, can be dragged into the project to install directly, or use cocoapods to configure the Podfile file `pod GMOpenSSL` installation; and import the system framework Security.framework.
 
+* iOS 9.0 or later
 * [GMOpenSSL.framework](https://github.com/muzipiao/GMOpenSSL)(openssl.framework)
 * Security.framework
 
@@ -78,7 +79,7 @@ Note: GMObjC.xcframework is a dynamic library, you need to select the `Embed & S
 
 ### Swift Package Manager
 
-GMObjC support SwiftPM from version 3.2.1. To use SwiftPM, you should use Xcode 11 to open your project. Click `File` -> `Swift Packages` -> `Add Package Dependency`, enter [GMObjC repo's URL](https://github.com/muzipiao/GMObjC.git). Or you can login Xcode with your GitHub account and just type `GMObjC` to search.
+GMObjC support SwiftPM from version 3.3.0. To use SwiftPM, you should use Xcode 11 to open your project. Click `File` -> `Swift Packages` -> `Add Package Dependency`, enter [GMObjC repo's URL](https://github.com/muzipiao/GMObjC.git). Or you can login Xcode with your GitHub account and just type `GMObjC` to search.
 
 After select the package, you can choose the dependency type (tagged version, branch or commit). Then Xcode will setup all the stuff for you.
 
@@ -86,7 +87,7 @@ If you're a framework author and use GMObjC as a dependency, update your `Packag
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.2.1")
+    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.3.0")
 ],
 ```
 

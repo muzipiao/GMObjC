@@ -30,6 +30,7 @@ open GMObjC.xcworkspace
 
 依赖 OpenSSL 1.1.1 以上版本，已打包为 Framework，并上传 cocoapods，可拖入项目直接安装，或使用 cocoapods 配置  Podfile 文件`pod GMOpenSSL`安装；并导入系统框架 Security.framework。
 
+* iOS 9.0 以上系统
 * [GMOpenSSL.framework](https://github.com/muzipiao/GMOpenSSL)(openssl.framework)
 * Security.framework
 
@@ -41,7 +42,7 @@ open GMObjC.xcworkspace
 * 使用 Carthage
 * 编译为 Framework/XCFramework
 * 使用 Swift Package Manager
-* 拖入项目源码
+* 拖入项目源码直接使用
 
 ### CocoaPods
 
@@ -78,13 +79,13 @@ carthage update --use-xcframeworks
 
 ### Swift Package Manager
 
-GMObjC 从 3.2.1 开始支持 SwiftPM，在工程中使用，点击 `File` -> `Swift Packages` -> `Add Package Dependency`，输入 [GMObjC 的 URL](https://github.com/muzipiao/GMObjC.git)，或者在 Xcode 中添加 GitHub 账号，搜索 `GMObjC` 即可。
+GMObjC 从 3.3.0 开始支持 SwiftPM，在工程中使用，点击 `File` -> `Swift Packages` -> `Add Package Dependency`，输入 [GMObjC 分支 URL](https://github.com/muzipiao/GMObjC.git)，或者在 Xcode 中添加 GitHub 账号，搜索 `GMObjC` 即可。
 
 如果在组件库中使用，更新 `Package.swift` 文件：
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.2.1")
+    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.3.0")
 ],
 ```
 
