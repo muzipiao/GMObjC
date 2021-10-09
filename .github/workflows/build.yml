@@ -41,7 +41,8 @@ jobs:
           echo Clean DerivedData
           rm -rf ~/Library/Developer/Xcode/DerivedData/
           echo Run the tests
-          xcodebuild test -workspace GMObjC.xcworkspace -scheme 'Tests iOS' -destination 'platform=iOS Simulator,name=iPhone 12' -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+          
+          xcodebuild test -workspace GMObjC.xcworkspace -scheme 'Tests iOS' -destination 'platform=iOS Simulator,name=iPhone 12,OS=latest' -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
       # 第四步，通知codecov
       - name: Notify codecov
         run: |
