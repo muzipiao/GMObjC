@@ -1,0 +1,48 @@
+name: build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    name: Build and Test default scheme using any available iPhone simulator
+    runs-on: macos-latest
+
+    steps:
+      # 第一步，获取源码，将代码检出到虚拟机上
+      - name: Checkout
+        uses: actions/checkout@v2
+      # 第二步，安装所需环境
+      - name: Install
+        run: |
+          env
+          locale
+          gem install cocoapods --no-document --quiet
+          gem install xcpretty --no-document --quiet
+          pod --version
+          pod repo update --silent
+          xcpretty --version
+          xcodebuild -version
+          xcodebuild -showsdks
+      # 第三步，编译测试
+      - name: Build and Tests
+        run: |
+          set -o pipefail
+          echo Check if the library described by the podspec can be built
+          pod lib lint --allow-warnings --skip-tests
+          echo Build as frameworks
+          xcodebuild build -project GMObjC.xcodeproj -scheme 'GMObjC' -sdk iphonesimulator PLATFORM_NAME=iphonesimulator -configuration Debug | xcpretty -c
+          echo Build the Demo apps
+          pod install
+          xcodebuild build -workspace GMObjC.xcworkspace -scheme 'GMObjC iOS Demo' -destination 'platform=iOS Simulator,name=iPhone 13' -configuration Debug CODE_SIGNING_ALLOWED=NO | xcpretty -c
+          echo Clean DerivedData
+          rm -rf ~/Library/Developer/Xcode/DerivedData/
+          echo Run the tests
+          xcodebuild test -workspace GMObjC.xcworkspace -scheme 'Tests iOS' -destination 'platform=iOS Simulator,name=iPhone 13' -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+      # 第四步，通知codecov
+      - name: Notify codecov
+        run: |
+          bash <(curl -s https://codecov.io/bash) -G "./GMObjC" -t ${{ secrets.CODECOV_TOKEN }}

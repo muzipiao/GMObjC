@@ -1,8 +1,0 @@
-ignore:
-  - "国密官方文档"
-  - "Example"
-  - "Tests"
-  - "XCFrameworks"
-  - "Pods"
-  - "Carthage"
-
