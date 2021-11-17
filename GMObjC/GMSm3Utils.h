@@ -10,6 +10,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "GMUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// 提取数据或文件的摘要值。返回值：摘要值，16进制编码格式
 /// @param plainData 待提取摘要的数据
 + (nullable NSString *)hashWithData:(NSData *)plainData;
+
+
+/// HMAC 算法计算摘要，计算的摘要长度和原摘要算法长度相同
+/// @param key  密钥字符串，keyData:：NSData 格式的 密钥
+/// @param plaintext 待计算的消息明文，plainData：NSData 格式的消息明文
++ (nullable NSString *)hmacWithSm3:(NSString *)key plaintext:(NSString *)plaintext;
++ (nullable NSString *)hmacWithSm3:(NSData *)keyData plainData:(NSData *)plainData;
+
+/// HMAC 算法计算摘要，计算的摘要长度和原摘要算法长度相同
+/// @param type 选取的摘要算法，详见 GMObjCDef.h 中 GMHashType 枚举
+/// @param key 密钥字符串，keyData: NSData 格式的 密钥
+/// @param plaintext 待计算的消息明文，plainData：NSData 格式的消息明文
++ (nullable NSString *)hmac:(GMHashType)type key:(NSString *)key plaintext:(NSString *)plaintext;
++ (nullable NSString *)hmac:(GMHashType)type keyData:(NSData *)keyData plainData:(NSData *)plainData;
 
 @end
 

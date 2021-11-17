@@ -43,9 +43,20 @@
 
 // 常用标准椭圆曲线，默认 NID_sm2，一般不需更改
 typedef NS_ENUM(int, GMCurveType) {
-    GMCurveType_sm2p256v1 = 1172,   // NID_sm2
+    GMCurveType_sm2p256v1 = 1172,   // NID_sm2(默认)
     GMCurveType_secp256k1 = 714,    // NID_secp256k1
     GMCurveType_secp256r1 = 415     // NID_X9_62_prime256v1
+};
+
+// HMAC 算法主要类型
+typedef NS_ENUM(int, GMHashType) {
+    GMHashType_SM3 = 0,     // EVP_sm3(void)(默认)
+    GMHashType_MD5,         // EVP_md5(void)
+    GMHashType_SHA1,        // EVP_sha1(void)
+    GMHashType_SHA224,      // EVP_sha224(void)
+    GMHashType_SHA256,      // EVP_sha256(void)
+    GMHashType_SHA384,      // EVP_sha384(void)
+    GMHashType_SHA512       // EVP_sha512(void)
 };
 
 #endif /* GMObjCDef_h */

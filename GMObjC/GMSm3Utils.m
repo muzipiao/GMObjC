@@ -8,7 +8,8 @@
 
 #import "GMSm3Utils.h"
 #import <openssl/sm3.h>
-#import "GMUtils.h"
+#import <openssl/evp.h>
+#import <openssl/hmac.h>
 
 @implementation GMSm3Utils
 
@@ -25,7 +26,7 @@
 
 ///MARK: - 字符串的摘要值
 + (nullable NSString *)hashWithString:(NSString *)plaintext{
-    if (!plaintext || plaintext.length == 0) {
+    if (plaintext.length == 0) {
         return nil;
     }
     NSData *strData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
@@ -35,7 +36,7 @@
 
 ///MARK: - 文件的摘要值
 + (nullable NSString *)hashWithData:(NSData *)plainData{
-    if (!plainData || plainData.length == 0) {
+    if (plainData.length == 0) {
         return nil;
     }
     // 原文
@@ -68,6 +69,80 @@
         }
     }
     return digestStr;
+}
+
+//MARK: - HMAC
++ (nullable NSString *)hmacWithSm3:(NSString *)key plaintext:(NSString *)plaintext {
+    NSString *resultHex = [self hmac:GMHashType_SM3 key:key plaintext:plaintext];
+    return resultHex;
+}
+
++ (nullable NSString *)hmacWithSm3:(NSData *)keyData plainData:(NSData *)plainData {
+    NSString *resultHex = [self hmac:GMHashType_SM3 keyData:keyData plainData:plainData];
+    return resultHex;
+}
+
++ (nullable NSString *)hmac:(GMHashType)type key:(NSString *)key plaintext:(NSString *)plaintext {
+    if (key.length == 0 || plaintext.length == 0) {
+        return nil;
+    }
+    NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *resultHex = [self hmac:type keyData:keyData plainData:plainData];
+    return resultHex;
+}
+
++ (nullable NSString *)hmac:(GMHashType)type keyData:(NSData *)keyData plainData:(NSData *)plainData {
+    if (keyData.length == 0 || plainData.length == 0) {
+        return nil;
+    }
+    int keyLen = (int)keyData.length;
+    int txtLen = (int)plainData.length;
+    uint8_t *keyBytes = (uint8_t *)keyData.bytes;
+    uint8_t *txtBytes = (uint8_t *)plainData.bytes;
+    
+    unsigned int mdLen = 0;
+    uint8_t *md = (uint8_t *)OPENSSL_zalloc(EVP_MAX_MD_SIZE);
+    const EVP_MD *evpMD = [self evpMDType:type];
+    HMAC(evpMD, keyBytes, keyLen, txtBytes, txtLen, md, &mdLen);
+    
+    NSData *resultData = [NSData dataWithBytes:md length:mdLen];
+    OPENSSL_free(md);
+    
+    NSString *mdHex = [GMUtils dataToHex:resultData];
+    return mdHex;
+}
+
++ (const EVP_MD *)evpMDType:(GMHashType)type {
+    const EVP_MD *md = NULL;
+    switch (type) {
+        case GMHashType_SM3:
+            md = EVP_sm3();
+            break;
+        case GMHashType_MD5:
+            md = EVP_md5();
+            break;
+        case GMHashType_SHA1:
+            md = EVP_sha1();
+            break;
+        case GMHashType_SHA224:
+            md = EVP_sha224();
+            break;
+        case GMHashType_SHA256:
+            md = EVP_sha256();
+            break;
+        case GMHashType_SHA384:
+            md = EVP_sha384();
+            break;
+        case GMHashType_SHA512:
+            md = EVP_sha512();
+            break;
+            
+        default:
+            md = EVP_sm3();
+            break;
+    }
+    return md;
 }
 
 @end
