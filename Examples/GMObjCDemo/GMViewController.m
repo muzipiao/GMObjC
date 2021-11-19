@@ -27,6 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    NSLog(@"GMObjC 版本：%d", GMOBJC_VERSION_NUMBER);
+    NSLog(@"GMObjC 版本：%s", GMOBJC_VERSION_TEXT);
     // 初始化测试用密码、公钥，私钥
     self.gPwd = @"123456";
     self.gPubkey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9"
@@ -104,6 +106,15 @@
     NSArray<NSString *> *c1c3c2Result2 = [GMSm2Utils asn1DecodeToC1C3C2Array:enResult2]; // 解码为 @[c1,c3,c2]
     NSData *c1c3c2Result3 = [GMSm2Utils asn1DecodeToC1C3C2Data:enResult3]; // 解码为 c1c3c2拼接的Data
     
+    // 将解码后的密文顺序更改
+    NSString *convertToC1C2C3 = [GMSm2Utils convertC1C3C2ToC1C2C3:c1c3c2Result1 hasPrefix:NO];
+    NSString *convertToC1C3C2 = [GMSm2Utils convertC1C2C3ToC1C3C2:convertToC1C2C3 hasPrefix:NO];
+    if ([convertToC1C3C2 isEqualToString:c1c3c2Result1]) {
+        NSLog(@"C1C3C2 顺序更改成功");
+    }else{
+        NSLog(@"C1C3C2 顺序更改失败");
+    }
+    
     // ASN1 编码
     NSString *asn1Result1 = [GMSm2Utils asn1EncodeWithC1C3C2:c1c3c2Result1];
     NSString *asn1Result2 = [GMSm2Utils asn1EncodeWithC1C3C2Array:c1c3c2Result2];
@@ -122,6 +133,7 @@
     [mStr appendFormat:@"\n生成SM2私钥：\n%@", priKey];
     [mStr appendFormat:@"\nSM2加密密文：\n%@", enResult1];
     [mStr appendFormat:@"\nASN1 解码SM2密文：\n%@", c1c3c2Result1];
+    [mStr appendFormat:@"\nC1C3C2 顺序SM2密文转为 C1C2C3 顺序：\n%@", convertToC1C2C3];
     [mStr appendFormat:@"\nASN1编码SM2密文：\n%@", asn1Result1];
     [mStr appendFormat:@"\nSM2解密结果：\n%@", deResult1];
     self.gTextView.text = mStr;
@@ -200,6 +212,24 @@
     [mStr appendString:@"\n-------SM3摘要-------"];
     [mStr appendFormat:@"\n字符串 123456 SM3摘要：\n%@", sm3DigPwd];
     [mStr appendFormat:@"\n文件 sm4TestFile.txt SM3摘要：\n%@", sm3DigFile];
+    // HMAC 计算
+    NSString *randomKey = @"qwertyuiop1234567890"; // 服务端传过来的 key
+    [mStr appendFormat:@"\n HMAC 计算摘要使用的 key：\n%@", randomKey];
+    NSString *hmacSM3 = [GMSm3Utils hmacWithSm3:randomKey plaintext:self.gPwd];
+    [mStr appendFormat:@"\n字符串 123456 使用 SM3 计算 HMAC 摘要：\n%@", hmacSM3];
+    NSString *hmacMD5 = [GMSm3Utils hmac:GMHashType_MD5 key:randomKey plaintext:self.gPwd];
+    [mStr appendFormat:@"\n字符串 123456 使用 MD5 计算 HMAC 摘要：\n%@", hmacMD5];
+    NSString *hmacSHA1 = [GMSm3Utils hmac:GMHashType_SHA1 key:randomKey plaintext:self.gPwd];
+    [mStr appendFormat:@"\n字符串 123456 使用 SHA1 计算 HMAC 摘要：\n%@", hmacSHA1];
+    NSString *hmacSHA224 = [GMSm3Utils hmac:GMHashType_SHA224 key:randomKey plaintext:self.gPwd];
+    [mStr appendFormat:@"\n字符串 123456 使用 SHA224 计算 HMAC 摘要：\n%@", hmacSHA224];
+    NSString *hmacSHA256 = [GMSm3Utils hmac:GMHashType_SHA256 key:randomKey plaintext:self.gPwd];
+    [mStr appendFormat:@"\n字符串 123456 使用 SHA256 计算 HMAC 摘要：\n%@", hmacSHA256];
+    NSString *hmacSHA384 = [GMSm3Utils hmac:GMHashType_SHA384 key:randomKey plaintext:self.gPwd];
+    [mStr appendFormat:@"\n字符串 123456 使用 SHA384 计算 HMAC 摘要：\n%@", hmacSHA384];
+    NSString *hmacSHA512 = [GMSm3Utils hmac:GMHashType_SHA512 key:randomKey plaintext:self.gPwd];
+    [mStr appendFormat:@"\n字符串 123456 使用 SHA512 计算 HMAC 摘要：\n%@", hmacSHA512];
+    
     self.gTextView.text = mStr;
 }
 

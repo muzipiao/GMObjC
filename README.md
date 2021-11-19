@@ -8,7 +8,7 @@
 [![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-brightgreen.svg)](https://swift.org/package-manager/)
 [![codecov](https://codecov.io/gh/muzipiao/GMObjC/branch/master/graph/badge.svg)](https://codecov.io/gh/muzipiao/GMObjC)
 
-[简体中文](https://github.com/muzipiao/GMObjC/blob/master/README-CN.md)
+[简体中文 Readme 文档](https://github.com/muzipiao/GMObjC/blob/master/README-CN.md)
 
 OpenSSL 1.1.1 and above adds support for chinese SM2/SM3/SM4 encryption algorithm, based on OpenSSL, SM2 asymmetric encryption, SM2 signature verification, ECDH key agreement, SM3 digest algorithm, and SM4 symmetric encryption are used for OC encapsulation.
 
@@ -293,9 +293,9 @@ NSString *cbcPlaintext = [GMSm4Utils cbcDecryptText:cbcCipertext key:sm4Key IV:i
 NSData *cbcDecryptData = [GMSm4Utils cbcDecryptData:cbcCipherData key:sm4Key IV:ivec];
 ```
 
-### SM3 Summary
+### SM3 Digest
 
-Similar to hash and md5, SM3 digest algorithm can perform digest calculation on text files, and the digest length is a 64-byte Hex encoding format string.
+Similar to md5、sha1，SM3 digest algorithm can perform digest calculation on text files, and the digest length is a 64-byte Hex encoding format string.
 
 ```objc
 // Original
@@ -308,9 +308,32 @@ NSString *textDigest = [GMSm3Utils hashWithString:plaintext];
 NSString *dataDigest = [GMSm3Utils hashWithData:plainData];
 ```
 
+### HMAC calculation Digest
+
+HMAC algorithm calculates the Digest, and the calculated Digest length is the same as that of the original Digest algorithm.
+
+```objc
+NSString *plaintext = @"123456"; // plaintext
+NSString *randomKey = @"qwertyuiop1234567890"; // Key passed from the server
+// HMAC uses SM3 digest algorithm
+NSString *hmacSM3 = [GMSm3Utils hmacWithSm3:randomKey plaintext:plaintext];
+// HMAC uses MD5 digest algorithm
+NSString *hmacMD5 = [GMSm3Utils hmac:GMHashType_MD5 key:randomKey plaintext:plaintext];
+// HMAC uses SHA1 digest algorithm
+NSString *hmacSHA1 = [GMSm3Utils hmac:GMHashType_SHA1 key:randomKey plaintext:plaintext];
+// HMAC uses SHA224 digest algorithm
+NSString *hmacSHA224 = [GMSm3Utils hmac:GMHashType_SHA224 key:randomKey plaintext:plaintext];
+// HMAC uses SHA256 digest algorithm
+NSString *hmacSHA256 = [GMSm3Utils hmac:GMHashType_SHA256 key:randomKey plaintext:plaintext];
+// HMAC uses SHA384 digest algorithm
+NSString *hmacSHA384 = [GMSm3Utils hmac:GMHashType_SHA384 key:randomKey plaintext:plaintext];
+// HMAC uses SHA512 digest algorithm
+NSString *hmacSHA512 = [GMSm3Utils hmac:GMHashType_SHA512 key:randomKey plaintext:plaintext];
+```
+
 ### ASN1 encoding and decoding
 
-OpenSSL performs ASN1 encoding on the SM2 encryption result, and the ciphertext encoding format is also required to be ASN1 format when decrypting. Encryption and decryption on other platforms may require the original ciphertext spliced ​​by C1C3C2, so encoding and decoding is required. Individual back-end encryption and decryption are spliced ​​according to C1C2C3, or other orders. If encryption and decryption is not possible, confirm the splicing order with the background and splice by yourself.
+OpenSSL encodes the SM2 encryption results in ASN1 format. During decryption, the ciphertext encoding format is also required to be ASN1 format. After decoding, the original ciphertext spliced in c1c3c2 order is obtained.
 
 ```objc
 // public key
@@ -340,20 +363,31 @@ NSString *asn1Result2 = [GMSm2Utils asn1EncodeWithC1C3C2Array:c1c3c2Result2];
 NSData *asn1Result3 = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Result3];
 ```
 
-How to split a ciphertext string? Assuming that the Hex code (hexadecimal code) format ciphertext is arranged according to C1C2C3, it is known that the length of C1 is fixed to 128 bytes, and the length of C3 is fixed to 64 bytes, then C2 length = total length of ciphertext string-C1 length 128 -C3 length, in this way, C1, C2, and C3 strings are obtained respectively, which can be spliced ​​freely.
+### Ciphertext format conversion
 
-Assuming that the ciphertext of the Hex encoding format is arranged in C1C2C3, C1, C2, and C3 can be split in the following way.
+After ASN1 decodes the ciphertext, the ciphertext sequence obtained is c1c3c2, and other platforms may need ciphertext in the order of c1c2c3; For example, the Java side uses bouncycastle for SM2 encryption, and the ciphertext may be the ciphertext beginning with **04** and arranged according to c1c2c3.
+
+OpenSSL decryption requires the ciphertext to be arranged in c1c3c2 and ASN1 encoding format. Conversion is required in both cases. For the ciphertext encrypted by bouncycastle, the ciphertext format needs to be changed from c1c2c3 to c1c3c2, then ASN1 coding and decryption.
+
+Generally, the ciphertext does not contain **ciphertext format identification**. As for whether it does, it can be confirmed by observation or with other platforms. The common identification at the beginning of the ciphertext.
+
+* 02 or 03 compressed representation
+* 04 uncompressed representation
+* 06 or 07 mixed representation
 
 ```objc
-// Hex encoding format ciphertext must be greater than 192, pay attention to judge the length before intercepting the string
-NSString *C1C2C3 = @"1C03C16FEFB1...Assuming here is the ciphertext arranged in C1C2C3...0B8ECAE42AD68B";
-// Random point C1 of elliptic curve has a fixed length of 128 (Hex encoding format)
-NSString *C1 = [C1C2C3 substringToIndex:128];
-// The ciphertext digest value C3 has a fixed length of 64 (Hex encoding format)
-NSString *C3 = [C1C2C3 substringFromIndex:(C1C2C3.length-64)];
-// Length of C2 in ciphertext = total length of ciphertext string-C1 length (128)-C3 length (64)
-NSString *C2 = [C1C2C3 substringWithRange:NSMakeRange(128, C1C2C3.length-C1.length-C3.length)];
+NSString *ciphertext = @"C1C2C3 Sequential ciphertext";
+// Change the ciphertext in c1c2c3 order to c1c3c2 order
+NSString *c1c3c2 = [GMSm2Utils convertC1C2C3ToC1C3C2:c1c2c3 hasPrefix:NO];
+// ASN1 encoding, encoding the ciphertext in c1c3c2 order into ASN1 format
+NSString *asn1Result = [GMSm2Utils asn1EncodeWithC1C3C2:c1c3c2];
+// Decrypt to plain text string
+NSString *deResult1 = [GMSm2Utils decryptToText:asn1Result privateKey:priKey]; 
+// If necessary, you can change the ciphertext in c1c3c2 order to c1c2c3 order
+NSString *c1c2c3 = [GMSm2Utils convertC1C3C2ToC1C2C3:c1c3c2 hasPrefix:NO];
 ```
+
+**Ciphertext splitting principle**Assuming that the ciphertext without ASN1 coding is in hex coding (hexadecimal coding) format and arranged in the order of c1c2c3, it is known that C1 length is fixed at 128 bytes and C3 length is fixed at 64 bytes, then C2 length = total length of ciphertext string - C1 length 128 - C3 length, so C1, C2 and C3 strings are obtained respectively and spliced freely.
 
 ### Generate public and private keys
 

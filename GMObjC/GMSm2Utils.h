@@ -36,6 +36,17 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSString *)decryptToHex:(NSString *)ciphertext privateKey:(NSString *)privateKey;
 + (nullable NSData *)decryptToData:(NSData *)cipherData privateKey:(NSString *)privateKey;
 
+///MARK: - 密文格式转换
+/// C1C2C3 顺序的 Hex 格式密文转为 C1C3C2 顺序。返回值：C1C3C2 顺序排列的 Hex 格式密文，失败返回 nil
+/// @param ciphertext  按照 C1C2C3 顺序排列的 Hex 格式密文
+/// @param hasPrefix 是否包含密文标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
++ (nullable NSString *)convertC1C2C3ToC1C3C2:(NSString *)ciphertext hasPrefix:(BOOL)hasPrefix;
+
+/// C1C3C2 顺序的 Hex 格式密文转为 C1C2C3 顺序。返回值：C1C2C3 顺序排列的 Hex 格式密文，失败返回 nil
+/// @param ciphertext 按照 C1C3C2 顺序排列的 Hex 格式密文
+/// @param hasPrefix 是否包含密文标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
++ (nullable NSString *)convertC1C3C2ToC1C2C3:(NSString *)ciphertext hasPrefix:(BOOL)hasPrefix;
+
 ///MARK: - ASN1 编码解码
 /// ASN1  编码。对 c1c3c2 格式密文进行 ASN1 编码，返回值：ASN1 编码后的密文。
 /// 参数：c1c3c2Hex 密文（字符串拼接 c1c3c2）；c1c3c2Array 密文数组（@[c1,c3,c2]）；c1c3c2Data 密文 Data（NSData 类型拼接的 c1c3c2）

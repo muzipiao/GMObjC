@@ -3,20 +3,15 @@
 /**
  * GMSm2Utils SM2 非对称加解密及签名验签，ECDH密钥协商
  * GMSm2Bio PEM/DER 格式公私钥读取或创建
- * GMSm3Utils SM3 摘要提取
+ * GMSm3Utils SM3 摘要提取，HMAC 计算
  * GMSm4Utils SM4 对称加解密，含ECB和CBC模式
  * GMUtils  工具类，16进制编码解码等
  */
 
 #import <Foundation/Foundation.h>
 
-//! Project version number for GMObjC.
-FOUNDATION_EXPORT double GMObjCVersionNumber;
-
-//! Project version string for GMObjC.
-FOUNDATION_EXPORT const unsigned char GMObjCVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <GMObjC/PublicHeader.h>
+#define GMOBJC_VERSION_NUMBER  0x301010
+#define GMOBJC_VERSION_TEXT    "GMObjC 3.1.1  19 Nov 2021"
 
 #import "GMUtils.h"
 #import "GMObjCDef.h"

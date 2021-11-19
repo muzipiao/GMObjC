@@ -258,6 +258,40 @@ static int kDefaultEllipticCurveType = NID_sm2;
     return plainData;
 }
 
+///MARK: - 密文格式转换
+
+// C1C2C3 顺序的 Hex 格式密文转为 C1C3C2 顺序
++ (nullable NSString *)convertC1C2C3ToC1C3C2:(NSString *)ciphertext hasPrefix:(BOOL)hasPrefix {
+    NSString *cipherHex = ciphertext;
+    if (hasPrefix == YES && cipherHex.length > 2) {
+        cipherHex = [cipherHex substringFromIndex:2];
+    }
+    if (cipherHex.length < 192) {
+        return nil;
+    }
+    NSString *c1 = [cipherHex substringToIndex:128];
+    NSString *c3 = [cipherHex substringFromIndex:(cipherHex.length - 64)];
+    NSString *c2 = [cipherHex substringWithRange:NSMakeRange(128, cipherHex.length - c1.length - c3.length)];
+    NSString *c1c3c2 = [NSString stringWithFormat:@"%@%@%@", c1, c3, c2];
+    return c1c3c2;
+}
+
+// C1C3C2 顺序的 Hex 格式密文转为 C1C2C3 顺序
++ (nullable NSString *)convertC1C3C2ToC1C2C3:(NSString *)ciphertext hasPrefix:(BOOL)hasPrefix {
+    NSString *cipherHex = ciphertext;
+    if (hasPrefix == YES && cipherHex.length > 2) {
+        cipherHex = [cipherHex substringFromIndex:2];
+    }
+    if (cipherHex.length < 192) {
+        return nil;
+    }
+    NSString *c1 = [cipherHex substringToIndex:128];
+    NSString *c3 = [cipherHex substringWithRange:NSMakeRange(128, 64)];
+    NSString *c2 = [cipherHex substringFromIndex:192];
+    NSString *c1c2c3 = [NSString stringWithFormat:@"%@%@%@", c1, c2, c3];
+    return c1c2c3;
+}
+
 ///MARK: - ASN1 编码
 
 + (NSData *)asn1EnC1Hex:(NSString *)c1 c3Data:(NSData *)c3 c2Data:(NSData *)c2{

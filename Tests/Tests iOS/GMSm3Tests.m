@@ -59,7 +59,7 @@
                               @(GMHashType_SHA224), @(GMHashType_SHA256), @(GMHashType_SHA384),
                               @(GMHashType_SHA512)];
     
-    for (NSInteger i = 0; i < 50; i++) {
+    for (NSInteger i = 0; i < 100; i++) {
         NSNumber *typeNum = hmacTypeList[arc4random_uniform((uint32_t)hmacTypeList.count)];
         GMHashType hashType = (GMHashType)typeNum.intValue;
         
@@ -247,7 +247,7 @@
         NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
         NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
         
-        NSString *hmac2 = [GMSm3Utils hmacWithSm3:keyData plainData:plainData];
+        NSString *hmac2 = [GMSm3Utils hmac:hashType keyData:keyData plainData:plainData];
         XCTAssertTrue([hmac1 isEqualToString:hmac2], @"相同数据不同类型摘要相同");
     }
     // 多次摘要相同

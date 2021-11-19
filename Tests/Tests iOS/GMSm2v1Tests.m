@@ -143,6 +143,23 @@
     }
 }
 
+// 测试密文转换出现空值的情况
+- (void)testConvertNull {
+    NSArray *randStrList = @[[NSNull null], @"", @"krand"];
+    for (NSInteger i = 0; i < 100; i++) {
+        NSString *randStr = randStrList[arc4random_uniform((uint32_t)randStrList.count)];
+        randStr = [randStr isKindOfClass:[NSNull class]] ? nil : randStr;
+        if ([randStr isEqualToString:@"krand"]) {
+            randStr = [self randomEn:(int)arc4random_uniform(192)];
+        }
+        BOOL randPrefix = i%2 == 0 ? YES : NO;
+        NSString *c1c3c2 = [GMSm2Utils convertC1C2C3ToC1C3C2:randStr hasPrefix:randPrefix];
+        XCTAssertNil(c1c3c2, @"转换结果为空");
+        NSString *c1c2c3 = [GMSm2Utils convertC1C3C2ToC1C2C3:randStr hasPrefix:randPrefix];
+        XCTAssertNil(c1c2c3, @"转换结果为空");
+    }
+}
+
 /// 测试签名验签出现空值情况
 - (void)testSignNull {
     NSData *plainData = [NSData dataWithBytes:"123456" length:6];
@@ -311,11 +328,46 @@
         NSArray<NSString *> *newKey = [GMSm2Utils createKeyPair];
         NSString *pubKey = newKey[0];
         NSString *priKey = newKey[1];
-        if (priKey.length != 64) {
-            NSLog(@"123456789");
-        }
         XCTAssertNotNil(pubKey, @"生成公钥不为空");
         XCTAssertNotNil(priKey, @"生成私钥不为空");
+    }
+}
+
+// 测试密文转换
+- (void)testConvertCiphertext {
+    for (NSInteger i = 0; i < 1000; i++) {
+        NSArray<NSString *> *newKey = [GMSm2Utils createKeyPair];
+        NSString *pubKey = newKey[0];
+        NSString *priKey = newKey[1];
+        XCTAssertNotNil(pubKey, @"生成公钥不为空");
+        XCTAssertNotNil(priKey, @"生成私钥不为空");
+        // 加密
+        NSString *plaintext = [self randomAny:10000];
+        XCTAssertNotNil(plaintext, @"生成明文字符串不为空");
+        NSString *ciphertextASN1 = [GMSm2Utils encryptText:plaintext publicKey:pubKey];
+        XCTAssertNotNil(ciphertextASN1, @"密文字符串不为空");
+        // ASN1 解码
+        NSString *originC1C3C2 = [GMSm2Utils asn1DecodeToC1C3C2:ciphertextASN1];
+        XCTAssertNotNil(originC1C3C2, @"密文字符串不为空");
+        // 顺序转换
+        BOOL hasPrefix = i%2 == 0 ? YES : NO;
+        NSString *prefixC1C3C2 = originC1C3C2;
+        if (hasPrefix == YES) {
+            prefixC1C3C2 = [NSString stringWithFormat:@"04%@", originC1C3C2];
+        }
+        NSString *convertC1C2C3 = [GMSm2Utils convertC1C3C2ToC1C2C3:prefixC1C3C2 hasPrefix:hasPrefix];
+        XCTAssertNotNil(convertC1C2C3, @"密文字符串不为空");
+        if (hasPrefix == YES) {
+            convertC1C2C3 = [NSString stringWithFormat:@"04%@", convertC1C2C3];
+        }
+        NSString *convertC1C3C2 = [GMSm2Utils convertC1C2C3ToC1C3C2:convertC1C2C3 hasPrefix:hasPrefix];
+        XCTAssertTrue([convertC1C3C2 isEqualToString:originC1C3C2], @"转换后结果一致");
+        // ASN1 编码
+        NSString *convertASN1 = [GMSm2Utils asn1EncodeWithC1C3C2:convertC1C3C2];
+        XCTAssertNotNil(convertASN1, @"密文字符串不为空");
+        // 解密
+        NSString *deText = [GMSm2Utils decryptToText:convertASN1 privateKey:priKey];
+        XCTAssertTrue([deText isEqualToString:plaintext], @"解密结果与原文一致");
     }
 }
 

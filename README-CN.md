@@ -8,7 +8,7 @@
 [![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-brightgreen.svg)](https://swift.org/package-manager/)
 [![codecov](https://codecov.io/gh/muzipiao/GMObjC/branch/master/graph/badge.svg)](https://codecov.io/gh/muzipiao/GMObjC)
 
-[English](https://github.com/muzipiao/GMObjC/blob/master/README.md)
+[English Readme](https://github.com/muzipiao/GMObjC/blob/master/README.md)
 
 OpenSSL 1.1.1 以上版本增加了对中国 SM2/SM3/SM4 加密算法的支持，基于 OpenSSL 对国密 SM2 非对称加密、SM2 签名验签、ECDH 密钥协商、SM3 摘要算法，SM4 对称加密做 OC 封装。
 
@@ -293,7 +293,7 @@ NSData *cbcDecryptData = [GMSm4Utils cbcDecryptData:cbcCipherData key:sm4Key IV:
 
 ### SM3 摘要
 
-类似于 hash、md5，SM3 摘要算法可对文本文件进行摘要计算，摘要长度为 64 字节的 Hex 编码格式字符串。
+类似于 md5、sha1，SM3 摘要算法可对文本文件进行摘要计算，摘要长度为 64 字节的 Hex 编码格式字符串。
 
 ```objc
 // 原文
@@ -306,9 +306,32 @@ NSString *textDigest = [GMSm3Utils hashWithString:plaintext];
 NSString *dataDigest = [GMSm3Utils hashWithData:plainData];
 ```
 
+### HMAC 计算摘要
+
+HMAC 算法计算摘要，计算的摘要长度和原摘要算法长度相同。
+
+```objc
+NSString *plaintext = @"123456"; // 普通原文
+NSString *randomKey = @"qwertyuiop1234567890"; // 服务端传过来的 key
+// HMAC 使用 SM3 摘要算法
+NSString *hmacSM3 = [GMSm3Utils hmacWithSm3:randomKey plaintext:plaintext];
+// HMAC 使用 MD5 摘要算法
+NSString *hmacMD5 = [GMSm3Utils hmac:GMHashType_MD5 key:randomKey plaintext:plaintext];
+// HMAC 使用 SHA1 摘要算法
+NSString *hmacSHA1 = [GMSm3Utils hmac:GMHashType_SHA1 key:randomKey plaintext:plaintext];
+// HMAC 使用 SHA224 摘要算法
+NSString *hmacSHA224 = [GMSm3Utils hmac:GMHashType_SHA224 key:randomKey plaintext:plaintext];
+// HMAC 使用 SHA256 摘要算法
+NSString *hmacSHA256 = [GMSm3Utils hmac:GMHashType_SHA256 key:randomKey plaintext:plaintext];
+// HMAC 使用 SHA384 摘要算法
+NSString *hmacSHA384 = [GMSm3Utils hmac:GMHashType_SHA384 key:randomKey plaintext:plaintext];
+// HMAC 使用 SHA512 摘要算法
+NSString *hmacSHA512 = [GMSm3Utils hmac:GMHashType_SHA512 key:randomKey plaintext:plaintext];
+```
+
 ### ASN1 编码解码
 
-OpenSSL 对 SM2 加密结果进行了 ASN1 编码，解密时也是要求密文编码格式为 ASN1 格式，其他平台加解密可能需要 C1C3C2 拼接的原始密文，所以需要编码解码。个别后端加解密是按照 C1C2C3 来拼接的，也可能是其他顺序，若无法加解密，与后台确认拼接顺序，自行拼接即可。
+OpenSSL 对 SM2 加密结果进行了 ASN1 编码，解密时也是要求密文编码格式为 ASN1 格式，解码后得到顺序为 C1C3C2 拼接的原始密文。
 
 ```objc
 // 公钥
@@ -338,20 +361,31 @@ NSString *asn1Result2 = [GMSm2Utils asn1EncodeWithC1C3C2Array:c1c3c2Result2];
 NSData *asn1Result3 = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Result3];
 ```
 
-如何拆分密文字符串？假设 Hex 编码（16 进制编码）格式密文是按照 C1C2C3 排列的，已知 C1 长度固定为 128 字节，C3 长度固定为 64 字节，那 C2 长度 = 密文字符串总长度 - C1长度 128 - C3长度，这样就分别得到了 C1、C2、C3 字符串，自由拼接。
+### 密文格式转换
 
-假设 Hex 编码格式密文按照 C1C2C3 排列，可按照以下方式拆分 C1、C2、C3。
+ASN1 解码密文后，得到的密文排列顺序为 C1C3C2，其他平台可能需要顺序为 C1C2C3 的密文；例如 Java 端使用 BouncyCastle 进行 SM2 加密，得到密文可能是**04**开头，按照 C1C2C3 排列的密文。
+
+OpenSSL 解密要求密文排列顺序为 C1C3C2，且为 ASN1 编码格式，这两种情况都需要进行转换。BouncyCastle 加密的密文，需要先将密文格式由 C1C2C3 更改为 C1C3C2，再进行 ASN1 编码，然后进行解密。
+
+密文一般不包含**密文格式标识**，至于是否包含，可通过观察或与其他平台确认，密文开头常见标识。
+
+* 02或03 压缩表示形式
+* 04 未压缩表示形式
+* 06或07 混合表示形式
 
 ```objc
-// Hex 编码格式密文必大于 192，截取字符串前注意判断长度
-NSString *C1C2C3 = @"1C03C16FEFB1...假设这里是按照C1C2C3排列的密文...0B8ECAE42AD68B";
-// 椭圆曲线随机点 C1 固定长度为 128 （Hex 编码格式）
-NSString *C1 = [C1C2C3 substringToIndex:128];
-// 密文摘要值 C3 固定长度为 64（Hex 编码格式）
-NSString *C3 = [C1C2C3 substringFromIndex:(C1C2C3.length - 64)];
-// 密文中 C2 长度 =  密文字符串总长度 - C1长度(128) - C3长度(64)
-NSString *C2 = [C1C2C3 substringWithRange:NSMakeRange(128, C1C2C3.length - C1.length - C3.length)];
+NSString *ciphertext = @"C1C2C3 排列顺序的密文";
+// 将 C1C2C3 排列顺序的密文，更改为 C1C3C2 顺序
+NSString *c1c3c2 = [GMSm2Utils convertC1C2C3ToC1C3C2:c1c2c3 hasPrefix:NO];
+// ASN1 编码，将 c1c3c2 顺序的密文编码为 ASN1 格式
+NSString *asn1Result = [GMSm2Utils asn1EncodeWithC1C3C2:c1c3c2];
+// 解密为普通字符串明文
+NSString *deResult1 = [GMSm2Utils decryptToText:asn1Result privateKey:priKey]; 
+// 根据需要，可以将 C1C3C2 排列顺序的密文，更改为 C1C2C3 顺序
+NSString *c1c2c3 = [GMSm2Utils convertC1C3C2ToC1C2C3:c1c3c2 hasPrefix:NO];
 ```
+
+**密文拆分原理：**假设未进行 ASN1 编码的密文是 Hex 编码（16 进制编码）格式，且按照 C1C2C3 顺序排列的，已知 C1 长度固定为 128 字节，C3 长度固定为 64 字节，那 C2 长度 = 密文字符串总长度 - C1长度 128 - C3长度，这样就分别得到了 C1、C2、C3 字符串，自由拼接。
 
 ### 生成公私钥
 

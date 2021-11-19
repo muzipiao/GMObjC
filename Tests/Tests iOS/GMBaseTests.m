@@ -14,6 +14,9 @@ NSString *const GMTestUserID = @"lifei_zdjl@126.com";
 
 - (void)setUp {
     [super setUp];
+    NSLog(@"GMObjC 版本：%d", GMOBJC_VERSION_NUMBER);
+    NSLog(@"GMObjC 版本：%s", GMOBJC_VERSION_TEXT);
+    
     NSString *txtPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"sm4TestFile.txt" ofType:nil];
     self.fileData = [NSData dataWithContentsOfFile:txtPath];
 }
