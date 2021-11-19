@@ -385,7 +385,7 @@ NSString *deResult1 = [GMSm2Utils decryptToText:asn1Result privateKey:priKey];
 NSString *c1c2c3 = [GMSm2Utils convertC1C3C2ToC1C2C3:c1c3c2 hasPrefix:NO];
 ```
 
-**密文拆分原理：**假设未进行 ASN1 编码的密文是 Hex 编码（16 进制编码）格式，且按照 C1C2C3 顺序排列的，已知 C1 长度固定为 128 字节，C3 长度固定为 64 字节，那 C2 长度 = 密文字符串总长度 - C1长度 128 - C3长度，这样就分别得到了 C1、C2、C3 字符串，自由拼接。
+密文拆分原理：假设未进行 ASN1 编码的密文是 Hex 编码（16 进制编码）格式，且按照 C1C2C3 顺序排列的，已知 C1 长度固定为 128 字节，C3 长度固定为 64 字节，那 C2 长度 = 密文字符串总长度 - C1长度 128 - C3长度，这样就分别得到了 C1、C2、C3 字符串，自由拼接。
 
 ### 生成公私钥
 

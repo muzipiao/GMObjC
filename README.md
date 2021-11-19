@@ -387,7 +387,7 @@ NSString *deResult1 = [GMSm2Utils decryptToText:asn1Result privateKey:priKey];
 NSString *c1c2c3 = [GMSm2Utils convertC1C3C2ToC1C2C3:c1c3c2 hasPrefix:NO];
 ```
 
-**Ciphertext splitting principle**Assuming that the ciphertext without ASN1 coding is in hex coding (hexadecimal coding) format and arranged in the order of c1c2c3, it is known that C1 length is fixed at 128 bytes and C3 length is fixed at 64 bytes, then C2 length = total length of ciphertext string - C1 length 128 - C3 length, so C1, C2 and C3 strings are obtained respectively and spliced freely.
+Ciphertext splitting principle: Assuming that the ciphertext without ASN1 coding is in hex coding (hexadecimal coding) format and arranged in the order of c1c2c3, it is known that C1 length is fixed at 128 bytes and C3 length is fixed at 64 bytes, then C2 length = total length of ciphertext string - C1 length 128 - C3 length, so C1, C2 and C3 strings are obtained respectively and spliced freely.
 
 ### Generate public and private keys
 
