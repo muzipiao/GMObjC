@@ -67,7 +67,7 @@
     int pad_en = SM4_BLOCK_SIZE - plain_obj_len % SM4_BLOCK_SIZE;
     size_t result_len = plain_obj_len + pad_en;
     // 填充
-    uint8_t p_text[result_len];
+    uint8_t *p_text = (uint8_t *)OPENSSL_zalloc((int)(result_len + 1));
     memcpy(p_text, plain_obj, plain_obj_len);
     for (int i = 0; i < pad_en; i++) {
         p_text[plain_obj_len + i] = pad_en;
@@ -91,6 +91,7 @@
     
     NSData *cipherData = [NSData dataWithBytes:result length:result_len];
     
+    OPENSSL_free(p_text);
     OPENSSL_free(result);
     
     return cipherData;
@@ -177,7 +178,7 @@
     int pad_len = SM4_BLOCK_SIZE - p_obj_len % SM4_BLOCK_SIZE;
     size_t result_len = p_obj_len + pad_len;
     // PKCS7 填充
-    uint8_t p_text[result_len];
+    uint8_t *p_text = (uint8_t *)OPENSSL_zalloc((int)(result_len + 1));
     memcpy(p_text, p_obj, p_obj_len);
     for (int i = 0; i < pad_len; i++) {
         p_text[p_obj_len + i] = pad_len;
@@ -201,6 +202,7 @@
     
     NSData *cipherData = [NSData dataWithBytes:result length:result_len];
     
+    OPENSSL_free(p_text);
     OPENSSL_free(result);
     
     return cipherData;
