@@ -66,12 +66,10 @@
     // 计算填充长度
     int pad_en = SM4_BLOCK_SIZE - plain_obj_len % SM4_BLOCK_SIZE;
     size_t result_len = plain_obj_len + pad_en;
-    // 填充
+    // PKCS7 填充
     uint8_t *p_text = (uint8_t *)OPENSSL_zalloc((int)(result_len + 1));
     memcpy(p_text, plain_obj, plain_obj_len);
-    for (int i = 0; i < pad_en; i++) {
-        p_text[plain_obj_len + i] = pad_en;
-    }
+    memset(p_text + plain_obj_len, pad_en, pad_en);
     
     uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(result_len + 1));
     int group_num = (int)(result_len / SM4_BLOCK_SIZE);
@@ -172,9 +170,8 @@
     // PKCS7 填充
     uint8_t *p_text = (uint8_t *)OPENSSL_zalloc((int)(result_len + 1));
     memcpy(p_text, p_obj, p_obj_len);
-    for (int i = 0; i < pad_len; i++) {
-        p_text[p_obj_len + i] = pad_len;
-    }
+    memset(p_text + p_obj_len, pad_len, pad_len);
+    
     uint8_t *result = (uint8_t *)OPENSSL_zalloc((int)(result_len + 1));
     // 密钥 key Hex 转 uint8_t
     NSData *kData = [GMUtils hexToData:key];
