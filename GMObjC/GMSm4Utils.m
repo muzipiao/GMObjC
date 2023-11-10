@@ -15,7 +15,7 @@
     }
 }
 
-//MARK: - 生成 SM4 密钥
+// MARK: - 生成 SM4 密钥
 + (nullable NSData *)generateKey {
     NSInteger len = SM4_BLOCK_SIZE;
     uint8_t bytes[len];
@@ -36,7 +36,7 @@
     return randomData;
 }
 
-//MARK: - ECB 加密
+// MARK: - ECB 加密
 + (nullable NSData *)encryptDataWithECB:(NSData *)plainData keyData:(NSData *)keyData {
     if (plainData.length == 0 || keyData.length != SM4_BLOCK_SIZE) {
         return nil;
@@ -74,7 +74,7 @@
     return cipherData;
 }
 
-//MARK: - ECB 解密
+// MARK: - ECB 解密
 + (nullable NSData *)decryptDataWithECB:(NSData *)cipherData keyData:(NSData *)keyData {
     if (cipherData.length == 0 || keyData.length != SM4_BLOCK_SIZE) {
         return nil;
@@ -106,7 +106,7 @@
     return plainData;
 }
 
-//MARK: - CBC 加密
+// MARK: - CBC 加密
 + (nullable NSData *)encryptDataWithCBC:(NSData *)plainData keyData:(NSData *)keyData ivecData:(NSData *)ivecData {
     if (plainData.length == 0 || keyData.length != SM4_BLOCK_SIZE || ivecData.length != SM4_BLOCK_SIZE) {
         return nil;
@@ -145,7 +145,7 @@
     return cipherData;
 }
 
-//MARK: - CBC 解密
+// MARK: - CBC 解密
 + (nullable NSData *)decryptDataWithCBC:(NSData *)cipherData keyData:(NSData *)keyData ivecData:(NSData *)ivecData {
     if (cipherData.length == 0 || keyData.length != SM4_BLOCK_SIZE || ivecData.length != SM4_BLOCK_SIZE) {
         return nil;

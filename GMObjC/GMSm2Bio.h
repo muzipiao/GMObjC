@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GMSm2Bio : NSObject
 
-//MARK: - 读取PEM格式秘钥
+// MARK: - 读取PEM格式秘钥
 /// 从 PEM 文件中读取 SM2 公钥，返回 HEX 格式公钥
 /// @param pemData PEM 格式公钥数据
 /// @param pwdData PEM 格式证书密码，无密码时传入 nil
@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param pwdData PEM 格式证书密码，无密码时传入 nil
 + (nullable NSString *)readPrivateKeyFromPemData:(NSData *)pemData password:(nullable NSData *)pwdData;
 
-//MARK: - 读取DER格式秘钥
+// MARK: - 读取DER格式秘钥
 /// 从 DER 文件中读取 SM2 公钥，返回 HEX 格式公钥
 /// @param derData DER 格式公钥数据
 + (nullable NSString *)readPublicKeyFromDerData:(NSData *)derData;
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param derData DER 格式私钥数据
 + (nullable NSString *)readPrivateKeyFromDerData:(NSData *)derData;
 
-//MARK: - 写入PEM/DER格式文件
+// MARK: - 写入PEM/DER格式文件
 /// 将公钥/私钥写入PEM文件，返回YES成功，NO失败
 /// @param publicKey 04 开头的公钥，privateKey私钥（ 皆为Hex 编码格式）
 /// @param filePath PEM文件存储路径
@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)savePublicKey:(NSString *)publicKey toDerFileAtPath:(NSString *)filePath;
 + (BOOL)savePrivateKey:(NSString *)privateKey toDerFileAtPath:(NSString *)filePath;
 
-//MARK: - PEM & DER 字符互转
+// MARK: - PEM & DER 字符互转
 /// 将 PEM 格式公私钥转换为 DER 格式
 /// @param pemData PEM格式密钥数据
 /// @param isPublicKey 标记 derData 是公钥/私钥，YES为公钥，NO为私钥
@@ -92,13 +92,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param isPublicKey 标记 derData 是公钥/私钥，YES为公钥，NO为私钥
 + (nullable NSData *)convertDerToPem:(NSData *)derData isPublicKey:(BOOL)isPublicKey;
 
-//MARK: - 读取证书
+// MARK: - 读取证书
 /// 从证书文件中读取证书信息，读取的公私钥可能非 SM2 密钥信息(可能是 RSA)
 /// @param cerData 证书文件数据
 /// @param pwdData 证书密码，默认为空
 + (nullable GMSm2X509Info *)readX509InfoFromData:(NSData *)cerData password:(nullable NSData *)pwdData;
 
-//MARK: - 创建PEM/DER格式公私钥
+// MARK: - 创建PEM/DER格式公私钥
 /// 创建 PEM 格式 SM2 公私钥，默认保存tmp文件夹下。
 /// 返回值：数组元素 1 为公钥sm2-pub.pem/.der路径，2 为私钥sm2-pri.pem/.der路径
 + (GMSm2KeyFiles *)generatePemKeyFiles;

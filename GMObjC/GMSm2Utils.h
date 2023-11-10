@@ -47,22 +47,27 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 
 @interface GMSm2Utils : NSObject
 
-//MARK: - 创建秘钥对
+// MARK: - 创建秘钥对
 /// 创建 SM2 公私钥（基于官方文档 NID_sm2 推荐曲线）。返回值：公钥和私钥 HEX 编码字符串
 + (GMSm2Key *)generateKey;
 
-//MARK: - SM2 加解密
+// MARK: - SM2 加解密
 /// SM2 加密。返回 NSData 格式密文（ASN1 编码格式，可使用 asn1DecodeToC1C3C2Data 解码为非 ASN1 编码格式），失败返回 nil
 /// @param plainData 明文（NSData 格式）
 /// @param publicKey 04 开头的公钥（ Hex 编码格式）
 + (nullable NSData *)encryptData:(NSData *)plainData publicKey:(NSString *)publicKey;
+
+/// SM2 加密。返回 NSData 格式密文（ASN1 编码格式，可使用 asn1DecodeToC1C3C2Data 解码为非 ASN1 编码格式），失败返回 nil
+/// @param plaintext 明文（NSString 原文格式）
+/// @param publicKey 04 开头的公钥（ Hex 编码格式）
++ (nullable NSData *)encryptText:(NSString *)plaintext publicKey:(NSString *)publicKey;
 
 /// SM2 解密。返回 NSData 格式明文，解密失败返回 nil
 /// @param cipherData 密文（ASN1 编码格式，若非 ASN1 编码格式，需要先使用 asn1EncodeWithC1C3C2Data 进行编码）
 /// @param privateKey 私钥（ Hex 编码格式）
 + (nullable NSData *)decryptToData:(NSData *)cipherData privateKey:(NSString *)privateKey;
 
-//MARK: - ASN1 编码解码
+// MARK: - ASN1 编码解码
 /// ASN1  编码。返回 ASN1 编码格式的密文
 /// @param c1c3c2Data 按照 C1C3C2 排序的密文数据，若非此顺序需要先转换
 + (nullable NSData *)asn1EncodeWithC1C3C2Data:(NSData *)c1c3c2Data;
@@ -75,7 +80,7 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 // hasPrefix 密文前面是否有 0x04 前缀标识，YES 时返回结果前面会拼接上 0x04，默认 NO
 + (nullable NSData *)asn1DecodeToC1C3C2Data:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix;
 
-//MARK: - 密文顺序转换
+// MARK: - 密文顺序转换
 /// 将密文顺序由 C1C2C3 转为 C1C3C2，返回 C1C3C2 顺序排列的密文，失败返回 nil
 /// - Parameter c1c2c3Data: 按照 C1C2C3 顺序排列的密文
 + (nullable NSData *)convertC1C2C3ToC1C3C2:(NSData *)c1c2c3Data;
@@ -88,7 +93,7 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 /// hasPrefix: 是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
 + (nullable NSData *)convertC1C3C2ToC1C2C3:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix;
 
-//MARK: - 签名验签
+// MARK: - 签名验签
 /// SM2 数字签名。返回值：数字签名，RS 拼接的 Hex 格式字符串，前半部分是 R，后半部分是 S
 /// @param plainData 明文（NSData 格式）
 /// @param privateKey SM2 私钥（Hex 编码格式）
@@ -102,7 +107,7 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 /// @param userData 用户 ID（NSData 格式，任意值），当为 nil 时默认为 "1234567812345678" 的 NSData 格式
 + (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS publicKey:(NSString *)publicKey userData:(nullable NSData *)userData;
 
-//MARK: - SM2 签名 Der 编码解码
+// MARK: - SM2 签名 Der 编码解码
 /// Der 编码。返回值：SM2 数字签名， Der 编码格式
 /// @param signRS RS 拼接的 Hex 格式字符串，前半部分是 R，后半部分是 S
 + (nullable NSString *)encodeDerWithSignRS:(NSString *)signRS;
@@ -111,7 +116,7 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 /// @param derSign Der 编码格式的数字签名，通常以 30 开头
 + (nullable NSString *)decodeDerToSignRS:(NSString *)derSign;
 
-//MARK: - SM2 公钥的压缩与解压缩
+// MARK: - SM2 公钥的压缩与解压缩
 /// SM2 公钥压缩。返回值：02 或 03 开头的压缩公钥
 /// - Parameter publicKey 04 开头的非压缩公钥
 + (nullable NSString *)compressPublicKey:(nullable NSString *)publicKey;
@@ -120,13 +125,13 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 /// @param publicKey 02 或 03 开头的压缩公钥
 + (nullable NSString *)decompressPublicKey:(nullable NSString *)publicKey;
 
-//MARK: - ECDH 密钥协商
+// MARK: - ECDH 密钥协商
 /// 椭圆曲线 Diffie-Hellman 密钥协商（ECDH），返回 64 字节 16 进制编码格式密钥
 /// @param publicKey 临时公钥（其他端传入的公钥）
 /// @param privateKey 临时私钥（当前端生成的私钥）
 + (nullable NSString *)computeECDH:(NSString *)publicKey privateKey:(NSString *)privateKey;
 
-//MARK: - 椭圆曲线类型
+// MARK: - 椭圆曲线类型
 /// 常见椭圆曲线为 NID_sm2、NID_secp256k1、NID_X9_62_prime256v1
 /// 默认 NID_sm2，参考文件头注释中说明，一般不需更改
 /// 若需要更改，传入枚举 GMCurveType 枚举值即可

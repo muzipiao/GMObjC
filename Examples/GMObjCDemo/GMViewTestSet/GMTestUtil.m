@@ -91,7 +91,7 @@
     return model;
 }
 
-//MARK: - SM3 摘要计算
+// MARK: - SM3 摘要计算
 + (GMTestModel *)testSm3 {
     NSData *plainData = [@"123456" dataUsingEncoding:NSUTF8StringEncoding]; // 明文 123456 的 NSData 格式
     // sm3 字符串摘要
@@ -124,7 +124,7 @@
     return model;
 }
 
-//MARK: - SM4 加解密
+// MARK: - SM4 加解密
 + (GMTestModel *)testSm4 {
     NSData *sm4KeyData = [GMSm4Utils generateKey]; //  生成 16 字节密钥
     NSData *plainData = [@"123456" dataUsingEncoding:NSUTF8StringEncoding];
@@ -169,7 +169,7 @@
     return model;
 }
 
-//MARK: - ECDH 密钥协商
+// MARK: - ECDH 密钥协商
 + (GMTestModel *)testECDH {
     // 客户端client生成一对公私钥
     GMSm2Key *clientKey = [GMSm2Utils generateKey];
@@ -195,7 +195,7 @@
     return model;
 }
 
-//MARK: - PEM/DER文件
+// MARK: - PEM/DER文件
 + (GMTestModel *)testReadPemDerFiles {
     GMTestModel *model = [[GMTestModel alloc] initWithTitle:@"PEM/DER密钥读取:"];
     // PEM/DER文件路径

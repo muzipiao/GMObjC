@@ -7,7 +7,7 @@
 
 #import "GMTestCell.h"
 
-//MARK: - GMTestHeader
+// MARK: - GMTestHeader
 @implementation GMTestHeader
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
@@ -38,7 +38,7 @@
 
 @end
 
-//MARK: - GMTestCell
+// MARK: - GMTestCell
 @implementation GMTestCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

@@ -78,7 +78,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
     }
 }
 
-//MARK: - 读取PEM格式秘钥
+// MARK: - 读取PEM格式秘钥
 + (nullable NSString *)readPublicKeyFromPemData:(NSData *)pemData password:(nullable NSData *)pwdData {
     if (pemData == nil || pemData.length == 0) {
         return nil;
@@ -146,7 +146,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
     return result;
 }
 
-//MARK: - 读取DER格式秘钥
+// MARK: - 读取DER格式秘钥
 + (nullable NSString *)readPublicKeyFromDerData:(NSData *)derData {
     if (derData == nil || derData.length == 0) {
         return nil;
@@ -214,7 +214,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
     return result;
 }
 
-//MARK: - 写入PEM/DER格式文件
+// MARK: - 写入PEM/DER格式文件
 + (BOOL)savePublicKey:(NSString *)publicKey toPemFileAtPath:(NSString *)filePath {
     return [self savePubKeyToFile:publicKey filePath:filePath pemType:YES];
 }
@@ -336,7 +336,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
     return success;
 }
 
-//MARK: - 创建PEM/DER格式公私钥
+// MARK: - 创建PEM/DER格式公私钥
 + (GMSm2KeyFiles *)generatePemKeyFiles {
     NSString *pubFileName = [NSString stringWithFormat:@"sm2-%@-pub.pem", [NSUUID UUID].UUIDString];
     NSString *priFileName = [NSString stringWithFormat:@"sm2-%@-pri.pem", [NSUUID UUID].UUIDString];
@@ -413,7 +413,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
     return keyFiles;
 }
 
-//MARK: - PEM & DER 互转
+// MARK: - PEM & DER 互转
 /// 将 PEM 格式公私钥转换为 DER 格式
 /// @param pemData PEM格式密钥数据
 /// @param isPublicKey 标记 derData 是公钥/私钥，YES为公钥，NO为私钥
@@ -504,7 +504,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
     return pemData;
 }
 
-//MARK: - 读取证书
+// MARK: - 读取证书
 /// 从证书文件中读取证书信息
 /// @param cerData 证书文件数据
 /// @param pwdData 证书密码，默认为空

@@ -28,7 +28,7 @@
     self.msgLabel.frame = CGRectMake(0, viewTop + 40, viewWidth, 40);
 }
 
-//MARK: - Lazy Load
+// MARK: - Lazy Load
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
         UILabel *tmpLabel = [[UILabel alloc] init];

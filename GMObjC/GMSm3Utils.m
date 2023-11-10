@@ -15,7 +15,7 @@
     }
 }
 
-//MARK: - 文件的摘要值
+// MARK: - 文件的摘要值
 + (nullable NSData *)hashWithData:(NSData *)data {
     if (data.length == 0) {
         return nil;
@@ -42,7 +42,7 @@
     return digestData;
 }
 
-//MARK: - HMAC
+// MARK: - HMAC
 + (nullable NSData *)hmacWithData:(NSData *)data keyData:(NSData *)keyData {
     NSData *resultData = [self hmacWithData:data keyData:keyData keyType:GMHashType_SM3];
     return resultData;

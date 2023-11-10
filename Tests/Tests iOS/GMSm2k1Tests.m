@@ -36,7 +36,7 @@
     [super tearDown];
 }
 
-//MARK: - 椭圆曲线类型
+// MARK: - 椭圆曲线类型
 - (void)testEllipticCurveType {
     int currentType = [GMSm2Utils curveType];
     XCTAssertTrue(currentType == GMSm2CurveTypeSecp256k1, @"当前椭圆曲线应为 NID_secp256k1");

@@ -45,14 +45,14 @@
     [super tearDown];
 }
 
-//MARK: - 椭圆曲线类型
+// MARK: - 椭圆曲线类型
 - (void)testEllipticCurveType {
     int currentType = [GMSm2Utils curveType];
     XCTAssertTrue(currentType == GMSm2CurveTypeSm2p256v1, @"当前椭圆曲线应为 NID_sm2");
 }
 
 
-//MARK: - NULL
+// MARK: - NULL
 /// 测试加解密出现空值情况
 - (void)testEnDeNull {
     NSData *plainData = [NSData dataWithBytes:"123456" length:6];
@@ -199,7 +199,7 @@
     }
 }
 
-//MARK: - Error Key
+// MARK: - Error Key
 /// 测试公私钥错误的情况下加解密和签名验签情况
 - (void)testErrorKey {
     NSString *errorPubKey = @"0408E3FFF9505BCFAF9307E888888999999B3936437A870407EA3D97886BAF"
@@ -228,7 +228,7 @@
     }
 }
 
-//MARK: - ECDH
+// MARK: - ECDH
 /// 测试 ECDH 密钥协商
 - (void)testECDH {
     for (NSInteger i = 0; i < 1000; i++) {
@@ -257,7 +257,7 @@
     }
 }
 
-//MARK: - KeyPair
+// MARK: - KeyPair
 /// 测试大量生产 sm2 公私钥
 - (void)testCreateKeys {
     for (NSInteger i = 0; i < 10000; i++) {
@@ -308,7 +308,7 @@
     }
 }
 
-//MARK: - ASN1 编解码
+// MARK: - ASN1 编解码
 /// 测试多次 ASN1 编码解码结果相同
 - (void)testASN1SameResult {
     NSString *plaintext = [self randomAny:10000];
@@ -362,7 +362,7 @@
     }
 }
 
-//MARK: - 加解密
+// MARK: - 加解密
 /// 测试 SM2 加解密
 - (void)testEnDe {
     for (NSInteger i = 0; i < 3000; i++) {
@@ -379,7 +379,7 @@
     }
 }
 
-//MARK: - 签名验签
+// MARK: - 签名验签
 /// 测试签名验签
 - (void)testSignVerify {
     NSArray *randUserArray = @[[NSNull null], @"", GMTestUserID];
@@ -402,7 +402,7 @@
     }
 }
 
-//MARK: - 加解密耗时
+// MARK: - 加解密耗时
 /// 测试加密耗时
 - (void)testPerformanceEnText {
     NSString *plaintext = @"123456";
@@ -431,7 +431,7 @@
     }];
 }
 
-//MARK: - ASN1 耗时
+// MARK: - ASN1 耗时
 - (void)testPerformanceASN1EnData {
     NSData *plainData = [NSData dataWithBytes:"123456" length:6];
     NSData *cipherData = [GMSm2Utils encryptData:plainData publicKey:self.gPubKey];

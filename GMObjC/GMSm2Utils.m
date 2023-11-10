@@ -37,7 +37,7 @@ IMPLEMENT_ASN1_FUNCTIONS(SM2_Ciphertext_1)
 }
 @end
 
-//MARK: - GMSm2Utils
+// MARK: - GMSm2Utils
 @interface GMSm2Utils ()
 // SM2 椭圆曲线类型，默认 NID_sm2，无特殊情况无需更改
 @property (nonatomic, assign) int curveType;
@@ -76,7 +76,7 @@ static GMSm2Utils *_instance;
     }
 }
 
-//MARK: - 椭圆曲线类型
+// MARK: - 椭圆曲线类型
 - (int)curveType {
     if (_curveType == 0) {
         return NID_sm2;
@@ -105,7 +105,7 @@ static GMSm2Utils *_instance;
     }
 }
 
-//MARK: - 创建公私钥对
+// MARK: - 创建公私钥对
 + (GMSm2Key *)generateKey{
     GMSm2Key *keyObj = [[GMSm2Key alloc] init];
     EC_GROUP *group = EC_GROUP_new_by_curve_name([self curveType]); // 椭圆曲线
@@ -141,7 +141,7 @@ static GMSm2Utils *_instance;
     return keyObj;
 }
 
-//MARK: - SM2 加密
+// MARK: - SM2 加密
 + (nullable NSData *)enData:(NSData *)plainData hexPubKey:(NSString *)hexPubKey{
     uint8_t *plain_bytes = (uint8_t *)[plainData bytes]; // 明文
     const char *public_key = hexPubKey.UTF8String; // 公钥
@@ -191,7 +191,16 @@ static GMSm2Utils *_instance;
     return cipherData;
 }
 
-//MARK: - SM2 解密
+// 加密 NSString 格式明文
++ (nullable NSData *)encryptText:(NSString *)plaintext publicKey:(NSString *)publicKey {
+    if (plaintext.length == 0 || publicKey.length == 0) {
+        return nil;
+    }
+    NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
+    return [self encryptData:plainData publicKey:publicKey];
+}
+
+// MARK: - SM2 解密
 + (nullable NSData *)deData:(NSData *)cipherData hexPriKey:(NSString *)hexPriKey{
     uint8_t *cipher_bytes = (uint8_t *)[cipherData bytes]; // 明文
     const char *private_key = hexPriKey.UTF8String; // 私钥
@@ -245,7 +254,7 @@ static GMSm2Utils *_instance;
     return plainData;
 }
 
-//MARK: - 密文格式转换
+// MARK: - 密文格式转换
 + (nullable NSData *)convertC1C2C3ToC1C3C2:(NSData *)c1c2c3Data {
     return [self convertC1C2C3ToC1C3C2:c1c2c3Data hasPrefix:NO];
 }
@@ -318,7 +327,7 @@ static GMSm2Utils *_instance;
     return c1c2c3Data;
 }
 
-//MARK: - ASN1 编码
+// MARK: - ASN1 编码
 + (NSData *)asn1EncodeC1Data:(NSData *)c1 c3Data:(NSData *)c3 c2Data:(NSData *)c2{
     if (c1.length == 0 || c3.length == 0 || c2.length == 0) {
         return nil;
@@ -406,7 +415,7 @@ static GMSm2Utils *_instance;
     return asn1Data;
 }
 
-//MARK: - ASN1 解码
+// MARK: - ASN1 解码
 + (NSArray<NSData *> *)asn1DeToC1C3C2Data:(NSData *)asn1Data {
     long asn1_ctext_len = asn1Data.length; // ASN1格式密文原文长度
     const uint8_t *asn1_ctext = (uint8_t *)[asn1Data bytes];
@@ -468,7 +477,7 @@ static GMSm2Utils *_instance;
     return c1c3c2Data;
 }
 
-//MARK: - SM2 签名
+// MARK: - SM2 签名
 + (nullable NSString *)signData:(NSData *)plainData privateKey:(NSString *)privateKey userData:(nullable NSData *)userData{
     if (plainData.length == 0 || privateKey.length == 0) {
         return nil;
@@ -541,7 +550,7 @@ static GMSm2Utils *_instance;
     return sigStr;
 }
 
-//MARK: - SM2 验签
+// MARK: - SM2 验签
 + (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS publicKey:(NSString *)publicKey userData:(nullable NSData *)userData{
     if (plainData.length == 0 || signRS.length == 0 || publicKey.length == 0) {
         return NO;
@@ -605,7 +614,7 @@ static GMSm2Utils *_instance;
     return isOK;
 }
 
-//MARK: - SM2签名 Der 编码
+// MARK: - SM2签名 Der 编码
 + (nullable NSString *)encodeDerWithSignRS:(NSString *)signRS{
     if (signRS.length == 0) {
         return nil;
@@ -649,7 +658,7 @@ static GMSm2Utils *_instance;
     return derEncode;
 }
 
-//MARK: - SM2签名 Der 解码
+// MARK: - SM2签名 Der 解码
 + (nullable NSString *)decodeDerToSignRS:(NSString *)derSign{
     if (derSign.length == 0) {
         return nil;
@@ -708,7 +717,7 @@ static GMSm2Utils *_instance;
     return originSign;
 }
 
-//MARK: - ECDH 密钥协商
+// MARK: - ECDH 密钥协商
 + (nullable NSString *)computeECDH:(NSString *)publicKey privateKey:(NSString *)privateKey{
     if (!publicKey || publicKey.length == 0 || !privateKey || privateKey.length == 0) {
         return nil;
@@ -758,7 +767,7 @@ static GMSm2Utils *_instance;
 }
 
 
-//MARK: - SM2 公钥的压缩与解压缩
+// MARK: - SM2 公钥的压缩与解压缩
 + (nullable NSString *)compressPublicKey:(nullable NSString *)publicKey {
     NSString *compressedKey = [self compressOrDePublicKey:publicKey isCompress:YES];
     return compressedKey;

@@ -59,13 +59,13 @@
     self.private8PemList = m5.copy;
 }
 
-//MARK: - 椭圆曲线类型
+// MARK: - 椭圆曲线类型
 - (void)testEllipticCurveType {
     int currentType = [GMSm2Utils curveType];
     XCTAssertTrue(currentType == GMSm2CurveTypeSm2p256v1, @"当前椭圆曲线应为 NID_sm2");
 }
 
-//MARK: - 测试NULL
+// MARK: - 测试NULL
 - (void)testParameterNull {
     NSArray *strNilArray = @[[NSNull null], @""];
     NSArray *dataNilArray = @[[NSNull null], [NSData new]];
@@ -103,7 +103,7 @@
     }
 }
 
-//MARK: - 密钥文件读取
+// MARK: - 密钥文件读取
 - (void)testReadPemDerFiles {
     for (NSInteger i = 0; i < 10; i++) {
         NSString *pubPemPath = self.publicPemList[i];
@@ -147,7 +147,7 @@
     }
 }
 
-//MARK: - 密钥保存至文件
+// MARK: - 密钥保存至文件
 - (void)testSaveToPemDerFiles {
     NSString *tmpDir = NSTemporaryDirectory();
     for (NSInteger i = 0; i < 100; i++) {
@@ -194,7 +194,7 @@
     }
 }
 
-//MARK: - PEM & DER 转换
+// MARK: - PEM & DER 转换
 - (void)testConvertPemAndDer {
     for (NSInteger i = 0; i < 10; i++) {
         NSString *pubPemPath = self.publicPemList[i];
@@ -233,7 +233,7 @@
     }
 }
 
-//MARK: - 创建密钥对文件
+// MARK: - 创建密钥对文件
 - (void)testCreateKeyPairFiles {
     for (NSInteger i = 0; i < 100; i++) {
         GMSm2KeyFiles *derArray = [GMSm2Bio generateDerKeyFiles];

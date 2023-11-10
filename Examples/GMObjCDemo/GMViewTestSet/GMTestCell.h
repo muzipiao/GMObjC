@@ -9,14 +9,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-//MARK: - GMTestHeader
+// MARK: - GMTestHeader
 @interface GMTestHeader : UITableViewHeaderFooterView
 
 @property (nonatomic, strong) UILabel *titleLabel;
 
 @end
 
-//MARK: - GMTestCell
+// MARK: - GMTestCell
 @interface GMTestCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *titleLabel;
