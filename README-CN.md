@@ -167,7 +167,7 @@ NSString *plainHex = @"313233343536"; // Hex 格式字明文（123456 的 Hex �
 NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData 格式明文
 
 // userID 传入 nil 或空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
-NSString *userID = @"lifei_zdjl@126.com"; // 普通字符串的 userID
+NSString *userID = @"lifei_zdjl@qq.com"; // 普通字符串的 userID
 NSString *userHex = [GMUtils stringToHex:userID]; // Hex 格式的 userID
 NSData *userData = [userID dataUsingEncoding:NSUTF8StringEncoding]; // NSData 格式的 userID
 

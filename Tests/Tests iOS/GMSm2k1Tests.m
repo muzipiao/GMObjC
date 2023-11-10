@@ -16,7 +16,7 @@
 
 - (void)setUp {
     [super setUp];
-    [GMSm2Utils setEllipticCurveType:GMCurveType_secp256k1];
+    [GMSm2Utils setCurveType:GMSm2CurveTypeSecp256k1];
     
     self.gPubKey = @"044D5055D99F95BE6DF30F8C4BF3A6A5AF5B777847289A5F4F1A9197052E403968D79BCC6558F026ACDA72748F02426C9D023E9E71F59A0368AB2B3370325938A9";
     self.gPriKey = @"B3BDD054F0132FBD5D361C2E0D2BDEA81AB8C67CEC2D197A2EC4551D55353BB5";
@@ -36,10 +36,10 @@
     [super tearDown];
 }
 
-///MARK: - 椭圆曲线类型
+//MARK: - 椭圆曲线类型
 - (void)testEllipticCurveType {
-    int currentType = [GMSm2Utils ellipticCurveType];
-    XCTAssertTrue(currentType == GMCurveType_secp256k1, @"当前椭圆曲线应为 NID_secp256k1");
+    int currentType = [GMSm2Utils curveType];
+    XCTAssertTrue(currentType == GMSm2CurveTypeSecp256k1, @"当前椭圆曲线应为 NID_secp256k1");
 }
 
 @end
