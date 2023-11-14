@@ -142,7 +142,7 @@ NSData *enResult3 = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // 加�
 // sm2 解密
 NSString *deResult1 = [GMSm2Utils decryptToText:enResult1 privateKey:priKey]; // 解密为普通字符串明文
 NSString *deResult2 = [GMSm2Utils decryptToHex:enResult2 privateKey:priKey]; // 解密为 Hex 格式明文
-NSData *deResult3 = [GMSm2Utils decryptToData:enResult3 privateKey:priKey]; // 解密为 NSData 格式明文
+NSData *deResult3 = [GMSm2Utils decryptData:enResult3 privateKey:priKey]; // 解密为 NSData 格式明文
 ```
 
 **注意：**

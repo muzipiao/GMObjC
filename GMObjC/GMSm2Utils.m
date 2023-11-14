@@ -106,7 +106,7 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - 创建公私钥对
-+ (GMSm2Key *)generateKey{
++ (GMSm2Key *)generateKey {
     GMSm2Key *keyObj = [[GMSm2Key alloc] init];
     EC_GROUP *group = EC_GROUP_new_by_curve_name([self curveType]); // 椭圆曲线
     EC_KEY *key = NULL; // 密钥对
@@ -142,7 +142,7 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - SM2 加密
-+ (nullable NSData *)enData:(NSData *)plainData hexPubKey:(NSString *)hexPubKey{
++ (nullable NSData *)enData:(NSData *)plainData hexPubKey:(NSString *)hexPubKey {
     uint8_t *plain_bytes = (uint8_t *)[plainData bytes]; // 明文
     const char *public_key = hexPubKey.UTF8String; // 公钥
     size_t msg_len = plainData.length; // 明文长度
@@ -183,7 +183,7 @@ static GMSm2Utils *_instance;
 }
 
 // 加密 NSData 格式明文
-+ (nullable NSData *)encryptData:(NSData *)plainData publicKey:(NSString *)publicKey{
++ (nullable NSData *)encryptData:(NSData *)plainData publicKey:(NSString *)publicKey {
     if (plainData.length == 0 || publicKey.length == 0) {
         return nil;
     }
@@ -197,11 +197,12 @@ static GMSm2Utils *_instance;
         return nil;
     }
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-    return [self encryptData:plainData publicKey:publicKey];
+    NSData *cipherData = [self encryptData:plainData publicKey:publicKey];
+    return cipherData;
 }
 
 // MARK: - SM2 解密
-+ (nullable NSData *)deData:(NSData *)cipherData hexPriKey:(NSString *)hexPriKey{
++ (nullable NSData *)deData:(NSData *)cipherData hexPriKey:(NSString *)hexPriKey {
     uint8_t *cipher_bytes = (uint8_t *)[cipherData bytes]; // 明文
     const char *private_key = hexPriKey.UTF8String; // 私钥
     size_t ctext_len = cipherData.length;
@@ -245,22 +246,25 @@ static GMSm2Utils *_instance;
     return plainData;
 }
 
-// 解密密文，返回 NSData 编码格式明文
-+ (nullable NSData *)decryptToData:(NSData *)cipherData privateKey:(NSString *)privateKey{
-    if (!cipherData || cipherData.length == 0 || !privateKey || privateKey.length == 0) {
+// 解密 NSData 格式密文，返回 NSData 编码格式明文
++ (nullable NSData *)decryptData:(NSData *)asn1Data privateKey:(NSString *)privateKey {
+    if (!asn1Data || asn1Data.length == 0 || !privateKey || privateKey.length == 0) {
         return nil;
     }
-    NSData *plainData = [self deData:cipherData hexPriKey:privateKey];
+    NSData *plainData = [self deData:asn1Data hexPriKey:privateKey];
+    return plainData;
+}
+
+// 解密 16进制格式密文，返回 NSData 编码格式明文
++ (nullable NSData *)decryptHex:(NSString *)asn1Hex privateKey:(NSString *)privateKey {
+    NSData *cipherData = [GMSmUtils dataFromHexString:asn1Hex];
+    NSData *plainData = [self decryptData:cipherData privateKey:privateKey];
     return plainData;
 }
 
 // MARK: - 密文格式转换
-+ (nullable NSData *)convertC1C2C3ToC1C3C2:(NSData *)c1c2c3Data {
-    return [self convertC1C2C3ToC1C3C2:c1c2c3Data hasPrefix:NO];
-}
-
 // C1C2C3 顺序的密文转为 C1C3C2 顺序
-+ (nullable NSData *)convertC1C2C3ToC1C3C2:(NSData *)c1c2c3Data hasPrefix:(BOOL)hasPrefix {
++ (nullable NSData *)convertC1C2C3DataToC1C3C2:(NSData *)c1c2c3Data hasPrefix:(BOOL)hasPrefix {
     if (c1c2c3Data.length < 32) {
         return nil;
     }
@@ -291,12 +295,13 @@ static GMSm2Utils *_instance;
     return c1c3c2Data;
 }
 
-+ (nullable NSData *)convertC1C3C2ToC1C2C3:(NSData *)c1c3c2Data {
-    return [self convertC1C3C2ToC1C2C3:c1c3c2Data hasPrefix:NO];
++ (nullable NSData *)convertC1C2C3HexToC1C3C2:(NSString *)c1c2c3Hex hasPrefix:(BOOL)hasPrefix {
+    NSData *c1c2c3Data = [GMSmUtils dataFromHexString:c1c2c3Hex];
+    return [self convertC1C2C3DataToC1C3C2:c1c2c3Data hasPrefix:hasPrefix];
 }
 
 // C1C3C2 顺序的密文转为 C1C2C3 顺序
-+ (nullable NSData *)convertC1C3C2ToC1C2C3:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix {
++ (nullable NSData *)convertC1C3C2DataToC1C2C3:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix {
     if (c1c3c2Data.length < 32) {
         return nil;
     }
@@ -327,8 +332,13 @@ static GMSm2Utils *_instance;
     return c1c2c3Data;
 }
 
++ (nullable NSData *)convertC1C3C2HexToC1C2C3:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix {
+    NSData *c1c3c2Data = [GMSmUtils dataFromHexString:c1c3c2Hex];
+    return [self convertC1C3C2DataToC1C2C3:c1c3c2Data hasPrefix:hasPrefix];
+}
+
 // MARK: - ASN1 编码
-+ (NSData *)asn1EncodeC1Data:(NSData *)c1 c3Data:(NSData *)c3 c2Data:(NSData *)c2{
++ (NSData *)asn1EncodeC1Data:(NSData *)c1 c3Data:(NSData *)c3 c2Data:(NSData *)c2 {
     if (c1.length == 0 || c3.length == 0 || c2.length == 0) {
         return nil;
     }
@@ -385,10 +395,6 @@ static GMSm2Utils *_instance;
     return asn1Data;
 }
 
-+ (nullable NSData *)asn1EncodeWithC1C3C2Data:(NSData *)c1c3c2Data {
-    return [self asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:NO];
-}
-
 + (nullable NSData *)asn1EncodeWithC1C3C2Data:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix {
     if (c1c3c2Data.length <= 32) {
         return nil;
@@ -415,8 +421,13 @@ static GMSm2Utils *_instance;
     return asn1Data;
 }
 
++ (nullable NSData *)asn1EncodeWithC1C3C2Hex:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix {
+    NSData *c1c3c2Data = [GMSmUtils dataFromHexString:c1c3c2Hex];
+    return [self asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:hasPrefix];
+}
+
 // MARK: - ASN1 解码
-+ (NSArray<NSData *> *)asn1DeToC1C3C2Data:(NSData *)asn1Data {
++ (NSArray<NSData *> *)asn1DecodeToC1C3C2DataList:(NSData *)asn1Data {
     long asn1_ctext_len = asn1Data.length; // ASN1格式密文原文长度
     const uint8_t *asn1_ctext = (uint8_t *)[asn1Data bytes];
     
@@ -453,15 +464,11 @@ static GMSm2Utils *_instance;
     return @[c1Data, c3Data, c2Data];
 }
 
-+ (nullable NSData *)asn1DecodeToC1C3C2Data:(NSData *)asn1Data {
-    return [self asn1DecodeToC1C3C2Data:asn1Data hasPrefix:NO];
-}
-
 + (nullable NSData *)asn1DecodeToC1C3C2Data:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix {
     if (asn1Data.length == 0) {
         return nil;
     }
-    NSArray<NSData *> *c1c3c2Array = [self asn1DeToC1C3C2Data:asn1Data];
+    NSArray<NSData *> *c1c3c2Array = [self asn1DecodeToC1C3C2DataList:asn1Data];
     if (c1c3c2Array.count != 3) {
         return nil;
     }
@@ -478,7 +485,7 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - SM2 签名
-+ (nullable NSString *)signData:(NSData *)plainData privateKey:(NSString *)privateKey userData:(nullable NSData *)userData{
++ (nullable NSString *)signData:(NSData *)plainData privateKey:(NSString *)privateKey userData:(nullable NSData *)userData {
     if (plainData.length == 0 || privateKey.length == 0) {
         return nil;
     }
@@ -551,7 +558,7 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - SM2 验签
-+ (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS publicKey:(NSString *)publicKey userData:(nullable NSData *)userData{
++ (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS publicKey:(NSString *)publicKey userData:(nullable NSData *)userData {
     if (plainData.length == 0 || signRS.length == 0 || publicKey.length == 0) {
         return NO;
     }
@@ -615,7 +622,7 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - SM2签名 Der 编码
-+ (nullable NSString *)encodeDerWithSignRS:(NSString *)signRS{
++ (nullable NSString *)encodeDerWithSignRS:(NSString *)signRS {
     if (signRS.length == 0) {
         return nil;
     }
@@ -659,7 +666,7 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - SM2签名 Der 解码
-+ (nullable NSString *)decodeDerToSignRS:(NSString *)derSign{
++ (nullable NSString *)decodeDerToSignRS:(NSString *)derSign {
     if (derSign.length == 0) {
         return nil;
     }
@@ -718,7 +725,7 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - ECDH 密钥协商
-+ (nullable NSString *)computeECDH:(NSString *)publicKey privateKey:(NSString *)privateKey{
++ (nullable NSString *)computeECDH:(NSString *)publicKey privateKey:(NSString *)privateKey {
     if (!publicKey || publicKey.length == 0 || !privateKey || privateKey.length == 0) {
         return nil;
     }
@@ -768,12 +775,12 @@ static GMSm2Utils *_instance;
 
 
 // MARK: - SM2 公钥的压缩与解压缩
-+ (nullable NSString *)compressPublicKey:(nullable NSString *)publicKey {
++ (nullable NSString *)compressPublicKey:(NSString *)publicKey {
     NSString *compressedKey = [self compressOrDePublicKey:publicKey isCompress:YES];
     return compressedKey;
 }
 
-+ (nullable NSString *)decompressPublicKey:(nullable NSString *)publicKey {
++ (nullable NSString *)decompressPublicKey:(NSString *)publicKey {
     NSString *uncompressedKey = [self compressOrDePublicKey:publicKey isCompress:NO];
     return uncompressedKey;
 }
@@ -803,6 +810,5 @@ static GMSm2Utils *_instance;
     
     return result;
 }
-
 
 @end

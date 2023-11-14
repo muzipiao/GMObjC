@@ -19,7 +19,7 @@
     NSData *cipherData = [GMSm2Utils encryptData:plainData publicKey:publicKey];
     NSAssert(cipherData.length != 0, @"GMObjC-Error：公钥可能不正确，请在网站上或其他平台验证公钥正确性");
     // ASN1 解码
-    NSData *c1c3c2Data = [GMSm2Utils asn1DecodeToC1C3C2Data:cipherData];
+    NSData *c1c3c2Data = [GMSm2Utils asn1DecodeToC1C3C2Data:cipherData hasPrefix:NO];
     NSAssert(c1c3c2Data.length != 0, @"GMObjC-Error：ASN1 解码错误，加密结果可能不正确");
     NSAssert(NO, @"GMObjC-Error：未分析到失败原因，请结合在线网站或者其他平台进行验证");
 }
@@ -31,7 +31,7 @@
     [self checkSm2CipherData:cipherData]; // 判断原文是否为字符串
     NSAssert(cipherData.length != 0, @"GMObjC-Error：传入的数据存在空值");
     // 直接进行解密
-    NSData *plainData = [GMSm2Utils decryptToData:cipherData privateKey:privateKey];
+    NSData *plainData = [GMSm2Utils decryptData:cipherData privateKey:privateKey];
     if (plainData.length > 0) {
         NSAssert(NO, @"GMObjC-Error：经测试，解密正常");
     }
@@ -111,7 +111,7 @@
     NSData *cipherData = [GMSmUtils dataFromHexString:cipherHex];
     // 尝试直接解密密文 Data
     if ([cipherHex hasPrefix:@"30"]) {
-        NSData *plainData = [GMSm2Utils decryptToData:cipherData privateKey:privateKey];
+        NSData *plainData = [GMSm2Utils decryptData:cipherData privateKey:privateKey];
         NSAssert(plainData.length == 0, @"GMObjC-Error：解密失败的原因是直接传入了普通字符串，先使用 [GMSmUtils dataFromHexString:] 解码");
     }
     // 非 30 开头，则尝试 ASN1 编码
@@ -128,7 +128,7 @@
     NSString *cipherHex = [GMSmUtils hexStringFromData:cipherData];
     // 尝试直接解密密文 Data
     if ([cipherHex hasPrefix:@"30"]) {
-        NSData *plainData = [GMSm2Utils decryptToData:cipherData privateKey:privateKey];
+        NSData *plainData = [GMSm2Utils decryptData:cipherData privateKey:privateKey];
         NSAssert(plainData.length == 0, @"GMObjC-Error：解密失败的原因是直接传入了普通字符串，先使用 [GMSmUtils dataFromHexString:] 解码");
     }
     // 非 30 开头，则尝试 ASN1 编码
@@ -139,22 +139,22 @@
 + (void)sm2DecryptWithASN1:(NSData *)cipherData privateKey:(NSString *)privateKey {
     [self checkSm2CipherData:cipherData]; // 判断原文是否为字符串
     // 解密失败，先检查是否为 ASN1 编码，如果不是 ASN1 编码，则需要进行 ASN1 编码
-    NSData *asn1CipherData0 = [GMSm2Utils asn1EncodeWithC1C3C2Data:cipherData];
-    NSData *plainData = [GMSm2Utils decryptToData:asn1CipherData0 privateKey:privateKey];
+    NSData *asn1CipherData0 = [GMSm2Utils asn1EncodeWithC1C3C2Data:cipherData hasPrefix:NO];
+    NSData *plainData = [GMSm2Utils decryptData:asn1CipherData0 privateKey:privateKey];
     NSAssert(plainData.length == 0, @"GMObjC-Error：解密失败的原因是 cipherData 不是 ASN1 编码格式，使用时进行 ASN1 编码");
     // 解密失败，尝试 ASN1 编码前，移除 cipherData 的 04 前缀
     NSData *asn1CipherData1 = [GMSm2Utils asn1EncodeWithC1C3C2Data:cipherData hasPrefix:YES];
-    plainData = [GMSm2Utils decryptToData:asn1CipherData1 privateKey:privateKey];
+    plainData = [GMSm2Utils decryptData:asn1CipherData1 privateKey:privateKey];
     NSAssert(plainData.length == 0, @"GMObjC-Error：解密失败的原因是 cipherData 不是 ASN1 编码格式，使用时进行 ASN1 编码");
     // 解密失败，尝试改变 C1C2C3 的顺序，当密文无前缀时
-    NSData *c1c3c2Data0 = [GMSm2Utils convertC1C2C3ToC1C3C2:cipherData hasPrefix:NO];
+    NSData *c1c3c2Data0 = [GMSm2Utils convertC1C2C3DataToC1C3C2:cipherData hasPrefix:NO];
     NSData *asn1CipherData2 = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Data0 hasPrefix:NO];
-    plainData = [GMSm2Utils decryptToData:asn1CipherData2 privateKey:privateKey];
+    plainData = [GMSm2Utils decryptData:asn1CipherData2 privateKey:privateKey];
     NSAssert(plainData.length == 0, @"GMObjC-Error：解密失败的原因是 cipherData 不是 ASN1 编码格式，且顺序为 C1C2C3，先调整顺序，再 ASN1 编码");
     // 解密失败，尝试改变 C1C2C3 的顺序，当密文有前缀时
-    NSData *c1c3c2Data1 = [GMSm2Utils convertC1C2C3ToC1C3C2:cipherData hasPrefix:YES];
+    NSData *c1c3c2Data1 = [GMSm2Utils convertC1C2C3DataToC1C3C2:cipherData hasPrefix:YES];
     NSData *asn1CipherData3 = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Data1 hasPrefix:YES];
-    plainData = [GMSm2Utils decryptToData:asn1CipherData3 privateKey:privateKey];
+    plainData = [GMSm2Utils decryptData:asn1CipherData3 privateKey:privateKey];
     NSAssert(plainData.length == 0, @"GMObjC-Error：解密失败的原因是 cipherData 不是 ASN1 编码格式，顺序为 C1C2C3，并包含04前缀，先调整顺序，再 ASN1 编码");
 }
 

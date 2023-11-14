@@ -88,7 +88,7 @@
                 cipherData = [GMSm2Utils encryptData:[randStr dataUsingEncoding:NSUTF8StringEncoding] publicKey:self.gPubKey];
                 XCTAssertNotNil(cipherData, @"测试密文不为空");
             }
-            NSData *deData = [GMSm2Utils decryptToData:cipherData privateKey:randPri];
+            NSData *deData = [GMSm2Utils decryptData:cipherData privateKey:randPri];
             XCTAssertNil(deData, @"解密字符串应为空");
         }
         if ((randData.length > 0 && randPri.length > 0) == NO) {
@@ -97,7 +97,7 @@
                 cipherData = [GMSm2Utils encryptData:randData publicKey:self.gPubKey];
                 XCTAssertNotNil(cipherData, @"测试密文不为空");
             }
-            NSData *deData = [GMSm2Utils decryptToData:cipherData privateKey:randPri];
+            NSData *deData = [GMSm2Utils decryptData:cipherData privateKey:randPri];
             XCTAssertNil(deData, @"解密字符串应为空");
         }
     }
@@ -134,9 +134,9 @@
         }
         BOOL randPrefix = i%2 == 0 ? YES : NO;
         NSData *randData = [randStr dataUsingEncoding:NSUTF8StringEncoding];
-        NSData *c1c3c2 = [GMSm2Utils convertC1C2C3ToC1C3C2:randData hasPrefix:randPrefix];
+        NSData *c1c3c2 = [GMSm2Utils convertC1C2C3DataToC1C3C2:randData hasPrefix:randPrefix];
         XCTAssertNil(c1c3c2, @"转换结果为空");
-        NSData *c1c2c3 = [GMSm2Utils convertC1C3C2ToC1C2C3:randData hasPrefix:randPrefix];
+        NSData *c1c2c3 = [GMSm2Utils convertC1C3C2DataToC1C2C3:randData hasPrefix:randPrefix];
         XCTAssertNil(c1c2c3, @"转换结果为空");
     }
 }
@@ -213,7 +213,7 @@
     
     NSData *cipherData = [GMSmUtils dataFromHexString:self.gCipherDataHex];
     // 使用错误的私钥解密为空
-    NSData *deData = [GMSm2Utils decryptToData:cipherData privateKey:errorPriKey];
+    NSData *deData = [GMSm2Utils decryptData:cipherData privateKey:errorPriKey];
     XCTAssertTrue(deData.length == 0, @"解密结果为空");
     
     // 使用错误的公钥私钥，验签不通过
@@ -295,15 +295,15 @@
             [mutableData appendData:originC1C3C2];
             prefixC1C3C2 = mutableData.copy;
         }
-        NSData *convertC1C2C3 = [GMSm2Utils convertC1C3C2ToC1C2C3:prefixC1C3C2 hasPrefix:hasPrefix];
+        NSData *convertC1C2C3 = [GMSm2Utils convertC1C3C2DataToC1C2C3:prefixC1C3C2 hasPrefix:hasPrefix];
         XCTAssertNotNil(convertC1C2C3, @"密文字符串不为空");
-        NSData *convertC1C3C2 = [GMSm2Utils convertC1C2C3ToC1C3C2:convertC1C2C3 hasPrefix:hasPrefix];
+        NSData *convertC1C3C2 = [GMSm2Utils convertC1C2C3DataToC1C3C2:convertC1C2C3 hasPrefix:hasPrefix];
         XCTAssertTrue([convertC1C3C2 isEqualToData:prefixC1C3C2], @"转换后结果一致");
         // ASN1 编码
         NSData *convertASN1 = [GMSm2Utils asn1EncodeWithC1C3C2Data:convertC1C3C2 hasPrefix:hasPrefix];
         XCTAssertNotNil(convertASN1, @"密文字符串不为空");
         // 解密
-        NSData *deData = [GMSm2Utils decryptToData:convertASN1 privateKey:priKey];
+        NSData *deData = [GMSm2Utils decryptData:convertASN1 privateKey:priKey];
         XCTAssertTrue([deData isEqualToData:plainData], @"解密结果与原文一致");
     }
 }
@@ -336,7 +336,7 @@
     BOOL isSame_Ctext = [encodeStr isEqualToData:ciphertext];
     XCTAssertTrue(isSame_Ctext, @"编码后和原始密文相同");
     
-    NSData *decryptStr = [GMSm2Utils decryptToData:ciphertext privateKey:self.gPriKey];
+    NSData *decryptStr = [GMSm2Utils decryptData:ciphertext privateKey:self.gPriKey];
     XCTAssertNotNil(decryptStr, @"解密结果不为空");
     BOOL isSame_plain = [decryptStr isEqualToData:plainData];
     XCTAssertTrue(isSame_plain, @"加解密结果应该相同");
@@ -374,7 +374,7 @@
         NSData *enData = [GMSm2Utils encryptData:plainData publicKey:self.gPubKey];
         XCTAssertNotNil(enData, @"加密字符串不为空");
         // 解密
-        NSData *deData = [GMSm2Utils decryptToData:enData privateKey:self.gPriKey];
+        NSData *deData = [GMSm2Utils decryptData:enData privateKey:self.gPriKey];
         XCTAssertTrue([deData isEqualToData:plainData], @"解密结果与原文一致");
     }
 }
@@ -426,7 +426,7 @@
     NSData *cipherData = [GMSm2Utils encryptData:plainData publicKey:self.gPubKey];
     XCTAssertNotNil(cipherData, @"密文不为空");
     [self measureBlock:^{
-        NSData *deData = [GMSm2Utils decryptToData:cipherData privateKey:self.gPriKey];
+        NSData *deData = [GMSm2Utils decryptData:cipherData privateKey:self.gPriKey];
         XCTAssertNotNil(deData, @"解密结果不为空");
     }];
 }

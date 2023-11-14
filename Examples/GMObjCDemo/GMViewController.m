@@ -49,12 +49,6 @@ static NSString *kGMTestHeaderID = @"kGMTestHeaderID";
     [self.modelList addObject:[GMTestUtil testConvertPemAndDer]];
     [self.modelList addObject:[GMTestUtil testReadX509FileInfo]];
     [self.view addSubview:self.tableView];
-    
-    NSString *prikey = @"dfd9f517a121f67565957383d44a5e032dbd868f1eff0f02cda8b17e69bd08a7";
-    NSString *plaintext = @"123456"; // ordinary plaintext
-    NSString *c1c3c2Result = @"9e62bd4ddf639c368a011da8c53654fa9158f80aaccf92a47861d46415dd53e12904b0f10aeee6d7eace37a44143582bef92f644162df65b2ffb288c9197669c7580d96d5d0a9114d75399ae4978a98d4f842b289385f2944eb4d550ca04cfbc600460268363";
-    NSData *cccc = [c1c3c2Result dataUsingEncoding:NSUTF8StringEncoding];
-    [GMDoctor checkSm2Decrypt:cccc privateKey:prikey];
 }
 
 // MARK: - SetupUI

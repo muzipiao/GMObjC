@@ -142,7 +142,7 @@
         NSData *plainData = [@"123456" dataUsingEncoding:NSUTF8StringEncoding];
         NSData *cipherData = [GMSm2Utils encryptData:plainData publicKey:pubPemStrKey];
         XCTAssertTrue(cipherData.length > 0, @"加密结果不为空");
-        NSData *decryptData = [GMSm2Utils decryptToData:cipherData privateKey:priPemStrKey];
+        NSData *decryptData = [GMSm2Utils decryptData:cipherData privateKey:priPemStrKey];
         XCTAssertTrue([decryptData isEqualToData:plainData], @"解密结果等于原文");
     }
 }

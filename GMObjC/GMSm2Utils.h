@@ -63,35 +63,51 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 + (nullable NSData *)encryptText:(NSString *)plaintext publicKey:(NSString *)publicKey;
 
 /// SM2 解密。返回 NSData 格式明文，解密失败返回 nil
-/// @param cipherData 密文（ASN1 编码格式，若非 ASN1 编码格式，需要先使用 asn1EncodeWithC1C3C2Data 进行编码）
+/// @param asn1Data NSData 格式密文（ASN1 编码格式，若非 ASN1 编码格式，需要先使用 asn1EncodeWithC1C3C2Data 进行编码）
 /// @param privateKey 私钥（ Hex 编码格式）
-+ (nullable NSData *)decryptToData:(NSData *)cipherData privateKey:(NSString *)privateKey;
++ (nullable NSData *)decryptData:(NSData *)asn1Data privateKey:(NSString *)privateKey;
+
+/// SM2 解密。返回 NSData 格式明文，解密失败返回 nil
+/// @param asn1Hex 16 进制编码格式密文（ASN1 编码格式，若非 ASN1 编码格式，需要先使用 asn1EncodeWithC1C3C2Hex 进行编码）
+/// @param privateKey 私钥（ Hex 编码格式）
++ (nullable NSData *)decryptHex:(NSString *)asn1Hex privateKey:(NSString *)privateKey;
 
 // MARK: - ASN1 编码解码
 /// ASN1  编码。返回 ASN1 编码格式的密文
-/// @param c1c3c2Data 按照 C1C3C2 排序的密文数据，若非此顺序需要先转换
-+ (nullable NSData *)asn1EncodeWithC1C3C2Data:(NSData *)c1c3c2Data;
-// hasPrefix 密文前面是否有前缀标识，例如 0x04 前缀标识，默认 NO
+/// @param c1c3c2Data 按照 C1C3C2 排序的 NSData 密文数据，若非此顺序需要先转换
+/// @param hasPrefix 密文 c1c3c2Data 前面是否有前缀标识，例如 0x04 前缀标识，默认 NO
 + (nullable NSData *)asn1EncodeWithC1C3C2Data:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix;
+
+/// ASN1  编码。返回 ASN1 编码格式的密文
+/// @param c1c3c2Hex 按照 C1C3C2 排序的 16 进制编码密文数据，若非此顺序需要先转换
+/// @param hasPrefix 密文 c1c3c2Hex 前面是否有前缀标识，例如 04 前缀标识，默认 NO
++ (nullable NSData *)asn1EncodeWithC1C3C2Hex:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix;
 
 /// ASN1  解码。返回按照 C1C3C2 排序的密文
 /// @param asn1Data ASN1 编码格式的密文
-+ (nullable NSData *)asn1DecodeToC1C3C2Data:(NSData *)asn1Data;
-// hasPrefix 密文前面是否有 0x04 前缀标识，YES 时返回结果前面会拼接上 0x04，默认 NO
+/// @param hasPrefix 密文前面是否有 0x04 前缀标识，YES 时返回结果前面会拼接上 0x04，默认 NO
 + (nullable NSData *)asn1DecodeToC1C3C2Data:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix;
 
 // MARK: - 密文顺序转换
 /// 将密文顺序由 C1C2C3 转为 C1C3C2，返回 C1C3C2 顺序排列的密文，失败返回 nil
-/// - Parameter c1c2c3Data: 按照 C1C2C3 顺序排列的密文
-+ (nullable NSData *)convertC1C2C3ToC1C3C2:(NSData *)c1c2c3Data;
-// hasPrefix: 是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
-+ (nullable NSData *)convertC1C2C3ToC1C3C2:(NSData *)c1c2c3Data hasPrefix:(BOOL)hasPrefix;
+/// @param c1c2c3Data 按照 C1C2C3 顺序排列的密文
+/// @param hasPrefix 是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
++ (nullable NSData *)convertC1C2C3DataToC1C3C2:(NSData *)c1c2c3Data hasPrefix:(BOOL)hasPrefix;
+
+/// 将密文顺序由 C1C2C3 转为 C1C3C2，返回 C1C3C2 顺序排列的密文，失败返回 nil
+/// @param c1c2c3Hex 按照 C1C2C3 顺序排列的密文
+/// @param hasPrefix 是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
++ (nullable NSData *)convertC1C2C3HexToC1C3C2:(NSString *)c1c2c3Hex hasPrefix:(BOOL)hasPrefix;
 
 /// C1C3C2 顺序的密文转为 C1C2C3 顺序，返回 C1C2C3 顺序排列的密文，失败返回 nil
-/// - Parameter c1c3c2Data: 按照 C1C3C2 顺序排列的密文
-+ (nullable NSData *)convertC1C3C2ToC1C2C3:(NSData *)c1c3c2Data;
-/// hasPrefix: 是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
-+ (nullable NSData *)convertC1C3C2ToC1C2C3:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix;
+/// @param c1c3c2Data 按照 C1C3C2 顺序排列的 NSData 格式密文
+/// @param hasPrefix 是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
++ (nullable NSData *)convertC1C3C2DataToC1C2C3:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix;
+
+/// C1C3C2 顺序的密文转为 C1C2C3 顺序，返回 C1C2C3 顺序排列的密文，失败返回 nil
+/// @param c1c3c2Hex 按照 C1C3C2 顺序排列的 16 进制格式密文
+/// @param hasPrefix 是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
++ (nullable NSData *)convertC1C3C2HexToC1C2C3:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix;
 
 // MARK: - 签名验签
 /// SM2 数字签名。返回值：数字签名，RS 拼接的 Hex 格式字符串，前半部分是 R，后半部分是 S
@@ -119,11 +135,11 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 // MARK: - SM2 公钥的压缩与解压缩
 /// SM2 公钥压缩。返回值：02 或 03 开头的压缩公钥
 /// - Parameter publicKey 04 开头的非压缩公钥
-+ (nullable NSString *)compressPublicKey:(nullable NSString *)publicKey;
++ (nullable NSString *)compressPublicKey:(NSString *)publicKey;
 
 /// SM2 公钥解压缩。返回值：04 开头的非压缩公钥
 /// @param publicKey 02 或 03 开头的压缩公钥
-+ (nullable NSString *)decompressPublicKey:(nullable NSString *)publicKey;
++ (nullable NSString *)decompressPublicKey:(NSString *)publicKey;
 
 // MARK: - ECDH 密钥协商
 /// 椭圆曲线 Diffie-Hellman 密钥协商（ECDH），返回 64 字节 16 进制编码格式密钥

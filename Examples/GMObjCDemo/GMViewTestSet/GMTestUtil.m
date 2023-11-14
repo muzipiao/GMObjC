@@ -20,7 +20,7 @@
     NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，Hex 编码格式
     NSString *priKey = keyPair.privateKey; // 测试用私钥，Hex 编码格式
     NSData *encryptData = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // 加密 NSData 类型数据
-    NSData *decryptData = [GMSm2Utils decryptToData:encryptData privateKey:priKey]; // 解密为 NSData 格式明文
+    NSData *decryptData = [GMSm2Utils decryptData:encryptData privateKey:priKey]; // 解密为 NSData 格式明文
     // 判断 sm2 加解密结果
     if ([decryptData isEqualToData:plainData]) {
         NSLog(@"sm2 加密解密成功");
@@ -29,8 +29,8 @@
     }
     NSData *c1c3c2Data = [GMSm2Utils asn1DecodeToC1C3C2Data:encryptData hasPrefix:NO]; // ASN1 解码为 c1c3c2拼接的Data
     // 将解码后的密文顺序更改
-    NSData *convertToC1C2C3 = [GMSm2Utils convertC1C3C2ToC1C2C3:c1c3c2Data hasPrefix:NO];
-    NSData *convertToC1C3C2 = [GMSm2Utils convertC1C2C3ToC1C3C2:convertToC1C2C3 hasPrefix:NO];
+    NSData *convertToC1C2C3 = [GMSm2Utils convertC1C3C2DataToC1C2C3:c1c3c2Data hasPrefix:NO];
+    NSData *convertToC1C3C2 = [GMSm2Utils convertC1C2C3DataToC1C3C2:convertToC1C2C3 hasPrefix:NO];
     if ([convertToC1C3C2 isEqualToData:c1c3c2Data]) {
         NSLog(@"C1C3C2 顺序更改成功");
     } else {
