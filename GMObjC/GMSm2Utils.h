@@ -75,38 +75,38 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 // MARK: - ASN1 编码解码
 /// ASN1  编码。返回 ASN1 编码格式的密文
 /// @param c1c3c2Data 按照 C1C3C2 排序的 NSData 密文数据，若非此顺序需要先转换
-/// @param hasPrefix 密文 c1c3c2Data 前面是否有前缀标识，例如 0x04 前缀标识，默认 NO
+/// @param hasPrefix 标记密文 c1c3c2Data 前面是否有前缀标识，例如 0x04 前缀标识，默认 NO
 + (nullable NSData *)asn1EncodeWithC1C3C2Data:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix;
 
 /// ASN1  编码。返回 ASN1 编码格式的密文
 /// @param c1c3c2Hex 按照 C1C3C2 排序的 16 进制编码密文数据，若非此顺序需要先转换
-/// @param hasPrefix 密文 c1c3c2Hex 前面是否有前缀标识，例如 04 前缀标识，默认 NO
+/// @param hasPrefix 标记密文 c1c3c2Hex 前面是否有前缀标识，例如 04 前缀标识，默认 NO
 + (nullable NSData *)asn1EncodeWithC1C3C2Hex:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix;
 
 /// ASN1  解码。返回按照 C1C3C2 排序的密文
 /// @param asn1Data ASN1 编码格式的密文
-/// @param hasPrefix 密文前面是否有 0x04 前缀标识，YES 时返回结果前面会拼接上 0x04，默认 NO
+/// @param hasPrefix 返回的密文结果前面是否增加 0x04 前缀标识，YES 时返回结果前面会拼接上 0x04，默认 NO
 + (nullable NSData *)asn1DecodeToC1C3C2Data:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix;
 
 // MARK: - 密文顺序转换
 /// 将密文顺序由 C1C2C3 转为 C1C3C2，返回 C1C3C2 顺序排列的密文，失败返回 nil
 /// @param c1c2c3Data 按照 C1C2C3 顺序排列的密文
-/// @param hasPrefix 是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
+/// @param hasPrefix 标记c1c2c3Data是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
 + (nullable NSData *)convertC1C2C3DataToC1C3C2:(NSData *)c1c2c3Data hasPrefix:(BOOL)hasPrefix;
 
 /// 将密文顺序由 C1C2C3 转为 C1C3C2，返回 C1C3C2 顺序排列的密文，失败返回 nil
 /// @param c1c2c3Hex 按照 C1C2C3 顺序排列的密文
-/// @param hasPrefix 是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
+/// @param hasPrefix 标记c1c2c3Hex是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
 + (nullable NSData *)convertC1C2C3HexToC1C3C2:(NSString *)c1c2c3Hex hasPrefix:(BOOL)hasPrefix;
 
 /// C1C3C2 顺序的密文转为 C1C2C3 顺序，返回 C1C2C3 顺序排列的密文，失败返回 nil
 /// @param c1c3c2Data 按照 C1C3C2 顺序排列的 NSData 格式密文
-/// @param hasPrefix 是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
+/// @param hasPrefix 标记c1c3c2Data是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
 + (nullable NSData *)convertC1C3C2DataToC1C2C3:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix;
 
 /// C1C3C2 顺序的密文转为 C1C2C3 顺序，返回 C1C2C3 顺序排列的密文，失败返回 nil
 /// @param c1c3c2Hex 按照 C1C3C2 顺序排列的 16 进制格式密文
-/// @param hasPrefix 是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
+/// @param hasPrefix 标记c1c3c2Hex是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
 + (nullable NSData *)convertC1C3C2HexToC1C2C3:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix;
 
 // MARK: - 签名验签
@@ -143,8 +143,8 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 
 // MARK: - ECDH 密钥协商
 /// 椭圆曲线 Diffie-Hellman 密钥协商（ECDH），返回 64 字节 16 进制编码格式密钥
-/// @param publicKey 临时公钥（其他端传入的公钥）
-/// @param privateKey 临时私钥（当前端生成的私钥）
+/// @param publicKey 对方公钥
+/// @param privateKey 己方私钥
 + (nullable NSString *)computeECDH:(NSString *)publicKey privateKey:(NSString *)privateKey;
 
 // MARK: - 椭圆曲线类型
