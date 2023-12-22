@@ -484,6 +484,15 @@ static GMSm2Utils *_instance;
     return c1c3c2Data;
 }
 
+/// ASN1  解码。返回按照 C1C3C2 排序的密文，hasPrefix=YES时，返回结果前面会拼接上 04 前缀标识
+/// @param asn1Data ASN1 编码格式的密文
+/// @param hasPrefix 返回的密文结果前面是否增加 04 前缀标识，YES 时返回结果前面会拼接上 04，默认 NO
++ (nullable NSString *)asn1DecodeToC1C3C2Hex:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix {
+    NSData *c1c3c2Data = [self asn1DecodeToC1C3C2Data:asn1Data hasPrefix:hasPrefix];
+    NSString *c1c3c2Hex = [GMSmUtils hexStringFromData:c1c3c2Data];
+    return c1c3c2Hex;
+}
+
 // MARK: - SM2 签名
 + (nullable NSString *)signData:(NSData *)plainData privateKey:(NSString *)privateKey userData:(nullable NSData *)userData {
     if (plainData.length == 0 || privateKey.length == 0) {

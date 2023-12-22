@@ -203,7 +203,7 @@
 /// 测试公私钥错误的情况下加解密和签名验签情况
 - (void)testErrorKey {
     NSString *errorPubKey = @"0408E3FFF9505BCFAF9307E888888999999B3936437A870407EA3D97886BAF"
-                             "BC9C624537215DE9507BC0E2DD276CF74695C924F28E9004CDE4678F63D698";
+    "BC9C624537215DE9507BC0E2DD276CF74695C924F28E9004CDE4678F63D698";
     NSString *errorPriKey = @"6666662B9FE24AB196305F82E647616C3A3694441FB3422E7838E24DEAE";
     
     // 使用错误的公钥加密结果为空
@@ -314,29 +314,33 @@
     NSString *plaintext = [self randomAny:10000];
     XCTAssertNotNil(plaintext, @"生成字符串不为空");
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *ciphertext = [GMSm2Utils encryptData:plainData publicKey:self.gPubKey];
-    XCTAssertNotNil(ciphertext, @"加密字符串不为空");
+    NSData *ciphertData = [GMSm2Utils encryptData:plainData publicKey:self.gPubKey];
+    XCTAssertNotNil(ciphertData, @"加密字符串不为空");
     
-    NSData *c1c3c2Str = [GMSm2Utils asn1DecodeToC1C3C2Data:ciphertext hasPrefix:NO];
-    XCTAssertNotNil(c1c3c2Str, @"ASN1解码后字符串不为空");
+    NSData *c1c3c2Data = [GMSm2Utils asn1DecodeToC1C3C2Data:ciphertData hasPrefix:NO];
+    XCTAssertNotNil(c1c3c2Data, @"ASN1解码后字符串不为空");
     for (NSInteger i = 0; i < 1000; i++) {
-        NSData *newDecodeStr = [GMSm2Utils asn1DecodeToC1C3C2Data:ciphertext hasPrefix:NO];
-        BOOL isSame_decode = [newDecodeStr isEqualToData:c1c3c2Str];
+        NSData *newDecodeStr = [GMSm2Utils asn1DecodeToC1C3C2Data:ciphertData hasPrefix:NO];
+        BOOL isSame_decode = [newDecodeStr isEqualToData:c1c3c2Data];
         XCTAssertTrue(isSame_decode, @"多次解码应该相同");
     }
     
-    NSData *encodeStr = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Str hasPrefix:NO];
+    NSString *c1c3c2Hex = [GMSm2Utils asn1DecodeToC1C3C2Hex:ciphertData hasPrefix:NO];
+    NSData *c1c3c2HexToData = [GMSmUtils dataFromHexString:c1c3c2Hex];
+    XCTAssertTrue([c1c3c2HexToData isEqualToData:c1c3c2Data], @"不同API解码结果应该相同");
+    
+    NSData *encodeStr = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:NO];
     XCTAssertNotNil(encodeStr, @"ASN1编码后字符串不为空");
     for (NSInteger i = 0; i < 1000; i++) {
-        NSData *newEncodeStr = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Str hasPrefix:NO];
+        NSData *newEncodeStr = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:NO];
         BOOL isSame_encode = [newEncodeStr isEqualToData:encodeStr];
         XCTAssertTrue(isSame_encode, @"多次编码应该相同");
     }
     
-    BOOL isSame_Ctext = [encodeStr isEqualToData:ciphertext];
+    BOOL isSame_Ctext = [encodeStr isEqualToData:ciphertData];
     XCTAssertTrue(isSame_Ctext, @"编码后和原始密文相同");
     
-    NSData *decryptStr = [GMSm2Utils decryptData:ciphertext privateKey:self.gPriKey];
+    NSData *decryptStr = [GMSm2Utils decryptData:ciphertData privateKey:self.gPriKey];
     XCTAssertNotNil(decryptStr, @"解密结果不为空");
     BOOL isSame_plain = [decryptStr isEqualToData:plainData];
     XCTAssertTrue(isSame_plain, @"加解密结果应该相同");
