@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0726408C77272FA3CBD0C416 /* libPods-GMObjC Mac Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 917BF1DEBB71D3B9589B967D /* libPods-GMObjC Mac Demo.a */; };
 		9C745900270FE3AE0062C1E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C7458FF270FE3AE0062C1E5 /* Assets.xcassets */; };
 		9C745903270FE3AE0062C1E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C745901270FE3AE0062C1E5 /* LaunchScreen.storyboard */; };
 		9C745906270FE3AE0062C1E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C745905270FE3AE0062C1E5 /* main.m */; };
@@ -66,6 +67,10 @@
 		9CC40DE02AB03E5F00E5C253 /* GMTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC40DDB2AB03E5F00E5C253 /* GMTestModel.m */; };
 		9CC40DE12AB03E5F00E5C253 /* GMTestUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC40DDC2AB03E5F00E5C253 /* GMTestUtil.m */; };
 		9CC40DE22AB03E5F00E5C253 /* GMTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC40DDD2AB03E5F00E5C253 /* GMTestCell.m */; };
+		9CCDFC0F2B357087004E50AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCDFC0E2B357087004E50AD /* AppDelegate.swift */; };
+		9CCDFC112B357087004E50AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCDFC102B357087004E50AD /* ViewController.swift */; };
+		9CCDFC132B357088004E50AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CCDFC122B357088004E50AD /* Assets.xcassets */; };
+		9CCDFC162B357088004E50AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CCDFC142B357088004E50AD /* Main.storyboard */; };
 		9CF02FDB2A6FBB25008B80DE /* bing-base64-chain.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD12A6FBB25008B80DE /* bing-base64-chain.cer */; };
 		9CF02FDC2A6FBB25008B80DE /* github-der-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD22A6FBB25008B80DE /* github-der-single.cer */; };
 		9CF02FDD2A6FBB25008B80DE /* bing-base64-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD32A6FBB25008B80DE /* bing-base64-single.cer */; };
@@ -77,6 +82,7 @@
 
 /* Begin PBXFileReference section */
 		68E4A04DB15A16DA7ADA9CC6 /* libPods-GMObjC iOS Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GMObjC iOS Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		917BF1DEBB71D3B9589B967D /* libPods-GMObjC Mac Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GMObjC Mac Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7458F0270FE3AD0062C1E5 /* GMObjC iOS Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GMObjC iOS Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7458FF270FE3AE0062C1E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C745902270FE3AE0062C1E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -143,6 +149,12 @@
 		9CC40DDD2AB03E5F00E5C253 /* GMTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMTestCell.m; sourceTree = "<group>"; };
 		9CC40DDE2AB03E5F00E5C253 /* GMTestUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMTestUtil.h; sourceTree = "<group>"; };
 		9CC40DDF2AB03E5F00E5C253 /* GMTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMTestModel.h; sourceTree = "<group>"; };
+		9CCDFC0C2B357087004E50AD /* GMObjC Mac Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GMObjC Mac Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CCDFC0E2B357087004E50AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9CCDFC102B357087004E50AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9CCDFC122B357088004E50AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9CCDFC152B357088004E50AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9CCDFC172B357088004E50AD /* GMObjC_Mac_Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GMObjC_Mac_Demo.entitlements; sourceTree = "<group>"; };
 		9CF02FD12A6FBB25008B80DE /* bing-base64-chain.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bing-base64-chain.cer"; sourceTree = "<group>"; };
 		9CF02FD22A6FBB25008B80DE /* github-der-single.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "github-der-single.cer"; sourceTree = "<group>"; };
 		9CF02FD32A6FBB25008B80DE /* bing-base64-single.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bing-base64-single.cer"; sourceTree = "<group>"; };
@@ -150,7 +162,9 @@
 		9CF02FD62A6FBB25008B80DE /* github-base64-single.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "github-base64-single.cer"; sourceTree = "<group>"; };
 		9CF02FD82A6FBB25008B80DE /* github-base64-chain.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "github-base64-chain.cer"; sourceTree = "<group>"; };
 		A435991C6640EC8C28AD2FA7 /* Pods-GMObjC iOS Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC iOS Demo.debug.xcconfig"; path = "Target Support Files/Pods-GMObjC iOS Demo/Pods-GMObjC iOS Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		E77C5DF90DF69822C35F1FB6 /* Pods-GMObjC Mac Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC Mac Demo.release.xcconfig"; path = "Target Support Files/Pods-GMObjC Mac Demo/Pods-GMObjC Mac Demo.release.xcconfig"; sourceTree = "<group>"; };
 		E935FE42A13E06A08E1D0982 /* Pods-GMObjC iOS Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC iOS Demo.release.xcconfig"; path = "Target Support Files/Pods-GMObjC iOS Demo/Pods-GMObjC iOS Demo.release.xcconfig"; sourceTree = "<group>"; };
+		F7BF8D599B17666EB4149051 /* Pods-GMObjC Mac Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC Mac Demo.debug.xcconfig"; path = "Target Support Files/Pods-GMObjC Mac Demo/Pods-GMObjC Mac Demo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +176,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9CCDFC092B357087004E50AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0726408C77272FA3CBD0C416 /* libPods-GMObjC Mac Demo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -169,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				68E4A04DB15A16DA7ADA9CC6 /* libPods-GMObjC iOS Demo.a */,
+				917BF1DEBB71D3B9589B967D /* libPods-GMObjC Mac Demo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -178,6 +201,8 @@
 			children = (
 				A435991C6640EC8C28AD2FA7 /* Pods-GMObjC iOS Demo.debug.xcconfig */,
 				E935FE42A13E06A08E1D0982 /* Pods-GMObjC iOS Demo.release.xcconfig */,
+				F7BF8D599B17666EB4149051 /* Pods-GMObjC Mac Demo.debug.xcconfig */,
+				E77C5DF90DF69822C35F1FB6 /* Pods-GMObjC Mac Demo.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
@@ -187,7 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				9CBB89B227101105008411A1 /* Tests Sources */,
-				9C7458F2270FE3AD0062C1E5 /* GMObjCDemo */,
+				9C7458F2270FE3AD0062C1E5 /* GMObjC iOS Demo */,
+				9CCDFC0D2B357087004E50AD /* GMObjC Mac Demo */,
 				9C7458F1270FE3AD0062C1E5 /* Products */,
 				80CC98608CB3E85AC33490DE /* Pods */,
 				56D0E04BA6AD31614EE08036 /* Frameworks */,
@@ -198,11 +224,12 @@
 			isa = PBXGroup;
 			children = (
 				9C7458F0270FE3AD0062C1E5 /* GMObjC iOS Demo.app */,
+				9CCDFC0C2B357087004E50AD /* GMObjC Mac Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9C7458F2270FE3AD0062C1E5 /* GMObjCDemo */ = {
+		9C7458F2270FE3AD0062C1E5 /* GMObjC iOS Demo */ = {
 			isa = PBXGroup;
 			children = (
 				9C74590D270FE4790062C1E5 /* GMAppDelegate.h */,
@@ -215,7 +242,7 @@
 				9C745904270FE3AE0062C1E5 /* Info.plist */,
 				9C745905270FE3AE0062C1E5 /* main.m */,
 			);
-			path = GMObjCDemo;
+			path = "GMObjC iOS Demo";
 			sourceTree = "<group>";
 		};
 		9CBB89B227101105008411A1 /* Tests Sources */ = {
@@ -331,6 +358,18 @@
 			path = GMViewTestSet;
 			sourceTree = "<group>";
 		};
+		9CCDFC0D2B357087004E50AD /* GMObjC Mac Demo */ = {
+			isa = PBXGroup;
+			children = (
+				9CCDFC0E2B357087004E50AD /* AppDelegate.swift */,
+				9CCDFC102B357087004E50AD /* ViewController.swift */,
+				9CCDFC122B357088004E50AD /* Assets.xcassets */,
+				9CCDFC142B357088004E50AD /* Main.storyboard */,
+				9CCDFC172B357088004E50AD /* GMObjC_Mac_Demo.entitlements */,
+			);
+			path = "GMObjC Mac Demo";
+			sourceTree = "<group>";
+		};
 		9CF02FCF2A6FBB25008B80DE /* x509_cer */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +405,25 @@
 			productReference = 9C7458F0270FE3AD0062C1E5 /* GMObjC iOS Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9CCDFC0B2B357087004E50AD /* GMObjC Mac Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CCDFC1A2B357088004E50AD /* Build configuration list for PBXNativeTarget "GMObjC Mac Demo" */;
+			buildPhases = (
+				C9AF4EDC22B76D9C13A486CC /* [CP] Check Pods Manifest.lock */,
+				9CCDFC082B357087004E50AD /* Sources */,
+				9CCDFC092B357087004E50AD /* Frameworks */,
+				9CCDFC0A2B357087004E50AD /* Resources */,
+				8A4E7E15477D6871FD06253A /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GMObjC Mac Demo";
+			productName = "GMObjC Mac Demo";
+			productReference = 9CCDFC0C2B357087004E50AD /* GMObjC Mac Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -373,10 +431,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
 					9C7458EF270FE3AD0062C1E5 = {
 						CreatedOnToolsVersion = 13.0;
+					};
+					9CCDFC0B2B357087004E50AD = {
+						CreatedOnToolsVersion = 14.1;
 					};
 				};
 			};
@@ -394,6 +456,7 @@
 			projectRoot = "";
 			targets = (
 				9C7458EF270FE3AD0062C1E5 /* GMObjC iOS Demo */,
+				9CCDFC0B2B357087004E50AD /* GMObjC Mac Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -465,6 +528,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9CCDFC0A2B357087004E50AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CCDFC132B357088004E50AD /* Assets.xcassets in Resources */,
+				9CCDFC162B357088004E50AD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -507,6 +579,45 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8A4E7E15477D6871FD06253A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GMObjC Mac Demo/Pods-GMObjC Mac Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GMObjC Mac Demo/Pods-GMObjC Mac Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GMObjC Mac Demo/Pods-GMObjC Mac Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9AF4EDC22B76D9C13A486CC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GMObjC Mac Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -523,6 +634,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9CCDFC082B357087004E50AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CCDFC112B357087004E50AD /* ViewController.swift in Sources */,
+				9CCDFC0F2B357087004E50AD /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -532,6 +652,14 @@
 				9C745902270FE3AE0062C1E5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9CCDFC142B357088004E50AD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9CCDFC152B357088004E50AD /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -660,7 +788,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9CA5KUE8T7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GMObjCDemo/Info.plist;
+				INFOPLIST_FILE = "GMObjC iOS Demo/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = GMObjC;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -692,7 +820,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9CA5KUE8T7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GMObjCDemo/Info.plist;
+				INFOPLIST_FILE = "GMObjC iOS Demo/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = GMObjC;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -713,6 +841,74 @@
 			};
 			name = Release;
 		};
+		9CCDFC182B357088004E50AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7BF8D599B17666EB4149051 /* Pods-GMObjC Mac Demo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "GMObjC Mac Demo/GMObjC_Mac_Demo.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9CA5KUE8T7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jinher.jingquezhili;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		9CCDFC192B357088004E50AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E77C5DF90DF69822C35F1FB6 /* Pods-GMObjC Mac Demo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "GMObjC Mac Demo/GMObjC_Mac_Demo.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9CA5KUE8T7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jinher.jingquezhili;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -730,6 +926,15 @@
 			buildConfigurations = (
 				9C74590A270FE3AE0062C1E5 /* Debug */,
 				9C74590B270FE3AE0062C1E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9CCDFC1A2B357088004E50AD /* Build configuration list for PBXNativeTarget "GMObjC Mac Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CCDFC182B357088004E50AD /* Debug */,
+				9CCDFC192B357088004E50AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

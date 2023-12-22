@@ -9,6 +9,12 @@ target 'GMObjC iOS Demo' do
   pod 'GMObjC', :path => './'
 end
 
+target 'GMObjC Mac Demo' do
+  project example_project_path
+  platform :ios, '10.13'
+  pod 'GMObjC', :path => './'
+end
+
 # Test Project
 target 'Tests Host' do
   project test_project_path
