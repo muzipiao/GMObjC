@@ -11,7 +11,7 @@ end
 
 target 'GMObjC Mac Demo' do
   project example_project_path
-  platform :ios, '10.13'
+  platform :osx, '10.13'
   pod 'GMObjC', :path => './'
 end
 
