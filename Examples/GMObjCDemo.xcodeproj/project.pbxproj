@@ -16,7 +16,6 @@
 		9C745911270FE4790062C1E5 /* GMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74590F270FE4790062C1E5 /* GMViewController.m */; };
 		9C7FE7952B3955DD006AE995 /* GMTestUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC40DDC2AB03E5F00E5C253 /* GMTestUtil.m */; };
 		9C7FE7962B395605006AE995 /* GMTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC40DDB2AB03E5F00E5C253 /* GMTestModel.m */; };
-		9C7FE79A2B395B72006AE995 /* GMTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7FE7992B395B72006AE995 /* GMTestCell.swift */; };
 		9CBB89EB27101106008411A1 /* sm2pri-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B427101105008411A1 /* sm2pri-4.pem */; };
 		9CBB89EC27101106008411A1 /* sm2pri-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B527101105008411A1 /* sm2pri-5.pem */; };
 		9CBB89ED27101106008411A1 /* sm2pri-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B627101105008411A1 /* sm2pri-7.pem */; };
@@ -73,6 +72,7 @@
 		9CC40DE22AB03E5F00E5C253 /* GMTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC40DDD2AB03E5F00E5C253 /* GMTestCell.m */; };
 		9CCDFC0F2B357087004E50AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCDFC0E2B357087004E50AD /* AppDelegate.swift */; };
 		9CCDFC132B357088004E50AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CCDFC122B357088004E50AD /* Assets.xcassets */; };
+		9CD523372B47EDB40077D8E8 /* GMTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD523362B47EDB40077D8E8 /* GMTestCell.swift */; };
 		9CDD89972B396588000FE5C4 /* GMMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDD89962B396588000FE5C4 /* GMMainVC.swift */; };
 		9CF02FDB2A6FBB25008B80DE /* bing-base64-chain.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD12A6FBB25008B80DE /* bing-base64-chain.cer */; };
 		9CF02FDC2A6FBB25008B80DE /* github-der-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD22A6FBB25008B80DE /* github-der-single.cer */; };
@@ -95,7 +95,6 @@
 		9C74590D270FE4790062C1E5 /* GMAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMAppDelegate.h; sourceTree = "<group>"; };
 		9C74590E270FE4790062C1E5 /* GMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMViewController.h; sourceTree = "<group>"; };
 		9C74590F270FE4790062C1E5 /* GMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMViewController.m; sourceTree = "<group>"; };
-		9C7FE7992B395B72006AE995 /* GMTestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTestCell.swift; sourceTree = "<group>"; };
 		9CB630D02B3A9DE90017AE18 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9CBB89B427101105008411A1 /* sm2pri-4.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-4.pem"; sourceTree = "<group>"; };
 		9CBB89B527101105008411A1 /* sm2pri-5.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sm2pri-5.pem"; sourceTree = "<group>"; };
@@ -158,6 +157,8 @@
 		9CCDFC0E2B357087004E50AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CCDFC122B357088004E50AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CCDFC172B357088004E50AD /* GMObjC_Mac_Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GMObjC_Mac_Demo.entitlements; sourceTree = "<group>"; };
+		9CD523352B47E8ED0077D8E8 /* GMObjC_Mac_Demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GMObjC_Mac_Demo-Bridging-Header.h"; sourceTree = "<group>"; };
+		9CD523362B47EDB40077D8E8 /* GMTestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTestCell.swift; sourceTree = "<group>"; };
 		9CDD89962B396588000FE5C4 /* GMMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GMMainVC.swift; sourceTree = "<group>"; };
 		9CF02FD12A6FBB25008B80DE /* bing-base64-chain.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bing-base64-chain.cer"; sourceTree = "<group>"; };
 		9CF02FD22A6FBB25008B80DE /* github-der-single.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "github-der-single.cer"; sourceTree = "<group>"; };
@@ -367,7 +368,8 @@
 			children = (
 				9CCDFC0E2B357087004E50AD /* AppDelegate.swift */,
 				9CDD89962B396588000FE5C4 /* GMMainVC.swift */,
-				9C7FE7992B395B72006AE995 /* GMTestCell.swift */,
+				9CD523362B47EDB40077D8E8 /* GMTestCell.swift */,
+				9CD523352B47E8ED0077D8E8 /* GMObjC_Mac_Demo-Bridging-Header.h */,
 				9CCDFC122B357088004E50AD /* Assets.xcassets */,
 				9CCDFC172B357088004E50AD /* GMObjC_Mac_Demo.entitlements */,
 				9CB630D02B3A9DE90017AE18 /* main.swift */,
@@ -643,11 +645,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C7FE7962B395605006AE995 /* GMTestModel.m in Sources */,
-				9C7FE79A2B395B72006AE995 /* GMTestCell.swift in Sources */,
 				9C4BA10E2B3AD613007EB1ED /* main.swift in Sources */,
 				9C7FE7952B3955DD006AE995 /* GMTestUtil.m in Sources */,
 				9CDD89972B396588000FE5C4 /* GMMainVC.swift in Sources */,
 				9CCDFC0F2B357087004E50AD /* AppDelegate.swift in Sources */,
+				9CD523372B47EDB40077D8E8 /* GMTestCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,6 +792,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9CA5KUE8T7;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "GMObjC iOS Demo/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = GMObjC;
@@ -822,6 +825,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9CA5KUE8T7;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "GMObjC iOS Demo/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = GMObjC;
@@ -875,6 +879,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "GMObjC Mac Demo/GMObjC_Mac_Demo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -911,6 +916,7 @@
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "GMObjC Mac Demo/GMObjC_Mac_Demo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 			};
