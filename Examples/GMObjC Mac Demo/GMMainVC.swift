@@ -23,7 +23,6 @@ class GMMainVC: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.layer?.backgroundColor = NSColor.green.cgColor
         // 运行示例
         self.modelList.append(GMTestUtil.testSm2EnDe())
         self.modelList.append(GMTestUtil.testSm2Sign())
@@ -40,28 +39,40 @@ class GMMainVC: NSViewController {
         self.tableView.addTableColumn(self.tableColumn)
         self.scrollView.documentView = self.tableView
         self.view.addSubview(self.scrollView)
-        self.scrollView.frame = self.view.bounds
-        self.tableView.frame = self.view.bounds
-        self.tableColumn.width = self.view.bounds.size.width
+        NSLayoutConstraint.activate([
+            self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.tableView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+            self.tableView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+            self.tableView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
+            self.tableView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+        ])
+        self.tableView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
+        self.tableColumn.width = self.scrollView.frame.width
         self.tableView.reloadData()
     }
     
     // MARK: - Lazy Load
     lazy var scrollView: NSScrollView = {
         let tmpView = NSScrollView(frame: self.view.bounds)
+        tmpView.translatesAutoresizingMaskIntoConstraints = false
         return tmpView
     }()
     
     lazy var tableView: NSTableView = {
         let tmpView = NSTableView(frame: self.view.bounds)
         if #available(macOS 11.0, *) {
-            tmpView.style = NSTableView.Style.automatic
+            tmpView.style = NSTableView.Style.fullWidth
         }
-        tmpView.autoresizingMask = NSView.AutoresizingMask.width
-        tmpView.rowSizeStyle = NSTableView.RowSizeStyle.custom
-        tmpView.usesAutomaticRowHeights = true
+        tmpView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
+        tmpView.translatesAutoresizingMaskIntoConstraints = false
+        // 父视图的尺寸更改时的自动调整
+        tmpView.autoresizingMask = [.width, .height]
+        tmpView.rowSizeStyle = NSTableView.RowSizeStyle.large
         tmpView.rowHeight = 44
-        tmpView.selectionHighlightStyle = .regular
+        tmpView.selectionHighlightStyle = .none
         tmpView.allowsColumnResizing = false
         tmpView.allowsColumnSelection = false
         tmpView.allowsColumnReordering = false
@@ -99,20 +110,11 @@ extension GMMainVC: NSTableViewDelegate, NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-//        NSTableCellView
-        return 88
+        guard let model = self.modelList[0].itemList[row] as? GMTestItemModel else { return 0 }
+        let textWidth = tableView.bounds.size.width - 12 - 20
+        let textHeight = self.textHeight(text: model.detail, fontSize: 16, width: textWidth)
+        return textHeight + 12
     }
-    
-    //Recalculate when the screen moves
-//    func tableViewColumnDidResize(_ notification: Notification) {
-//      let allIndex = IndexSet(integersIn:0..<self.YOURTABLE.numberOfRows)
-//     YOURTABLE.noteHeightOfRows(withIndexesChanged: allIndex)
-// }
-    
-//    func tableViewColumnDidResize(_ notification: Notification) {
-//        let allIndex = IndexSet(integersIn: 0..<self.modelList[0].itemList.count)
-//        self.tableView.noteHeightOfRows(withIndexesChanged: allIndex)
-//    }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         var cell = tableView.makeView(withIdentifier: self.kGMTestCellID, owner: self) as? GMTestCell
@@ -125,3 +127,17 @@ extension GMMainVC: NSTableViewDelegate, NSTableViewDataSource {
     }
 }
 
+// MARK: - 工具类
+extension GMMainVC {
+    // 计算文本的高度
+    private func textHeight(text: String?, fontSize: CGFloat, width: CGFloat) -> CGFloat {
+        let textSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude);
+        let textDict = [NSAttributedString.Key.font: NSFont.systemFont(ofSize: fontSize)]
+        guard let text = text, text.isEmpty == false else { return 0 }
+        let height = text.boundingRect(with: textSize,
+                                       options: .usesLineFragmentOrigin,
+                                       attributes: textDict,
+                                       context: nil).size.height
+        return height
+    }
+}

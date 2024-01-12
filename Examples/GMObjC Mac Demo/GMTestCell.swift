@@ -7,6 +7,7 @@
 
 import Cocoa
 
+//NSTableCellView
 class GMTestCell: NSTableCellView {
 
     override init(frame frameRect: NSRect) {
@@ -20,25 +21,27 @@ class GMTestCell: NSTableCellView {
     }
     
     private func setupConstraints() {
-        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        let titleLeading = self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12)
-        let titleTop = self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8)
-        let titleTrailing = self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12)
-        let btmTrailing = self.titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12)
-        NSLayoutConstraint.activate([titleLeading, titleTop, titleTrailing, btmTrailing])
+        NSLayoutConstraint.activate([
+            self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
     }
     
     // MARK: - Lazy Load
     lazy var titleLabel: NSTextView = {
-        let tmpLabel = NSTextView(frame: NSRect.zero)
-        tmpLabel.font = NSFont.systemFont(ofSize: 16)
-        tmpLabel.textColor = NSColor(red: 47.0/255.0, green: 56.0/255.0, blue: 86.0/255.0, alpha: 1.0)
-        tmpLabel.textContainer?.lineFragmentPadding = 5
-        tmpLabel.textContainer?.lineBreakMode = .byWordWrapping
-        tmpLabel.isEditable = false
-        return tmpLabel
+        let textView = NSTextView(frame: self.bounds)
+        textView.font = NSFont.systemFont(ofSize: 16)
+        textView.textColor = NSColor(red: 47.0/255.0, green: 56.0/255.0, blue: 86.0/255.0, alpha: 1.0)
+        textView.textContainer?.lineFragmentPadding = 5
+        textView.textContainerInset = NSSize(width: 10, height: 0)
+        textView.textContainer?.lineBreakMode = .byWordWrapping
+        textView.isEditable = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.isSelectable = true
+        return textView
     }()
-    
 }
 
 //-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
