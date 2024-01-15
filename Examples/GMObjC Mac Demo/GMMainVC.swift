@@ -54,6 +54,12 @@ class GMMainVC: NSViewController {
         self.tableView.reloadData()
     }
     
+    override func viewDidLayout() {
+        super.viewDidLayout()
+        self.tableView.reloadData()
+        print("-----------1---------------")
+    }
+    
     // MARK: - Lazy Load
     lazy var scrollView: NSScrollView = {
         let tmpView = NSScrollView(frame: self.view.bounds)

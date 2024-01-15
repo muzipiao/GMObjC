@@ -21,6 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let styleMask: NSWindow.StyleMask = [.titled, .resizable, .miniaturizable, .closable, .fullSizeContentView]
         self.window = NSWindow(contentRect: winRect, styleMask: styleMask, backing: .buffered, defer: false)
         self.window?.minSize = CGSize(width: 400, height: 300)
+        self.window?.isRestorable = false // 默认为True，会保留上次的窗口大小和位置
         self.window?.center()
         self.window?.makeKeyAndOrderFront(nil)
         // 设置 rootVC
