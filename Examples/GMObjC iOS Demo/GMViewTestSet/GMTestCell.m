@@ -60,14 +60,12 @@
 }
 
 - (void)setupConstraints {
-    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [self.titleLabel.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:12],
         [self.titleLabel.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:8],
         [self.titleLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-12]
     ]];
     
-    self.contentLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [self.contentLabel.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:12],
         [self.contentLabel.topAnchor constraintEqualToAnchor:self.titleLabel.bottomAnchor constant:8],
@@ -75,7 +73,6 @@
         [self.contentLabel.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-8]
     ]];
     
-    self.bubbleButton.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [self.bubbleButton.widthAnchor constraintEqualToConstant:70.0],
         [self.bubbleButton.heightAnchor constraintEqualToConstant:28.0],
@@ -107,6 +104,7 @@
         UILabel *tmpLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         tmpLabel.font = [UIFont systemFontOfSize:16];
         tmpLabel.textColor = [UIColor colorWithRed:(47.0 / 255.0) green:(56.0 / 255.0) blue:(86.0 / 255.0) alpha:1.0];
+        tmpLabel.translatesAutoresizingMaskIntoConstraints = NO;
         tmpLabel.lineBreakMode = NSLineBreakByWordWrapping;
         tmpLabel.numberOfLines = 0;
         _titleLabel = tmpLabel;
@@ -119,6 +117,7 @@
         UILabel *tmpLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         tmpLabel.font = [UIFont systemFontOfSize:14];
         tmpLabel.textColor = [UIColor colorWithRed:(94.0 / 255.0) green:(99.0 / 255.0) blue:(123.0 / 255.0) alpha:1.0];
+        tmpLabel.translatesAutoresizingMaskIntoConstraints = NO;
         tmpLabel.lineBreakMode = NSLineBreakByWordWrapping;
         tmpLabel.numberOfLines = 0;
         _contentLabel = tmpLabel;
@@ -139,6 +138,7 @@
         tmpBtn.layer.cornerRadius = 5.0;
         tmpBtn.layer.masksToBounds = YES;
         tmpBtn.hidden = YES;
+        tmpBtn.translatesAutoresizingMaskIntoConstraints = NO;
         [tmpBtn addTarget:self action:@selector(bubbleBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         _bubbleButton = tmpBtn;
     }

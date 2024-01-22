@@ -6,13 +6,16 @@
 //
 
 import Cocoa
+import SnapKit
 
 //NSTableCellView
-class GMTestCell: NSTableCellView {
+class GMTestCell: NSTableRowView {
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.titleLabel)
+        self.addSubview(self.contentLabel)
         self.setupConstraints()
     }
     
@@ -20,119 +23,55 @@ class GMTestCell: NSTableCellView {
         super.init(coder: coder)
     }
     
+    func updateBgColor(titleBg: NSColor, contentBg: NSColor) {
+        self.titleLabel.backgroundColor = titleBg
+        self.contentLabel.backgroundColor = contentBg
+    }
+    
+    func updateTxt(title: String?, content: String?) {
+        self.titleLabel.string = title ?? ""
+        self.contentLabel.string = content ?? ""
+        self.titleLabel.sizeToFit()
+        self.contentLabel.sizeToFit()
+        self.needsUpdateConstraints = true
+        self.layoutSubtreeIfNeeded()
+    }
+    
     private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-        ])
+        self.titleLabel.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(40)
+        }
+        self.contentLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.titleLabel.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
     }
     
     // MARK: - Lazy Load
     lazy var titleLabel: NSTextView = {
-        let textView = NSTextView(frame: self.bounds)
+        let textView = NSTextView(frame: NSRect.zero)
         textView.font = NSFont.systemFont(ofSize: 16)
         textView.textColor = NSColor(red: 47.0/255.0, green: 56.0/255.0, blue: 86.0/255.0, alpha: 1.0)
-        textView.textContainer?.lineFragmentPadding = 5
-        textView.textContainerInset = NSSize(width: 10, height: 0)
+        textView.textContainer?.lineFragmentPadding = 0 // 一行的首尾默认会再加5的边距
+        textView.textContainerInset = NSSize(width: 10, height: 10)
         textView.textContainer?.lineBreakMode = .byWordWrapping
-        textView.isEditable = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isSelectable = true
+        textView.isEditable = false
+        return textView
+    }()
+    
+    lazy var contentLabel: NSTextView = {
+        let textView = NSTextView(frame: NSRect.zero)
+        textView.font = NSFont.systemFont(ofSize: 14)
+        textView.textColor = NSColor(red: 94.0/255.0, green: 99.0/255.0, blue: 123.0/255.0, alpha: 1.0)
+        textView.textContainer?.lineFragmentPadding = 0 // 一行的首尾默认会再加5的边距
+        textView.textContainerInset = NSSize(width: 10, height: 0)
+        textView.textContainer?.lineBreakMode = .byWordWrapping
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.isSelectable = true
+        textView.isEditable = false
         return textView
     }()
 }
-
-//-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-//{
-//    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-//    if (self) {
-//        self.selectionStyle = UITableViewCellSelectionStyleDefault;
-//        [self.contentView addSubview:self.titleLabel];
-//        [self.contentView addSubview:self.contentLabel];
-//        [self.contentView addSubview:self.bubbleButton];
-//        [self setupConstraints];
-//    }
-//    return self;
-//}
-//
-//- (void)layoutSubviews {
-//    [super layoutSubviews];
-//    self.bubbleButton.hidden = !self.isSelected;
-//}
-//
-//- (void)setupConstraints {
-//    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-//    [NSLayoutConstraint activateConstraints:@[
-//        [self.titleLabel.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:12],
-//        [self.titleLabel.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:8],
-//        [self.titleLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-12]
-//    ]];
-//    
-//    self.contentLabel.translatesAutoresizingMaskIntoConstraints = NO;
-//    [NSLayoutConstraint activateConstraints:@[
-//        [self.contentLabel.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:12],
-//        [self.contentLabel.topAnchor constraintEqualToAnchor:self.titleLabel.bottomAnchor constant:8],
-//        [self.contentLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-12],
-//        [self.contentLabel.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-8]
-//    ]];
-//    
-//    self.bubbleButton.translatesAutoresizingMaskIntoConstraints = NO;
-//    [NSLayoutConstraint activateConstraints:@[
-//        [self.bubbleButton.widthAnchor constraintEqualToConstant:70.0],
-//        [self.bubbleButton.heightAnchor constraintEqualToConstant:28.0],
-//        [self.bubbleButton.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:4],
-//        [self.bubbleButton.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-12],
-//    ]];
-//}
-//
-//// MARK: - Actions
-//- (void)bubbleBtnClick:(UIButton *)sender {
-//    if (self.contentLabel.text.length == 0) {
-//        return;
-//    }
-//    UIPasteboard *paste = [UIPasteboard generalPasteboard];
-//    [paste setString:self.contentLabel.text];
-//    
-//    sender.selected = YES;
-//    __weak typeof(self) _self = self;
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        __strong typeof(_self) self = _self;
-//        if (!self) return;
-//        sender.selected = NO;
-//    });
-//}
-//
-
-//
-//- (UILabel *)contentLabel {
-//    if (_contentLabel == nil) {
-//        UILabel *tmpLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-//        tmpLabel.font = [UIFont systemFontOfSize:14];
-//        tmpLabel.textColor = [UIColor colorWithRed:(94.0 / 255.0) green:(99.0 / 255.0) blue:(123.0 / 255.0) alpha:1.0];
-//        tmpLabel.lineBreakMode = NSLineBreakByWordWrapping;
-//        tmpLabel.numberOfLines = 0;
-//        _contentLabel = tmpLabel;
-//    }
-//    return _contentLabel;
-//}
-//
-//- (UIButton *)bubbleButton {
-//    if (_bubbleButton == nil) {
-//        UIButton *tmpBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        tmpBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-//        [tmpBtn setTitle:@"复 制" forState:UIControlStateNormal];
-//        [tmpBtn setTitle:@"已复制" forState:UIControlStateSelected];
-//        [tmpBtn setTitleColor:[UIColor colorWithRed:19.0/255.0 green:119.0/255.0 blue:227.0/255.0 alpha:1] forState:UIControlStateNormal];
-//        [tmpBtn setTitleColor:[UIColor colorWithRed:19.0/255.0 green:119.0/255.0 blue:227.0/255.0 alpha:0.5] forState:UIControlStateSelected];
-//        tmpBtn.layer.borderColor = [UIColor colorWithRed:19.0/255.0 green:119.0/255.0 blue:227.0/255.0 alpha:0.3].CGColor;
-//        tmpBtn.layer.borderWidth = 2.0;
-//        tmpBtn.layer.cornerRadius = 5.0;
-//        tmpBtn.layer.masksToBounds = YES;
-//        tmpBtn.hidden = YES;
-//        [tmpBtn addTarget:self action:@selector(bubbleBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-//        _bubbleButton = tmpBtn;
-//    }
-//    return _bubbleButton;
-//}

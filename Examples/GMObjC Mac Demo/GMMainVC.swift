@@ -11,64 +11,58 @@ class GMMainVC: NSViewController {
     
     private let kGMTestColumnID = NSUserInterfaceItemIdentifier("kGMTestColumnID")
     private let kGMTestCellID = NSUserInterfaceItemIdentifier("kGMTestCellID")
-    private var modelList: [GMTestModel] = []
+    private var itemModelList: [GMTestItemModel] = []
     
     override func loadView() {
-        super.loadView()
-        guard let winSize = NSScreen.main?.frame.size else { return }
-        let winWidth = winSize.width * 0.5
-        let winHeight = winSize.height * 0.5
-        self.view.frame = CGRect(x: 0, y: 0, width: winWidth, height: winHeight)
+        let winSize = NSScreen.main?.frame.size ?? NSSize(width: 800.0, height: 600.0)
+        let winRect = NSRect(x: 0, y: 0, width: winSize.width * 0.5, height: winSize.height * 0.5)
+        self.view = NSView(frame: winRect)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // 运行示例
-        self.modelList.append(GMTestUtil.testSm2EnDe())
-        self.modelList.append(GMTestUtil.testSm2Sign())
-        self.modelList.append(GMTestUtil.testSm3())
-        self.modelList.append(GMTestUtil.testSm4())
-        self.modelList.append(GMTestUtil.testECDH())
-        self.modelList.append(GMTestUtil.testReadPemDerFiles())
-        self.modelList.append(GMTestUtil.testSaveToPemDerFiles())
-        self.modelList.append(GMTestUtil.testCreateKeyPairFiles())
-        self.modelList.append(GMTestUtil.testCompressPublicKey())
-        self.modelList.append(GMTestUtil.testConvertPemAndDer())
-        self.modelList.append(GMTestUtil.testReadX509FileInfo())
+        var modelList: [GMTestModel] = []
+        modelList.append(GMTestUtil.testSm2EnDe())
+        modelList.append(GMTestUtil.testSm2Sign())
+        modelList.append(GMTestUtil.testSm3())
+        modelList.append(GMTestUtil.testSm4())
+        modelList.append(GMTestUtil.testECDH())
+        modelList.append(GMTestUtil.testReadPemDerFiles())
+        modelList.append(GMTestUtil.testSaveToPemDerFiles())
+        modelList.append(GMTestUtil.testCreateKeyPairFiles())
+        modelList.append(GMTestUtil.testCompressPublicKey())
+        modelList.append(GMTestUtil.testConvertPemAndDer())
+        modelList.append(GMTestUtil.testReadX509FileInfo())
+        // 转换类型
+        self.itemModelList = modelList.flatMap({ $0.itemList as? [GMTestItemModel] ?? [] })
         // 创建视图
         self.tableView.addTableColumn(self.tableColumn)
         self.scrollView.documentView = self.tableView
         self.view.addSubview(self.scrollView)
-        NSLayoutConstraint.activate([
-            self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            self.tableView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
-            self.tableView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
-            self.tableView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
-            self.tableView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
-        ])
-        self.tableView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
-        self.tableColumn.width = self.scrollView.frame.width
-        self.tableView.reloadData()
+        self.scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        self.tableView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+        }
     }
     
     override func viewDidLayout() {
         super.viewDidLayout()
+        self.tableColumn.width = self.view.bounds.width - 20
         self.tableView.reloadData()
-        print("-----------1---------------")
     }
     
     // MARK: - Lazy Load
     lazy var scrollView: NSScrollView = {
-        let tmpView = NSScrollView(frame: self.view.bounds)
+        let tmpView = NSScrollView(frame: NSRect.zero)
         tmpView.translatesAutoresizingMaskIntoConstraints = false
         return tmpView
     }()
     
     lazy var tableView: NSTableView = {
-        let tmpView = NSTableView(frame: self.view.bounds)
+        let tmpView = NSTableView(frame: NSRect.zero)
         if #available(macOS 11.0, *) {
             tmpView.style = NSTableView.Style.fullWidth
         }
@@ -76,10 +70,9 @@ class GMMainVC: NSViewController {
         tmpView.translatesAutoresizingMaskIntoConstraints = false
         // 父视图的尺寸更改时的自动调整
         tmpView.autoresizingMask = [.width, .height]
-        tmpView.rowSizeStyle = NSTableView.RowSizeStyle.large
         tmpView.rowHeight = 44
         tmpView.selectionHighlightStyle = .none
-        tmpView.allowsColumnResizing = false
+        tmpView.allowsColumnResizing = true
         tmpView.allowsColumnSelection = false
         tmpView.allowsColumnReordering = false
         tmpView.headerView = nil
@@ -89,9 +82,9 @@ class GMMainVC: NSViewController {
     }()
     
     lazy var tableColumn: NSTableColumn = {
-        let tmpView = NSTableColumn(identifier: self.kGMTestColumnID)
-        tmpView.resizingMask = NSTableColumn.ResizingOptions.autoresizingMask
-        return tmpView
+        let tmpColumn = NSTableColumn(identifier: self.kGMTestColumnID)
+        tmpColumn.resizingMask = NSTableColumn.ResizingOptions.userResizingMask
+        return tmpColumn
     }()
     
     lazy var colorList: [NSColor] = {
@@ -112,14 +105,15 @@ class GMMainVC: NSViewController {
 extension GMMainVC: NSTableViewDelegate, NSTableViewDataSource {
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return self.modelList[0].itemList.count
+        return self.itemModelList.count
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        guard let model = self.modelList[0].itemList[row] as? GMTestItemModel else { return 0 }
+        let model = self.itemModelList[row]
         let textWidth = tableView.bounds.size.width - 12 - 20
-        let textHeight = self.textHeight(text: model.detail, fontSize: 16, width: textWidth)
-        return textHeight + 12
+        let detailHeight = self.textHeight(text: model.detail, fontSize: 14, width: textWidth)
+        let cellHeight = detailHeight + 40.0 + 6
+        return cellHeight
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -127,8 +121,13 @@ extension GMMainVC: NSTableViewDelegate, NSTableViewDataSource {
         if (cell == nil) {
             cell = GMTestCell(frame: NSRect.zero)
         }
-        guard let model = self.modelList[0].itemList[row] as? GMTestItemModel else { return cell }
-        cell?.titleLabel.string = model.detail
+        guard let cell = cell else { return cell }
+        // 背景色
+        let colorIndex: Int = (row%8) < self.colorList.count ? (row%8) : 0
+        cell.updateBgColor(titleBg: self.colorList[colorIndex], contentBg: self.colorList[colorIndex])
+        // 更新文本
+        let model = self.itemModelList[row]
+        cell.updateTxt(title: model.title, content: model.detail)
         return cell
     }
 }

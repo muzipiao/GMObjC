@@ -74,6 +74,63 @@
 		9CCDFC132B357088004E50AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CCDFC122B357088004E50AD /* Assets.xcassets */; };
 		9CD523372B47EDB40077D8E8 /* GMTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD523362B47EDB40077D8E8 /* GMTestCell.swift */; };
 		9CDD89972B396588000FE5C4 /* GMMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDD89962B396588000FE5C4 /* GMMainVC.swift */; };
+		9CE013142B5E4AD700F49627 /* bing-der-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD42A6FBB25008B80DE /* bing-der-single.cer */; };
+		9CE013152B5E4AD700F49627 /* github-base64-chain.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD82A6FBB25008B80DE /* github-base64-chain.cer */; };
+		9CE013162B5E4AD700F49627 /* github-base64-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD62A6FBB25008B80DE /* github-base64-single.cer */; };
+		9CE013172B5E4AD700F49627 /* bing-base64-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD32A6FBB25008B80DE /* bing-base64-single.cer */; };
+		9CE013182B5E4AD700F49627 /* bing-base64-chain.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD12A6FBB25008B80DE /* bing-base64-chain.cer */; };
+		9CE013192B5E4AD700F49627 /* github-der-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD22A6FBB25008B80DE /* github-der-single.cer */; };
+		9CE0131A2B5E4ADF00F49627 /* sm2pri-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B527101105008411A1 /* sm2pri-5.pem */; };
+		9CE0131B2B5E4ADF00F49627 /* sm2pri-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BD27101105008411A1 /* sm2pri-9.pem */; };
+		9CE0131C2B5E4ADF00F49627 /* sm2pri-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BB27101105008411A1 /* sm2pri-10.pem */; };
+		9CE0131D2B5E4ADF00F49627 /* sm2pri-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B427101105008411A1 /* sm2pri-4.pem */; };
+		9CE0131E2B5E4ADF00F49627 /* sm2pri-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B727101105008411A1 /* sm2pri-6.pem */; };
+		9CE0131F2B5E4ADF00F49627 /* sm2pri-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B827101105008411A1 /* sm2pri-2.pem */; };
+		9CE013202B5E4ADF00F49627 /* sm2pri-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BA27101105008411A1 /* sm2pri-1.pem */; };
+		9CE013212B5E4ADF00F49627 /* sm2pri-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B627101105008411A1 /* sm2pri-7.pem */; };
+		9CE013222B5E4ADF00F49627 /* sm2pri-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BC27101105008411A1 /* sm2pri-8.pem */; };
+		9CE013232B5E4ADF00F49627 /* sm2pri-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B927101105008411A1 /* sm2pri-3.pem */; };
+		9CE013242B5E4AF400F49627 /* sm2pri-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C827101105008411A1 /* sm2pri-10.der */; };
+		9CE013252B5E4AF400F49627 /* sm2pri-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C327101105008411A1 /* sm2pri-7.der */; };
+		9CE013262B5E4AF400F49627 /* sm2pri-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C527101105008411A1 /* sm2pri-4.der */; };
+		9CE013272B5E4AF400F49627 /* sm2pri-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C727101105008411A1 /* sm2pri-8.der */; };
+		9CE013282B5E4AF400F49627 /* sm2pri-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C627101105008411A1 /* sm2pri-9.der */; };
+		9CE013292B5E4AF400F49627 /* sm2pri-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C227101105008411A1 /* sm2pri-6.der */; };
+		9CE0132A2B5E4AF400F49627 /* sm2pri-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C027101105008411A1 /* sm2pri-3.der */; };
+		9CE0132B2B5E4AF400F49627 /* sm2pri-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BF27101105008411A1 /* sm2pri-1.der */; };
+		9CE0132C2B5E4AF400F49627 /* sm2pri-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C127101105008411A1 /* sm2pri-2.der */; };
+		9CE0132D2B5E4AF400F49627 /* sm2pri-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C427101105008411A1 /* sm2pri-5.der */; };
+		9CE0132E2B5E4AFB00F49627 /* sm2pri8-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D327101105008411A1 /* sm2pri8-7.pem */; };
+		9CE0132F2B5E4AFB00F49627 /* sm2pri8-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D127101105008411A1 /* sm2pri8-4.pem */; };
+		9CE013302B5E4AFB00F49627 /* sm2pri8-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D027101105008411A1 /* sm2pri8-5.pem */; };
+		9CE013312B5E4AFB00F49627 /* sm2pri8-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CB27101105008411A1 /* sm2pri8-8.pem */; };
+		9CE013322B5E4AFB00F49627 /* sm2pri8-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CF27101105008411A1 /* sm2pri8-1.pem */; };
+		9CE013332B5E4AFB00F49627 /* sm2pri8-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D227101105008411A1 /* sm2pri8-6.pem */; };
+		9CE013342B5E4AFB00F49627 /* sm2pri8-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CD27101105008411A1 /* sm2pri8-3.pem */; };
+		9CE013352B5E4AFB00F49627 /* sm2pri8-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CE27101105008411A1 /* sm2pri8-2.pem */; };
+		9CE013362B5E4AFB00F49627 /* sm2pri8-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CA27101105008411A1 /* sm2pri8-9.pem */; };
+		9CE013372B5E4AFB00F49627 /* sm2pri8-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CC27101105008411A1 /* sm2pri8-10.pem */; };
+		9CE013382B5E4B0000F49627 /* sm2pub-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D827101105008411A1 /* sm2pub-7.der */; };
+		9CE013392B5E4B0000F49627 /* sm2pub-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D927101105008411A1 /* sm2pub-6.der */; };
+		9CE0133A2B5E4B0000F49627 /* sm2pub-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D727101105008411A1 /* sm2pub-3.der */; };
+		9CE0133B2B5E4B0000F49627 /* sm2pub-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DC27101105008411A1 /* sm2pub-8.der */; };
+		9CE0133C2B5E4B0000F49627 /* sm2pub-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DA27101105008411A1 /* sm2pub-4.der */; };
+		9CE0133D2B5E4B0000F49627 /* sm2pub-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DE27101105008411A1 /* sm2pub-10.der */; };
+		9CE0133E2B5E4B0000F49627 /* sm2pub-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D627101105008411A1 /* sm2pub-2.der */; };
+		9CE0133F2B5E4B0000F49627 /* sm2pub-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DD27101105008411A1 /* sm2pub-9.der */; };
+		9CE013402B5E4B0000F49627 /* sm2pub-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DB27101105008411A1 /* sm2pub-5.der */; };
+		9CE013412B5E4B0000F49627 /* sm2pub-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D527101105008411A1 /* sm2pub-1.der */; };
+		9CE013422B5E4B0C00F49627 /* sm2pub-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E927101106008411A1 /* sm2pub-8.pem */; };
+		9CE013432B5E4B0C00F49627 /* sm2pub-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E827101106008411A1 /* sm2pub-9.pem */; };
+		9CE013442B5E4B0C00F49627 /* sm2pub-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E227101106008411A1 /* sm2pub-6.pem */; };
+		9CE013452B5E4B0C00F49627 /* sm2pub-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E127101106008411A1 /* sm2pub-4.pem */; };
+		9CE013462B5E4B0C00F49627 /* sm2pub-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E327101106008411A1 /* sm2pub-7.pem */; };
+		9CE013472B5E4B0C00F49627 /* sm2pub-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E727101106008411A1 /* sm2pub-10.pem */; };
+		9CE013482B5E4B0C00F49627 /* sm2pub-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E627101106008411A1 /* sm2pub-1.pem */; };
+		9CE013492B5E4B0C00F49627 /* sm2pub-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E527101106008411A1 /* sm2pub-2.pem */; };
+		9CE0134A2B5E4B0C00F49627 /* sm2pub-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E027101105008411A1 /* sm2pub-5.pem */; };
+		9CE0134B2B5E4B0C00F49627 /* sm2pub-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E427101106008411A1 /* sm2pub-3.pem */; };
+		9CE0134C2B5E4B1200F49627 /* sm4TestFile.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89EA27101106008411A1 /* sm4TestFile.txt */; };
 		9CF02FDB2A6FBB25008B80DE /* bing-base64-chain.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD12A6FBB25008B80DE /* bing-base64-chain.cer */; };
 		9CF02FDC2A6FBB25008B80DE /* github-der-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD22A6FBB25008B80DE /* github-der-single.cer */; };
 		9CF02FDD2A6FBB25008B80DE /* bing-base64-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD32A6FBB25008B80DE /* bing-base64-single.cer */; };
@@ -539,7 +596,64 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CE013442B5E4B0C00F49627 /* sm2pub-6.pem in Resources */,
+				9CE013402B5E4B0000F49627 /* sm2pub-5.der in Resources */,
+				9CE013292B5E4AF400F49627 /* sm2pri-6.der in Resources */,
+				9CE0131E2B5E4ADF00F49627 /* sm2pri-6.pem in Resources */,
+				9CE013432B5E4B0C00F49627 /* sm2pub-9.pem in Resources */,
+				9CE0131C2B5E4ADF00F49627 /* sm2pri-10.pem in Resources */,
+				9CE0131B2B5E4ADF00F49627 /* sm2pri-9.pem in Resources */,
+				9CE013172B5E4AD700F49627 /* bing-base64-single.cer in Resources */,
+				9CE0132B2B5E4AF400F49627 /* sm2pri-1.der in Resources */,
+				9CE013232B5E4ADF00F49627 /* sm2pri-3.pem in Resources */,
+				9CE013162B5E4AD700F49627 /* github-base64-single.cer in Resources */,
+				9CE0134B2B5E4B0C00F49627 /* sm2pub-3.pem in Resources */,
+				9CE013152B5E4AD700F49627 /* github-base64-chain.cer in Resources */,
+				9CE013392B5E4B0000F49627 /* sm2pub-6.der in Resources */,
+				9CE013412B5E4B0000F49627 /* sm2pub-1.der in Resources */,
+				9CE0132C2B5E4AF400F49627 /* sm2pri-2.der in Resources */,
+				9CE0133D2B5E4B0000F49627 /* sm2pub-10.der in Resources */,
+				9CE013212B5E4ADF00F49627 /* sm2pri-7.pem in Resources */,
+				9CE013332B5E4AFB00F49627 /* sm2pri8-6.pem in Resources */,
+				9CE0133B2B5E4B0000F49627 /* sm2pub-8.der in Resources */,
+				9CE0131A2B5E4ADF00F49627 /* sm2pri-5.pem in Resources */,
+				9CE013452B5E4B0C00F49627 /* sm2pub-4.pem in Resources */,
+				9CE013462B5E4B0C00F49627 /* sm2pub-7.pem in Resources */,
+				9CE013472B5E4B0C00F49627 /* sm2pub-10.pem in Resources */,
+				9CE0133A2B5E4B0000F49627 /* sm2pub-3.der in Resources */,
+				9CE013372B5E4AFB00F49627 /* sm2pri8-10.pem in Resources */,
+				9CE0132A2B5E4AF400F49627 /* sm2pri-3.der in Resources */,
+				9CE0132D2B5E4AF400F49627 /* sm2pri-5.der in Resources */,
+				9CE013382B5E4B0000F49627 /* sm2pub-7.der in Resources */,
+				9CE0132F2B5E4AFB00F49627 /* sm2pri8-4.pem in Resources */,
+				9CE013482B5E4B0C00F49627 /* sm2pub-1.pem in Resources */,
+				9CE0133C2B5E4B0000F49627 /* sm2pub-4.der in Resources */,
+				9CE013342B5E4AFB00F49627 /* sm2pri8-3.pem in Resources */,
+				9CE013422B5E4B0C00F49627 /* sm2pub-8.pem in Resources */,
+				9CE0133F2B5E4B0000F49627 /* sm2pub-9.der in Resources */,
+				9CE0132E2B5E4AFB00F49627 /* sm2pri8-7.pem in Resources */,
+				9CE013322B5E4AFB00F49627 /* sm2pri8-1.pem in Resources */,
+				9CE0131F2B5E4ADF00F49627 /* sm2pri-2.pem in Resources */,
+				9CE013362B5E4AFB00F49627 /* sm2pri8-9.pem in Resources */,
+				9CE0131D2B5E4ADF00F49627 /* sm2pri-4.pem in Resources */,
+				9CE0133E2B5E4B0000F49627 /* sm2pub-2.der in Resources */,
+				9CE013492B5E4B0C00F49627 /* sm2pub-2.pem in Resources */,
+				9CE013312B5E4AFB00F49627 /* sm2pri8-8.pem in Resources */,
+				9CE0134C2B5E4B1200F49627 /* sm4TestFile.txt in Resources */,
+				9CE013182B5E4AD700F49627 /* bing-base64-chain.cer in Resources */,
+				9CE013192B5E4AD700F49627 /* github-der-single.cer in Resources */,
+				9CE013302B5E4AFB00F49627 /* sm2pri8-5.pem in Resources */,
+				9CE013202B5E4ADF00F49627 /* sm2pri-1.pem in Resources */,
+				9CE013352B5E4AFB00F49627 /* sm2pri8-2.pem in Resources */,
+				9CE0134A2B5E4B0C00F49627 /* sm2pub-5.pem in Resources */,
+				9CE013282B5E4AF400F49627 /* sm2pri-9.der in Resources */,
+				9CE013252B5E4AF400F49627 /* sm2pri-7.der in Resources */,
+				9CE013262B5E4AF400F49627 /* sm2pri-4.der in Resources */,
+				9CE013272B5E4AF400F49627 /* sm2pri-8.der in Resources */,
+				9CE013142B5E4AD700F49627 /* bing-der-single.cer in Resources */,
+				9CE013222B5E4ADF00F49627 /* sm2pri-8.pem in Resources */,
 				9CCDFC132B357088004E50AD /* Assets.xcassets in Resources */,
+				9CE013242B5E4AF400F49627 /* sm2pri-10.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,6 +834,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -774,6 +889,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -800,7 +916,6 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -833,7 +948,6 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -872,7 +986,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinher.jingquezhili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -909,7 +1022,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinher.jingquezhili;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -9,23 +9,21 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    public var window: NSWindow?
+    var window: NSWindow!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // 窗口尺寸
-        let screenSize = NSScreen.main?.frame.size
-        let winWidth = (screenSize?.width ?? 1920) * 0.5
-        let winHeight = (screenSize?.height ?? 1080) * 0.5
-        let winRect = CGRect(x: winWidth * 0.5, y: winHeight * 0.5, width: winWidth, height: winHeight)
-        // 创建 window
+        let mainVC = GMMainVC()
+        let winW = NSWidth(NSScreen.screens[0].frame) * 0.5;
+        let winH = NSHeight(NSScreen.screens[0].frame) * 0.5;
+        let winRect = NSRect(x: 0, y: 0, width: winW, height: winH);
         let styleMask: NSWindow.StyleMask = [.titled, .resizable, .miniaturizable, .closable, .fullSizeContentView]
-        self.window = NSWindow(contentRect: winRect, styleMask: styleMask, backing: .buffered, defer: false)
-        self.window?.minSize = CGSize(width: 400, height: 300)
-        self.window?.isRestorable = false // 默认为True，会保留上次的窗口大小和位置
-        self.window?.center()
-        self.window?.makeKeyAndOrderFront(nil)
-        // 设置 rootVC
-        self.window?.contentViewController = GMMainVC()
+        window = NSWindow(contentRect: winRect, styleMask: styleMask, backing: .buffered, defer: false)
+        window.isReleasedWhenClosed = false
+        window.minSize = NSMakeSize(winW * 0.5, winH * 0.5)
+        window.center()
+        window.title = "GMObjC Mac Demo"
+        window.contentViewController = mainVC;
+        window.makeKeyAndOrderFront(nil)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
