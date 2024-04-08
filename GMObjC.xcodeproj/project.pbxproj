@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C58AAF92BC38869001E62E5 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9C58AAF82BC38869001E62E5 /* PrivacyInfo.xcprivacy */; };
 		9CEA768F271017B700DA6FA1 /* GMObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA768E271017B700DA6FA1 /* GMObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEA76A02710180E00DA6FA1 /* GMSm4Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA76952710180E00DA6FA1 /* GMSm4Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEA76A12710180E00DA6FA1 /* GMSm3Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA76962710180E00DA6FA1 /* GMSm3Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C58AAF82BC38869001E62E5 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		9CEA768B271017B700DA6FA1 /* GMObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CEA768E271017B700DA6FA1 /* GMObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMObjC.h; sourceTree = "<group>"; };
 		9CEA76952710180E00DA6FA1 /* GMSm4Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm4Utils.h; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 		9CEA768D271017B700DA6FA1 /* GMObjC */ = {
 			isa = PBXGroup;
 			children = (
+				9C58AAF82BC38869001E62E5 /* PrivacyInfo.xcprivacy */,
 				9CEA768E271017B700DA6FA1 /* GMObjC.h */,
 				9CEA769F2710180E00DA6FA1 /* GMObjCDef.h */,
 				9CEA769C2710180E00DA6FA1 /* GMSm2Bio.h */,
@@ -170,6 +173,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C58AAF92BC38869001E62E5 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
