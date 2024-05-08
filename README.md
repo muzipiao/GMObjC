@@ -68,7 +68,7 @@ Carthage can automatically compile a third-party framework into a dynamic framew
 # Install carthage
 brew update && brew install carthage
 # Create Cartfile file and write it to github "muzipiao/GMObjC"
-touch Cartfile && echo'github "muzipiao/GMObjC"' >> Cartfile
+touch Cartfile && echo 'github "muzipiao/GMObjC"' >> Cartfile
 # Pull and compile into a dynamic library, and you can find GMObjC.framework in Carthage/Build/iOS/ under the current command directory
 carthage update --use-xcframeworks
 ```
