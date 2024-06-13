@@ -101,23 +101,6 @@ Points to note when integrating OpenSSL:
 2. If you need to self-compile OpenSSL, there is an `OpenSSL_BUILD` folder in the [GMOpenSSL](https://github.com/muzipiao/GMOpenSSL) project directory, terminal cd switch to this directory, first execute `./build -libssl.sh` command to compile and generate .a file, after waiting, execute `./create-openssl-framework.sh` command to package as framework, then openssl.framework appears in the directory.
 3. The packaged static library does not expose the national secret header files. Open the downloaded source code and drag sm2.h, sm3.h, and sm4.h under the crypto/include/internal path to the openssl.framework/Headers file Just clip it.
 
-### Xcode compilation errors that may be encountered during integration
-
-Error 1：
-
-```text
-Building for iOS, but the linked and embedded framework 'GMObjC.framework' was built for iOS + iOS Simulator.
-```
-
-As a solution, select the project path `Build Settings-Build Options-Validate Workspace` and change it to YES/NO, and change it once.
-
-Error 2：
-
-```text
-building for iOS Simulator, but linking in object file built for iOS, for architecture arm64
-```
-The solution, select the project path `Build Settings-Architectures-Excluded Architecture`, select `Any iOS Simulator SDK` to add arm64, refer to [stackoverflow solution](https://stackoverflow.com/questions/63607158/xcode-12-building-for-ios-simulator-but-linking-in-object-file-built-for-ios)。
-
 ## How To Use
 
 ### SM2 encryption and decryption
@@ -432,6 +415,41 @@ n   = FFFFFFFF 00000000 FFFFFFFF FFFFFFFF BCE6FAAD A7179E84 F3B9CAC2 FC632551
 Gx  = 6B17D1F2 E12C4247 F8BCE6E5 63A440F2 77037D81 2DEB33A0 F4A13945 D898C296
 Gy  = 4FE342E2 FE1A7F9B 8EE7EB4A 7C0F9E16 2BCE3357 6B315ECE CBB64068 37BF51F5
 ```
+
+## Possible errors
+
+### The binary file was rejected due to signature review:
+
+```text
+ITMS-91065: Missing signature - Your app includes “Frameworks/OpenSSL.framework/OpenSSL”, which includes BoringSSL / openssl_grpc, an SDK that was identified in the documentation as a privacy-impacting third-party SDK. If a new app includes a privacy-impacting SDK, or an app update adds a new privacy-impacting SDK, the SDK must include a signature file. Please contact the provider of the SDK that includes this file to get an updated SDK version with a signature.
+```
+
+**Solution**, manually sign the specified binary file, please refer to [issues 92](https://github.com/muzipiao/GMObjC/issues/92).
+
+```shell
+# Check the signature, no signature is displayed code object is not signed at all
+codesign -dv openssl.xcframework
+# Copy the certificate name in the keychain and execute this command to sign.
+xcrun codesign --timestamp -s "full name of certificate" openssl.xcframework
+# Verify signature
+xcrun codesign --verify --verbose openssl.xcframework
+```
+
+### Xcode compilation error 1:
+
+```text
+Building for iOS, but the linked and embedded framework 'GMObjC.framework' was built for iOS + iOS Simulator.
+```
+
+**Solution**, select the project path `Build Settings-Build Options-Validate Workspace` and change it to YES/NO, and change it once.
+
+### Xcode compilation error 2:
+
+```text
+building for iOS Simulator, but linking in object file built for iOS, for architecture arm64
+```
+
+**Solution**, select the project path `Build Settings-Architectures-Excluded Architecture`, select `Any iOS Simulator SDK` to add arm64, refer to [stackoverflow solution](https://stackoverflow.com/questions/63607158/xcode-12-building-for-ios-simulator-but-linking-in-object-file-built-for-ios).
 
 ## Other
 

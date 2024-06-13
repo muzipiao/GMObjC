@@ -99,23 +99,6 @@ dependencies: [
 2. 如果需要自编译 OpenSSL，在 [GMOpenSSL](https://github.com/muzipiao/GMOpenSSL) 项目目录下有一个`OpenSSL_BUILD`文件夹，终端 cd 切换到该目录下，先执行`./build-libssl.sh`命令编译生成 .a 文件，等待结束后再执行`./create-openssl-framework.sh`命令打包为 framework，这时该目录下就出现了 openssl.framework。
 3. 打包完成的静态库并未暴露国密的头文件，打开下载的源码，将 crypto/include/internal 路径下的 sm2.h、sm3.h，sm4.h 都拖到 openssl.framework/Headers 文件夹下即可。
 
-### 集成可能遇到的 Xcode 编译错误
-
-错误1：
-
-```text
-Building for iOS, but the linked and embedded framework 'GMObjC.framework' was built for iOS + iOS Simulator.
-```
-
-解决办法，选择工程路径 `Build Settings - Build Options - Validate Workspace` 更改为 YES/NO，更改一次即可。
-
-错误2：
-
-```text
-building for iOS Simulator, but linking in object file built for iOS, for architecture arm64
-```
-解决办法，选择工程 路径`Build Settings - Architectures - Excluded Architecture` 选择 `Any iOS Simulator SDK` 添加 arm64，参考[stackoverflow 方案](https://stackoverflow.com/questions/63607158/xcode-12-building-for-ios-simulator-but-linking-in-object-file-built-for-ios)。
-
 ## 用法
 
 ### SM2 加解密
@@ -431,6 +414,40 @@ n   = FFFFFFFF 00000000 FFFFFFFF FFFFFFFF BCE6FAAD A7179E84 F3B9CAC2 FC632551
 Gx  = 6B17D1F2 E12C4247 F8BCE6E5 63A440F2 77037D81 2DEB33A0 F4A13945 D898C296
 Gy  = 4FE342E2 FE1A7F9B 8EE7EB4A 7C0F9E16 2BCE3357 6B315ECE CBB64068 37BF51F5
 ```
+
+## 可能遇到的错误
+
+### 二进制文件因签名审核被拒：
+
+```text
+ITMS-91065: Missing signature - Your app includes “Frameworks/OpenSSL.framework/OpenSSL”, which includes BoringSSL / openssl_grpc, an SDK that was identified in the documentation as a privacy-impacting third-party SDK. If a new app includes a privacy-impacting SDK, or an app update adds a new privacy-impacting SDK, the SDK must include a signature file. Please contact the provider of the SDK that includes this file to get an updated SDK version with a signature.
+```
+
+**解决办法**，对指定二进制文件手动签名即可，可参考[issues 92](https://github.com/muzipiao/GMObjC/issues/92)。
+
+```shell
+# 查看签名，无签名显示 code object is not signed at all
+codesign -dv openssl.xcframework
+# 钥匙串复制证书名称，执行此命令即可签名。
+xcrun codesign --timestamp -s "证书全称" openssl.xcframework
+# 验证签名
+xcrun codesign --verify --verbose openssl.xcframework
+```
+
+### Xcode 编译错误1：
+
+```text
+Building for iOS, but the linked and embedded framework 'GMObjC.framework' was built for iOS + iOS Simulator.
+```
+
+**解决办法**，选择工程路径 `Build Settings - Build Options - Validate Workspace` 更改为 YES/NO，更改一次即可。
+
+### Xcode 编译错误2：
+
+```text
+building for iOS Simulator, but linking in object file built for iOS, for architecture arm64
+```
+**解决办法**，选择工程 路径`Build Settings - Architectures - Excluded Architecture` 选择 `Any iOS Simulator SDK` 添加 arm64，参考[stackoverflow 方案](https://stackoverflow.com/questions/63607158/xcode-12-building-for-ios-simulator-but-linking-in-object-file-built-for-ios)。
 
 ## 其他
 
