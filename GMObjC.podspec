@@ -9,7 +9,6 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "lifei" => "lifei_zdjl@126.com" }
   s.source = { :git => "https://github.com/muzipiao/GMObjC.git", :tag => s.version.to_s }
-  s.pod_target_xcconfig   = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
   s.source_files        = "GMObjC/**/*.{h,m}"
   s.public_header_files = "GMObjC/**/*.h"
