@@ -12,7 +12,7 @@ jobs:
     steps:
       # 第一步，获取源码，将代码检出到虚拟机上
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       # 第二步，安装所需环境
       - name: Install
         run: |
