@@ -87,7 +87,7 @@ If you're a framework author and use GMObjC as a dependency, update your `Packag
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.3.0")
+    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.3.5")
 ],
 ```
 

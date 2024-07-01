@@ -85,7 +85,7 @@ GMObjC 从 3.3.0 开始支持 SwiftPM，在工程中使用，点击 `File` -> `S
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.3.0")
+    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.3.5")
 ],
 ```
 
