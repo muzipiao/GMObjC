@@ -6,11 +6,11 @@ import PackageDescription
 let package = Package(
     name: "GMObjC",
     products: [
-        .library(name: "GMObjC", targets: ["GMObjC"]),
+        .library(name: "GMObjC", targets: ["GMObjC", "openssl"]),
     ],
     dependencies: [],
     targets: [
-        .target(name: "GMObjC", dependencies: ["openssl"], path: "GMObjC", resources: [.copy("PrivacyInfo.xcprivacy")]),
-        .binaryTarget(name: "openssl", path: "XCFrameworks/openssl.xcframework"),
+        .target(name: "GMObjC", path: "GMObjC", resources: [.copy("PrivacyInfo.xcprivacy")]),
+        .binaryTarget(name: "openssl", path: "XCFrameworks/OpenSSL.xcframework"),
     ]
 )

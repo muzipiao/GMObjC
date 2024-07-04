@@ -87,7 +87,7 @@ If you're a framework author and use GMObjC as a dependency, update your `Packag
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.3.6")
+    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.3.7")
 ],
 ```
 
@@ -428,11 +428,11 @@ ITMS-91065: Missing signature - Your app includes “Frameworks/OpenSSL.framewor
 
 ```shell
 # Check the signature, no signature is displayed code object is not signed at all
-codesign -dv openssl.xcframework
+codesign -dv --verbose=4 OpenSSL.xcframework
 # Copy the certificate name in the keychain and execute this command to sign.
-xcrun codesign --timestamp -s "full name of certificate" openssl.xcframework
+xcrun codesign --timestamp -s "full name of certificate" OpenSSL.xcframework
 # Verify signature
-xcrun codesign --verify --verbose openssl.xcframework
+xcrun codesign --verify --verbose OpenSSL.xcframework
 ```
 
 ### Xcode compilation error 1:

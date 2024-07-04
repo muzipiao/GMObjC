@@ -85,7 +85,7 @@ GMObjC 从 3.3.0 开始支持 SwiftPM，在工程中使用，点击 `File` -> `S
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.3.6")
+    .package(url: "https://github.com/muzipiao/GMObjC.git", from: "3.3.7")
 ],
 ```
 
@@ -427,11 +427,11 @@ ITMS-91065: Missing signature - Your app includes “Frameworks/OpenSSL.framewor
 
 ```shell
 # 查看签名，无签名显示 code object is not signed at all
-codesign -dv openssl.xcframework
+codesign -dv --verbose=4 OpenSSL.xcframework
 # 钥匙串复制证书名称，执行此命令即可签名。
-xcrun codesign --timestamp -s "证书全称" openssl.xcframework
+xcrun codesign --timestamp -s "证书全称" OpenSSL.xcframework
 # 验证签名
-xcrun codesign --verify --verbose openssl.xcframework
+xcrun codesign --verify --verbose OpenSSL.xcframework
 ```
 
 ### Xcode 编译错误1：
