@@ -10,8 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define GMOBJC_VERSION_NUMBER  0x303020
-#define GMOBJC_VERSION_TEXT    "GMObjC 3.3.2  02 Dec 2021"
+#define GMOBJC_VERSION_NUMBER  0x303080
+#define GMOBJC_VERSION_TEXT    "GMObjC 3.3.8  06 Nov 2024"
 
 #import "GMUtils.h"
 #import "GMObjCDef.h"

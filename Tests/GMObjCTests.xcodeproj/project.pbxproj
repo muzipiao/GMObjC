@@ -365,7 +365,6 @@
 				9C7219FB271008A100B86975 /* Sources */,
 				9C7219FC271008A100B86975 /* Frameworks */,
 				9C7219FD271008A100B86975 /* Resources */,
-				80FFC18FCC58378F9D848717 /* [CP] Embed Pods Frameworks */,
 				18B5213EC07771050D1C7BFE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -386,7 +385,6 @@
 				9CC6BE8427118B11004C47EE /* Sources */,
 				9CC6BE8527118B11004C47EE /* Frameworks */,
 				9CC6BE8627118B11004C47EE /* Resources */,
-				C5B5CF9F04F131F3EF384E28 /* [CP] Embed Pods Frameworks */,
 				7E800F1AF545CDEA24EEF43E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -560,40 +558,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tests Host/Pods-Tests Host-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		80FFC18FCC58378F9D848717 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tests iOS/Pods-Tests iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tests iOS/Pods-Tests iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tests iOS/Pods-Tests iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C5B5CF9F04F131F3EF384E28 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tests Host/Pods-Tests Host-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tests Host/Pods-Tests Host-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tests Host/Pods-Tests Host-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D4833740E6E37C452CFEB4AE /* [CP] Check Pods Manifest.lock */ = {
