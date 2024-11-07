@@ -6,8 +6,8 @@
  * GMSm2Bio PEM/DER 格式公私钥读取或创建
  * GMSm3Utils SM3 摘要提取，HMAC 计算
  * GMSm4Utils SM4 对称加解密，含ECB和CBC模式
+ * GMSmUtils  工具类，16进制编码解码等
  * GMDoctor 问题诊断，仅用于 Debug 环境调试检查可能遇到的问题
- * GMUtils  工具类，16进制编码解码等
  */
 
 #import <Foundation/Foundation.h>
@@ -19,5 +19,5 @@
 #import "GMSm2Utils.h"
 #import "GMSm3Utils.h"
 #import "GMSm4Utils.h"
+#import "GMSmUtils.h"
 #import "GMDoctor.h"
-#import "GMUtils.h"

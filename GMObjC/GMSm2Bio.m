@@ -8,7 +8,7 @@
 
 #import "GMSm2Bio.h"
 #import "GMSm2Utils.h"
-#import "GMUtils.h"
+#import "GMSmUtils.h"
 #import <openssl/sm2.h>
 #import <openssl/bn.h>
 #import <openssl/pem.h>
@@ -135,7 +135,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
             result = [NSString stringWithCString:hex_pri encoding:NSUTF8StringEncoding];
             // 根据椭圆曲线的类型，依据椭圆曲线上的点获取私钥长度，不足前面补0
             size_t maxLen = ((EC_GROUP_get_degree(group) + 7) / 8) * 2;
-            result = [GMUtils prefixPaddingZero:result maxLen:maxLen];
+            result = [GMSmUtils prefixPaddingZero:result maxLen:maxLen];
             if (hex_pri) { OPENSSL_free(hex_pri); }
         }
     } while (NO);
@@ -203,7 +203,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
             result = [NSString stringWithCString:hex_pri encoding:NSUTF8StringEncoding];
             // 根据椭圆曲线的类型，依据椭圆曲线上的点获取私钥长度，不足前面补0
             size_t maxLen = ((EC_GROUP_get_degree(group) + 7) / 8) * 2;
-            result = [GMUtils prefixPaddingZero:result maxLen:maxLen];
+            result = [GMSmUtils prefixPaddingZero:result maxLen:maxLen];
             if (hex_pri) { OPENSSL_free(hex_pri); }
         }
     } while (NO);
@@ -599,7 +599,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
     long privateDataLength = BIO_get_mem_data(privateBio, &privateDataBuffer);
     if (privateDataBuffer && privateDataLength > 0) {
         NSData *privateData = [NSData dataWithBytes:privateDataBuffer length:privateDataLength];
-        privateString = [GMUtils hexStringFromData:privateData];
+        privateString = [GMSmUtils hexStringFromData:privateData];
     }
     // Free
     if (privateBio) { BIO_free(privateBio); }
@@ -621,7 +621,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
         return nil;
     }
     NSData *publicData = [NSData dataWithBytes:publicBytes length:publicLen];
-    NSString *publicString = [GMUtils hexStringFromData:publicData];
+    NSString *publicString = [GMSmUtils hexStringFromData:publicData];
     if (publicKey) { EVP_PKEY_free(publicKey); }
     
     return publicString;
@@ -701,7 +701,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
     const unsigned char *signatureBytes = signatureBitString->data;
     NSUInteger signatureLength = signatureBitString->length;
     NSData *signatureData = [NSData dataWithBytes:signatureBytes length:signatureLength];
-    NSString *signature = [GMUtils hexStringFromData:signatureData];
+    NSString *signature = [GMSmUtils hexStringFromData:signatureData];
     return signature;
 }
 
@@ -740,7 +740,7 @@ typedef NS_ENUM(int, GMSm2CerType) {
         return nil;
     }
     NSData *digestData = [NSData dataWithBytes:buffer length:bufferLen];
-    NSString *digestString = [GMUtils hexStringFromData:digestData];
+    NSString *digestString = [GMSmUtils hexStringFromData:digestData];
     return digestString;
 }
 

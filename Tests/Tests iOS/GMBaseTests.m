@@ -8,7 +8,7 @@
 
 #import "GMBaseTests.h"
 
-NSString *const GMTestUserID = @"lifei_zdjl@126.com";
+NSString *const GMTestUserID = @"lifei_zdjl@qq.com";
 
 @implementation GMBaseTests
 

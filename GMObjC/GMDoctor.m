@@ -4,7 +4,7 @@
 #include <mach/mach.h> // CPU 类型
 #import "GMSm2Utils.h"
 #import "GMSm2Bio.h"
-#import "GMUtils.h"
+#import "GMSmUtils.h"
 #endif
 
 @implementation GMDoctor
@@ -89,26 +89,26 @@
 
 // Private-判断原文 cipherData 是否为字符串
 + (void)checkSm2CipherData:(NSData *)cipherData {
-    NSData *convertData = [GMUtils checkStringData:cipherData];
+    NSData *convertData = [GMSmUtils checkStringData:cipherData];
     if ([convertData isEqualToData:cipherData]) {
         return;
     }
     NSString *cipherString = [[NSString alloc] initWithData:cipherData encoding:NSUTF8StringEncoding];
-    if ([GMUtils isValidHexString:cipherString]) {
+    if ([GMSmUtils isValidHexString:cipherString]) {
         NSAssert(NO, @"GMObjC-Error：使用 [GMSm2Utils dataFromHexString:] 解析 cipherData");
     }
-    if ([GMUtils isValidBase64String:cipherString]) {
+    if ([GMSmUtils isValidBase64String:cipherString]) {
         NSAssert(NO, @"GMObjC-Error：使用 [GMSm2Utils dataFromBase64EncodedString:] 解析 cipherData");
     }
 }
 
 // Private-如果直接传入 HEX 格式字符串数据
 + (void)sm2DecryptWithHex:(NSString *)cipherHex privateKey:(NSString *)privateKey {
-    if (cipherHex.length == 0 || [GMUtils isValidHexString:cipherHex] == NO) {
+    if (cipherHex.length == 0 || [GMSmUtils isValidHexString:cipherHex] == NO) {
         return;
     }
     // 将 HEX 格式密文解码为 NSData
-    NSData *cipherData = [GMUtils dataFromHexString:cipherHex];
+    NSData *cipherData = [GMSmUtils dataFromHexString:cipherHex];
     // 尝试直接解密密文 Data
     if ([cipherHex hasPrefix:@"30"]) {
         NSData *plainData = [GMSm2Utils decryptData:cipherData privateKey:privateKey];
@@ -120,12 +120,12 @@
 
 // Private-如果直接传入 Base64 格式字符串数据
 + (void)sm2DecryptWithBase64:(NSString *)cipherBase64 privateKey:(NSString *)privateKey {
-    if (cipherBase64.length == 0 || [GMUtils isValidBase64String:cipherBase64] == NO) {
+    if (cipherBase64.length == 0 || [GMSmUtils isValidBase64String:cipherBase64] == NO) {
         return;
     }
     // 将 Base64 格式密文解码为 NSData
-    NSData *cipherData = [GMUtils dataFromBase64EncodedString:cipherBase64];
-    NSString *cipherHex = [GMUtils hexStringFromData:cipherData];
+    NSData *cipherData = [GMSmUtils dataFromBase64EncodedString:cipherBase64];
+    NSString *cipherHex = [GMSmUtils hexStringFromData:cipherData];
     // 尝试直接解密密文 Data
     if ([cipherHex hasPrefix:@"30"]) {
         NSData *plainData = [GMSm2Utils decryptData:cipherData privateKey:privateKey];
@@ -166,7 +166,7 @@
         NSAssert(NO, @"GMObjC-Error：privateKey 为 PEM 格式，使用 [GMSm2Bio readPublicKeyFromPemData:] 读取");
     }
     // 判断是不是 PEM 或者 DER
-    if ([GMUtils isValidBase64String:publicKey] == YES && [GMUtils isValidHexString:publicKey] == NO) {
+    if ([GMSmUtils isValidBase64String:publicKey] == YES && [GMSmUtils isValidHexString:publicKey] == NO) {
         NSArray *pemList = @[@"-----BEGIN PUBLIC KEY-----", publicKey, @"-----END PUBLIC KEY-----"];
         NSString *pemPubKey = [pemList componentsJoinedByString:@"\n"];
         NSString *pemKeyHex = [GMSm2Bio readPublicKeyFromPemData:[pemPubKey dataUsingEncoding:NSUTF8StringEncoding] password:nil];
@@ -176,11 +176,11 @@
             NSAssert(NO, @"GMObjC-Error：公钥必须为 04 开头的 HEX 编码格式，使用 [GMSmUtils dataFromBase64EncodedString:] 解码");
         }
     }
-    if ([GMUtils isValidHexString:publicKey] == NO) {
+    if ([GMSmUtils isValidHexString:publicKey] == NO) {
         NSAssert(NO, @"GMObjC-Error：公钥必须为 04 开头的 HEX 编码格式");
     }
     // 检查是否传入了普通字符串
-    NSData *keyData = [GMUtils dataFromHexString:publicKey];
+    NSData *keyData = [GMSmUtils dataFromHexString:publicKey];
     NSString *keyStr = [[NSString alloc] initWithData:keyData encoding:NSUTF8StringEncoding];
     if (keyStr.length > 0) {
         NSAssert(NO, @"GMObjC-Error：公钥格式错误，请传入正确的 HEX 编码格式公钥，不是将普通字符串进行 HEX 编码");
@@ -208,7 +208,7 @@
     if ([privateKey containsString:@"-----BEGIN"]) {
         NSAssert(NO, @"GMObjC-Error：私钥为 PEM 格式，使用 [GMSm2Bio readPrivateKeyFromPemData:] 读取");
     }
-    if ([GMUtils isValidBase64String:privateKey] == YES && [GMUtils isValidHexString:privateKey] == NO) {
+    if ([GMSmUtils isValidBase64String:privateKey] == YES && [GMSmUtils isValidHexString:privateKey] == NO) {
         NSArray *pemList = @[@"-----BEGIN EC PRIVATE KEY-----", privateKey, @"-----END EC PRIVATE KEY-----"];
         NSString *pemPriKey = [pemList componentsJoinedByString:@"\n"];
         NSString *pemKeyHex = [GMSm2Bio readPrivateKeyFromPemData:[pemPriKey dataUsingEncoding:NSUTF8StringEncoding] password:nil];
@@ -218,11 +218,11 @@
             NSAssert(NO, @"GMObjC-Error：私钥必须为 HEX 编码格式，使用 [GMSmUtils dataFromBase64EncodedString:] 解码");
         }
     }
-    if ([GMUtils isValidHexString:privateKey] == NO) {
+    if ([GMSmUtils isValidHexString:privateKey] == NO) {
         NSAssert(NO, @"GMObjC-Error：私钥必须为正确的 HEX 编码格式");
     }
     // 检查是否传入了普通字符串
-    NSData *keyData = [GMUtils dataFromHexString:privateKey];
+    NSData *keyData = [GMSmUtils dataFromHexString:privateKey];
     NSString *keyStr = [[NSString alloc] initWithData:keyData encoding:NSUTF8StringEncoding];
     if (keyStr.length > 0) {
         NSAssert(NO, @"GMObjC-Error：私钥格式错误，请传入正确的 HEX 编码格式私钥，不是将普通字符串进行 HEX 编码");

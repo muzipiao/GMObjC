@@ -1,5 +1,5 @@
 #import "GMSm4Utils.h"
-#import "GMUtils.h"
+#import "GMSmUtils.h"
 #import <openssl/sm4.h>
 #import <openssl/evp.h>
 #import <openssl/modes.h>

@@ -5,12 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "GMObjC",
+    platforms: [.iOS(.v11), .macOS(.v10_13)],
     products: [
-        .library(name: "GMObjC", targets: ["GMObjC", "openssl"]),
+        .library(name: "GMObjC", targets: ["GMObjC"]),
     ],
     dependencies: [],
     targets: [
-        .target(name: "GMObjC", path: "GMObjC", resources: [.copy("PrivacyInfo.xcprivacy")]),
-        .binaryTarget(name: "openssl", path: "XCFrameworks/OpenSSL.xcframework"),
+        .target(name: "GMObjC", dependencies: ["OpenSSL"], path: "GMObjC", publicHeadersPath: "include"),
+        .binaryTarget(name: "OpenSSL", path: "Frameworks/OpenSSL.xcframework"),
     ]
 )

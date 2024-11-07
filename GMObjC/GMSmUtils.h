@@ -6,7 +6,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GMUtils : NSObject
+@interface GMSmUtils : NSObject
 
 // MARK: - Hex 编码
 /// 字符串 16 进制编码。返回值：16 进制编码的字符串

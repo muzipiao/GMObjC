@@ -1,7 +1,7 @@
-#import "GMUtils.h"
+#import "GMSmUtils.h"
 #import <openssl/crypto.h>
 
-@implementation GMUtils
+@implementation GMSmUtils
 
 // MARK: - Hex 编码
 /// 字符串 16 进制编码。返回值：16 进制编码的字符串

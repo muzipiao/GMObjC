@@ -1,5 +1,5 @@
 #import "GMSm2Utils.h"
-#import "GMUtils.h"
+#import "GMSmUtils.h"
 #import <openssl/sm2.h>
 #import <openssl/bn.h>
 #import <openssl/evp.h>
@@ -129,7 +129,7 @@ static GMSm2Utils *_instance;
         // 根据椭圆曲线的类型，依据椭圆曲线上的点获取私钥长度，不足前面补0
         size_t maxLen = ((EC_GROUP_get_degree(group) + 7) / 8) * 2;
         NSString *privateKey = [NSString stringWithCString:hex_pri encoding:NSUTF8StringEncoding];
-        keyObj.privateKey = [GMUtils prefixPaddingZero:privateKey maxLen:maxLen];
+        keyObj.privateKey = [GMSmUtils prefixPaddingZero:privateKey maxLen:maxLen];
         
         OPENSSL_free(hex_pub);
         OPENSSL_free(hex_pri);
@@ -257,7 +257,7 @@ static GMSm2Utils *_instance;
 
 // 解密 16进制格式密文，返回 NSData 编码格式明文
 + (nullable NSData *)decryptHex:(NSString *)asn1Hex privateKey:(NSString *)privateKey {
-    NSData *cipherData = [GMUtils dataFromHexString:asn1Hex];
+    NSData *cipherData = [GMSmUtils dataFromHexString:asn1Hex];
     NSData *plainData = [self decryptData:cipherData privateKey:privateKey];
     return plainData;
 }
@@ -296,7 +296,7 @@ static GMSm2Utils *_instance;
 }
 
 + (nullable NSData *)convertC1C2C3HexToC1C3C2:(NSString *)c1c2c3Hex hasPrefix:(BOOL)hasPrefix {
-    NSData *c1c2c3Data = [GMUtils dataFromHexString:c1c2c3Hex];
+    NSData *c1c2c3Data = [GMSmUtils dataFromHexString:c1c2c3Hex];
     return [self convertC1C2C3DataToC1C3C2:c1c2c3Data hasPrefix:hasPrefix];
 }
 
@@ -333,7 +333,7 @@ static GMSm2Utils *_instance;
 }
 
 + (nullable NSData *)convertC1C3C2HexToC1C2C3:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix {
-    NSData *c1c3c2Data = [GMUtils dataFromHexString:c1c3c2Hex];
+    NSData *c1c3c2Data = [GMSmUtils dataFromHexString:c1c3c2Hex];
     return [self convertC1C3C2DataToC1C2C3:c1c3c2Data hasPrefix:hasPrefix];
 }
 
@@ -345,8 +345,8 @@ static GMSm2Utils *_instance;
     NSUInteger c1_len = c1.length;
     NSData *c1XData = [c1 subdataWithRange:NSMakeRange(0, c1_len/2)];
     NSData *c1YData = [c1 subdataWithRange:NSMakeRange(c1_len/2, c1_len/2)];
-    const char *c1_x_hex = [GMUtils hexStringFromData:c1XData].UTF8String;
-    const char *c1_y_hex = [GMUtils hexStringFromData:c1YData].UTF8String;
+    const char *c1_x_hex = [GMSmUtils hexStringFromData:c1XData].UTF8String;
+    const char *c1_y_hex = [GMSmUtils hexStringFromData:c1YData].UTF8String;
     uint8_t *c3_text = (uint8_t *)[c3 bytes];
     size_t c3_len = c3.length;
     uint8_t *c2_text = (uint8_t *)[c2 bytes];
@@ -422,7 +422,7 @@ static GMSm2Utils *_instance;
 }
 
 + (nullable NSData *)asn1EncodeWithC1C3C2Hex:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix {
-    NSData *c1c3c2Data = [GMUtils dataFromHexString:c1c3c2Hex];
+    NSData *c1c3c2Data = [GMSmUtils dataFromHexString:c1c3c2Hex];
     return [self asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:hasPrefix];
 }
 
@@ -445,10 +445,10 @@ static GMSm2Utils *_instance;
     // 根据椭圆曲线的类型，依据椭圆曲线上的点获取C1长度
     EC_GROUP *group = EC_GROUP_new_by_curve_name([self curveType]);
     size_t maxLen = ((EC_GROUP_get_degree(group) + 7) / 8) * 2;
-    NSString *paddingC1X = [GMUtils prefixPaddingZero:c1xStr maxLen:maxLen];
-    NSString *paddingC1Y = [GMUtils prefixPaddingZero:c1yStr maxLen:maxLen];
+    NSString *paddingC1X = [GMSmUtils prefixPaddingZero:c1xStr maxLen:maxLen];
+    NSString *paddingC1Y = [GMSmUtils prefixPaddingZero:c1yStr maxLen:maxLen];
     NSString *c1Hex = [NSString stringWithFormat:@"%@%@", paddingC1X, paddingC1Y];
-    NSData *c1Data = [GMUtils dataFromHexString:c1Hex];
+    NSData *c1Data = [GMSmUtils dataFromHexString:c1Hex];
     // C3
     const int c3_len = EVP_MD_size(digest);
     NSData *c3Data = [NSData dataWithBytes:sm2_st->C3->data length:c3_len];
@@ -474,7 +474,7 @@ static GMSm2Utils *_instance;
     }
     NSData *prefixData = [NSData data];
     if (hasPrefix) {
-        prefixData = [GMUtils dataFromHexString:@"04"];
+        prefixData = [GMSmUtils dataFromHexString:@"04"];
     }
     NSMutableData *c1c3c2Data = [NSMutableData dataWithData:prefixData];
     [c1c3c2Data appendData:c1c3c2Array[0]];
@@ -489,7 +489,7 @@ static GMSm2Utils *_instance;
 /// @param hasPrefix 返回的密文结果前面是否增加 04 前缀标识，YES 时返回结果前面会拼接上 04，默认 NO
 + (nullable NSString *)asn1DecodeToC1C3C2Hex:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix {
     NSData *c1c3c2Data = [self asn1DecodeToC1C3C2Data:asn1Data hasPrefix:hasPrefix];
-    NSString *c1c3c2Hex = [GMUtils hexStringFromData:c1c3c2Data];
+    NSString *c1c3c2Hex = [GMSmUtils hexStringFromData:c1c3c2Data];
     return c1c3c2Hex;
 }
 
@@ -552,8 +552,8 @@ static GMSm2Utils *_instance;
         }
         // 根据椭圆曲线的类型，依据椭圆曲线上的点获取签名长度
         size_t maxLen = ((EC_GROUP_get_degree(group) + 7) / 8) * 2;
-        NSString *paddingR = [GMUtils prefixPaddingZero:rStr maxLen:maxLen];
-        NSString *paddingS = [GMUtils prefixPaddingZero:sStr maxLen:maxLen];
+        NSString *paddingR = [GMSmUtils prefixPaddingZero:rStr maxLen:maxLen];
+        NSString *paddingS = [GMSmUtils prefixPaddingZero:sStr maxLen:maxLen];
         sigStr = [NSString stringWithFormat:@"%@%@", paddingR, paddingS];
     } while (NO);
     // Free
@@ -663,7 +663,7 @@ static GMSm2Utils *_instance;
             break;
         }
         NSData *derData = [NSData dataWithBytes:der length:der_len];
-        derEncode = [GMUtils hexStringFromData:derData];
+        derEncode = [GMSmUtils hexStringFromData:derData];
     } while (NO);
     // Free，注意 ECDSA_SIG_free 会释放 sig_r & sig_s
     if (sig == NULL && sig_r) { BN_free(sig_r); }
@@ -679,7 +679,7 @@ static GMSm2Utils *_instance;
     if (derSign.length == 0) {
         return nil;
     }
-    NSData *derData = [GMUtils dataFromHexString:derSign];
+    NSData *derData = [GMSmUtils dataFromHexString:derSign];
     size_t sign_len = derData.length;
     const uint8_t *sign_char = (uint8_t *)[derData bytes]; // 明文
     // 复制一份，对比验证
@@ -721,8 +721,8 @@ static GMSm2Utils *_instance;
         }
         // 根据椭圆曲线的类型，依据椭圆曲线上的点获取签名长度
         size_t maxLen = ((EC_GROUP_get_degree(group) + 7) / 8) * 2;
-        NSString *paddingR = [GMUtils prefixPaddingZero:rStr maxLen:maxLen];
-        NSString *paddingS = [GMUtils prefixPaddingZero:sStr maxLen:maxLen];
+        NSString *paddingR = [GMSmUtils prefixPaddingZero:rStr maxLen:maxLen];
+        NSString *paddingS = [GMSmUtils prefixPaddingZero:sStr maxLen:maxLen];
         originSign = [NSString stringWithFormat:@"%@%@", paddingR, paddingS];
     } while (NO);
     // Free
@@ -769,7 +769,7 @@ static GMSm2Utils *_instance;
             break;
         }
         NSData *ecdhData = [NSData dataWithBytes:ecdh_text length:ret];
-        ecdhStr = [GMUtils hexStringFromData:ecdhData];
+        ecdhStr = [GMSmUtils hexStringFromData:ecdhData];
         
         OPENSSL_free(ecdh_text);
     } while (NO);
