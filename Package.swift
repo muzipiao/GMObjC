@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "GMObjC",
-    platforms: [.iOS(.v11), .macOS(.v10_13)],
+    platforms: [.iOS(.v12), .macOS(.v10_13)],
     products: [
         .library(name: "GMObjC", targets: ["GMObjC"]),
     ],

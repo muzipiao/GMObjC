@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C1ABB6B2CDC871C003844DC /* OpenSSL.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C1ABB692CDC871C003844DC /* OpenSSL.xcframework */; };
 		9C58AAF92BC38869001E62E5 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9C58AAF82BC38869001E62E5 /* PrivacyInfo.xcprivacy */; };
 		9C5F53A82CDC600400265C1C /* GMDoctor.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C5F53A62CDC600400265C1C /* GMDoctor.h */; };
 		9C5F53A92CDC600400265C1C /* GMDoctor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5F53A72CDC600400265C1C /* GMDoctor.m */; };
-		9C5F53AD2CDC609100265C1C /* OpenSSL.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5F53AC2CDC609100265C1C /* OpenSSL.xcframework */; };
 		9CEA768F271017B700DA6FA1 /* GMObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA768E271017B700DA6FA1 /* GMObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEA76A02710180E00DA6FA1 /* GMSm4Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA76952710180E00DA6FA1 /* GMSm4Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEA76A12710180E00DA6FA1 /* GMSm3Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA76962710180E00DA6FA1 /* GMSm3Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,10 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C1ABB692CDC871C003844DC /* OpenSSL.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:9CA5KUE8T7:BEIJING JINHER SOFTWARE CO.LTD."; lastKnownFileType = wrapper.xcframework; path = OpenSSL.xcframework; sourceTree = "<group>"; };
 		9C58AAF82BC38869001E62E5 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		9C5F53A62CDC600400265C1C /* GMDoctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMDoctor.h; sourceTree = "<group>"; };
 		9C5F53A72CDC600400265C1C /* GMDoctor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMDoctor.m; sourceTree = "<group>"; };
-		9C5F53AC2CDC609100265C1C /* OpenSSL.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:9CA5KUE8T7:BEIJING JINHER SOFTWARE CO.LTD."; lastKnownFileType = wrapper.xcframework; path = OpenSSL.xcframework; sourceTree = "<group>"; };
 		9CEA768B271017B700DA6FA1 /* GMObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CEA768E271017B700DA6FA1 /* GMObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMObjC.h; sourceTree = "<group>"; };
 		9CEA76952710180E00DA6FA1 /* GMSm4Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm4Utils.h; sourceTree = "<group>"; };
@@ -48,18 +48,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C5F53AD2CDC609100265C1C /* OpenSSL.xcframework in Frameworks */,
+				9C1ABB6B2CDC871C003844DC /* OpenSSL.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9C1ABB6A2CDC871C003844DC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9C1ABB692CDC871C003844DC /* OpenSSL.xcframework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 		9CEA7681271017B700DA6FA1 = {
 			isa = PBXGroup;
 			children = (
 				9CEA768D271017B700DA6FA1 /* GMObjC */,
-				9CEA76AB2710182200DA6FA1 /* XCFrameworks */,
+				9C1ABB6A2CDC871C003844DC /* Frameworks */,
 				9CEA768C271017B700DA6FA1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,14 +99,6 @@
 				9CEA769A2710180E00DA6FA1 /* GMSm4Utils.m */,
 			);
 			path = GMObjC;
-			sourceTree = "<group>";
-		};
-		9CEA76AB2710182200DA6FA1 /* XCFrameworks */ = {
-			isa = PBXGroup;
-			children = (
-				9C5F53AC2CDC609100265C1C /* OpenSSL.xcframework */,
-			);
-			path = XCFrameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
