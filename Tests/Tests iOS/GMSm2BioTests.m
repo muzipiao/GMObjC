@@ -21,7 +21,7 @@
 @implementation GMSm2BioTests
 
 - (void)setUp {
-    [GMSm2Utils setCurveType:GMSm2CurveTypeSm2p256v1];
+    [GMSm2Utils setCurveType:GMSm2CurveSm2p256v1];
     
     NSMutableArray *m1 = [NSMutableArray arrayWithCapacity:10];
     NSMutableArray *m2 = [NSMutableArray arrayWithCapacity:10];
@@ -62,7 +62,7 @@
 // MARK: - 椭圆曲线类型
 - (void)testEllipticCurveType {
     int currentType = [GMSm2Utils curveType];
-    XCTAssertTrue(currentType == GMSm2CurveTypeSm2p256v1, @"当前椭圆曲线应为 NID_sm2");
+    XCTAssertTrue(currentType == GMSm2CurveSm2p256v1, @"当前椭圆曲线应为 NID_sm2");
 }
 
 // MARK: - 测试NULL

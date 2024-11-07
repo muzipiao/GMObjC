@@ -34,9 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 常用标准椭圆曲线，默认 NID_sm2，无特殊情况，使用默认即可
 typedef NS_ENUM(int, GMSm2CurveType) {
-    GMSm2CurveTypeSm2p256v1 = 1172,   // NID_sm2(默认)
-    GMSm2CurveTypeSecp256k1 = 714,    // NID_secp256k1
-    GMSm2CurveTypeSecp256r1 = 415     // NID_X9_62_prime256v1
+    GMSm2CurveSm2p256v1 = 1172,   // NID_sm2(默认)
+    GMSm2CurveSecp256k1 = 714,    // NID_secp256k1
+    GMSm2CurveSecp256r1 = 415     // NID_X9_62_prime256v1
 };
 
 // SM2 公私钥（默认基于官方文档 NID_sm2 推荐曲线）
@@ -139,12 +139,17 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 
 // MARK: - SM2 公钥的压缩与解压缩
 /// SM2 公钥压缩。返回值：02 或 03 开头的压缩公钥
-/// - Parameter publicKey 04 开头的非压缩公钥
+/// @param publicKey 04 开头的非压缩公钥
 + (nullable NSString *)compressPublicKey:(NSString *)publicKey;
 
 /// SM2 公钥解压缩。返回值：04 开头的非压缩公钥
 /// @param publicKey 02 或 03 开头的压缩公钥
 + (nullable NSString *)decompressPublicKey:(NSString *)publicKey;
+
+// MARK: - SM2 私钥计算公钥
+/// SM2 私钥计算公钥。返回值：04 开头的非压缩公钥
+/// @param privateKey  私钥（ Hex 编码格式）
++ (nullable NSString *)calcPublicKeyFromPrivateKey:(NSString *)privateKey;
 
 // MARK: - ECDH 密钥协商
 /// 椭圆曲线 Diffie-Hellman 密钥协商（ECDH），返回 64 字节 16 进制编码格式密钥

@@ -90,13 +90,13 @@ static GMSm2Utils *_instance;
 
 + (void)setCurveType:(int)type {
     switch (type) {
-        case GMSm2CurveTypeSm2p256v1:
+        case GMSm2CurveSm2p256v1:
             [GMSm2Utils shared].curveType = NID_sm2;
             break;
-        case GMSm2CurveTypeSecp256k1:
+        case GMSm2CurveSecp256k1:
             [GMSm2Utils shared].curveType = NID_secp256k1;
             break;
-        case GMSm2CurveTypeSecp256r1:
+        case GMSm2CurveSecp256r1:
             [GMSm2Utils shared].curveType = NID_X9_62_prime256v1;
             break;
         default:
@@ -818,6 +818,49 @@ static GMSm2Utils *_instance;
     if (pub_point) { EC_POINT_free(pub_point); }
     
     return result;
+}
+
+// MARK: - SM2 私钥计算公钥
++ (nullable NSString *)calcPublicKeyFromPrivateKey:(NSString *)privateKey {
+    if (privateKey.length == 0) {
+        return nil;
+    }
+    const char *private_key = privateKey.UTF8String;
+    EC_GROUP *group = EC_GROUP_new_by_curve_name([self curveType]);
+    BIGNUM *pri_num = NULL;  // 私钥
+    EC_POINT *pub_point = NULL; // 公钥坐标
+    EC_KEY *key = NULL; // 密钥对
+    NSString *publicKey = nil;  // 计算出的公钥
+    do {
+        if (!BN_hex2bn(&pri_num, private_key)) {
+            break; // 私钥转 BIGNUM
+        }
+        key = EC_KEY_new();
+        if (!EC_KEY_set_group(key, group)) {
+            break;
+        }
+        if (!EC_KEY_set_private_key(key, pri_num)) {
+            break; // 设置私钥
+        }
+        pub_point = EC_POINT_new(group);
+        if (!EC_POINT_mul(group, pub_point, pri_num, NULL, NULL, NULL)) {
+            break; // 私钥算出公钥
+        }
+        if (!EC_KEY_set_public_key(key, pub_point)) {
+            break; // 设置公钥
+        }
+        char *hex_pub = EC_POINT_point2hex(group, pub_point, EC_KEY_get_conv_form(key), NULL);
+        publicKey = [NSString stringWithCString:hex_pub encoding:NSUTF8StringEncoding];
+        
+        OPENSSL_free(hex_pub);
+    } while (NO);
+    // Free
+    if (group) { EC_GROUP_free(group); }
+    if (pub_point) { EC_POINT_free(pub_point); }
+    if (pri_num) { BN_free(pri_num); }
+    if (key) { EC_KEY_free(key); }
+    
+    return publicKey;
 }
 
 @end
