@@ -126,7 +126,7 @@
 
 // MARK: - SM4 加解密
 + (GMTestModel *)testSm4 {
-    NSData *sm4KeyData = [GMSm4Utils generateKey]; //  生成 16 字节密钥
+    NSData *sm4KeyData = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]]; //  生成 16 字节密钥
     NSData *plainData = [@"123456" dataUsingEncoding:NSUTF8StringEncoding];
     // ECB 加解密模式
     NSData *sm4EcbCiperData = [GMSm4Utils encryptDataWithECB:plainData keyData:sm4KeyData];
@@ -138,7 +138,7 @@
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"ECB模式解密结果" detail:sm4EcbPlaintext.hexDesc]];
     
     // CBC 加解密模式
-    NSData *ivecData = [GMSm4Utils generateKey]; // 生成 16 字节初始化向量
+    NSData *ivecData = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]]; // 生成 16 字节初始化向量
     NSData *sm4CbcCiperData = [GMSm4Utils encryptDataWithCBC:plainData keyData:sm4KeyData ivecData:ivecData];
     NSData *sm4CbcPlainData = [GMSm4Utils decryptDataWithCBC:sm4CbcCiperData keyData:sm4KeyData ivecData:ivecData];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"CBC模式需要的16字节向量" detail:ivecData.hexDesc]];

@@ -17,12 +17,11 @@
 /// 测试 sm4 出现空的情况
 - (void)testSm4Null {
     NSData *plainData = [@"123456" dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *sm4Key = [GMSm4Utils generateKey];
-    NSData *ivec = [GMSm4Utils generateKey];
+    NSData *sm4Key = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]];
+    NSData *ivec = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]];
     NSArray *randDataList = @[[NSNull null], [NSData data], plainData];
     NSArray *randKeyList = @[[NSNull null], [NSData data], sm4Key];
     NSArray *randIvecList = @[[NSNull null], [NSData data], ivec];
-    
     
     for (NSInteger i = 0; i < 128; i++) {
         NSData *randData = randDataList[arc4random_uniform((uint32_t)randDataList.count)];
@@ -52,7 +51,7 @@
 /// 测试大量生产 sm4 公私钥
 - (void)testSm4CreateKeys {
     for (NSInteger i = 0; i < 1000; i++) {
-        NSData *sm4Key = [GMSm4Utils generateKey];
+        NSData *sm4Key = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]];
         XCTAssertNotNil(sm4Key, @"生成 sm4 密钥不为空");
         XCTAssertTrue(sm4Key.length == 16, @" sm4密钥长度 ");
     }
@@ -63,7 +62,7 @@
     XCTAssertNotNil(self.fileData, @"待加密 NSData 不为空");
     for (NSInteger i = 0; i < 1000; i++) {
         // 生产密钥不为空
-        NSData *sm4Key = [GMSm4Utils generateKey];
+        NSData *sm4Key = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]];
         XCTAssertNotNil(sm4Key, @"生成 sm4 密钥不为空");
         
         // ECB 模式
@@ -73,7 +72,7 @@
         XCTAssertTrue(decryptDataByEcb.length > 0, @"解密后数据不为空");
         
         // CBC 模式
-        NSData *ivec = [GMSm4Utils generateKey];
+        NSData *ivec = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]];
         NSData *cipherDataByCbc = [GMSm4Utils encryptDataWithCBC:self.fileData keyData:sm4Key ivecData:ivec];
         XCTAssertTrue(cipherDataByCbc.length > 0, @"加密后数据不为空");
         NSData *decryptDataByCbc = [GMSm4Utils decryptDataWithCBC:cipherDataByCbc keyData:sm4Key ivecData:ivec];
@@ -103,7 +102,7 @@
         NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
         XCTAssertNotNil(plainData, @"生成字符串不为空");
         // 生产密钥不为空
-        NSData *sm4Key = [GMSm4Utils generateKey];
+        NSData *sm4Key = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]];
         XCTAssertNotNil(sm4Key, @"生成 sm4 密钥不为空");
         // ECB 模式
         NSData *encryptByEcb = [GMSm4Utils encryptDataWithECB:plainData keyData:sm4Key];
@@ -111,7 +110,7 @@
         NSData *decryptByEcb = [GMSm4Utils decryptDataWithECB:encryptByEcb keyData:sm4Key];
         XCTAssertNotNil(decryptByEcb, @"解密结果不为空");
         // CBC 模式
-        NSData *ivec = [GMSm4Utils generateKey];
+        NSData *ivec = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]];
         NSData *encryptByCbc = [GMSm4Utils encryptDataWithCBC:plainData keyData:sm4Key ivecData:ivec];
         XCTAssertNotNil(encryptByCbc, @"加密字符串不为空");
         NSData *decryptByCbc = [GMSm4Utils decryptDataWithCBC:encryptByCbc keyData:sm4Key ivecData:ivec];

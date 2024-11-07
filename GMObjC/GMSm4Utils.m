@@ -16,13 +16,13 @@
 }
 
 // MARK: - 生成 SM4 密钥
-+ (nullable NSData *)generateKey {
++ (nullable NSString *)generateKey {
     NSInteger len = SM4_BLOCK_SIZE;
     uint8_t bytes[len];
     int status = SecRandomCopyBytes(kSecRandomDefault, (sizeof bytes)/(sizeof bytes[0]), &bytes);
     if (status == errSecSuccess) {
         NSData *resultData = [NSData dataWithBytes:bytes length:len];
-        return resultData;
+        return [GMSmUtils hexStringFromData:resultData];
     }
     // 容错，若 SecRandomCopyBytes 失败
     NSString *keyStr = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -33,7 +33,7 @@
         [randomStr appendString:subChar];
     }
     NSData *randomData = [randomStr dataUsingEncoding:NSUTF8StringEncoding];
-    return randomData;
+    return [GMSmUtils hexStringFromData:randomData];
 }
 
 // MARK: - ECB 加密
@@ -176,5 +176,22 @@
     
     return plainData;
 }
+
+// MARK: - DEPRECATED
++ (nullable NSString *)createSm4Key API_DEPRECATED_WITH_REPLACEMENT("generateKey", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED)) {
+    return [self generateKey];
+}
+
+//+ (nullable NSString *)ecbEncryptText:(NSString *)plaintext key:(NSString *)key API_DEPRECATED_WITH_REPLACEMENT("encryptDataWithECB:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
+//+ (nullable NSString *)cbcEncryptText:(NSString *)plaintext key:(NSString *)key IV:(NSString *)ivec API_DEPRECATED_WITH_REPLACEMENT("encryptDataWithCBC:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
+//
+//+ (nullable NSString *)ecbDecryptText:(NSString *)ciphertext key:(NSString *)key API_DEPRECATED_WITH_REPLACEMENT("decryptDataWithECB:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
+//+ (nullable NSString *)cbcDecryptText:(NSString *)ciphertext key:(NSString *)key IV:(NSString *)ivec API_DEPRECATED_WITH_REPLACEMENT("decryptDataWithCBC:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
+//
+//+ (nullable NSData *)ecbEncryptData:(NSData *)plainData key:(NSString *)key API_DEPRECATED_WITH_REPLACEMENT("encryptDataWithECB:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
+//+ (nullable NSData *)cbcEncryptData:(NSData *)plainData key:(NSString *)key IV:(NSString *)ivec API_DEPRECATED_WITH_REPLACEMENT("encryptDataWithCBC:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
+//
+//+ (nullable NSData *)ecbDecryptData:(NSData *)cipherData key:(NSString *)key API_DEPRECATED_WITH_REPLACEMENT("decryptDataWithECB:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
+//+ (nullable NSData *)cbcDecryptData:(NSData *)cipherData key:(NSString *)key IV:(NSString *)ivec API_DEPRECATED_WITH_REPLACEMENT("decryptDataWithCBC:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
 
 @end
