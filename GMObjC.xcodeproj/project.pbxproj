@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9C58AAF92BC38869001E62E5 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9C58AAF82BC38869001E62E5 /* PrivacyInfo.xcprivacy */; };
+		9C5F53A82CDC600400265C1C /* GMDoctor.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C5F53A62CDC600400265C1C /* GMDoctor.h */; };
+		9C5F53A92CDC600400265C1C /* GMDoctor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5F53A72CDC600400265C1C /* GMDoctor.m */; };
+		9C5F53AD2CDC609100265C1C /* OpenSSL.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5F53AC2CDC609100265C1C /* OpenSSL.xcframework */; };
 		9CEA768F271017B700DA6FA1 /* GMObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA768E271017B700DA6FA1 /* GMObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEA76A02710180E00DA6FA1 /* GMSm4Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA76952710180E00DA6FA1 /* GMSm4Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEA76A12710180E00DA6FA1 /* GMSm3Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA76962710180E00DA6FA1 /* GMSm3Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -19,12 +22,13 @@
 		9CEA76A72710180E00DA6FA1 /* GMSm2Bio.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA769C2710180E00DA6FA1 /* GMSm2Bio.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEA76A82710180E00DA6FA1 /* GMSm2Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA769D2710180E00DA6FA1 /* GMSm2Utils.m */; };
 		9CEA76A92710180E00DA6FA1 /* GMSm2Bio.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA769E2710180E00DA6FA1 /* GMSm2Bio.m */; };
-		9CEA76AA2710180E00DA6FA1 /* GMObjCDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA769F2710180E00DA6FA1 /* GMObjCDef.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9CEA76AD2710182200DA6FA1 /* openssl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEA76AC2710182200DA6FA1 /* openssl.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9C58AAF82BC38869001E62E5 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		9C5F53A62CDC600400265C1C /* GMDoctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMDoctor.h; sourceTree = "<group>"; };
+		9C5F53A72CDC600400265C1C /* GMDoctor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMDoctor.m; sourceTree = "<group>"; };
+		9C5F53AC2CDC609100265C1C /* OpenSSL.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:9CA5KUE8T7:BEIJING JINHER SOFTWARE CO.LTD."; lastKnownFileType = wrapper.xcframework; path = OpenSSL.xcframework; sourceTree = "<group>"; };
 		9CEA768B271017B700DA6FA1 /* GMObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CEA768E271017B700DA6FA1 /* GMObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMObjC.h; sourceTree = "<group>"; };
 		9CEA76952710180E00DA6FA1 /* GMSm4Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm4Utils.h; sourceTree = "<group>"; };
@@ -37,8 +41,6 @@
 		9CEA769C2710180E00DA6FA1 /* GMSm2Bio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm2Bio.h; sourceTree = "<group>"; };
 		9CEA769D2710180E00DA6FA1 /* GMSm2Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm2Utils.m; sourceTree = "<group>"; };
 		9CEA769E2710180E00DA6FA1 /* GMSm2Bio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm2Bio.m; sourceTree = "<group>"; };
-		9CEA769F2710180E00DA6FA1 /* GMObjCDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMObjCDef.h; sourceTree = "<group>"; };
-		9CEA76AC2710182200DA6FA1 /* openssl.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:9CA5KUE8T7:BEIJING JINHER SOFTWARE CO.LTD."; lastKnownFileType = wrapper.xcframework; path = openssl.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CEA76AD2710182200DA6FA1 /* openssl.xcframework in Frameworks */,
+				9C5F53AD2CDC609100265C1C /* OpenSSL.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +77,10 @@
 			children = (
 				9C58AAF82BC38869001E62E5 /* PrivacyInfo.xcprivacy */,
 				9CEA768E271017B700DA6FA1 /* GMObjC.h */,
-				9CEA769F2710180E00DA6FA1 /* GMObjCDef.h */,
+				9CEA76982710180E00DA6FA1 /* GMUtils.h */,
+				9CEA769B2710180E00DA6FA1 /* GMUtils.m */,
+				9C5F53A62CDC600400265C1C /* GMDoctor.h */,
+				9C5F53A72CDC600400265C1C /* GMDoctor.m */,
 				9CEA769C2710180E00DA6FA1 /* GMSm2Bio.h */,
 				9CEA769E2710180E00DA6FA1 /* GMSm2Bio.m */,
 				9CEA76972710180E00DA6FA1 /* GMSm2Utils.h */,
@@ -84,8 +89,6 @@
 				9CEA76992710180E00DA6FA1 /* GMSm3Utils.m */,
 				9CEA76952710180E00DA6FA1 /* GMSm4Utils.h */,
 				9CEA769A2710180E00DA6FA1 /* GMSm4Utils.m */,
-				9CEA76982710180E00DA6FA1 /* GMUtils.h */,
-				9CEA769B2710180E00DA6FA1 /* GMUtils.m */,
 			);
 			path = GMObjC;
 			sourceTree = "<group>";
@@ -93,7 +96,7 @@
 		9CEA76AB2710182200DA6FA1 /* XCFrameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9CEA76AC2710182200DA6FA1 /* openssl.xcframework */,
+				9C5F53AC2CDC609100265C1C /* OpenSSL.xcframework */,
 			);
 			path = XCFrameworks;
 			sourceTree = "<group>";
@@ -106,12 +109,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CEA768F271017B700DA6FA1 /* GMObjC.h in Headers */,
+				9C5F53A82CDC600400265C1C /* GMDoctor.h in Headers */,
 				9CEA76A22710180E00DA6FA1 /* GMSm2Utils.h in Headers */,
 				9CEA76A12710180E00DA6FA1 /* GMSm3Utils.h in Headers */,
 				9CEA76A32710180E00DA6FA1 /* GMUtils.h in Headers */,
 				9CEA76A72710180E00DA6FA1 /* GMSm2Bio.h in Headers */,
 				9CEA76A02710180E00DA6FA1 /* GMSm4Utils.h in Headers */,
-				9CEA76AA2710180E00DA6FA1 /* GMObjCDef.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +189,7 @@
 			files = (
 				9CEA76A92710180E00DA6FA1 /* GMSm2Bio.m in Sources */,
 				9CEA76A52710180E00DA6FA1 /* GMSm4Utils.m in Sources */,
+				9C5F53A92CDC600400265C1C /* GMDoctor.m in Sources */,
 				9CEA76A42710180E00DA6FA1 /* GMSm3Utils.m in Sources */,
 				9CEA76A82710180E00DA6FA1 /* GMSm2Utils.m in Sources */,
 				9CEA76A62710180E00DA6FA1 /* GMUtils.m in Sources */,
@@ -317,6 +321,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -335,6 +340,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.GMObjC;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -348,6 +354,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -366,6 +373,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.GMObjC;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

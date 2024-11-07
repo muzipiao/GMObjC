@@ -1,42 +1,39 @@
-//
-//  GMSm3Utils.h
-//  BaseDemo
-//
-//  Created by lifei on 2019/8/2.
-//  Copyright © 2019 lifei. All rights reserved.
 /**
  * SM3 摘要算法，提取数据摘要
  * 摘要长度为 32 字节，转为 16 进制字符串为 64 个字符
  */
 
 #import <Foundation/Foundation.h>
-#import "GMUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+// HMAC 算法主要类型
+typedef NS_ENUM(int, GMHashType) {
+    GMHashType_SM3 = 0,     // EVP_sm3(void)(默认)
+    GMHashType_MD5,         // EVP_md5(void)
+    GMHashType_SHA1,        // EVP_sha1(void)
+    GMHashType_SHA224,      // EVP_sha224(void)
+    GMHashType_SHA256,      // EVP_sha256(void)
+    GMHashType_SHA384,      // EVP_sha384(void)
+    GMHashType_SHA512       // EVP_sha512(void)
+};
+
 @interface GMSm3Utils : NSObject
 
-/// 提取文本字符串的摘要值。返回值：摘要值，16进制编码格式
-/// @param plaintext 待提取摘要的字符串
-+ (nullable NSString *)hashWithString:(NSString *)plaintext;
+/// 提取数据或文件的摘要值。返回值：SM3 摘要值，长度为SM3_DIGEST_LENGTH(32)字节
+/// @param data 待提取摘要的数据
++ (nullable NSData *)hashWithData:(NSData *)data;
 
-/// 提取数据或文件的摘要值。返回值：摘要值，16进制编码格式
-/// @param plainData 待提取摘要的数据
-+ (nullable NSString *)hashWithData:(NSData *)plainData;
+/// HMAC 算法计算 SM3 摘要。返回值：长度为SM3_DIGEST_LENGTH(32)字节的摘要
+/// @param data NSData 格式的数据明文
+/// @param keyData SM3 类型密钥，任意字符
++ (nullable NSData *)hmacWithData:(NSData *)data keyData:(NSData *)keyData;
 
-
-/// HMAC 算法计算摘要。返回值：计算的摘要长度和原摘要算法长度相同，16进制编码格式
-/// @param key  密钥字符串，keyData:：NSData 格式的 密钥
-/// @param plaintext 待计算的消息明文，plainData：NSData 格式的消息明文
-+ (nullable NSString *)hmacWithSm3:(NSString *)key plaintext:(NSString *)plaintext;
-+ (nullable NSString *)hmacWithSm3:(NSData *)keyData plainData:(NSData *)plainData;
-
-/// HMAC 算法计算摘要。返回值：计算的摘要长度和原摘要算法长度相同，16进制编码格式
-/// @param type 选取的摘要算法，详见 GMObjCDef.h 中 GMHashType 枚举
-/// @param key 密钥字符串，keyData: NSData 格式的 密钥
-/// @param plaintext 待计算的消息明文，plainData：NSData 格式的消息明文
-+ (nullable NSString *)hmac:(GMHashType)type key:(NSString *)key plaintext:(NSString *)plaintext;
-+ (nullable NSString *)hmac:(GMHashType)type keyData:(NSData *)keyData plainData:(NSData *)plainData;
+/// HMAC 算法计算其他类型摘要。返回值：计算的摘要长度和摘要算法长度相同
+/// @param data NSData 格式的数据明文
+/// @param keyData NSData 格式的密钥，任意字符
+/// @param keyType 选取的摘要算法，详见 GMHashType 枚举
++ (nullable NSData *)hmacWithData:(NSData *)data keyData:(NSData *)keyData keyType:(GMHashType)keyType;
 
 @end
 
