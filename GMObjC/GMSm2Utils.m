@@ -530,8 +530,11 @@ static GMSm2Utils *_instance;
 /// @param privateHex SM2 私钥（Hex 编码格式）
 /// @param userText 用户 ID（字符串格式），当为 nil 时默认为 "1234567812345678"
 + (nullable NSString *)signText:(NSString *)plaintext privateKey:(NSString *)privateHex userText:(nullable NSString *)userText {
+    if (plaintext.length == 0 || privateHex.length == 0) {
+        return nil;
+    }
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *userData = [userText dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *userData = userText.length > 0 ? [userText dataUsingEncoding:NSUTF8StringEncoding] : nil;
     return [self signData:plainData privateKey:privateHex userData:userData];
 }
 
@@ -618,8 +621,11 @@ static GMSm2Utils *_instance;
 /// @param publicHex SM2 公钥（Hex 编码格式）
 /// @param userText 用户 ID（字符串格式），当为 nil 时默认为 "1234567812345678"
 + (BOOL)verifyText:(NSString *)plaintext signRS:(NSString *)signRS publicKey:(NSString *)publicHex userText:(nullable NSString *)userText {
+    if (plaintext.length == 0 || signRS.length == 0 || publicHex.length == 0) {
+        return nil;
+    }
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *userData = [userText dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *userData = userText.length > 0 ? [userText dataUsingEncoding:NSUTF8StringEncoding] : nil;
     return [self verifyData:plainData signRS:signRS publicKey:publicHex userData:userData];
 }
 

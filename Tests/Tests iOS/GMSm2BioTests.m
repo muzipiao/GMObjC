@@ -81,6 +81,8 @@
         
         XCTAssertNil([GMSm2Bio readPublicKeyFromDerData:randData], @"空值返回nil");
         XCTAssertNil([GMSm2Bio readPrivateKeyFromDerData:randData], @"空值返回nil");
+        
+        XCTAssertNil([GMSm2Bio readX509InfoFromData:randData password:randData], @"空值返回nil");
     }
     // 空值密钥保存返回NO
     for (NSInteger i = 0; i < 5; i++) {
@@ -236,14 +238,15 @@
 // MARK: - 创建密钥对文件
 - (void)testCreateKeyPairFiles {
     for (NSInteger i = 0; i < 100; i++) {
-        GMSm2KeyFiles *derArray = [GMSm2Bio generateDerKeyFiles];
-        GMSm2KeyFiles *pemArray = [GMSm2Bio generatePemKeyFiles];
-        XCTAssertTrue(derArray.publicKeyPath.length > 0 && pemArray.publicKeyPath.length > 0, @"生成密钥不应为空");
+        GMSm2KeyFiles *derFile = [GMSm2Bio generateDerKeyFiles];
+        GMSm2KeyFiles *pemFile = [GMSm2Bio generatePemKeyFiles];
+        XCTAssertTrue(derFile.publicKeyPath.length > 0, @"生成密钥不应为空");
+        XCTAssertTrue(pemFile.publicKeyPath.length > 0, @"生成密钥不应为空");
         
-        NSString *pubPemPath = pemArray.publicKeyPath;
-        NSString *priPemPath = pemArray.privateKeyPath;
-        NSString *pubDerPath = derArray.publicKeyPath;
-        NSString *priDerPath = derArray.privateKeyPath;
+        NSString *pubPemPath = pemFile.publicKeyPath;
+        NSString *priPemPath = pemFile.privateKeyPath;
+        NSString *pubDerPath = derFile.publicKeyPath;
+        NSString *priDerPath = derFile.privateKeyPath;
         NSData *pubPemData = [NSData dataWithContentsOfFile:pubPemPath];
         NSData *priPemData = [NSData dataWithContentsOfFile:priPemPath];
         NSData *pubDerData = [NSData dataWithContentsOfFile:pubDerPath];
@@ -257,6 +260,20 @@
         XCTAssertTrue(priFromPem.length > 0, @"生成密钥文件内容不应为空");
         XCTAssertTrue(priFromDer.length > 0, @"生成密钥文件内容不应为空");
         XCTAssertTrue(pubFromDer.length > 0, @"生成密钥文件内容不应为空");
+    }
+}
+
+- (void)testReadX509FileInfo {
+    NSArray *x509List = @[@"bing-base64-chain.cer", @"bing-base64-single.cer",
+                          @"bing-der-single.cer", @"github-base64-chain.cer",
+                          @"github-base64-single.cer", @"github-der-single.cer"];
+    for (NSString *fileName in x509List) {
+        NSString *filePath = [[NSBundle bundleForClass:[self class]] pathForResource:fileName ofType:nil];
+        NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+        GMSm2X509Info *fileInfo = [GMSm2Bio readX509InfoFromData:fileData password:nil];
+        XCTAssertTrue(fileInfo.description.length > 0, @"解析证书不为空");
+        XCTAssertTrue(fileInfo.version.length > 0, @"解析证书不为空");
+        XCTAssertTrue(fileInfo.publicKey.length > 0, @"解析证书不为空");
     }
 }
 

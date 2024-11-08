@@ -15,6 +15,7 @@ FOUNDATION_EXPORT NSString *const GMTestUserID; // 测试 ID
 
 // sm4 加解密文件测试
 @property (nonatomic, strong) NSData *fileData;
+@property (nonatomic, strong) NSString *fileText;
 
 /// 生成中英文混合字符串
 /// @param maxLength 字符串最大长度

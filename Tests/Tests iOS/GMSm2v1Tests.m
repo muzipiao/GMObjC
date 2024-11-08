@@ -15,25 +15,25 @@
     [GMSm2Utils setCurveType:GMSm2CurveSm2p256v1];
     
     self.gPubKey = @"0408E3FFF9505BCFAF9307E665E9229F4E1B3936437A870407EA3D97886BAFBC9"
-                    "C624537215DE9507BC0E2DD276CF74695C99DF42424F28E9004CDE4678F63D698";
+    "C624537215DE9507BC0E2DD276CF74695C99DF42424F28E9004CDE4678F63D698";
     self.gPriKey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB3422E7838E24DEAE";
     
     // 正确的加密后的数据
     self.gCipherText = @"3070022100E5E71C8158EE884CABA74BBFC43CF8A7D198928"
-                        "DDD3D8A6FB610437230D42CF4022100CF361D0243F15565D0"
-                        "BB55F9F1E2BA211D7B8E5568266157051E1FF9B1205DDB042"
-                        "067B19DF80644D1E3697E6D3A281A402CAE59FA0AF88611D7"
-                        "5ECE66C3261007C10406E6C3F6DD55A9";
+    "DDD3D8A6FB610437230D42CF4022100CF361D0243F15565D0"
+    "BB55F9F1E2BA211D7B8E5568266157051E1FF9B1205DDB042"
+    "067B19DF80644D1E3697E6D3A281A402CAE59FA0AF88611D7"
+    "5ECE66C3261007C10406E6C3F6DD55A9";
     self.gCipherHex = @"3070022100BF7D0E89E02CD0F3B241B23CD4D2904D48E1A7BA"
-                       "DDCD980A682DB812621ECF74022100981870FE0B8A9AF599B"
-                       "94C5C2D72EB8045305CD2D072499A5D6490535E7DAF630420"
-                       "F1BBEF021C566067CFD4ED243F9ED405322CBF3C003BE1A80"
-                       "DD0A38CBE0ACC8804062EFFC5F9F44D";
+    "DDCD980A682DB812621ECF74022100981870FE0B8A9AF599B"
+    "94C5C2D72EB8045305CD2D072499A5D6490535E7DAF630420"
+    "F1BBEF021C566067CFD4ED243F9ED405322CBF3C003BE1A80"
+    "DD0A38CBE0ACC8804062EFFC5F9F44D";
     self.gCipherDataHex = @"306F022100D0FC97E530F1F5B11FF01680ED5517A73BED"
-                           "3C06A2A3ECC593D5110A75F4653C022075FAEF6EEEA15E"
-                           "9E383AD983B2B54BE003855BC46C114070304A40C09213"
-                           "346A0420AC602A62EA27182445E2F5D608C01039B47C92"
-                           "5527F0973F67058CE70D85C9030406CC020AC863D6";
+    "3C06A2A3ECC593D5110A75F4653C022075FAEF6EEEA15E"
+    "9E383AD983B2B54BE003855BC46C114070304A40C09213"
+    "346A0420AC602A62EA27182445E2F5D608C01039B47C92"
+    "5527F0973F67058CE70D85C9030406CC020AC863D6";
 }
 
 - (void)tearDown {
@@ -51,6 +51,15 @@
     XCTAssertTrue(currentType == GMSm2CurveSm2p256v1, @"当前椭圆曲线应为 NID_sm2");
 }
 
+// 单例对象
+- (void)testInstance {
+    GMSm2Utils *sm2New1 = [[GMSm2Utils alloc] init];
+    GMSm2Utils *sm2New2 = [[GMSm2Utils alloc] init];
+    GMSm2Utils *sm2Copy = [sm2New1 copy];
+    XCTAssertTrue(sm2New1 == sm2New2, @"单例对象指针相同");
+    XCTAssertTrue(sm2New1 == sm2Copy, @"单例对象指针相同");
+    XCTAssertTrue(sm2New2 == sm2Copy, @"单例对象指针相同");
+}
 
 // MARK: - NULL
 /// 测试加解密出现空值情况
@@ -75,6 +84,8 @@
             // 加密普通字符串
             NSData *enData = [GMSm2Utils encryptData:[randStr dataUsingEncoding:NSUTF8StringEncoding] publicKey:randPub];
             XCTAssertNil(enData, @"加密字符串应为空");
+            NSData *enText = [GMSm2Utils encryptText:randStr publicKey:randPub];
+            XCTAssertNil(enText, @"加密字符串应为空");
         }
         if ((randData.length > 0 && randPub.length > 0) == NO) {
             NSData *enData = [GMSm2Utils encryptData:randData publicKey:randPub];
@@ -90,6 +101,10 @@
             }
             NSData *deData = [GMSm2Utils decryptData:cipherData privateKey:randPri];
             XCTAssertNil(deData, @"解密字符串应为空");
+            
+            NSString *cipherHex = [GMSmUtils hexStringFromData:cipherData];
+            NSData *deText = [GMSm2Utils decryptHex:cipherHex privateKey:randPri];
+            XCTAssertNil(deText, @"解密字符串应为空");
         }
         if ((randData.length > 0 && randPri.length > 0) == NO) {
             NSData *cipherData = randData;
@@ -134,10 +149,15 @@
         }
         BOOL randPrefix = i%2 == 0 ? YES : NO;
         NSData *randData = [randStr dataUsingEncoding:NSUTF8StringEncoding];
-        NSData *c1c3c2 = [GMSm2Utils convertC1C2C3DataToC1C3C2:randData hasPrefix:randPrefix];
-        XCTAssertNil(c1c3c2, @"转换结果为空");
-        NSData *c1c2c3 = [GMSm2Utils convertC1C3C2DataToC1C2C3:randData hasPrefix:randPrefix];
-        XCTAssertNil(c1c2c3, @"转换结果为空");
+        NSData *c1c3c2Data = [GMSm2Utils convertC1C2C3DataToC1C3C2:randData hasPrefix:randPrefix];
+        XCTAssertNil(c1c3c2Data, @"转换结果为空");
+        NSData *c1c2c3Data = [GMSm2Utils convertC1C3C2DataToC1C2C3:randData hasPrefix:randPrefix];
+        XCTAssertNil(c1c2c3Data, @"转换结果为空");
+        
+        NSData *c1c3c2Text = [GMSm2Utils convertC1C2C3HexToC1C3C2:randStr hasPrefix:randPrefix];
+        XCTAssertNil(c1c3c2Text, @"转换结果为空");
+        NSData *c1c2c3Text = [GMSm2Utils convertC1C3C2HexToC1C2C3:randStr hasPrefix:randPrefix];
+        XCTAssertNil(c1c2c3Text, @"转换结果为空");
     }
 }
 
@@ -167,6 +187,10 @@
             NSString *signData = [GMSm2Utils signData:randData privateKey:randPri userData:userData];
             XCTAssertNil(signData, @"签名字符串应为空");
         }
+        if ((randStr.length > 0 && randPri.length > 0) == NO) {
+            NSString *signText = [GMSm2Utils signText:randStr privateKey:randPri userText:randUser];
+            XCTAssertNil(signText, @"签名字符串应为空");
+        }
         // 测试验签
         if ((randData.length > 0 && randPub.length > 0) == NO) {
             NSString *sign = randStr;
@@ -179,6 +203,40 @@
             BOOL isDataOK = [GMSm2Utils verifyData:randData signRS:sign publicKey:randPub userData:userData];
             XCTAssertFalse(isDataOK, @"明文为空验证不通过");
         }
+        if ((randStr.length > 0 && randPub.length > 0) == NO) {
+            NSString *signText = randStr;
+            if (randStr.length == 0) {
+                signText = [GMSm2Utils signText:@"123456" privateKey:self.gPriKey userText:randUser];
+                XCTAssertNotNil(signText, @"测试签名不为空");
+            }
+            BOOL isDataOK = [GMSm2Utils verifyText:randStr signRS:signText publicKey:randPub userText:randUser];
+            XCTAssertFalse(isDataOK, @"明文为空验证不通过");
+        }
+    }
+}
+
+- (void)testCompressPublicKeyNull {
+    NSArray *randPubArray = @[[NSNull null], @""];
+    for (NSInteger i = 0; i < 30; i++) {
+        NSString *randPub = randPubArray[arc4random_uniform((uint32_t)randPubArray.count)];
+        randPub = [randPub isKindOfClass:[NSNull class]] ? nil : randPub;
+        
+        NSString *compress = [GMSm2Utils compressPublicKey:randPub];
+        XCTAssertNil(compress, @"公钥压缩空值应为空");
+        NSString *decompress = [GMSm2Utils decompressPublicKey:randPub];
+        XCTAssertNil(decompress, @"公钥解压缩空值应为空");
+    }
+}
+
+/// 测试私钥计算公钥为空情况
+- (void)testCalcPublicKeyFromNull {
+    NSArray *randPriArray = @[[NSNull null], @""];
+    for (NSInteger i = 0; i < 30; i++) {
+        NSString *randPri = randPriArray[arc4random_uniform((uint32_t)randPriArray.count)];
+        randPri = [randPri isKindOfClass:[NSNull class]] ? nil : randPri;
+        
+        NSString *calcPri = [GMSm2Utils calcPublicKeyFromPrivateKey:randPri];
+        XCTAssertNil(calcPri, @"计算公钥钥应为空");
     }
 }
 
@@ -207,14 +265,19 @@
     NSString *errorPriKey = @"6666662B9FE24AB196305F82E647616C3A3694441FB3422E7838E24DEAE";
     
     // 使用错误的公钥加密结果为空
+    NSString *plaintext = @"123456";
     NSData *plainData = [NSData dataWithBytes:"123456" length:6];
     NSData *enData = [GMSm2Utils encryptData:plainData publicKey:errorPubKey];
     XCTAssertTrue(enData.length == 0, @"加密结果为空");
+    NSData *enText = [GMSm2Utils encryptText:plaintext publicKey:errorPubKey];
+    XCTAssertTrue(enText.length == 0, @"加密结果为空");
     
     NSData *cipherData = [GMSmUtils dataFromHexString:self.gCipherDataHex];
     // 使用错误的私钥解密为空
     NSData *deData = [GMSm2Utils decryptData:cipherData privateKey:errorPriKey];
     XCTAssertTrue(deData.length == 0, @"解密结果为空");
+    NSData *deText = [GMSm2Utils decryptHex:self.gCipherDataHex privateKey:errorPriKey];
+    XCTAssertTrue(deText.length == 0, @"解密结果为空");
     
     // 使用错误的公钥私钥，验签不通过
     NSArray *pubArray = @[self.gPubKey, errorPubKey];
@@ -225,6 +288,37 @@
         NSString *signData = [GMSm2Utils signData:plainData privateKey:priKey userData:nil];
         BOOL isDataOK = [GMSm2Utils verifyData:plainData signRS:signData publicKey:pubKey userData:nil];
         XCTAssertFalse(isDataOK, @"签名结果应校验失败");
+        
+        NSString *signText = [GMSm2Utils signText:plaintext privateKey:priKey userText:nil];
+        BOOL isTextOK = [GMSm2Utils verifyText:plaintext signRS:signText publicKey:pubKey userText:nil];
+        XCTAssertFalse(isTextOK, @"签名结果应校验失败");
+    }
+}
+
+- (void)testCompressPublicKey {
+    for (NSInteger i = 0; i < 1000; i++) {
+        GMSm2Key *genKey = [GMSm2Utils generateKey];
+        NSString *publicKey = genKey.publicKey;
+        XCTAssertNotNil(publicKey, @"生成公钥不为空");
+        
+        NSString *compressKey = [GMSm2Utils compressPublicKey:publicKey];
+        XCTAssertNotNil(compressKey, @"压缩公钥不为空");
+        NSString *decompresKey = [GMSm2Utils decompressPublicKey:compressKey];
+        BOOL isSamePublic = [decompresKey isEqualToString:publicKey];
+        XCTAssertTrue(isSamePublic, @"公钥压缩解压应该不变");
+    }
+}
+
+/// 测试私钥计算公钥
+- (void)testCalcPublicKeyFromPrivateKey {
+    for (NSInteger i = 0; i < 1000; i++) {
+        GMSm2Key *genKey = [GMSm2Utils generateKey];
+        XCTAssertNotNil(genKey.publicKey, @"生成公钥不为空");
+        XCTAssertNotNil(genKey.privateKey, @"生成私钥不为空");
+        
+        NSString *calcPublicKey = [GMSm2Utils calcPublicKeyFromPrivateKey:genKey.privateKey];
+        BOOL isSamePublic = [calcPublicKey isEqualToString:genKey.publicKey];
+        XCTAssertTrue(isSamePublic, @"计算公钥应与生成的公钥相同");
     }
 }
 
@@ -267,6 +361,7 @@
         NSString *priKey = newKey.privateKey;
         XCTAssertNotNil(pubKey, @"生成公钥不为空");
         XCTAssertNotNil(priKey, @"生成私钥不为空");
+        XCTAssertNotNil(newKey.description, @"生成私钥不为空");
     }
 }
 
@@ -285,26 +380,42 @@
         NSData *ciphertextASN1 = [GMSm2Utils encryptData:plainData publicKey:pubKey];
         XCTAssertNotNil(ciphertextASN1, @"密文字符串不为空");
         // ASN1 解码
-        NSData *originC1C3C2 = [GMSm2Utils asn1DecodeToC1C3C2Data:ciphertextASN1 hasPrefix:NO];
-        XCTAssertNotNil(originC1C3C2, @"密文字符串不为空");
+        NSData *srcC1C3C2Data = [GMSm2Utils asn1DecodeToC1C3C2Data:ciphertextASN1 hasPrefix:NO];
+        XCTAssertNotNil(srcC1C3C2Data, @"密文字符串不为空");
+        NSString *srcC1C3C2Hex = [GMSm2Utils asn1DecodeToC1C3C2Hex:ciphertextASN1 hasPrefix:NO];
+        XCTAssertNotNil(srcC1C3C2Hex, @"密文字符串不为空");
         // 顺序转换
         BOOL hasPrefix = i%2 == 0 ? YES : NO;
-        NSData *prefixC1C3C2 = originC1C3C2;
+        NSData *prefixC1C3C2Data = srcC1C3C2Data;
+        NSString *prefixC1C3C2Hex = srcC1C3C2Hex;
         if (hasPrefix == YES) {
             NSMutableData *mutableData = [NSMutableData dataWithData:[GMSmUtils dataFromHexString:@"04"]];
-            [mutableData appendData:originC1C3C2];
-            prefixC1C3C2 = mutableData.copy;
+            [mutableData appendData:srcC1C3C2Data];
+            prefixC1C3C2Data = mutableData.copy;
+            prefixC1C3C2Hex = [NSString stringWithFormat:@"04%@", srcC1C3C2Hex];
         }
-        NSData *convertC1C2C3 = [GMSm2Utils convertC1C3C2DataToC1C2C3:prefixC1C3C2 hasPrefix:hasPrefix];
-        XCTAssertNotNil(convertC1C2C3, @"密文字符串不为空");
-        NSData *convertC1C3C2 = [GMSm2Utils convertC1C2C3DataToC1C3C2:convertC1C2C3 hasPrefix:hasPrefix];
-        XCTAssertTrue([convertC1C3C2 isEqualToData:prefixC1C3C2], @"转换后结果一致");
+        NSData *convertC1C2C3Data = [GMSm2Utils convertC1C3C2DataToC1C2C3:prefixC1C3C2Data hasPrefix:hasPrefix];
+        XCTAssertNotNil(convertC1C2C3Data, @"密文字符串不为空");
+        NSData *convertC1C3C2Data = [GMSm2Utils convertC1C2C3DataToC1C3C2:convertC1C2C3Data hasPrefix:hasPrefix];
+        XCTAssertTrue([convertC1C3C2Data isEqualToData:prefixC1C3C2Data], @"转换后结果一致");
+        
+        NSData *convertC1C2C3Text = [GMSm2Utils convertC1C3C2HexToC1C2C3:prefixC1C3C2Hex hasPrefix:hasPrefix];
+        XCTAssertNotNil(convertC1C2C3Text, @"密文字符串不为空");
+        NSString *convertC1C2C3Hex = [GMSmUtils hexStringFromData:convertC1C2C3Text];
+        NSData *convertC1C3C2Text = [GMSm2Utils convertC1C2C3HexToC1C3C2:convertC1C2C3Hex hasPrefix:hasPrefix];
+        NSString *convertC1C3C2Hex = [GMSmUtils hexStringFromData:convertC1C3C2Text];
+        XCTAssertTrue([convertC1C3C2Hex isEqualToString:prefixC1C3C2Hex], @"转换后结果一致");
+        
         // ASN1 编码
-        NSData *convertASN1 = [GMSm2Utils asn1EncodeWithC1C3C2Data:convertC1C3C2 hasPrefix:hasPrefix];
-        XCTAssertNotNil(convertASN1, @"密文字符串不为空");
+        NSData *convertASN1Data = [GMSm2Utils asn1EncodeWithC1C3C2Data:convertC1C3C2Data hasPrefix:hasPrefix];
+        XCTAssertNotNil(convertASN1Data, @"密文字符串不为空");
+        NSData *convertASN1Text = [GMSm2Utils asn1EncodeWithC1C3C2Hex:convertC1C3C2Hex hasPrefix:hasPrefix];
+        XCTAssertNotNil(convertASN1Text, @"密文字符串不为空");
         // 解密
-        NSData *deData = [GMSm2Utils decryptData:convertASN1 privateKey:priKey];
+        NSData *deData = [GMSm2Utils decryptData:convertASN1Data privateKey:priKey];
         XCTAssertTrue([deData isEqualToData:plainData], @"解密结果与原文一致");
+        NSData *deText = [GMSm2Utils decryptData:convertASN1Text privateKey:priKey];
+        XCTAssertTrue([deText isEqualToData:plainData], @"解密结果与原文一致");
     }
 }
 
@@ -377,9 +488,14 @@
         // ASN1 格式密文
         NSData *enData = [GMSm2Utils encryptData:plainData publicKey:self.gPubKey];
         XCTAssertNotNil(enData, @"加密字符串不为空");
+        NSData *enText = [GMSm2Utils encryptText:plaintext publicKey:self.gPubKey];
+        XCTAssertNotNil(enText, @"加密字符串不为空");
         // 解密
         NSData *deData = [GMSm2Utils decryptData:enData privateKey:self.gPriKey];
         XCTAssertTrue([deData isEqualToData:plainData], @"解密结果与原文一致");
+        NSString *deHex = [GMSmUtils hexStringFromData:enText];
+        NSData *deText = [GMSm2Utils decryptHex:deHex privateKey:self.gPriKey];
+        XCTAssertTrue([deText isEqualToData:plainData], @"解密结果与原文一致");
     }
 }
 
@@ -393,16 +509,28 @@
         NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
         XCTAssertNotNil(plainData, @"生成明文 Data 不为空");
         NSString *randUser = randUserArray[arc4random_uniform((uint32_t)randUserArray.count)];
+        NSString *randUserText = [randUser isKindOfClass:[NSNull class]] ? nil : randUser;
         NSData *randUserData = [randUser isKindOfClass:[NSNull class]] ? nil : [randUser dataUsingEncoding:NSUTF8StringEncoding];
         
         NSString *signData = [GMSm2Utils signData:plainData privateKey:self.gPriKey userData:randUserData];
         XCTAssertNotNil(signData, @"签名结果不为空");
+        NSString *signText = [GMSm2Utils signText:plaintext privateKey:self.gPriKey userText:randUserText];
+        XCTAssertNotNil(signText, @"签名结果不为空");
+        
         NSString *derData = [GMSm2Utils encodeDerWithSignRS:signData];
         XCTAssertNotNil(derData, @"Der 编码不为空");
+        NSString *derText = [GMSm2Utils encodeDerWithSignRS:signText];
+        XCTAssertNotNil(derText, @"Der 编码不为空");
+        
         NSString *originSignData = [GMSm2Utils decodeDerToSignRS:derData];
         XCTAssertTrue([originSignData isEqualToString:signData], @"Der 编码解码结果应该相同");
+        NSString *originSignText = [GMSm2Utils decodeDerToSignRS:derText];
+        XCTAssertTrue([originSignText isEqualToString:signText], @"Der 编码解码结果应该相同");
+        
         BOOL isDataOK = [GMSm2Utils verifyData:plainData signRS:signData publicKey:self.gPubKey userData:randUserData];
         XCTAssertTrue(isDataOK, @"签名结果应该校验成功");
+        BOOL isTextOK = [GMSm2Utils verifyText:plaintext signRS:signText publicKey:self.gPubKey userText:randUserText];
+        XCTAssertTrue(isTextOK, @"签名结果应该校验成功");
     }
 }
 

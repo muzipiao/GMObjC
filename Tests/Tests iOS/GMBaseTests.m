@@ -19,10 +19,12 @@ NSString *const GMTestUserID = @"lifei_zdjl@qq.com";
     
     NSString *txtPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"sm4TestFile.txt" ofType:nil];
     self.fileData = [NSData dataWithContentsOfFile:txtPath];
+    self.fileText = [NSString stringWithContentsOfFile:txtPath encoding:NSUTF8StringEncoding error:nil];
 }
 
 - (void)tearDown {
     self.fileData = nil;
+    self.fileText = nil;
     [super tearDown];
 }
 

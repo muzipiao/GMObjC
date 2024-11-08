@@ -42,6 +42,9 @@
 /// @param plaintext 明文（字符串类型）
 /// @param keyHex  密钥（Hex 编码格式）
 + (nullable NSData *)encryptTextWithECB:(NSString *)plaintext keyHex:(NSString *)keyHex {
+    if (plaintext.length == 0 || keyHex.length == 0) {
+        return nil;
+    }
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
     NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
     return [self encryptDataWithECB:plainData keyData:keyData];
@@ -137,6 +140,9 @@
 /// @param keyHex 密钥（Hex 编码格式）
 /// @param ivecHex 密钥（Hex 编码格式），确保加解密相同即可
 + (nullable NSData *)encryptTextWithCBC:(NSString *)plaintext keyHex:(NSString *)keyHex ivecHex:(NSString *)ivecHex {
+    if (plaintext.length == 0 || keyHex.length == 0) {
+        return nil;
+    }
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
     NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
     NSData *ivecData = [GMSmUtils dataFromHexString:ivecHex];

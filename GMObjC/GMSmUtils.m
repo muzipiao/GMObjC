@@ -63,6 +63,9 @@
 /// base64 编码。返回值：编码后的 base64 字符串
 /// @param data 待编码的数据
 + (nullable NSString *)base64EncodedStringWithData:(NSData *)data {
+    if (!data || data.length == 0) {
+        return nil;
+    }
     NSData *baseData = [data base64EncodedDataWithOptions:0];
     NSString *baseStr = [[NSString alloc] initWithData:baseData encoding:NSUTF8StringEncoding];
     return baseStr;
@@ -71,6 +74,9 @@
 /// base64 解码。返回值：解码后的 NSData 对象
 /// @param base64Str base64 编码格式字符串
 + (nullable NSData *)dataFromBase64EncodedString:(NSString *)base64Str {
+    if (!base64Str || base64Str.length == 0) {
+        return nil;
+    }
     NSData *data = [[NSData alloc] initWithBase64EncodedString:base64Str options:NSDataBase64DecodingIgnoreUnknownCharacters];
     return data;
 }
@@ -98,6 +104,9 @@
 /// 检查是否为有效的 16 进制编码
 /// @param hexStr 16 进制编码格式字符串
 + (BOOL)isValidHexString:(NSString *)hexStr {
+    if (!hexStr || hexStr.length == 0) {
+        return nil;
+    }
     NSString *pattern = @"^[0-9a-fA-F]+$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     return [pred evaluateWithObject:hexStr];
@@ -106,6 +115,9 @@
 /// 检查是否为有效的 base64 编码
 /// @param base64Str base64 编码格式字符串
 + (BOOL)isValidBase64String:(NSString *)base64Str {
+    if (!base64Str || base64Str.length == 0) {
+        return nil;
+    }
     NSString *base64Regex = @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", base64Regex];
     return [pred evaluateWithObject:base64Str];

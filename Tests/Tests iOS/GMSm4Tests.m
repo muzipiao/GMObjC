@@ -46,6 +46,41 @@
         NSData *cbcDeNull = [GMSm4Utils decryptDataWithCBC:randData keyData:randKey ivecData:randIvec];
         XCTAssertNil(cbcDeNull, @"有空值，解密 Data 应为空");
     }
+    for (NSInteger i = 0; i < 128; i++) {
+        NSData *randData = randDataList[arc4random_uniform((uint32_t)randDataList.count)];
+        randData = [randData isKindOfClass:[NSNull class]] ? nil : randData;
+        NSData *randKey = randKeyList[arc4random_uniform((uint32_t)randKeyList.count)];
+        randKey = [randKey isKindOfClass:[NSNull class]] ? nil : randKey;
+        NSData *randIvec = randIvecList[arc4random_uniform((uint32_t)randIvecList.count)];
+        randIvec = [randIvec isKindOfClass:[NSNull class]] ? nil : randIvec;
+        if (randData.length > 0 && randKey.length > 0) {
+            continue; // 数据和Key必须有一个为空，IVEC 的值可选
+        }
+        NSString *randStr = nil;
+        NSString *randKeyHex = nil;
+        NSString *randIvecHex = nil;
+        if (randData.length > 0) {
+            randStr = [[NSString alloc] initWithData:randData encoding:NSUTF8StringEncoding];
+        }
+        if (randKeyHex.length > 0) {
+            randKeyHex = [GMSmUtils hexStringFromData:randKey];
+        }
+        if (randIvecHex.length > 0) {
+            randIvecHex = [GMSmUtils hexStringFromData:randIvec];
+        }
+        // ECB 模式加密空
+        NSData *ecbEnNull = [GMSm4Utils encryptTextWithECB:randStr keyHex:randKeyHex];
+        XCTAssertNil(ecbEnNull, @"有空值，加密 Data 应为空");
+        // CBC 模式加密空
+        NSData *cbcEnNull = [GMSm4Utils encryptTextWithCBC:randStr keyHex:randKeyHex ivecHex:randIvecHex];
+        XCTAssertNil(cbcEnNull, @"有空值，加密 Data 应为空");
+        // ECB 模式解密空
+        NSData *ecbDeNull = [GMSm4Utils decryptTextWithECB:randStr keyHex:randKeyHex];
+        XCTAssertNil(ecbDeNull, @"有空值，解密 Data 应为空");
+        // CBC 模式解密空
+        NSData *cbcDeNull = [GMSm4Utils decryptTextWithCBC:randStr keyHex:randKeyHex ivecHex:randIvecHex];
+        XCTAssertNil(cbcDeNull, @"有空值，解密 Data 应为空");
+    }
 }
 
 /// 测试大量生产 sm4 公私钥
@@ -62,28 +97,45 @@
     XCTAssertNotNil(self.fileData, @"待加密 NSData 不为空");
     for (NSInteger i = 0; i < 1000; i++) {
         // 生产密钥不为空
-        NSData *sm4Key = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]];
-        XCTAssertNotNil(sm4Key, @"生成 sm4 密钥不为空");
+        NSString *keyHex = [GMSm4Utils generateKey];
+        NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
+        XCTAssertNotNil(keyData, @"生成 sm4 密钥不为空");
         
         // ECB 模式
-        NSData *cipherDataByEcb = [GMSm4Utils encryptDataWithECB:self.fileData keyData:sm4Key];
+        NSData *cipherDataByEcb = [GMSm4Utils encryptDataWithECB:self.fileData keyData:keyData];
         XCTAssertTrue(cipherDataByEcb.length > 0, @"加密后数据不为空");
-        NSData *decryptDataByEcb = [GMSm4Utils decryptDataWithECB:cipherDataByEcb keyData:sm4Key];
+        NSData *decryptDataByEcb = [GMSm4Utils decryptDataWithECB:cipherDataByEcb keyData:keyData];
         XCTAssertTrue(decryptDataByEcb.length > 0, @"解密后数据不为空");
+        NSData *cipherTextByEcb = [GMSm4Utils encryptTextWithECB:self.fileText keyHex:keyHex];
+        XCTAssertTrue(cipherTextByEcb.length > 0, @"加密后数据不为空");
+        NSString *cipherTextByEcbHex = [GMSmUtils hexStringFromData:cipherTextByEcb];
+        NSData *decryptTextByEcb = [GMSm4Utils decryptTextWithECB:cipherTextByEcbHex keyHex:keyHex];
+        XCTAssertTrue(decryptTextByEcb.length > 0, @"解密后数据不为空");
         
         // CBC 模式
-        NSData *ivec = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]];
-        NSData *cipherDataByCbc = [GMSm4Utils encryptDataWithCBC:self.fileData keyData:sm4Key ivecData:ivec];
+        NSString *ivecHex = [GMSm4Utils generateKey];
+        NSData *ivecData = [GMSmUtils dataFromHexString:ivecHex];
+        NSData *cipherDataByCbc = [GMSm4Utils encryptDataWithCBC:self.fileData keyData:keyData ivecData:ivecData];
         XCTAssertTrue(cipherDataByCbc.length > 0, @"加密后数据不为空");
-        NSData *decryptDataByCbc = [GMSm4Utils decryptDataWithCBC:cipherDataByCbc keyData:sm4Key ivecData:ivec];
+        NSData *decryptDataByCbc = [GMSm4Utils decryptDataWithCBC:cipherDataByCbc keyData:keyData ivecData:ivecData];
         XCTAssertTrue(decryptDataByCbc.length > 0, @"解密后数据不为空");
+        
+        NSData *cipherTextByCbc = [GMSm4Utils encryptTextWithCBC:self.fileText keyHex:keyHex ivecHex:ivecHex];
+        XCTAssertTrue(cipherTextByCbc.length > 0, @"加密后数据不为空");
+        NSString *cipherTextByCbcHex = [GMSmUtils hexStringFromData:cipherTextByCbc];
+        NSData *decryptTextByCbc = [GMSm4Utils decryptTextWithCBC:cipherTextByCbcHex keyHex:keyHex ivecHex:ivecHex];
+        XCTAssertTrue(decryptTextByCbc.length > 0, @"解密后数据不为空");
         
         // 加解密后与原数据相同
         BOOL isSameDataByEcb = [decryptDataByEcb isEqualToData:self.fileData];
         XCTAssertTrue(isSameDataByEcb, @"sm4 加解密后数据不变");
-        
         BOOL isSameDataByCbc = [decryptDataByCbc isEqualToData:self.fileData];
         XCTAssertTrue(isSameDataByCbc, @"sm4 加解密后数据不变");
+        
+        BOOL isSameTextByEcb = [decryptTextByEcb isEqualToData:self.fileData];
+        XCTAssertTrue(isSameTextByEcb, @"sm4 加解密后数据不变");
+        BOOL isSameTextByCbc = [decryptTextByCbc isEqualToData:self.fileData];
+        XCTAssertTrue(isSameTextByCbc, @"sm4 加解密后数据不变");
     }
 }
 
@@ -102,25 +154,43 @@
         NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
         XCTAssertNotNil(plainData, @"生成字符串不为空");
         // 生产密钥不为空
-        NSData *sm4Key = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]];
-        XCTAssertNotNil(sm4Key, @"生成 sm4 密钥不为空");
+        NSString *keyHex = [GMSm4Utils generateKey];
+        NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
+        XCTAssertNotNil(keyData, @"生成 sm4 密钥不为空");
         // ECB 模式
-        NSData *encryptByEcb = [GMSm4Utils encryptDataWithECB:plainData keyData:sm4Key];
-        XCTAssertNotNil(encryptByEcb, @"加密字符串不为空");
-        NSData *decryptByEcb = [GMSm4Utils decryptDataWithECB:encryptByEcb keyData:sm4Key];
-        XCTAssertNotNil(decryptByEcb, @"解密结果不为空");
+        NSData *cipherDataByEcb = [GMSm4Utils encryptDataWithECB:plainData keyData:keyData];
+        XCTAssertNotNil(cipherDataByEcb, @"加密字符串不为空");
+        NSData *decryptDataByEcb = [GMSm4Utils decryptDataWithECB:cipherDataByEcb keyData:keyData];
+        XCTAssertNotNil(decryptDataByEcb, @"解密结果不为空");
+        
+        NSData *cipherTextByEcb = [GMSm4Utils encryptTextWithECB:plaintext keyHex:keyHex];
+        XCTAssertNotNil(cipherTextByEcb, @"加密字符串不为空");
+        NSString *cipherTextByEcbHex = [GMSmUtils hexStringFromData:cipherTextByEcb];
+        NSData *decryptTextByEcb = [GMSm4Utils decryptTextWithECB:cipherTextByEcbHex keyHex:keyHex];
+        XCTAssertNotNil(decryptTextByEcb, @"解密结果不为空");
         // CBC 模式
-        NSData *ivec = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]];
-        NSData *encryptByCbc = [GMSm4Utils encryptDataWithCBC:plainData keyData:sm4Key ivecData:ivec];
-        XCTAssertNotNil(encryptByCbc, @"加密字符串不为空");
-        NSData *decryptByCbc = [GMSm4Utils decryptDataWithCBC:encryptByCbc keyData:sm4Key ivecData:ivec];
-        XCTAssertNotNil(decryptByCbc, @"解密结果不为空");
+        NSString *ivecHex = [GMSm4Utils generateKey];
+        NSData *ivecData = [GMSmUtils dataFromHexString:ivecHex];
+        NSData *cipherDataByCbc = [GMSm4Utils encryptDataWithCBC:plainData keyData:keyData ivecData:ivecData];
+        XCTAssertNotNil(cipherDataByCbc, @"加密字符串不为空");
+        NSData *decryptDataByCbc = [GMSm4Utils decryptDataWithCBC:cipherDataByCbc keyData:keyData ivecData:ivecData];
+        XCTAssertNotNil(decryptDataByCbc, @"解密结果不为空");
         
-        BOOL isSameByEcb = [decryptByEcb isEqualToData:plainData];
-        XCTAssertTrue(isSameByEcb, @"加解密结果应该相同");
+        NSData *cipherTextByCbc = [GMSm4Utils encryptTextWithCBC:plaintext keyHex:keyHex ivecHex:ivecHex];
+        XCTAssertNotNil(cipherTextByCbc, @"加密字符串不为空");
+        NSString *cipherTextByCbcHex = [GMSmUtils hexStringFromData:cipherTextByCbc];
+        NSData *decryptTextByCbc = [GMSm4Utils decryptTextWithCBC:cipherTextByCbcHex keyHex:keyHex ivecHex:ivecHex];
+        XCTAssertNotNil(decryptTextByCbc, @"解密结果不为空");
         
-        BOOL isSameByCbc = [decryptByCbc isEqualToData:plainData];
-        XCTAssertTrue(isSameByCbc, @"加解密结果应该相同");
+        BOOL isSameDataByEcb = [decryptDataByEcb isEqualToData:plainData];
+        XCTAssertTrue(isSameDataByEcb, @"加解密结果应该相同");
+        BOOL isSameDataByCbc = [decryptDataByCbc isEqualToData:plainData];
+        XCTAssertTrue(isSameDataByCbc, @"加解密结果应该相同");
+        
+        BOOL isSameTextByEcb = [decryptTextByEcb isEqualToData:plainData];
+        XCTAssertTrue(isSameTextByEcb, @"加解密结果应该相同");
+        BOOL isSameTextByCbc = [decryptTextByCbc isEqualToData:plainData];
+        XCTAssertTrue(isSameTextByCbc, @"加解密结果应该相同");
     }
 }
 
