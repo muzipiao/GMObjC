@@ -84,6 +84,10 @@ static GMSm2Utils *_instance;
     return _curveType;
 }
 
+/// 常见椭圆曲线为 NID_sm2、NID_secp256k1、NID_X9_62_prime256v1
+/// 默认 NID_sm2，参考文件头注释中说明，一般不需更改
+/// 若需要更改，传入枚举 GMCurveType 枚举值即可
+/// 若需要其他曲线，在 OpenSSL 源码 crypto/ec/ec_curve.c 查找
 + (int)curveType {
     return [GMSm2Utils shared].curveType;
 }
@@ -182,29 +186,33 @@ static GMSm2Utils *_instance;
     return cipherData;
 }
 
-// 加密 NSData 格式明文
-+ (nullable NSData *)encryptData:(NSData *)plainData publicKey:(NSString *)publicKey {
-    if (plainData.length == 0 || publicKey.length == 0) {
+/// SM2 加密。返回 NSData 格式密文（ASN1 编码格式，可使用 asn1DecodeToC1C3C2Data 解码为非 ASN1 编码格式），失败返回 nil
+/// @param plainData 明文（NSData 格式）
+/// @param publicHex 04 开头的公钥（ Hex 编码格式）
++ (nullable NSData *)encryptData:(NSData *)plainData publicKey:(NSString *)publicHex {
+    if (plainData.length == 0 || publicHex.length == 0) {
         return nil;
     }
-    NSData *cipherData = [self enData:plainData hexPubKey:publicKey];
+    NSData *cipherData = [self enData:plainData hexPubKey:publicHex];
     return cipherData;
 }
 
-// 加密 NSString 格式明文
-+ (nullable NSData *)encryptText:(NSString *)plaintext publicKey:(NSString *)publicKey {
-    if (plaintext.length == 0 || publicKey.length == 0) {
+/// SM2 加密。返回 NSData 格式密文（ASN1 编码格式，可使用 asn1DecodeToC1C3C2Data 解码为非 ASN1 编码格式），失败返回 nil
+/// @param plaintext 明文（NSString 原文格式）
+/// @param publicHex 04 开头的公钥（ Hex 编码格式）
++ (nullable NSData *)encryptText:(NSString *)plaintext publicKey:(NSString *)publicHex {
+    if (plaintext.length == 0 || publicHex.length == 0) {
         return nil;
     }
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *cipherData = [self encryptData:plainData publicKey:publicKey];
+    NSData *cipherData = [self encryptData:plainData publicKey:publicHex];
     return cipherData;
 }
 
 // MARK: - SM2 解密
-+ (nullable NSData *)deData:(NSData *)cipherData hexPriKey:(NSString *)hexPriKey {
++ (nullable NSData *)deData:(NSData *)cipherData hexPriKey:(NSString *)privateHex {
     uint8_t *cipher_bytes = (uint8_t *)[cipherData bytes]; // 明文
-    const char *private_key = hexPriKey.UTF8String; // 私钥
+    const char *private_key = privateHex.UTF8String; // 私钥
     size_t ctext_len = cipherData.length;
     
     const EVP_MD *digest = EVP_sm3(); // 摘要算法
@@ -246,24 +254,30 @@ static GMSm2Utils *_instance;
     return plainData;
 }
 
-// 解密 NSData 格式密文，返回 NSData 编码格式明文
-+ (nullable NSData *)decryptData:(NSData *)asn1Data privateKey:(NSString *)privateKey {
-    if (!asn1Data || asn1Data.length == 0 || !privateKey || privateKey.length == 0) {
+/// SM2 解密。返回 NSData 格式明文，解密失败返回 nil
+/// @param asn1Data NSData 格式密文（ASN1 编码格式，若非 ASN1 编码格式，需要先使用 asn1EncodeWithC1C3C2Data 进行编码）
+/// @param privateHex 私钥（ Hex 编码格式）
++ (nullable NSData *)decryptData:(NSData *)asn1Data privateKey:(NSString *)privateHex {
+    if (!asn1Data || asn1Data.length == 0 || !privateHex || privateHex.length == 0) {
         return nil;
     }
-    NSData *plainData = [self deData:asn1Data hexPriKey:privateKey];
+    NSData *plainData = [self deData:asn1Data hexPriKey:privateHex];
     return plainData;
 }
 
-// 解密 16进制格式密文，返回 NSData 编码格式明文
-+ (nullable NSData *)decryptHex:(NSString *)asn1Hex privateKey:(NSString *)privateKey {
+/// SM2 解密。返回 NSData 格式明文，解密失败返回 nil
+/// @param asn1Hex 16 进制编码格式密文（ASN1 编码格式，若非 ASN1 编码格式，需要先使用 asn1EncodeWithC1C3C2Hex 进行编码）
+/// @param privateHex 私钥（ Hex 编码格式）
++ (nullable NSData *)decryptHex:(NSString *)asn1Hex privateKey:(NSString *)privateHex {
     NSData *cipherData = [GMSmUtils dataFromHexString:asn1Hex];
-    NSData *plainData = [self decryptData:cipherData privateKey:privateKey];
+    NSData *plainData = [self decryptData:cipherData privateKey:privateHex];
     return plainData;
 }
 
 // MARK: - 密文格式转换
-// C1C2C3 顺序的密文转为 C1C3C2 顺序
+/// 将密文顺序由 C1C2C3 转为 C1C3C2，返回 C1C3C2 顺序排列的密文，失败返回 nil
+/// @param c1c2c3Data 按照 C1C2C3 顺序排列的密文
+/// @param hasPrefix 标记c1c2c3Data是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
 + (nullable NSData *)convertC1C2C3DataToC1C3C2:(NSData *)c1c2c3Data hasPrefix:(BOOL)hasPrefix {
     if (c1c2c3Data.length < 32) {
         return nil;
@@ -295,12 +309,17 @@ static GMSm2Utils *_instance;
     return c1c3c2Data;
 }
 
+/// 将密文顺序由 C1C2C3 转为 C1C3C2，返回 C1C3C2 顺序排列的密文，失败返回 nil
+/// @param c1c2c3Hex 按照 C1C2C3 顺序排列的密文
+/// @param hasPrefix 标记c1c2c3Hex是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
 + (nullable NSData *)convertC1C2C3HexToC1C3C2:(NSString *)c1c2c3Hex hasPrefix:(BOOL)hasPrefix {
     NSData *c1c2c3Data = [GMSmUtils dataFromHexString:c1c2c3Hex];
     return [self convertC1C2C3DataToC1C3C2:c1c2c3Data hasPrefix:hasPrefix];
 }
 
-// C1C3C2 顺序的密文转为 C1C2C3 顺序
+/// C1C3C2 顺序的密文转为 C1C2C3 顺序，返回 C1C2C3 顺序排列的密文，失败返回 nil
+/// @param c1c3c2Data 按照 C1C3C2 顺序排列的 NSData 格式密文
+/// @param hasPrefix 标记c1c3c2Data是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
 + (nullable NSData *)convertC1C3C2DataToC1C2C3:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix {
     if (c1c3c2Data.length < 32) {
         return nil;
@@ -332,6 +351,9 @@ static GMSm2Utils *_instance;
     return c1c2c3Data;
 }
 
+/// C1C3C2 顺序的密文转为 C1C2C3 顺序，返回 C1C2C3 顺序排列的密文，失败返回 nil
+/// @param c1c3c2Hex 按照 C1C3C2 顺序排列的 16 进制格式密文
+/// @param hasPrefix 标记c1c3c2Hex是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
 + (nullable NSData *)convertC1C3C2HexToC1C2C3:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix {
     NSData *c1c3c2Data = [GMSmUtils dataFromHexString:c1c3c2Hex];
     return [self convertC1C3C2DataToC1C2C3:c1c3c2Data hasPrefix:hasPrefix];
@@ -395,6 +417,9 @@ static GMSm2Utils *_instance;
     return asn1Data;
 }
 
+/// ASN1  编码。返回 ASN1 编码格式的密文
+/// @param c1c3c2Data 按照 C1C3C2 排序的 NSData 密文数据，若非此顺序需要先转换
+/// @param hasPrefix 标记密文 c1c3c2Data 前面是否有前缀标识，例如 0x04 前缀标识，默认 NO
 + (nullable NSData *)asn1EncodeWithC1C3C2Data:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix {
     if (c1c3c2Data.length <= 32) {
         return nil;
@@ -421,6 +446,9 @@ static GMSm2Utils *_instance;
     return asn1Data;
 }
 
+/// ASN1  编码。返回 ASN1 编码格式的密文
+/// @param c1c3c2Hex 按照 C1C3C2 排序的 16 进制编码密文数据，若非此顺序需要先转换
+/// @param hasPrefix 标记密文 c1c3c2Hex 前面是否有前缀标识，例如 04 前缀标识，默认 NO
 + (nullable NSData *)asn1EncodeWithC1C3C2Hex:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix {
     NSData *c1c3c2Data = [GMSmUtils dataFromHexString:c1c3c2Hex];
     return [self asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:hasPrefix];
@@ -464,6 +492,9 @@ static GMSm2Utils *_instance;
     return @[c1Data, c3Data, c2Data];
 }
 
+/// ASN1  解码。返回按照 C1C3C2 排序的密文，hasPrefix=YES时，返回结果前面会拼接上 0x04 前缀标识
+/// @param asn1Data ASN1 编码格式的密文
+/// @param hasPrefix 返回的密文结果前面是否增加 0x04 前缀标识，YES 时返回结果前面会拼接上 0x04，默认 NO
 + (nullable NSData *)asn1DecodeToC1C3C2Data:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix {
     if (asn1Data.length == 0) {
         return nil;
@@ -494,14 +525,28 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - SM2 签名
-+ (nullable NSString *)signData:(NSData *)plainData privateKey:(NSString *)privateKey userData:(nullable NSData *)userData {
-    if (plainData.length == 0 || privateKey.length == 0) {
+/// SM2 数字签名。返回值：数字签名，RS 拼接的 Hex 格式字符串，前半部分是 R，后半部分是 S
+/// @param plaintext 明文（字符串格式）
+/// @param privateHex SM2 私钥（Hex 编码格式）
+/// @param userText 用户 ID（字符串格式），当为 nil 时默认为 "1234567812345678"
++ (nullable NSString *)signText:(NSString *)plaintext privateKey:(NSString *)privateHex userText:(nullable NSString *)userText {
+    NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *userData = [userText dataUsingEncoding:NSUTF8StringEncoding];
+    return [self signData:plainData privateKey:privateHex userData:userData];
+}
+
+/// SM2 数字签名。返回值：数字签名，RS 拼接的 Hex 格式字符串，前半部分是 R，后半部分是 S
+/// @param plainData 明文（NSData 格式）
+/// @param privateHex SM2 私钥（Hex 编码格式）
+/// @param userData 用户 ID（NSData 格式），当为 nil 时默认为 "1234567812345678" 的 NSData 格式
++ (nullable NSString *)signData:(NSData *)plainData privateKey:(NSString *)privateHex userData:(nullable NSData *)userData {
+    if (plainData.length == 0 || privateHex.length == 0) {
         return nil;
     }
     if (userData.length == 0) {
         userData = [NSData dataWithBytes:SM2_DEFAULT_USERID length:strlen(SM2_DEFAULT_USERID)];
     }
-    const char *private_key = privateKey.UTF8String;
+    const char *private_key = privateHex.UTF8String;
     uint8_t *plain_bytes = (uint8_t *)[plainData bytes];
     size_t plain_len = plainData.length;
     uint8_t *user_id = (uint8_t *)[userData bytes];
@@ -567,14 +612,30 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - SM2 验签
-+ (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS publicKey:(NSString *)publicKey userData:(nullable NSData *)userData {
-    if (plainData.length == 0 || signRS.length == 0 || publicKey.length == 0) {
+/// SM2 验证数字签名。返回值：验签结果，YES 为通过，NO 为不通过
+/// @param plaintext 明文（字符串格式）
+/// @param signRS 数字签名，RS 拼接的 Hex 格式字符串，前半部分是 R，后半部分是 S
+/// @param publicHex SM2 公钥（Hex 编码格式）
+/// @param userText 用户 ID（字符串格式），当为 nil 时默认为 "1234567812345678"
++ (BOOL)verifyText:(NSString *)plaintext signRS:(NSString *)signRS publicKey:(NSString *)publicHex userText:(nullable NSString *)userText {
+    NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *userData = [userText dataUsingEncoding:NSUTF8StringEncoding];
+    return [self verifyData:plainData signRS:signRS publicKey:publicHex userData:userData];
+}
+
+/// SM2 验证数字签名。返回值：验签结果，YES 为通过，NO 为不通过
+/// @param plainData 明文（NSData 格式）
+/// @param signRS 数字签名，RS 拼接的 Hex 格式字符串，前半部分是 R，后半部分是 S
+/// @param publicHex SM2 公钥（Hex 编码格式）
+/// @param userData 用户 ID（NSData 格式，任意值），当为 nil 时默认为 "1234567812345678" 的 NSData 格式
++ (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS publicKey:(NSString *)publicHex userData:(nullable NSData *)userData {
+    if (plainData.length == 0 || signRS.length == 0 || publicHex.length == 0) {
         return NO;
     }
     if (userData.length == 0) {
         userData = [NSData dataWithBytes:SM2_DEFAULT_USERID length:strlen(SM2_DEFAULT_USERID)];
     }
-    const char *pub_key = publicKey.UTF8String;
+    const char *pub_key = publicHex.UTF8String;
     uint8_t *plain_bytes = (uint8_t *)[plainData bytes];
     size_t plain_len = plainData.length;
     uint8_t *user_id = (uint8_t *)[userData bytes];
@@ -631,6 +692,8 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - SM2签名 Der 编码
+/// Der 编码。返回值：SM2 数字签名， Der 编码格式
+/// @param signRS RS 拼接的 Hex 格式字符串，前半部分是 R，后半部分是 S
 + (nullable NSString *)encodeDerWithSignRS:(NSString *)signRS {
     if (signRS.length == 0) {
         return nil;
@@ -675,6 +738,8 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - SM2签名 Der 解码
+/// Der 解码。SM2 数字签名 Der 解码，返回值：数字签名，RS 拼接的Hex 格式字符串，前半部分是 R，后半部分是 S
+/// @param derSign Der 编码格式的数字签名，通常以 30 开头
 + (nullable NSString *)decodeDerToSignRS:(NSString *)derSign {
     if (derSign.length == 0) {
         return nil;
@@ -734,12 +799,15 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - ECDH 密钥协商
-+ (nullable NSString *)computeECDH:(NSString *)publicKey privateKey:(NSString *)privateKey {
-    if (!publicKey || publicKey.length == 0 || !privateKey || privateKey.length == 0) {
+/// 椭圆曲线 Diffie-Hellman 密钥协商（ECDH），返回 64 字节 16 进制编码格式密钥
+/// @param publicHex 对方公钥（ Hex 编码格式）
+/// @param privateHex 己方私钥（ Hex 编码格式）
++ (nullable NSString *)computeECDH:(NSString *)publicHex privateKey:(NSString *)privateHex {
+    if (!publicHex || publicHex.length == 0 || !privateHex || privateHex.length == 0) {
         return nil;
     }
-    const char *public_key = publicKey.UTF8String;
-    const char *private_key = privateKey.UTF8String; // 私钥
+    const char *public_key = publicHex.UTF8String;
+    const char *private_key = privateHex.UTF8String; // 私钥
     EC_GROUP *group = EC_GROUP_new_by_curve_name([self curveType]); // 椭圆曲线
     EC_POINT *pub_point = NULL;  // 公钥
     BIGNUM *pri_big_num = NULL; // 私钥
@@ -784,13 +852,17 @@ static GMSm2Utils *_instance;
 
 
 // MARK: - SM2 公钥的压缩与解压缩
-+ (nullable NSString *)compressPublicKey:(NSString *)publicKey {
-    NSString *compressedKey = [self compressOrDePublicKey:publicKey isCompress:YES];
+/// SM2 公钥压缩。返回值：02 或 03 开头的压缩公钥
+/// @param publicHex 04 开头的非压缩公钥
++ (nullable NSString *)compressPublicKey:(NSString *)publicHex {
+    NSString *compressedKey = [self compressOrDePublicKey:publicHex isCompress:YES];
     return compressedKey;
 }
 
-+ (nullable NSString *)decompressPublicKey:(NSString *)publicKey {
-    NSString *uncompressedKey = [self compressOrDePublicKey:publicKey isCompress:NO];
+/// SM2 公钥解压缩。返回值：04 开头的非压缩公钥
+/// @param publicHex 02 或 03 开头的压缩公钥
++ (nullable NSString *)decompressPublicKey:(NSString *)publicHex {
+    NSString *uncompressedKey = [self compressOrDePublicKey:publicHex isCompress:NO];
     return uncompressedKey;
 }
 
@@ -821,11 +893,13 @@ static GMSm2Utils *_instance;
 }
 
 // MARK: - SM2 私钥计算公钥
-+ (nullable NSString *)calcPublicKeyFromPrivateKey:(NSString *)privateKey {
-    if (privateKey.length == 0) {
+/// SM2 私钥计算公钥。返回值：04 开头的非压缩公钥
+/// @param privateHex  私钥（ Hex 编码格式）
++ (nullable NSString *)calcPublicKeyFromPrivateKey:(NSString *)privateHex {
+    if (privateHex.length == 0) {
         return nil;
     }
-    const char *private_key = privateKey.UTF8String;
+    const char *private_key = privateHex.UTF8String;
     EC_GROUP *group = EC_GROUP_new_by_curve_name([self curveType]);
     BIGNUM *pri_num = NULL;  // 私钥
     EC_POINT *pub_point = NULL; // 公钥坐标

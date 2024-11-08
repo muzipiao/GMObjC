@@ -215,20 +215,20 @@ typedef NS_ENUM(int, GMSm2CerType) {
 }
 
 // MARK: - 写入PEM/DER格式文件
-+ (BOOL)savePublicKey:(NSString *)publicKey toPemFileAtPath:(NSString *)filePath {
-    return [self savePubKeyToFile:publicKey filePath:filePath pemType:YES];
++ (BOOL)savePublicKey:(NSString *)publicHex toPemFileAtPath:(NSString *)filePath {
+    return [self savePubKeyToFile:publicHex filePath:filePath pemType:YES];
 }
 
-+ (BOOL)savePrivateKey:(NSString *)privateKey toPemFileAtPath:(NSString *)filePath {
-    return [self savePriKeyToFile:privateKey filePath:filePath pemType:YES];
++ (BOOL)savePrivateKey:(NSString *)privateHex toPemFileAtPath:(NSString *)filePath {
+    return [self savePriKeyToFile:privateHex filePath:filePath pemType:YES];
 }
 
-+ (BOOL)savePublicKey:(NSString *)publicKey toDerFileAtPath:(NSString *)filePath {
-    return [self savePubKeyToFile:publicKey filePath:filePath pemType:NO];
++ (BOOL)savePublicKey:(NSString *)publicHex toDerFileAtPath:(NSString *)filePath {
+    return [self savePubKeyToFile:publicHex filePath:filePath pemType:NO];
 }
 
-+ (BOOL)savePrivateKey:(NSString *)privateKey toDerFileAtPath:(NSString *)filePath {
-    return [self savePriKeyToFile:privateKey filePath:filePath pemType:NO];
++ (BOOL)savePrivateKey:(NSString *)privateHex toDerFileAtPath:(NSString *)filePath {
+    return [self savePriKeyToFile:privateHex filePath:filePath pemType:NO];
 }
 
 + (BOOL)savePubKeyToFile:(NSString *)publicKey filePath:(NSString *)filePath pemType:(BOOL)pemType {

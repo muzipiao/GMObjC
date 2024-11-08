@@ -16,6 +16,7 @@
 }
 
 // MARK: - 生成 SM4 密钥
+/// 生成 SM4 密钥（Hex 编码格式）。返回值：长度为 SM4_BLOCK_SIZE(16) 字节密钥
 + (nullable NSString *)generateKey {
     NSInteger len = SM4_BLOCK_SIZE;
     uint8_t bytes[len];
@@ -37,6 +38,18 @@
 }
 
 // MARK: - ECB 加密
+/// SM4 ECB 模式加密。返回值：加密后的 NSData 类型密文
+/// @param plaintext 明文（字符串类型）
+/// @param keyHex  密钥（Hex 编码格式）
++ (nullable NSData *)encryptTextWithECB:(NSString *)plaintext keyHex:(NSString *)keyHex {
+    NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
+    return [self encryptDataWithECB:plainData keyData:keyData];
+}
+
+/// SM4 ECB 模式加密。返回值：加密后的 NSData 类型密文
+/// @param plainData 明文（NSData 类型）
+/// @param keyData SM4 密钥，长度  SM4_BLOCK_SIZE(16) 字节任意数据
 + (nullable NSData *)encryptDataWithECB:(NSData *)plainData keyData:(NSData *)keyData {
     if (plainData.length == 0 || keyData.length != SM4_BLOCK_SIZE) {
         return nil;
@@ -75,6 +88,18 @@
 }
 
 // MARK: - ECB 解密
+/// SM4 ECB 模式解密。返回值：解密后的 NSData 类型明文
+/// @param ciphertext 密文（Hex 编码格式）
+/// @param keyHex 密钥（Hex 编码格式）
++ (nullable NSData *)decryptTextWithECB:(NSString *)ciphertext keyHex:(NSString *)keyHex {
+    NSData *cipherData = [GMSmUtils dataFromHexString:ciphertext];
+    NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
+    return [self decryptDataWithECB:cipherData keyData:keyData];
+}
+
+/// SM4 ECB 模式解密。返回值：解密后的 NSData 类型明文
+/// @param cipherData 密文（NSData 类型）
+/// @param keyData SM4 密钥，长度  SM4_BLOCK_SIZE(16) 字节任意数据
 + (nullable NSData *)decryptDataWithECB:(NSData *)cipherData keyData:(NSData *)keyData {
     if (cipherData.length == 0 || keyData.length != SM4_BLOCK_SIZE) {
         return nil;
@@ -107,6 +132,21 @@
 }
 
 // MARK: - CBC 加密
+/// SM4 CBC 模式加密。返回值：加密后的 NSData 类型密文
+/// @param plaintext 明文（字符串类型）
+/// @param keyHex 密钥（Hex 编码格式）
+/// @param ivecHex 密钥（Hex 编码格式），确保加解密相同即可
++ (nullable NSData *)encryptTextWithCBC:(NSString *)plaintext keyHex:(NSString *)keyHex ivecHex:(NSString *)ivecHex {
+    NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
+    NSData *ivecData = [GMSmUtils dataFromHexString:ivecHex];
+    return [self encryptDataWithCBC:plainData keyData:keyData ivecData:ivecData];
+}
+
+/// SM4 CBC 模式加密。返回值：加密后的 NSData 类型密文
+/// @param plainData 明文（NSData 类型）
+/// @param keyData SM4 密钥，长度  SM4_BLOCK_SIZE(16) 字节任意数据
+/// @param ivecData CBC 模式需传入长度  SM4_BLOCK_SIZE(16) 字节任意字符，确保加解密相同即可
 + (nullable NSData *)encryptDataWithCBC:(NSData *)plainData keyData:(NSData *)keyData ivecData:(NSData *)ivecData {
     if (plainData.length == 0 || keyData.length != SM4_BLOCK_SIZE || ivecData.length != SM4_BLOCK_SIZE) {
         return nil;
@@ -146,6 +186,21 @@
 }
 
 // MARK: - CBC 解密
+/// SM4 CBC 模式解密。返回值：解密后的 NSData 类型明文
+/// @param ciphertext 密文（字符串类型）
+/// @param keyHex 密钥（Hex 编码格式）
+/// @param ivecHex 密钥（Hex 编码格式），确保加解密相同即可
++ (nullable NSData *)decryptTextWithCBC:(NSString *)ciphertext keyHex:(NSString *)keyHex ivecHex:(NSString *)ivecHex {
+    NSData *cipherData = [GMSmUtils dataFromHexString:ciphertext];
+    NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
+    NSData *ivecData = [GMSmUtils dataFromHexString:ivecHex];
+    return [self decryptDataWithCBC:cipherData keyData:keyData ivecData:ivecData];
+}
+
+/// SM4 CBC 模式解密。返回值：解密后的 NSData 类型明文
+/// @param cipherData 密文（NSData 类型）
+/// @param keyData SM4 密钥，长度 SM4_BLOCK_SIZE(16) 字节任意数据
+/// @param ivecData CBC 模式需传入长度  SM4_BLOCK_SIZE(16) 字节任意字符，确保加解密相同即可
 + (nullable NSData *)decryptDataWithCBC:(NSData *)cipherData keyData:(NSData *)keyData ivecData:(NSData *)ivecData {
     if (cipherData.length == 0 || keyData.length != SM4_BLOCK_SIZE || ivecData.length != SM4_BLOCK_SIZE) {
         return nil;
@@ -176,22 +231,5 @@
     
     return plainData;
 }
-
-// MARK: - DEPRECATED
-+ (nullable NSString *)createSm4Key API_DEPRECATED_WITH_REPLACEMENT("generateKey", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED)) {
-    return [self generateKey];
-}
-
-//+ (nullable NSString *)ecbEncryptText:(NSString *)plaintext key:(NSString *)key API_DEPRECATED_WITH_REPLACEMENT("encryptDataWithECB:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
-//+ (nullable NSString *)cbcEncryptText:(NSString *)plaintext key:(NSString *)key IV:(NSString *)ivec API_DEPRECATED_WITH_REPLACEMENT("encryptDataWithCBC:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
-//
-//+ (nullable NSString *)ecbDecryptText:(NSString *)ciphertext key:(NSString *)key API_DEPRECATED_WITH_REPLACEMENT("decryptDataWithECB:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
-//+ (nullable NSString *)cbcDecryptText:(NSString *)ciphertext key:(NSString *)key IV:(NSString *)ivec API_DEPRECATED_WITH_REPLACEMENT("decryptDataWithCBC:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
-//
-//+ (nullable NSData *)ecbEncryptData:(NSData *)plainData key:(NSString *)key API_DEPRECATED_WITH_REPLACEMENT("encryptDataWithECB:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
-//+ (nullable NSData *)cbcEncryptData:(NSData *)plainData key:(NSString *)key IV:(NSString *)ivec API_DEPRECATED_WITH_REPLACEMENT("encryptDataWithCBC:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
-//
-//+ (nullable NSData *)ecbDecryptData:(NSData *)cipherData key:(NSString *)key API_DEPRECATED_WITH_REPLACEMENT("decryptDataWithECB:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
-//+ (nullable NSData *)cbcDecryptData:(NSData *)cipherData key:(NSString *)key IV:(NSString *)ivec API_DEPRECATED_WITH_REPLACEMENT("decryptDataWithCBC:keyData:", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED));
 
 @end

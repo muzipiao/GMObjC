@@ -1,5 +1,5 @@
 //  Created by lifei on 2023/9/14.
-//  参考 issue 和邮件反馈，总结遇到的问题，协助分析；
+//  参考 issue 反馈，总结遇到的问题，协助分析；
 //  用于测试环境排查故障，不能用于生产环境。
 
 #import <Foundation/Foundation.h>
