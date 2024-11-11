@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0726408C77272FA3CBD0C416 /* libPods-GMObjC Mac Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 917BF1DEBB71D3B9589B967D /* libPods-GMObjC Mac Demo.a */; };
+		9C27EEC42CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC32CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 */; };
+		9C27EEC52CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC32CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 */; };
+		9C27EEC82CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC62CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 */; };
+		9C27EEC92CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC62CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 */; };
+		9C27EECA2CE1F97D0028FF60 /* aiboxkit-cer-ecdsa.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC72CE1F97D0028FF60 /* aiboxkit-cer-ecdsa.cer */; };
+		9C27EECB2CE1F97D0028FF60 /* aiboxkit-cer-ecdsa.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC72CE1F97D0028FF60 /* aiboxkit-cer-ecdsa.cer */; };
 		9C4BA10E2B3AD613007EB1ED /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB630D02B3A9DE90017AE18 /* main.swift */; };
 		9C745900270FE3AE0062C1E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C7458FF270FE3AE0062C1E5 /* Assets.xcassets */; };
 		9C745903270FE3AE0062C1E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C745901270FE3AE0062C1E5 /* LaunchScreen.storyboard */; };
@@ -146,6 +152,9 @@
 		68E4A04DB15A16DA7ADA9CC6 /* libPods-GMObjC iOS Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GMObjC iOS Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7359A048C4A87E3BADAFF8AD /* Pods-GMObjC Mac Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC Mac Demo.debug.xcconfig"; path = "Target Support Files/Pods-GMObjC Mac Demo/Pods-GMObjC Mac Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		917BF1DEBB71D3B9589B967D /* libPods-GMObjC Mac Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GMObjC Mac Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C27EEC32CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aiboxkit-pkcs12-single.p12"; sourceTree = "<group>"; };
+		9C27EEC62CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aiboxkit-pkcs12-pwd.p12"; sourceTree = "<group>"; };
+		9C27EEC72CE1F97D0028FF60 /* aiboxkit-cer-ecdsa.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aiboxkit-cer-ecdsa.cer"; sourceTree = "<group>"; };
 		9C7458F0270FE3AD0062C1E5 /* GMObjC iOS Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GMObjC iOS Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7458FF270FE3AE0062C1E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C745902270FE3AE0062C1E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -443,6 +452,9 @@
 				9CF02FD82A6FBB25008B80DE /* github-base64-chain.cer */,
 				9CF02FD62A6FBB25008B80DE /* github-base64-single.cer */,
 				9CF02FD22A6FBB25008B80DE /* github-der-single.cer */,
+				9C27EEC32CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 */,
+				9C27EEC72CE1F97D0028FF60 /* aiboxkit-cer-ecdsa.cer */,
+				9C27EEC62CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 */,
 			);
 			path = x509_cer;
 			sourceTree = "<group>";
@@ -564,6 +576,7 @@
 				9CBB8A1027101106008411A1 /* sm2pub-8.der in Resources */,
 				9CBB89FE27101106008411A1 /* sm2pri-10.der in Resources */,
 				9CBB89F527101106008411A1 /* sm2pri-1.der in Resources */,
+				9C27EEC42CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 in Resources */,
 				9CBB8A0F27101106008411A1 /* sm2pub-5.der in Resources */,
 				9CBB8A0627101106008411A1 /* sm2pri8-4.pem in Resources */,
 				9CBB8A0227101106008411A1 /* sm2pri8-3.pem in Resources */,
@@ -578,6 +591,7 @@
 				9CBB89FF27101106008411A1 /* sm2pri8-9.pem in Resources */,
 				9CBB8A1127101106008411A1 /* sm2pub-9.der in Resources */,
 				9CBB89FD27101106008411A1 /* sm2pri-8.der in Resources */,
+				9C27EECA2CE1F97D0028FF60 /* aiboxkit-cer-ecdsa.cer in Resources */,
 				9CBB8A0D27101106008411A1 /* sm2pub-6.der in Resources */,
 				9CF02FDB2A6FBB25008B80DE /* bing-base64-chain.cer in Resources */,
 				9C745903270FE3AE0062C1E5 /* LaunchScreen.storyboard in Resources */,
@@ -588,6 +602,7 @@
 				9CBB89EC27101106008411A1 /* sm2pri-5.pem in Resources */,
 				9CBB8A0E27101106008411A1 /* sm2pub-4.der in Resources */,
 				9CBB8A0027101106008411A1 /* sm2pri8-8.pem in Resources */,
+				9C27EEC82CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 in Resources */,
 				9CBB8A0727101106008411A1 /* sm2pri8-6.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,6 +619,7 @@
 				9CE0131C2B5E4ADF00F49627 /* sm2pri-10.pem in Resources */,
 				9CE0131B2B5E4ADF00F49627 /* sm2pri-9.pem in Resources */,
 				9CE013172B5E4AD700F49627 /* bing-base64-single.cer in Resources */,
+				9C27EEC92CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 in Resources */,
 				9CE0132B2B5E4AF400F49627 /* sm2pri-1.der in Resources */,
 				9CE013232B5E4ADF00F49627 /* sm2pri-3.pem in Resources */,
 				9CE013162B5E4AD700F49627 /* github-base64-single.cer in Resources */,
@@ -614,12 +630,14 @@
 				9CE0132C2B5E4AF400F49627 /* sm2pri-2.der in Resources */,
 				9CE0133D2B5E4B0000F49627 /* sm2pub-10.der in Resources */,
 				9CE013212B5E4ADF00F49627 /* sm2pri-7.pem in Resources */,
+				9C27EECB2CE1F97D0028FF60 /* aiboxkit-cer-ecdsa.cer in Resources */,
 				9CE013332B5E4AFB00F49627 /* sm2pri8-6.pem in Resources */,
 				9CE0133B2B5E4B0000F49627 /* sm2pub-8.der in Resources */,
 				9CE0131A2B5E4ADF00F49627 /* sm2pri-5.pem in Resources */,
 				9CE013452B5E4B0C00F49627 /* sm2pub-4.pem in Resources */,
 				9CE013462B5E4B0C00F49627 /* sm2pub-7.pem in Resources */,
 				9CE013472B5E4B0C00F49627 /* sm2pub-10.pem in Resources */,
+				9C27EEC52CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 in Resources */,
 				9CE0133A2B5E4B0000F49627 /* sm2pub-3.der in Resources */,
 				9CE013372B5E4AFB00F49627 /* sm2pri8-10.pem in Resources */,
 				9CE0132A2B5E4AF400F49627 /* sm2pri-3.der in Resources */,

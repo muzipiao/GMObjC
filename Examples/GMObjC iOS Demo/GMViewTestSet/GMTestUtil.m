@@ -358,13 +358,20 @@
 
 // MARK: - X509 格式证书读取
 + (GMTestModel *)testReadX509FileInfo {
-    NSArray *x509List = @[@"bing-base64-chain.cer", @"bing-base64-single.cer", @"bing-der-single.cer",
-                          @"github-base64-chain.cer", @"github-base64-single.cer", @"github-der-single.cer"];
+    NSArray *x509List = @[@"bing-base64-chain.cer", @"bing-base64-single.cer", 
+                          @"bing-der-single.cer", @"github-base64-chain.cer",
+                          @"github-base64-single.cer", @"github-der-single.cer",
+                          @"aiboxkit-cer-ecdsa.cer", @"aiboxkit-pkcs12-pwd.p12",
+                          @"aiboxkit-pkcs12-single.p12"];
     GMTestModel *model = [[GMTestModel alloc] initWithTitle:@"不同类型X509格式信息读取:"];
     for (NSString *fileName in x509List) {
         NSString *filePath = GMTestUtilBundle(fileName);
         NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-        GMSm2X509Info *fileInfo = [GMSm2Bio readX509InfoFromData:fileData password:nil];
+        NSData *pwdData = nil;
+        if ([fileName containsString:@"-pwd"]) {
+            pwdData = [@"12345678" dataUsingEncoding:NSUTF8StringEncoding];
+        }
+        GMSm2X509Info *fileInfo = [GMSm2Bio readX509InfoFromData:fileData password:pwdData];
         [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:fileName detail:fileInfo.description]];
     }
     return model;

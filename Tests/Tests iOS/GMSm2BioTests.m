@@ -242,6 +242,8 @@
         GMSm2KeyFiles *pemFile = [GMSm2Bio generatePemKeyFiles];
         XCTAssertTrue(derFile.publicKeyPath.length > 0, @"生成密钥不应为空");
         XCTAssertTrue(pemFile.publicKeyPath.length > 0, @"生成密钥不应为空");
+        XCTAssertTrue(derFile.description.length > 0, @"生成密钥不应为空");
+        XCTAssertTrue(pemFile.description.length > 0, @"生成密钥不应为空");
         
         NSString *pubPemPath = pemFile.publicKeyPath;
         NSString *priPemPath = pemFile.privateKeyPath;
@@ -266,11 +268,17 @@
 - (void)testReadX509FileInfo {
     NSArray *x509List = @[@"bing-base64-chain.cer", @"bing-base64-single.cer",
                           @"bing-der-single.cer", @"github-base64-chain.cer",
-                          @"github-base64-single.cer", @"github-der-single.cer"];
+                          @"github-base64-single.cer", @"github-der-single.cer",
+                          @"aiboxkit-cer-ecdsa.cer", @"aiboxkit-pkcs12-pwd.p12",
+                          @"aiboxkit-pkcs12-single.p12"];
     for (NSString *fileName in x509List) {
         NSString *filePath = [[NSBundle bundleForClass:[self class]] pathForResource:fileName ofType:nil];
         NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-        GMSm2X509Info *fileInfo = [GMSm2Bio readX509InfoFromData:fileData password:nil];
+        NSData *pwdData = nil;
+        if ([fileName containsString:@"-pwd"]) {
+            pwdData = [@"12345678" dataUsingEncoding:NSUTF8StringEncoding];
+        }
+        GMSm2X509Info *fileInfo = [GMSm2Bio readX509InfoFromData:fileData password:pwdData];
         XCTAssertTrue(fileInfo.description.length > 0, @"解析证书不为空");
         XCTAssertTrue(fileInfo.version.length > 0, @"解析证书不为空");
         XCTAssertTrue(fileInfo.publicKey.length > 0, @"解析证书不为空");
