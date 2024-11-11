@@ -186,7 +186,7 @@ static GMSm2Utils *_instance;
     return cipherData;
 }
 
-/// SM2 加密。返回 NSData 格式密文（ASN1 编码格式，可使用 asn1DecodeToC1C3C2Data 解码为非 ASN1 编码格式），失败返回 nil
+/// SM2 加密。返回 ASN1 编码密文（ASN1 编码可使用 asn1DecodeToC1C3C2Data 解码为非 ASN1 编码），失败返回 nil
 /// @param plainData 明文（NSData 格式）
 /// @param publicHex 04 开头的公钥（ Hex 编码格式）
 + (nullable NSData *)encryptData:(NSData *)plainData publicKey:(NSString *)publicHex {
@@ -197,16 +197,17 @@ static GMSm2Utils *_instance;
     return cipherData;
 }
 
-/// SM2 加密。返回 NSData 格式密文（ASN1 编码格式，可使用 asn1DecodeToC1C3C2Data 解码为非 ASN1 编码格式），失败返回 nil
+/// SM2 加密。返回 ASN1 编码 Hex 格式密文（ASN1 编码可使用 asn1DecodeToC1C3C2Hex 解码为非 ASN1 编码），失败返回 nil
 /// @param plaintext 明文（NSString 原文格式）
 /// @param publicHex 04 开头的公钥（ Hex 编码格式）
-+ (nullable NSData *)encryptText:(NSString *)plaintext publicKey:(NSString *)publicHex {
++ (nullable NSString *)encryptText:(NSString *)plaintext publicKey:(NSString *)publicHex {
     if (plaintext.length == 0 || publicHex.length == 0) {
         return nil;
     }
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
     NSData *cipherData = [self encryptData:plainData publicKey:publicHex];
-    return cipherData;
+    NSString *ciphertext = [GMSmUtils hexStringFromData:cipherData];
+    return ciphertext;
 }
 
 // MARK: - SM2 解密
@@ -255,7 +256,7 @@ static GMSm2Utils *_instance;
 }
 
 /// SM2 解密。返回 NSData 格式明文，解密失败返回 nil
-/// @param asn1Data NSData 格式密文（ASN1 编码格式，若非 ASN1 编码格式，需要先使用 asn1EncodeWithC1C3C2Data 进行编码）
+/// @param asn1Data NSData 格式密文（ASN1 编码，若非 ASN1 编码，需要先使用 asn1EncodeWithC1C3C2Data 进行编码）
 /// @param privateHex 私钥（ Hex 编码格式）
 + (nullable NSData *)decryptData:(NSData *)asn1Data privateKey:(NSString *)privateHex {
     if (!asn1Data || asn1Data.length == 0 || !privateHex || privateHex.length == 0) {
@@ -265,13 +266,17 @@ static GMSm2Utils *_instance;
     return plainData;
 }
 
-/// SM2 解密。返回 NSData 格式明文，解密失败返回 nil
-/// @param asn1Hex 16 进制编码格式密文（ASN1 编码格式，若非 ASN1 编码格式，需要先使用 asn1EncodeWithC1C3C2Hex 进行编码）
+/// SM2 解密。返回字符串格式明文，解密失败返回 nil
+/// @param asn1Hex ASN1 编码 Hex 格式密文（ASN1 编码，若非 ASN1 编码，需要先使用 asn1EncodeWithC1C3C2Hex 进行编码）
 /// @param privateHex 私钥（ Hex 编码格式）
-+ (nullable NSData *)decryptHex:(NSString *)asn1Hex privateKey:(NSString *)privateHex {
++ (nullable NSString *)decryptHex:(NSString *)asn1Hex privateKey:(NSString *)privateHex {
     NSData *cipherData = [GMSmUtils dataFromHexString:asn1Hex];
     NSData *plainData = [self decryptData:cipherData privateKey:privateHex];
-    return plainData;
+    if (plainData.length > 0) {
+        NSString *plaintext = [[NSString alloc] initWithData:plainData encoding:NSUTF8StringEncoding];
+        return plaintext;
+    }
+    return nil;
 }
 
 // MARK: - 密文格式转换
@@ -312,9 +317,11 @@ static GMSm2Utils *_instance;
 /// 将密文顺序由 C1C2C3 转为 C1C3C2，返回 C1C3C2 顺序排列的密文，失败返回 nil
 /// @param c1c2c3Hex 按照 C1C2C3 顺序排列的密文
 /// @param hasPrefix 标记c1c2c3Hex是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
-+ (nullable NSData *)convertC1C2C3HexToC1C3C2:(NSString *)c1c2c3Hex hasPrefix:(BOOL)hasPrefix {
++ (nullable NSString *)convertC1C2C3HexToC1C3C2:(NSString *)c1c2c3Hex hasPrefix:(BOOL)hasPrefix {
     NSData *c1c2c3Data = [GMSmUtils dataFromHexString:c1c2c3Hex];
-    return [self convertC1C2C3DataToC1C3C2:c1c2c3Data hasPrefix:hasPrefix];
+    NSData *c1c3c2Data = [self convertC1C2C3DataToC1C3C2:c1c2c3Data hasPrefix:hasPrefix];
+    NSString *c1c3c2Hex = [GMSmUtils hexStringFromData:c1c3c2Data];
+    return c1c3c2Hex;
 }
 
 /// C1C3C2 顺序的密文转为 C1C2C3 顺序，返回 C1C2C3 顺序排列的密文，失败返回 nil
@@ -354,9 +361,11 @@ static GMSm2Utils *_instance;
 /// C1C3C2 顺序的密文转为 C1C2C3 顺序，返回 C1C2C3 顺序排列的密文，失败返回 nil
 /// @param c1c3c2Hex 按照 C1C3C2 顺序排列的 16 进制格式密文
 /// @param hasPrefix 标记c1c3c2Hex是否包含压缩标识，默认 NO 没有标识，e.g. Java 端 BouncyCastle 库密文可能会带 04 前缀标识
-+ (nullable NSData *)convertC1C3C2HexToC1C2C3:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix {
++ (nullable NSString *)convertC1C3C2HexToC1C2C3:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix {
     NSData *c1c3c2Data = [GMSmUtils dataFromHexString:c1c3c2Hex];
-    return [self convertC1C3C2DataToC1C2C3:c1c3c2Data hasPrefix:hasPrefix];
+    NSData *c1c2c3Data = [self convertC1C3C2DataToC1C2C3:c1c3c2Data hasPrefix:hasPrefix];
+    NSString *c1c2c3Hex = [GMSmUtils hexStringFromData:c1c2c3Data];
+    return c1c2c3Hex;
 }
 
 // MARK: - ASN1 编码
@@ -417,7 +426,7 @@ static GMSm2Utils *_instance;
     return asn1Data;
 }
 
-/// ASN1  编码。返回 ASN1 编码格式的密文
+/// ASN1  编码。返回 ASN1 编码的密文
 /// @param c1c3c2Data 按照 C1C3C2 排序的 NSData 密文数据，若非此顺序需要先转换
 /// @param hasPrefix 标记密文 c1c3c2Data 前面是否有前缀标识，例如 0x04 前缀标识，默认 NO
 + (nullable NSData *)asn1EncodeWithC1C3C2Data:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix {
@@ -446,12 +455,14 @@ static GMSm2Utils *_instance;
     return asn1Data;
 }
 
-/// ASN1  编码。返回 ASN1 编码格式的密文
+/// ASN1  编码。返回 ASN1 编码的密文（ Hex 编码格式）
 /// @param c1c3c2Hex 按照 C1C3C2 排序的 16 进制编码密文数据，若非此顺序需要先转换
 /// @param hasPrefix 标记密文 c1c3c2Hex 前面是否有前缀标识，例如 04 前缀标识，默认 NO
-+ (nullable NSData *)asn1EncodeWithC1C3C2Hex:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix {
++ (nullable NSString *)asn1EncodeWithC1C3C2Hex:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix {
     NSData *c1c3c2Data = [GMSmUtils dataFromHexString:c1c3c2Hex];
-    return [self asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:hasPrefix];
+    NSData *asn1Data = [self asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:hasPrefix];
+    NSString *asn1Hex = [GMSmUtils hexStringFromData:asn1Data];
+    return asn1Hex;
 }
 
 // MARK: - ASN1 解码
@@ -493,7 +504,7 @@ static GMSm2Utils *_instance;
 }
 
 /// ASN1  解码。返回按照 C1C3C2 排序的密文，hasPrefix=YES时，返回结果前面会拼接上 0x04 前缀标识
-/// @param asn1Data ASN1 编码格式的密文
+/// @param asn1Data ASN1 编码的密文
 /// @param hasPrefix 返回的密文结果前面是否增加 0x04 前缀标识，YES 时返回结果前面会拼接上 0x04，默认 NO
 + (nullable NSData *)asn1DecodeToC1C3C2Data:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix {
     if (asn1Data.length == 0) {
@@ -515,8 +526,8 @@ static GMSm2Utils *_instance;
     return c1c3c2Data;
 }
 
-/// ASN1  解码。返回按照 C1C3C2 排序的密文，hasPrefix=YES时，返回结果前面会拼接上 04 前缀标识
-/// @param asn1Data ASN1 编码格式的密文
+/// ASN1  解码。返回按照 C1C3C2 排序的密文(16 进制编码格式)，hasPrefix=YES时，返回结果前面会拼接上 04 前缀标识
+/// @param asn1Data ASN1 编码的密文
 /// @param hasPrefix 返回的密文结果前面是否增加 04 前缀标识，YES 时返回结果前面会拼接上 04，默认 NO
 + (nullable NSString *)asn1DecodeToC1C3C2Hex:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix {
     NSData *c1c3c2Data = [self asn1DecodeToC1C3C2Data:asn1Data hasPrefix:hasPrefix];
@@ -622,7 +633,7 @@ static GMSm2Utils *_instance;
 /// @param userText 用户 ID（字符串格式），当为 nil 时默认为 "1234567812345678"
 + (BOOL)verifyText:(NSString *)plaintext signRS:(NSString *)signRS publicKey:(NSString *)publicHex userText:(nullable NSString *)userText {
     if (plaintext.length == 0 || signRS.length == 0 || publicHex.length == 0) {
-        return nil;
+        return NO;
     }
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
     NSData *userData = userText.length > 0 ? [userText dataUsingEncoding:NSUTF8StringEncoding] : nil;

@@ -121,8 +121,9 @@
         NSString *randomStr = [self randomAny:50];
         NSData *originalData = [randomStr dataUsingEncoding:NSUTF8StringEncoding];
         NSData *checkedData = [GMSmUtils checkStringData:originalData];
-        XCTAssertEqualObjects(originalData, checkedData, @"Regular string data should remain unchanged");
-        
+        if (![GMSmUtils isValidBase64String:randomStr] && ![GMSmUtils isValidHexString:randomStr]) {
+            XCTAssertEqualObjects(originalData, checkedData, @"Regular string data should remain unchanged");
+        }
         // Test with base64 string data
         NSString *base64Str = [GMSmUtils base64EncodedStringWithData:originalData];
         NSData *base64Data = [base64Str dataUsingEncoding:NSUTF8StringEncoding];

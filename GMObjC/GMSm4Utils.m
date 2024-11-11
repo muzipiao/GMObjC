@@ -38,19 +38,21 @@
 }
 
 // MARK: - ECB 加密
-/// SM4 ECB 模式加密。返回值：加密后的 NSData 类型密文
+/// SM4 ECB 模式加密。返回值：加密后的密文（Hex 编码格式）
 /// @param plaintext 明文（字符串类型）
 /// @param keyHex  密钥（Hex 编码格式）
-+ (nullable NSData *)encryptTextWithECB:(NSString *)plaintext keyHex:(NSString *)keyHex {
++ (nullable NSString *)encryptTextWithECB:(NSString *)plaintext keyHex:(NSString *)keyHex {
     if (plaintext.length == 0 || keyHex.length == 0) {
         return nil;
     }
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
     NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
-    return [self encryptDataWithECB:plainData keyData:keyData];
+    NSData *cipherData = [self encryptDataWithECB:plainData keyData:keyData];
+    NSString *cipherHex = [GMSmUtils hexStringFromData:cipherData];
+    return cipherHex;
 }
 
-/// SM4 ECB 模式加密。返回值：加密后的 NSData 类型密文
+/// SM4 ECB 模式加密。返回值：加密后的密文
 /// @param plainData 明文（NSData 类型）
 /// @param keyData SM4 密钥，长度  SM4_BLOCK_SIZE(16) 字节任意数据
 + (nullable NSData *)encryptDataWithECB:(NSData *)plainData keyData:(NSData *)keyData {
@@ -91,16 +93,21 @@
 }
 
 // MARK: - ECB 解密
-/// SM4 ECB 模式解密。返回值：解密后的 NSData 类型明文
+/// SM4 ECB 模式解密。返回值：解密后的明文（Hex 编码格式）
 /// @param ciphertext 密文（Hex 编码格式）
 /// @param keyHex 密钥（Hex 编码格式）
-+ (nullable NSData *)decryptTextWithECB:(NSString *)ciphertext keyHex:(NSString *)keyHex {
++ (nullable NSString *)decryptTextWithECB:(NSString *)ciphertext keyHex:(NSString *)keyHex {
     NSData *cipherData = [GMSmUtils dataFromHexString:ciphertext];
     NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
-    return [self decryptDataWithECB:cipherData keyData:keyData];
+    NSData *plainData = [self decryptDataWithECB:cipherData keyData:keyData];
+    if (plainData.length > 0) {
+        NSString *plaintext = [[NSString alloc] initWithData:plainData encoding:NSUTF8StringEncoding];
+        return plaintext;
+    }
+    return nil;
 }
 
-/// SM4 ECB 模式解密。返回值：解密后的 NSData 类型明文
+/// SM4 ECB 模式解密。返回值：解密后的明文
 /// @param cipherData 密文（NSData 类型）
 /// @param keyData SM4 密钥，长度  SM4_BLOCK_SIZE(16) 字节任意数据
 + (nullable NSData *)decryptDataWithECB:(NSData *)cipherData keyData:(NSData *)keyData {
@@ -135,21 +142,23 @@
 }
 
 // MARK: - CBC 加密
-/// SM4 CBC 模式加密。返回值：加密后的 NSData 类型密文
+/// SM4 CBC 模式加密。返回值：加密后的密文（Hex 编码格式）
 /// @param plaintext 明文（字符串类型）
 /// @param keyHex 密钥（Hex 编码格式）
 /// @param ivecHex 密钥（Hex 编码格式），确保加解密相同即可
-+ (nullable NSData *)encryptTextWithCBC:(NSString *)plaintext keyHex:(NSString *)keyHex ivecHex:(NSString *)ivecHex {
++ (nullable NSString *)encryptTextWithCBC:(NSString *)plaintext keyHex:(NSString *)keyHex ivecHex:(NSString *)ivecHex {
     if (plaintext.length == 0 || keyHex.length == 0) {
         return nil;
     }
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
     NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
     NSData *ivecData = [GMSmUtils dataFromHexString:ivecHex];
-    return [self encryptDataWithCBC:plainData keyData:keyData ivecData:ivecData];
+    NSData *cipherData = [self encryptDataWithCBC:plainData keyData:keyData ivecData:ivecData];
+    NSString *cipherHex = [GMSmUtils hexStringFromData:cipherData];
+    return cipherHex;
 }
 
-/// SM4 CBC 模式加密。返回值：加密后的 NSData 类型密文
+/// SM4 CBC 模式加密。返回值：加密后的密文
 /// @param plainData 明文（NSData 类型）
 /// @param keyData SM4 密钥，长度  SM4_BLOCK_SIZE(16) 字节任意数据
 /// @param ivecData CBC 模式需传入长度  SM4_BLOCK_SIZE(16) 字节任意字符，确保加解密相同即可
@@ -192,18 +201,23 @@
 }
 
 // MARK: - CBC 解密
-/// SM4 CBC 模式解密。返回值：解密后的 NSData 类型明文
+/// SM4 CBC 模式解密。返回值：解密后的明文
 /// @param ciphertext 密文（字符串类型）
 /// @param keyHex 密钥（Hex 编码格式）
 /// @param ivecHex 密钥（Hex 编码格式），确保加解密相同即可
-+ (nullable NSData *)decryptTextWithCBC:(NSString *)ciphertext keyHex:(NSString *)keyHex ivecHex:(NSString *)ivecHex {
++ (nullable NSString *)decryptTextWithCBC:(NSString *)ciphertext keyHex:(NSString *)keyHex ivecHex:(NSString *)ivecHex {
     NSData *cipherData = [GMSmUtils dataFromHexString:ciphertext];
     NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
     NSData *ivecData = [GMSmUtils dataFromHexString:ivecHex];
-    return [self decryptDataWithCBC:cipherData keyData:keyData ivecData:ivecData];
+    NSData *plainData = [self decryptDataWithCBC:cipherData keyData:keyData ivecData:ivecData];
+    if (plainData.length > 0) {
+        NSString *plaintext = [[NSString alloc] initWithData:plainData encoding:NSUTF8StringEncoding];
+        return plaintext;
+    }
+    return nil;
 }
 
-/// SM4 CBC 模式解密。返回值：解密后的 NSData 类型明文
+/// SM4 CBC 模式解密。返回值：解密后的明文
 /// @param cipherData 密文（NSData 类型）
 /// @param keyData SM4 密钥，长度 SM4_BLOCK_SIZE(16) 字节任意数据
 /// @param ivecData CBC 模式需传入长度  SM4_BLOCK_SIZE(16) 字节任意字符，确保加解密相同即可

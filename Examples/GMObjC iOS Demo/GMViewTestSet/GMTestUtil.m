@@ -14,15 +14,17 @@
 
 // MARK: - SM2 加解密
 + (GMTestModel *)testSm2EnDe {
-    NSData *plainData = [@"123456" dataUsingEncoding:NSUTF8StringEncoding]; // 明文 123456 的 NSData 格式
+    NSString *plaintext = @"123456";
+    NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding]; // 明文 123456 的 NSData 格式
     // 生成一对新的公私钥
     GMSm2Key *keyPair = [GMSm2Utils generateKey];
     NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，Hex 编码格式
     NSString *priKey = keyPair.privateKey; // 测试用私钥，Hex 编码格式
     NSData *encryptData = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // 加密 NSData 类型数据
-    NSData *decryptData = [GMSm2Utils decryptData:encryptData privateKey:priKey]; // 解密为 NSData 格式明文
+    NSString *encryptHex = [GMSmUtils hexStringFromData:encryptData];
+    NSString *decryptText = [GMSm2Utils decryptHex:encryptHex privateKey:priKey]; // 解密为 NSData 格式明文
     // 判断 sm2 加解密结果
-    if ([decryptData isEqualToData:plainData]) {
+    if ([decryptText isEqualToString:plaintext]) {
         NSLog(@"sm2 加密解密成功");
     }else{
         NSLog(@"sm2 加密解密失败");
@@ -47,8 +49,8 @@
     GMTestModel *model = [[GMTestModel alloc] initWithTitle:@"SM2加密与解密，ANS1编码与解码:"];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"生成SM2公钥" detail:pubKey]];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"生成SM2私钥" detail:priKey]];
-    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"SM2加密密文" detail:encryptData.hexDesc]];
-    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"SM2解密结果" detail:decryptData.hexDesc]];
+    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"SM2加密密文" detail:encryptHex]];
+    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"SM2解密结果" detail:decryptText]];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"ASN1 解码SM2密文" detail:c1c3c2Data.hexDesc]];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"C1C3C2 顺序SM2密文转为 C1C2C3 顺序" detail:convertToC1C2C3.hexDesc]];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"ASN1编码SM2密文" detail:asn1EncodeData.hexDesc]];
@@ -130,20 +132,20 @@
     NSData *plainData = [@"123456" dataUsingEncoding:NSUTF8StringEncoding];
     // ECB 加解密模式
     NSData *sm4EcbCiperData = [GMSm4Utils encryptDataWithECB:plainData keyData:sm4KeyData];
-    NSData *sm4EcbPlaintext = [GMSm4Utils decryptDataWithECB:sm4EcbCiperData keyData:sm4KeyData];
+    NSString *sm4EcbPlaintext = [GMSm4Utils decryptTextWithECB:sm4EcbCiperData.hexDesc keyHex:sm4KeyData.hexDesc];
     
     GMTestModel *model = [[GMTestModel alloc] initWithTitle:@"SM4加密与解密:"];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"SM4密钥" detail:sm4KeyData.hexDesc]];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"ECB 模式加密密文" detail:sm4EcbCiperData.hexDesc]];
-    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"ECB模式解密结果" detail:sm4EcbPlaintext.hexDesc]];
+    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"ECB模式解密结果" detail:sm4EcbPlaintext]];
     
     // CBC 加解密模式
     NSData *ivecData = [GMSmUtils dataFromHexString:[GMSm4Utils generateKey]]; // 生成 16 字节初始化向量
     NSData *sm4CbcCiperData = [GMSm4Utils encryptDataWithCBC:plainData keyData:sm4KeyData ivecData:ivecData];
-    NSData *sm4CbcPlainData = [GMSm4Utils decryptDataWithCBC:sm4CbcCiperData keyData:sm4KeyData ivecData:ivecData];
+    NSString *sm4CbcPlaintext = [GMSm4Utils decryptTextWithCBC:sm4CbcCiperData.hexDesc keyHex:sm4KeyData.hexDesc ivecHex:ivecData.hexDesc];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"CBC模式需要的16字节向量" detail:ivecData.hexDesc]];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"CBC模式加密密文" detail:sm4CbcCiperData.hexDesc]];
-    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"CBC模式解密结果" detail:sm4CbcPlainData.hexDesc]];
+    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"CBC模式解密结果" detail:sm4CbcPlaintext]];
     
     // 加解密文件，任意文件可读取为 NSData 格式
     NSString *txtPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"sm4TestFile.txt" ofType:nil];

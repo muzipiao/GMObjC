@@ -105,7 +105,7 @@
 /// @param hexStr 16 进制编码格式字符串
 + (BOOL)isValidHexString:(NSString *)hexStr {
     if (!hexStr || hexStr.length == 0) {
-        return nil;
+        return NO;
     }
     NSString *pattern = @"^[0-9a-fA-F]+$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
@@ -116,7 +116,7 @@
 /// @param base64Str base64 编码格式字符串
 + (BOOL)isValidBase64String:(NSString *)base64Str {
     if (!base64Str || base64Str.length == 0) {
-        return nil;
+        return NO;
     }
     NSString *base64Regex = @"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", base64Regex];

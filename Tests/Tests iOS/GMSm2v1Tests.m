@@ -84,7 +84,7 @@
             // 加密普通字符串
             NSData *enData = [GMSm2Utils encryptData:[randStr dataUsingEncoding:NSUTF8StringEncoding] publicKey:randPub];
             XCTAssertNil(enData, @"加密字符串应为空");
-            NSData *enText = [GMSm2Utils encryptText:randStr publicKey:randPub];
+            NSString *enText = [GMSm2Utils encryptText:randStr publicKey:randPub];
             XCTAssertNil(enText, @"加密字符串应为空");
         }
         if ((randData.length > 0 && randPub.length > 0) == NO) {
@@ -103,7 +103,7 @@
             XCTAssertNil(deData, @"解密字符串应为空");
             
             NSString *cipherHex = [GMSmUtils hexStringFromData:cipherData];
-            NSData *deText = [GMSm2Utils decryptHex:cipherHex privateKey:randPri];
+            NSString *deText = [GMSm2Utils decryptHex:cipherHex privateKey:randPri];
             XCTAssertNil(deText, @"解密字符串应为空");
         }
         if ((randData.length > 0 && randPri.length > 0) == NO) {
@@ -154,9 +154,9 @@
         NSData *c1c2c3Data = [GMSm2Utils convertC1C3C2DataToC1C2C3:randData hasPrefix:randPrefix];
         XCTAssertNil(c1c2c3Data, @"转换结果为空");
         
-        NSData *c1c3c2Text = [GMSm2Utils convertC1C2C3HexToC1C3C2:randStr hasPrefix:randPrefix];
+        NSString *c1c3c2Text = [GMSm2Utils convertC1C2C3HexToC1C3C2:randStr hasPrefix:randPrefix];
         XCTAssertNil(c1c3c2Text, @"转换结果为空");
-        NSData *c1c2c3Text = [GMSm2Utils convertC1C3C2HexToC1C2C3:randStr hasPrefix:randPrefix];
+        NSString *c1c2c3Text = [GMSm2Utils convertC1C3C2HexToC1C2C3:randStr hasPrefix:randPrefix];
         XCTAssertNil(c1c2c3Text, @"转换结果为空");
     }
 }
@@ -269,14 +269,14 @@
     NSData *plainData = [NSData dataWithBytes:"123456" length:6];
     NSData *enData = [GMSm2Utils encryptData:plainData publicKey:errorPubKey];
     XCTAssertTrue(enData.length == 0, @"加密结果为空");
-    NSData *enText = [GMSm2Utils encryptText:plaintext publicKey:errorPubKey];
+    NSString *enText = [GMSm2Utils encryptText:plaintext publicKey:errorPubKey];
     XCTAssertTrue(enText.length == 0, @"加密结果为空");
     
     NSData *cipherData = [GMSmUtils dataFromHexString:self.gCipherDataHex];
     // 使用错误的私钥解密为空
     NSData *deData = [GMSm2Utils decryptData:cipherData privateKey:errorPriKey];
     XCTAssertTrue(deData.length == 0, @"解密结果为空");
-    NSData *deText = [GMSm2Utils decryptHex:self.gCipherDataHex privateKey:errorPriKey];
+    NSString *deText = [GMSm2Utils decryptHex:self.gCipherDataHex privateKey:errorPriKey];
     XCTAssertTrue(deText.length == 0, @"解密结果为空");
     
     // 使用错误的公钥私钥，验签不通过
@@ -383,7 +383,7 @@
         NSData *srcC1C3C2Data = [GMSm2Utils asn1DecodeToC1C3C2Data:ciphertextASN1 hasPrefix:NO];
         XCTAssertNotNil(srcC1C3C2Data, @"密文字符串不为空");
         NSString *srcC1C3C2Hex = [GMSm2Utils asn1DecodeToC1C3C2Hex:ciphertextASN1 hasPrefix:NO];
-        XCTAssertNotNil(srcC1C3C2Hex, @"密文字符串不为空");
+        XCTAssertTrue(srcC1C3C2Hex.length > 0, @"密文字符串不为空");
         // 顺序转换
         BOOL hasPrefix = i%2 == 0 ? YES : NO;
         NSData *prefixC1C3C2Data = srcC1C3C2Data;
@@ -399,23 +399,21 @@
         NSData *convertC1C3C2Data = [GMSm2Utils convertC1C2C3DataToC1C3C2:convertC1C2C3Data hasPrefix:hasPrefix];
         XCTAssertTrue([convertC1C3C2Data isEqualToData:prefixC1C3C2Data], @"转换后结果一致");
         
-        NSData *convertC1C2C3Text = [GMSm2Utils convertC1C3C2HexToC1C2C3:prefixC1C3C2Hex hasPrefix:hasPrefix];
-        XCTAssertNotNil(convertC1C2C3Text, @"密文字符串不为空");
-        NSString *convertC1C2C3Hex = [GMSmUtils hexStringFromData:convertC1C2C3Text];
-        NSData *convertC1C3C2Text = [GMSm2Utils convertC1C2C3HexToC1C3C2:convertC1C2C3Hex hasPrefix:hasPrefix];
-        NSString *convertC1C3C2Hex = [GMSmUtils hexStringFromData:convertC1C3C2Text];
+        NSString *convertC1C2C3Hex = [GMSm2Utils convertC1C3C2HexToC1C2C3:prefixC1C3C2Hex hasPrefix:hasPrefix];
+        XCTAssertTrue(convertC1C2C3Hex.length > 0, @"密文字符串不为空");
+        NSString *convertC1C3C2Hex = [GMSm2Utils convertC1C2C3HexToC1C3C2:convertC1C2C3Hex hasPrefix:hasPrefix];
         XCTAssertTrue([convertC1C3C2Hex isEqualToString:prefixC1C3C2Hex], @"转换后结果一致");
         
         // ASN1 编码
         NSData *convertASN1Data = [GMSm2Utils asn1EncodeWithC1C3C2Data:convertC1C3C2Data hasPrefix:hasPrefix];
         XCTAssertNotNil(convertASN1Data, @"密文字符串不为空");
-        NSData *convertASN1Text = [GMSm2Utils asn1EncodeWithC1C3C2Hex:convertC1C3C2Hex hasPrefix:hasPrefix];
-        XCTAssertNotNil(convertASN1Text, @"密文字符串不为空");
+        NSString *convertASN1Text = [GMSm2Utils asn1EncodeWithC1C3C2Hex:convertC1C3C2Hex hasPrefix:hasPrefix];
+        XCTAssertTrue(convertASN1Text.length > 0, @"密文字符串不为空");
         // 解密
         NSData *deData = [GMSm2Utils decryptData:convertASN1Data privateKey:priKey];
         XCTAssertTrue([deData isEqualToData:plainData], @"解密结果与原文一致");
-        NSData *deText = [GMSm2Utils decryptData:convertASN1Text privateKey:priKey];
-        XCTAssertTrue([deText isEqualToData:plainData], @"解密结果与原文一致");
+        NSString *deText = [GMSm2Utils decryptHex:convertASN1Text privateKey:priKey];
+        XCTAssertTrue([deText isEqualToString:plaintext], @"解密结果与原文一致");
     }
 }
 
@@ -488,14 +486,13 @@
         // ASN1 格式密文
         NSData *enData = [GMSm2Utils encryptData:plainData publicKey:self.gPubKey];
         XCTAssertNotNil(enData, @"加密字符串不为空");
-        NSData *enText = [GMSm2Utils encryptText:plaintext publicKey:self.gPubKey];
-        XCTAssertNotNil(enText, @"加密字符串不为空");
+        NSString *enText = [GMSm2Utils encryptText:plaintext publicKey:self.gPubKey];
+        XCTAssertTrue(enText.length > 0, @"加密字符串不为空");
         // 解密
         NSData *deData = [GMSm2Utils decryptData:enData privateKey:self.gPriKey];
         XCTAssertTrue([deData isEqualToData:plainData], @"解密结果与原文一致");
-        NSString *deHex = [GMSmUtils hexStringFromData:enText];
-        NSData *deText = [GMSm2Utils decryptHex:deHex privateKey:self.gPriKey];
-        XCTAssertTrue([deText isEqualToData:plainData], @"解密结果与原文一致");
+        NSString *deText = [GMSm2Utils decryptHex:enText privateKey:self.gPriKey];
+        XCTAssertTrue([deText isEqualToString:plaintext], @"解密结果与原文一致");
     }
 }
 
