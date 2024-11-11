@@ -7,128 +7,128 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9C1ABB6B2CDC871C003844DC /* OpenSSL.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C1ABB692CDC871C003844DC /* OpenSSL.xcframework */; };
-		9C58AAF92BC38869001E62E5 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9C58AAF82BC38869001E62E5 /* PrivacyInfo.xcprivacy */; };
-		9C5F53A82CDC600400265C1C /* GMDoctor.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C5F53A62CDC600400265C1C /* GMDoctor.h */; };
-		9C5F53A92CDC600400265C1C /* GMDoctor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5F53A72CDC600400265C1C /* GMDoctor.m */; };
-		9CEA768F271017B700DA6FA1 /* GMObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA768E271017B700DA6FA1 /* GMObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9CEA76A02710180E00DA6FA1 /* GMSm4Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA76952710180E00DA6FA1 /* GMSm4Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9CEA76A12710180E00DA6FA1 /* GMSm3Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA76962710180E00DA6FA1 /* GMSm3Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9CEA76A22710180E00DA6FA1 /* GMSm2Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA76972710180E00DA6FA1 /* GMSm2Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9CEA76A32710180E00DA6FA1 /* GMSmUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA76982710180E00DA6FA1 /* GMSmUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9CEA76A42710180E00DA6FA1 /* GMSm3Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA76992710180E00DA6FA1 /* GMSm3Utils.m */; };
-		9CEA76A52710180E00DA6FA1 /* GMSm4Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA769A2710180E00DA6FA1 /* GMSm4Utils.m */; };
-		9CEA76A62710180E00DA6FA1 /* GMSmUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA769B2710180E00DA6FA1 /* GMSmUtils.m */; };
-		9CEA76A72710180E00DA6FA1 /* GMSm2Bio.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEA769C2710180E00DA6FA1 /* GMSm2Bio.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9CEA76A82710180E00DA6FA1 /* GMSm2Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA769D2710180E00DA6FA1 /* GMSm2Utils.m */; };
-		9CEA76A92710180E00DA6FA1 /* GMSm2Bio.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEA769E2710180E00DA6FA1 /* GMSm2Bio.m */; };
+		9CA353DB2CE200C600630D51 /* GMObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA353DA2CE200C600630D51 /* GMObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CA353ED2CE2029100630D51 /* GMSm3Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA353E12CE2029100630D51 /* GMSm3Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CA353EE2CE2029100630D51 /* GMSm4Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA353E22CE2029100630D51 /* GMSm4Utils.m */; };
+		9CA353EF2CE2029100630D51 /* GMSmUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA353E32CE2029100630D51 /* GMSmUtils.m */; };
+		9CA353F02CE2029100630D51 /* GMDoctor.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA353E42CE2029100630D51 /* GMDoctor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CA353F12CE2029100630D51 /* GMSm2Bio.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA353E52CE2029100630D51 /* GMSm2Bio.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CA353F22CE2029100630D51 /* GMSm2Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA353E62CE2029100630D51 /* GMSm2Utils.m */; };
+		9CA353F32CE2029100630D51 /* GMSm3Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA353E72CE2029100630D51 /* GMSm3Utils.m */; };
+		9CA353F42CE2029100630D51 /* GMSmUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA353E82CE2029100630D51 /* GMSmUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CA353F52CE2029100630D51 /* GMSm2Bio.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA353E92CE2029100630D51 /* GMSm2Bio.m */; };
+		9CA353F62CE2029100630D51 /* GMDoctor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA353EA2CE2029100630D51 /* GMDoctor.m */; };
+		9CA353F72CE2029100630D51 /* GMSm2Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA353EB2CE2029100630D51 /* GMSm2Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CA353F82CE2029100630D51 /* GMSm4Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA353EC2CE2029100630D51 /* GMSm4Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CA353FA2CE202BA00630D51 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9CA353F92CE202BA00630D51 /* PrivacyInfo.xcprivacy */; };
+		9CA353FD2CE202D900630D51 /* OpenSSL.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CA353FB2CE202D900630D51 /* OpenSSL.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9C1ABB692CDC871C003844DC /* OpenSSL.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:9CA5KUE8T7:BEIJING JINHER SOFTWARE CO.LTD."; lastKnownFileType = wrapper.xcframework; path = OpenSSL.xcframework; sourceTree = "<group>"; };
-		9C58AAF82BC38869001E62E5 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		9C5F53A62CDC600400265C1C /* GMDoctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMDoctor.h; sourceTree = "<group>"; };
-		9C5F53A72CDC600400265C1C /* GMDoctor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMDoctor.m; sourceTree = "<group>"; };
-		9CEA768B271017B700DA6FA1 /* GMObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9CEA768E271017B700DA6FA1 /* GMObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMObjC.h; sourceTree = "<group>"; };
-		9CEA76952710180E00DA6FA1 /* GMSm4Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm4Utils.h; sourceTree = "<group>"; };
-		9CEA76962710180E00DA6FA1 /* GMSm3Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm3Utils.h; sourceTree = "<group>"; };
-		9CEA76972710180E00DA6FA1 /* GMSm2Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm2Utils.h; sourceTree = "<group>"; };
-		9CEA76982710180E00DA6FA1 /* GMSmUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSmUtils.h; sourceTree = "<group>"; };
-		9CEA76992710180E00DA6FA1 /* GMSm3Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm3Utils.m; sourceTree = "<group>"; };
-		9CEA769A2710180E00DA6FA1 /* GMSm4Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm4Utils.m; sourceTree = "<group>"; };
-		9CEA769B2710180E00DA6FA1 /* GMSmUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSmUtils.m; sourceTree = "<group>"; };
-		9CEA769C2710180E00DA6FA1 /* GMSm2Bio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm2Bio.h; sourceTree = "<group>"; };
-		9CEA769D2710180E00DA6FA1 /* GMSm2Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm2Utils.m; sourceTree = "<group>"; };
-		9CEA769E2710180E00DA6FA1 /* GMSm2Bio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm2Bio.m; sourceTree = "<group>"; };
+		9CA353D72CE200C600630D51 /* GMObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CA353DA2CE200C600630D51 /* GMObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMObjC.h; sourceTree = "<group>"; };
+		9CA353E12CE2029100630D51 /* GMSm3Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm3Utils.h; sourceTree = "<group>"; };
+		9CA353E22CE2029100630D51 /* GMSm4Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm4Utils.m; sourceTree = "<group>"; };
+		9CA353E32CE2029100630D51 /* GMSmUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSmUtils.m; sourceTree = "<group>"; };
+		9CA353E42CE2029100630D51 /* GMDoctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMDoctor.h; sourceTree = "<group>"; };
+		9CA353E52CE2029100630D51 /* GMSm2Bio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm2Bio.h; sourceTree = "<group>"; };
+		9CA353E62CE2029100630D51 /* GMSm2Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm2Utils.m; sourceTree = "<group>"; };
+		9CA353E72CE2029100630D51 /* GMSm3Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm3Utils.m; sourceTree = "<group>"; };
+		9CA353E82CE2029100630D51 /* GMSmUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSmUtils.h; sourceTree = "<group>"; };
+		9CA353E92CE2029100630D51 /* GMSm2Bio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSm2Bio.m; sourceTree = "<group>"; };
+		9CA353EA2CE2029100630D51 /* GMDoctor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMDoctor.m; sourceTree = "<group>"; };
+		9CA353EB2CE2029100630D51 /* GMSm2Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm2Utils.h; sourceTree = "<group>"; };
+		9CA353EC2CE2029100630D51 /* GMSm4Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm4Utils.h; sourceTree = "<group>"; };
+		9CA353F92CE202BA00630D51 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		9CA353FB2CE202D900630D51 /* OpenSSL.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:9CA5KUE8T7:BEIJING JINHER SOFTWARE CO.LTD."; lastKnownFileType = wrapper.xcframework; path = OpenSSL.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9CEA7688271017B700DA6FA1 /* Frameworks */ = {
+		9CA353D42CE200C600630D51 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C1ABB6B2CDC871C003844DC /* OpenSSL.xcframework in Frameworks */,
+				9CA353FD2CE202D900630D51 /* OpenSSL.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9C1ABB6A2CDC871C003844DC /* Frameworks */ = {
+		9CA353CD2CE200C600630D51 = {
 			isa = PBXGroup;
 			children = (
-				9C1ABB692CDC871C003844DC /* OpenSSL.xcframework */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
-		9CEA7681271017B700DA6FA1 = {
-			isa = PBXGroup;
-			children = (
-				9CEA768D271017B700DA6FA1 /* GMObjC */,
-				9C1ABB6A2CDC871C003844DC /* Frameworks */,
-				9CEA768C271017B700DA6FA1 /* Products */,
+				9CA353D92CE200C600630D51 /* GMObjC */,
+				9CA353FC2CE202D900630D51 /* Frameworks */,
+				9CA353D82CE200C600630D51 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		9CEA768C271017B700DA6FA1 /* Products */ = {
+		9CA353D82CE200C600630D51 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9CEA768B271017B700DA6FA1 /* GMObjC.framework */,
+				9CA353D72CE200C600630D51 /* GMObjC.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9CEA768D271017B700DA6FA1 /* GMObjC */ = {
+		9CA353D92CE200C600630D51 /* GMObjC */ = {
 			isa = PBXGroup;
 			children = (
-				9C58AAF82BC38869001E62E5 /* PrivacyInfo.xcprivacy */,
-				9CEA768E271017B700DA6FA1 /* GMObjC.h */,
-				9C5F53A62CDC600400265C1C /* GMDoctor.h */,
-				9C5F53A72CDC600400265C1C /* GMDoctor.m */,
-				9CEA76982710180E00DA6FA1 /* GMSmUtils.h */,
-				9CEA769B2710180E00DA6FA1 /* GMSmUtils.m */,
-				9CEA769C2710180E00DA6FA1 /* GMSm2Bio.h */,
-				9CEA769E2710180E00DA6FA1 /* GMSm2Bio.m */,
-				9CEA76972710180E00DA6FA1 /* GMSm2Utils.h */,
-				9CEA769D2710180E00DA6FA1 /* GMSm2Utils.m */,
-				9CEA76962710180E00DA6FA1 /* GMSm3Utils.h */,
-				9CEA76992710180E00DA6FA1 /* GMSm3Utils.m */,
-				9CEA76952710180E00DA6FA1 /* GMSm4Utils.h */,
-				9CEA769A2710180E00DA6FA1 /* GMSm4Utils.m */,
+				9CA353F92CE202BA00630D51 /* PrivacyInfo.xcprivacy */,
+				9CA353DA2CE200C600630D51 /* GMObjC.h */,
+				9CA353E42CE2029100630D51 /* GMDoctor.h */,
+				9CA353EA2CE2029100630D51 /* GMDoctor.m */,
+				9CA353E82CE2029100630D51 /* GMSmUtils.h */,
+				9CA353E32CE2029100630D51 /* GMSmUtils.m */,
+				9CA353E52CE2029100630D51 /* GMSm2Bio.h */,
+				9CA353E92CE2029100630D51 /* GMSm2Bio.m */,
+				9CA353EB2CE2029100630D51 /* GMSm2Utils.h */,
+				9CA353E62CE2029100630D51 /* GMSm2Utils.m */,
+				9CA353E12CE2029100630D51 /* GMSm3Utils.h */,
+				9CA353E72CE2029100630D51 /* GMSm3Utils.m */,
+				9CA353EC2CE2029100630D51 /* GMSm4Utils.h */,
+				9CA353E22CE2029100630D51 /* GMSm4Utils.m */,
 			);
 			path = GMObjC;
+			sourceTree = "<group>";
+		};
+		9CA353FC2CE202D900630D51 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9CA353FB2CE202D900630D51 /* OpenSSL.xcframework */,
+			);
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		9CEA7686271017B700DA6FA1 /* Headers */ = {
+		9CA353D22CE200C600630D51 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CEA768F271017B700DA6FA1 /* GMObjC.h in Headers */,
-				9C5F53A82CDC600400265C1C /* GMDoctor.h in Headers */,
-				9CEA76A22710180E00DA6FA1 /* GMSm2Utils.h in Headers */,
-				9CEA76A12710180E00DA6FA1 /* GMSm3Utils.h in Headers */,
-				9CEA76A32710180E00DA6FA1 /* GMSmUtils.h in Headers */,
-				9CEA76A72710180E00DA6FA1 /* GMSm2Bio.h in Headers */,
-				9CEA76A02710180E00DA6FA1 /* GMSm4Utils.h in Headers */,
+				9CA353F12CE2029100630D51 /* GMSm2Bio.h in Headers */,
+				9CA353F72CE2029100630D51 /* GMSm2Utils.h in Headers */,
+				9CA353ED2CE2029100630D51 /* GMSm3Utils.h in Headers */,
+				9CA353F02CE2029100630D51 /* GMDoctor.h in Headers */,
+				9CA353DB2CE200C600630D51 /* GMObjC.h in Headers */,
+				9CA353F82CE2029100630D51 /* GMSm4Utils.h in Headers */,
+				9CA353F42CE2029100630D51 /* GMSmUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		9CEA768A271017B700DA6FA1 /* GMObjC */ = {
+		9CA353D62CE200C600630D51 /* GMObjC */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9CEA7692271017B700DA6FA1 /* Build configuration list for PBXNativeTarget "GMObjC" */;
+			buildConfigurationList = 9CA353DE2CE200C600630D51 /* Build configuration list for PBXNativeTarget "GMObjC" */;
 			buildPhases = (
-				9CEA7686271017B700DA6FA1 /* Headers */,
-				9CEA7687271017B700DA6FA1 /* Sources */,
-				9CEA7688271017B700DA6FA1 /* Frameworks */,
-				9CEA7689271017B700DA6FA1 /* Resources */,
+				9CA353D22CE200C600630D51 /* Headers */,
+				9CA353D32CE200C600630D51 /* Sources */,
+				9CA353D42CE200C600630D51 /* Frameworks */,
+				9CA353D52CE200C600630D51 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -136,77 +136,77 @@
 			);
 			name = GMObjC;
 			productName = GMObjC;
-			productReference = 9CEA768B271017B700DA6FA1 /* GMObjC.framework */;
+			productReference = 9CA353D72CE200C600630D51 /* GMObjC.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		9CEA7682271017B700DA6FA1 /* Project object */ = {
+		9CA353CE2CE200C600630D51 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
-					9CEA768A271017B700DA6FA1 = {
-						CreatedOnToolsVersion = 13.0;
+					9CA353D62CE200C600630D51 = {
+						CreatedOnToolsVersion = 15.4;
 					};
 				};
 			};
-			buildConfigurationList = 9CEA7685271017B700DA6FA1 /* Build configuration list for PBXProject "GMObjC" */;
-			compatibilityVersion = "Xcode 13.0";
+			buildConfigurationList = 9CA353D12CE200C600630D51 /* Build configuration list for PBXProject "GMObjC" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 9CEA7681271017B700DA6FA1;
-			productRefGroup = 9CEA768C271017B700DA6FA1 /* Products */;
+			mainGroup = 9CA353CD2CE200C600630D51;
+			productRefGroup = 9CA353D82CE200C600630D51 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9CEA768A271017B700DA6FA1 /* GMObjC */,
+				9CA353D62CE200C600630D51 /* GMObjC */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		9CEA7689271017B700DA6FA1 /* Resources */ = {
+		9CA353D52CE200C600630D51 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C58AAF92BC38869001E62E5 /* PrivacyInfo.xcprivacy in Resources */,
+				9CA353FA2CE202BA00630D51 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9CEA7687271017B700DA6FA1 /* Sources */ = {
+		9CA353D32CE200C600630D51 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CEA76A92710180E00DA6FA1 /* GMSm2Bio.m in Sources */,
-				9CEA76A52710180E00DA6FA1 /* GMSm4Utils.m in Sources */,
-				9C5F53A92CDC600400265C1C /* GMDoctor.m in Sources */,
-				9CEA76A42710180E00DA6FA1 /* GMSm3Utils.m in Sources */,
-				9CEA76A82710180E00DA6FA1 /* GMSm2Utils.m in Sources */,
-				9CEA76A62710180E00DA6FA1 /* GMSmUtils.m in Sources */,
+				9CA353F52CE2029100630D51 /* GMSm2Bio.m in Sources */,
+				9CA353EE2CE2029100630D51 /* GMSm4Utils.m in Sources */,
+				9CA353F62CE2029100630D51 /* GMDoctor.m in Sources */,
+				9CA353EF2CE2029100630D51 /* GMSmUtils.m in Sources */,
+				9CA353F22CE2029100630D51 /* GMSm2Utils.m in Sources */,
+				9CA353F32CE2029100630D51 /* GMSm3Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		9CEA7690271017B700DA6FA1 /* Debug */ = {
+		9CA353DC2CE200C600630D51 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -237,7 +237,8 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -251,24 +252,25 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		9CEA7691271017B700DA6FA1 /* Release */ = {
+		9CA353DD2CE200C600630D51 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -299,7 +301,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -307,21 +310,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		9CEA7693271017B700DA6FA1 /* Debug */ = {
+		9CA353DF2CE200C600630D51 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -329,32 +331,40 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.GMObjC;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.gmobjc;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e x86_64";
 			};
 			name = Debug;
 		};
-		9CEA7694271017B700DA6FA1 /* Release */ = {
+		9CA353E02CE200C600630D51 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -362,49 +372,57 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.GMObjC;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.gmobjc;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e x86_64";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9CEA7685271017B700DA6FA1 /* Build configuration list for PBXProject "GMObjC" */ = {
+		9CA353D12CE200C600630D51 /* Build configuration list for PBXProject "GMObjC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9CEA7690271017B700DA6FA1 /* Debug */,
-				9CEA7691271017B700DA6FA1 /* Release */,
+				9CA353DC2CE200C600630D51 /* Debug */,
+				9CA353DD2CE200C600630D51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9CEA7692271017B700DA6FA1 /* Build configuration list for PBXNativeTarget "GMObjC" */ = {
+		9CA353DE2CE200C600630D51 /* Build configuration list for PBXNativeTarget "GMObjC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9CEA7693271017B700DA6FA1 /* Debug */,
-				9CEA7694271017B700DA6FA1 /* Release */,
+				9CA353DF2CE200C600630D51 /* Debug */,
+				9CA353E02CE200C600630D51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 9CEA7682271017B700DA6FA1 /* Project object */;
+	rootObject = 9CA353CE2CE200C600630D51 /* Project object */;
 }

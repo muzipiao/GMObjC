@@ -15,9 +15,18 @@
 #define GMOBJC_VERSION_NUMBER  0x400000
 #define GMOBJC_VERSION_TEXT    "GMObjC 4.0.0  08 Nov 2024"
 
+#if __has_include(<GMObjC/GMSm2Bio.h>)
+#import <GMObjC/GMSm2Bio.h>
+#import <GMObjC/GMSm2Utils.h>
+#import <GMObjC/GMSm3Utils.h>
+#import <GMObjC/GMSm4Utils.h>
+#import <GMObjC/GMSmUtils.h>
+#import <GMObjC/GMDoctor.h>
+#else
 #import "GMSm2Bio.h"
 #import "GMSm2Utils.h"
 #import "GMSm3Utils.h"
 #import "GMSm4Utils.h"
 #import "GMSmUtils.h"
 #import "GMDoctor.h"
+#endif
