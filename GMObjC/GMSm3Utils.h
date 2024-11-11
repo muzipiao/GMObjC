@@ -20,20 +20,35 @@ typedef NS_ENUM(int, GMHashType) {
 
 @interface GMSm3Utils : NSObject
 
-/// 提取数据或文件的摘要值。返回值：SM3 摘要值，长度为SM3_DIGEST_LENGTH(32)字节
+/// 提取数据或文件的摘要值。返回 SM3 摘要值
 /// @param data 待提取摘要的数据
 + (nullable NSData *)hashWithData:(NSData *)data;
 
-/// HMAC 算法计算 SM3 摘要。返回值：长度为SM3_DIGEST_LENGTH(32)字节的摘要
+/// 提取数据摘要值。返回值 SM3 摘要值（Hex 编码格式）
+/// @param text 待提取摘要的数据
++ (nullable NSString *)hashWithText:(NSString *)text;
+
+/// HMAC 算法计算 SM3 摘要。返回 hmac 摘要值
 /// @param data NSData 格式的数据明文
-/// @param keyData SM3 类型密钥，任意字符
+/// @param keyData 密钥，任意不为空字符
 + (nullable NSData *)hmacWithData:(NSData *)data keyData:(NSData *)keyData;
 
-/// HMAC 算法计算其他类型摘要。返回值：计算的摘要长度和摘要算法长度相同
+/// HMAC 算法计算 SM3 摘要。返回 hmac 摘要值（Hex 编码格式）
+/// @param text 待提取摘要的数据
+/// @param keyText 密钥，任意不为空字符
++ (nullable NSString *)hmacWithText:(NSString *)text keyText:(NSString *)keyText;
+
+/// HMAC 算法计算其他类型摘要。返回 hmac 摘要值（Hex 编码格式）
 /// @param data NSData 格式的数据明文
 /// @param keyData NSData 格式的密钥，任意字符
 /// @param keyType 选取的摘要算法，详见 GMHashType 枚举
 + (nullable NSData *)hmacWithData:(NSData *)data keyData:(NSData *)keyData keyType:(GMHashType)keyType;
+
+/// HMAC 算法计算其他类型摘要。返回 hmac 摘要值（Hex 编码格式）
+/// @param text 待提取摘要的数据
+/// @param keyText 密钥，任意不为空字符
+/// @param keyType 选取的摘要算法，详见 GMHashType 枚举
++ (nullable NSString *)hmacWithText:(NSString *)text keyText:(NSString *)keyText keyType:(GMHashType)keyType;
 
 @end
 

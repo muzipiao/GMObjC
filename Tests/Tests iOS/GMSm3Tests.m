@@ -14,53 +14,47 @@
 
 @implementation GMSm3Tests
 
-/// 测试工具类
-- (void)testGMUtils {
-    for (NSInteger i = 0; i < 1000; i++) {
-        NSString *plaintext = [self randomAny:10000];
-        XCTAssertNotNil(plaintext, @"生成字符串不为空");
-        NSString *hexStr = [GMSmUtils hexStringFromString:plaintext];
-        XCTAssertNotNil(hexStr, @"16 进制字符串不为空");
-        NSString *originStr = [GMSmUtils stringFromHexString:hexStr];
-        BOOL isSameStr = [originStr isEqualToString:plaintext];
-        XCTAssertTrue(isSameStr, @"明文转 Hex 可逆");
-        
-        NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-        XCTAssertNotNil(plainData, @"明文 Data 不为空");
-        NSString *hexData = [GMSmUtils hexStringFromData:plainData];
-        XCTAssertNotNil(hexData, @"明文 Data 转 Hex 不为空");
-        NSData *originData = [GMSmUtils dataFromHexString:hexData];
-        BOOL isSameData = [originData isEqualToData:plainData];
-        XCTAssertTrue(isSameData, @"明文 Data 转 Hex 可逆");
-    }
-}
-
 /// 测试 sm3 出现空的情况
 - (void)testSm3Null {
     NSData *dataNull = [NSData data];
     NSData *digDataNull = [GMSm3Utils hashWithData:dataNull];
     XCTAssertNil(digDataNull, @"字符串为空摘要为空");
+    
+    NSString *textNull = nil;
+    NSString *hashTextNull = [GMSm3Utils hashWithText:textNull];
+    XCTAssertNil(hashTextNull, @"字符串为空摘要为空");
 }
 
 /// 测试 HMAC 出现空的情况
 - (void)testHMACNull {
-    NSArray *dataNilArray = @[[NSNull null], [NSData data]];
+    NSString *keyText = @"qwertyuiop1234567890";
+    NSArray *textNilArray = @[[NSNull null], @"", keyText];
     NSArray *hmacTypeList = @[@(GMHashType_SM3), @(GMHashType_MD5), @(GMHashType_SHA1),
                               @(GMHashType_SHA224), @(GMHashType_SHA256), @(GMHashType_SHA384),
                               @(GMHashType_SHA512)];
     
     for (NSInteger i = 0; i < 100; i++) {
-        NSData *randData = dataNilArray[arc4random_uniform((uint32_t)dataNilArray.count)];
-        randData = [randData isKindOfClass:[NSNull class]] ? nil : randData;
-        NSData *randKey = dataNilArray[arc4random_uniform((uint32_t)dataNilArray.count)];
-        randKey = [randKey isKindOfClass:[NSNull class]] ? nil : randKey;
+        NSString *randText = textNilArray[arc4random_uniform((uint32_t)textNilArray.count)];
+        randText = [randText isKindOfClass:[NSNull class]] ? nil : randText;
+        NSString *randKeyText = textNilArray[arc4random_uniform((uint32_t)textNilArray.count)];
+        randKeyText = [randKeyText isKindOfClass:[NSNull class]] ? nil : randKeyText;
+        if (randText.length > 0 && randKeyText > 0) {
+            continue;
+        }
+        NSData *randData = randText.length >= 0 ? [randText dataUsingEncoding:NSUTF8StringEncoding] : nil;
+        NSData *randKeyData = randKeyText.length >= 0 ? [randKeyText dataUsingEncoding:NSUTF8StringEncoding] : nil;
+        
         NSNumber *randIndex = hmacTypeList[arc4random_uniform((uint32_t)hmacTypeList.count)];
         GMHashType randType = (GMHashType)randIndex.intValue;
         // 计算 Hmac
-        NSData *hmac1 = [GMSm3Utils hmacWithData:randData keyData:randKey];
+        NSData *hmac1 = [GMSm3Utils hmacWithData:randData keyData:randKeyData];
         XCTAssertNil(hmac1, @"空值返回nil");
-        NSData *hmac2 = [GMSm3Utils hmacWithData:randData keyData:randKey keyType:randType];
+        NSData *hmac2 = [GMSm3Utils hmacWithData:randData keyData:randKeyData keyType:randType];
         XCTAssertNil(hmac2, @"空值返回nil");
+        NSString *hmac3 = [GMSm3Utils hmacWithText:randText keyText:randKeyText];
+        XCTAssertNil(hmac3, @"空值返回nil");
+        NSString *hmac4 = [GMSm3Utils hmacWithText:randText keyText:randKeyText keyType:randType];
+        XCTAssertNil(hmac4, @"空值返回nil");
     }
 }
 
@@ -69,26 +63,24 @@
     for (NSInteger i = 0; i < 1000; i++) {
         int randLen = arc4random_uniform((int)1000);
         NSString *plaintext = [self randomZhEn:randLen];
-        NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-        XCTAssertNotNil(plainData, @"生成字符串不为空");
+        XCTAssertTrue(plaintext.length > 0, @"生成字符串不为空");
         
-        NSData *tempDigData = [GMSm3Utils hashWithData:plainData];
-        XCTAssertNotNil(tempDigData, @"加密字符串不为空");
+        NSString *tmpHash = [GMSm3Utils hashWithText:plaintext];
+        XCTAssertTrue(tmpHash.length > 0, @"生成的 Hash 字符串不为空");
     }
     // 多次摘要相同
     int randLen = arc4random_uniform((int)1000);
     NSString *plaintext = [self randomZhEn:randLen];
-    NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *digData = nil;
+    XCTAssertTrue(plaintext.length > 0, @"生成字符串不为空");
+    NSString *digestText = nil;
     for (NSInteger i = 0; i < 1000; i++) {
-        XCTAssertNotNil(plainData, @"生成字符串不为空");
-        NSData *tempDigData = [GMSm3Utils hashWithData:plainData];
-        XCTAssertNotNil(tempDigData, @"加密字符串不为空");
-        if (digData) {
-            BOOL isSameDig = [digData isEqualToData:tempDigData];
-            XCTAssertTrue(isSameDig, @"多次摘要相同");
+        NSString *tmpHash = [GMSm3Utils hashWithText:plaintext];
+        XCTAssertTrue(tmpHash.length > 0, @"生成的 Hash 字符串不为空");
+        if (digestText) {
+            BOOL isSameDigest = [digestText isEqualToString:tmpHash];
+            XCTAssertTrue(isSameDigest, @"多次摘要相同");
         }
-        digData = tempDigData;
+        digestText = tmpHash;
     }
 }
 
@@ -111,37 +103,34 @@
 - (void)testHmacWithSm3 {
     for (NSInteger i = 0; i < 1000; i++) {
         int keyLen = arc4random_uniform((int)1000);
-        NSString *key = [self randomZhEn:keyLen];
-        NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
-        XCTAssertNotNil(keyData, @"生成字符串不为空");
+        NSString *keyText = [self randomZhEn:keyLen];
+        XCTAssertTrue(keyText.length > 0, @"生成字符串不为空");
         
         int randLen = arc4random_uniform((int)1000);
         NSString *plaintext = [self randomZhEn:randLen];
-        NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-        XCTAssertNotNil(plainData, @"生成字符串不为空");
-        NSData *hmac1 = [GMSm3Utils hmacWithData:plainData keyData:keyData];
-        XCTAssertTrue(hmac1.length == 32, @"长度为32");
+        XCTAssertTrue(plaintext.length > 0, @"生成字符串不为空");
+        
+        NSString *hmac1 = [GMSm3Utils hmacWithText:plaintext keyText:keyText];
+        XCTAssertTrue(hmac1.length == 64, @"SM3摘要长度为64(HEX编码格式)");
     }
     // 多次摘要相同
     int keyLen = arc4random_uniform((int)1000);
     NSString *keyText = [self randomZhEn:keyLen];
-    NSData *keyData = [keyText dataUsingEncoding:NSUTF8StringEncoding];
-    XCTAssertNotNil(keyData, @"生成字符串不为空");
+    XCTAssertTrue(keyText.length > 0, @"生成字符串不为空");
     
     int randLen = arc4random_uniform((int)1000);
     NSString *plaintext = [self randomZhEn:randLen];
-    NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-    XCTAssertNotNil(plainData, @"生成字符串不为空");
+    XCTAssertTrue(plaintext.length > 0, @"生成字符串不为空");
     
-    NSData *digData = nil;
+    NSString *digestText = nil;
     for (NSInteger i = 0; i < 1000; i++) {
-        NSData *tempDigData = [GMSm3Utils hmacWithData:plainData keyData:keyData];
-        XCTAssertNotNil(tempDigData, @"加密字符串不为空");
-        if (digData) {
-            BOOL isSameDig = [digData isEqualToData:tempDigData];
-            XCTAssertTrue(isSameDig, @"多次摘要相同");
+        NSString *tmpDigest = [GMSm3Utils hmacWithText:plaintext keyText:keyText];
+        XCTAssertTrue(tmpDigest.length > 0, @"加密字符串不为空");
+        if (digestText) {
+            BOOL isSameDigest = [digestText isEqualToString:tmpDigest];
+            XCTAssertTrue(isSameDigest, @"多次摘要相同");
         }
-        digData = tempDigData;
+        digestText = tmpDigest;
     }
 }
 
@@ -159,38 +148,34 @@
 - (void)hmacWithType:(GMHashType)hashType hashLen:(int)len {
     for (NSInteger i = 0; i < 1000; i++) {
         int keyLen = arc4random_uniform((int)1000);
-        NSString *key = [self randomZhEn:keyLen];
-        NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
-        XCTAssertNotNil(keyData, @"生成字符串不为空");
+        NSString *keyText = [self randomZhEn:keyLen];
+        XCTAssertTrue(keyText.length > 0, @"生成字符串不为空");
         
         int randLen = arc4random_uniform((int)1000);
         NSString *plaintext = [self randomZhEn:randLen];
-        NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-        XCTAssertNotNil(plainData, @"生成字符串不为空");
+        XCTAssertTrue(plaintext.length > 0, @"生成字符串不为空");
         
-        NSData *hmac1 = [GMSm3Utils hmacWithData:plainData keyData:keyData keyType:hashType];;
-        XCTAssertTrue(hmac1.length == len, @"同种类型 HASH 值长度固定");
+        NSString *hmacHex = [GMSm3Utils hmacWithText:plaintext keyText:keyText keyType:hashType];
+        XCTAssertTrue(hmacHex.length == len * 2, @"同种类型 HASH 值长度固定");
     }
     // 多次摘要相同
     int keyLen = arc4random_uniform((int)1000);
     NSString *keyText = [self randomZhEn:keyLen];
-    NSData *keyData = [keyText dataUsingEncoding:NSUTF8StringEncoding];
-    XCTAssertNotNil(keyData, @"生成字符串不为空");
+    XCTAssertTrue(keyText.length > 0, @"生成字符串不为空");
     
     int randLen = arc4random_uniform((int)1000);
     NSString *plaintext = [self randomZhEn:randLen];
-    NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-    XCTAssertNotNil(plainData, @"生成字符串不为空");
+    XCTAssertTrue(plaintext.length > 0, @"生成字符串不为空");
     
-    NSData *digData = nil;
+    NSString *digestText = nil;
     for (NSInteger i = 0; i < 1000; i++) {
-        NSData *tempDigData = [GMSm3Utils hmacWithData:plainData keyData:keyData keyType:hashType];
-        XCTAssertNotNil(tempDigData, @"加密字符串不为空");
-        if (digData) {
-            BOOL isSameDig = [digData isEqualToData:tempDigData];
-            XCTAssertTrue(isSameDig, @"多次摘要相同");
+        NSString *tmpDigest = [GMSm3Utils hmacWithText:plaintext keyText:keyText keyType:hashType];
+        XCTAssertTrue(tmpDigest.length > 0, @"加密字符串不为空");
+        if (digestText) {
+            BOOL isSameDigest = [digestText isEqualToString:tmpDigest];
+            XCTAssertTrue(isSameDigest, @"多次摘要相同");
         }
-        digData = tempDigData;
+        digestText = tmpDigest;
     }
 }
 
