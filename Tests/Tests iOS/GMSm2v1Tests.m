@@ -376,13 +376,16 @@
         // 加密
         NSString *plaintext = [self randomAny:10000];
         XCTAssertNotNil(plaintext, @"生成明文字符串不为空");
+        NSString *asn1Hex = [GMSm2Utils encryptText:plaintext publicKey:pubKey];
+        XCTAssertTrue(asn1Hex.length > 0, @"密文字符串不为空");
+        
         NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-        NSData *ciphertextASN1 = [GMSm2Utils encryptData:plainData publicKey:pubKey];
-        XCTAssertNotNil(ciphertextASN1, @"密文字符串不为空");
+        NSData *asn1Data = [GMSm2Utils encryptData:plainData publicKey:pubKey];
+        XCTAssertNotNil(asn1Data, @"密文字符串不为空");
         // ASN1 解码
-        NSData *srcC1C3C2Data = [GMSm2Utils asn1DecodeToC1C3C2Data:ciphertextASN1 hasPrefix:NO];
+        NSData *srcC1C3C2Data = [GMSm2Utils asn1DecodeToC1C3C2Data:asn1Data hasPrefix:NO];
         XCTAssertNotNil(srcC1C3C2Data, @"密文字符串不为空");
-        NSString *srcC1C3C2Hex = [GMSm2Utils asn1DecodeToC1C3C2Hex:ciphertextASN1 hasPrefix:NO];
+        NSString *srcC1C3C2Hex = [GMSm2Utils asn1DecodeToC1C3C2Hex:asn1Hex hasPrefix:NO];
         XCTAssertTrue(srcC1C3C2Hex.length > 0, @"密文字符串不为空");
         // 顺序转换
         BOOL hasPrefix = i%2 == 0 ? YES : NO;
@@ -422,6 +425,9 @@
 - (void)testASN1SameResult {
     NSString *plaintext = [self randomAny:10000];
     XCTAssertNotNil(plaintext, @"生成字符串不为空");
+    NSString *ciphertHex = [GMSm2Utils encryptText:plaintext publicKey:self.gPubKey];
+    XCTAssertTrue(ciphertHex.length > 0, @"加密字符串不为空");
+    
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
     NSData *ciphertData = [GMSm2Utils encryptData:plainData publicKey:self.gPubKey];
     XCTAssertNotNil(ciphertData, @"加密字符串不为空");
@@ -434,7 +440,7 @@
         XCTAssertTrue(isSame_decode, @"多次解码应该相同");
     }
     
-    NSString *c1c3c2Hex = [GMSm2Utils asn1DecodeToC1C3C2Hex:ciphertData hasPrefix:NO];
+    NSString *c1c3c2Hex = [GMSm2Utils asn1DecodeToC1C3C2Hex:ciphertHex hasPrefix:NO];
     NSData *c1c3c2HexToData = [GMSmUtils dataFromHexString:c1c3c2Hex];
     XCTAssertTrue([c1c3c2HexToData isEqualToData:c1c3c2Data], @"不同API解码结果应该相同");
     

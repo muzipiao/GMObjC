@@ -91,9 +91,9 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 + (nullable NSData *)asn1DecodeToC1C3C2Data:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix;
 
 /// ASN1  解码。返回按照 C1C3C2 排序的密文(Hex 编码格式)，hasPrefix=YES时，返回结果前面会拼接上 04 前缀标识
-/// @param asn1Data ASN1 编码的密文
+/// @param asn1Hex ASN1 编码的密文 (Hex 编码格式)
 /// @param hasPrefix 返回的密文结果前面是否增加 04 前缀标识，YES 时返回结果前面会拼接上 04，默认 NO
-+ (nullable NSString *)asn1DecodeToC1C3C2Hex:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix;
++ (nullable NSString *)asn1DecodeToC1C3C2Hex:(NSString *)asn1Hex hasPrefix:(BOOL)hasPrefix;
 
 // MARK: - 密文顺序转换
 /// 将密文顺序由 C1C2C3 转为 C1C3C2，返回 C1C3C2 顺序排列的密文，失败返回 nil

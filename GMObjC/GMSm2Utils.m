@@ -527,9 +527,10 @@ static GMSm2Utils *_instance;
 }
 
 /// ASN1  解码。返回按照 C1C3C2 排序的密文(16 进制编码格式)，hasPrefix=YES时，返回结果前面会拼接上 04 前缀标识
-/// @param asn1Data ASN1 编码的密文
+/// @param asn1Hex ASN1 编码的密文 (Hex 编码格式)
 /// @param hasPrefix 返回的密文结果前面是否增加 04 前缀标识，YES 时返回结果前面会拼接上 04，默认 NO
-+ (nullable NSString *)asn1DecodeToC1C3C2Hex:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix {
++ (nullable NSString *)asn1DecodeToC1C3C2Hex:(NSString *)asn1Hex hasPrefix:(BOOL)hasPrefix {
+    NSData *asn1Data = [GMSmUtils dataFromHexString:asn1Hex];
     NSData *c1c3c2Data = [self asn1DecodeToC1C3C2Data:asn1Data hasPrefix:hasPrefix];
     NSString *c1c3c2Hex = [GMSmUtils hexStringFromData:c1c3c2Data];
     return c1c3c2Hex;

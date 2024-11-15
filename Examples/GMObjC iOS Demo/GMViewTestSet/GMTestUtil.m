@@ -20,6 +20,7 @@
     GMSm2Key *keyPair = [GMSm2Utils generateKey];
     NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，Hex 编码格式
     NSString *priKey = keyPair.privateKey; // 测试用私钥，Hex 编码格式
+    
     NSData *encryptData = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // 加密 NSData 类型数据
     NSString *encryptHex = [GMSmUtils hexStringFromData:encryptData];
     NSString *decryptText = [GMSm2Utils decryptHex:encryptHex privateKey:priKey]; // 解密为 NSData 格式明文
@@ -29,6 +30,7 @@
     }else{
         NSLog(@"sm2 加密解密失败");
     }
+    
     NSData *c1c3c2Data = [GMSm2Utils asn1DecodeToC1C3C2Data:encryptData hasPrefix:NO]; // ASN1 解码为 c1c3c2拼接的Data
     // 将解码后的密文顺序更改
     NSData *convertToC1C2C3 = [GMSm2Utils convertC1C3C2DataToC1C2C3:c1c3c2Data hasPrefix:NO];
@@ -60,36 +62,36 @@
 // MARK: - SM2 签名验签
 + (GMTestModel *)testSm2Sign {
     GMSm2Key *keyPair = [GMSm2Utils generateKey];
-    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，Hex 编码格式
-    NSString *priKey = keyPair.privateKey; // 测试用私钥，Hex 编码格式
-    NSData *plainData = [@"123456" dataUsingEncoding:NSUTF8StringEncoding]; // 明文 123456 的 NSData 格式
+    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥（Hex 编码格式）
+    NSString *priKey = keyPair.privateKey; // 测试用私钥（Hex 编码格式）
+    
+    NSString *plaintext = @"123456";
     // userID 传入 nil 或空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
-    NSString *userID = @"lifei_zdjl@qq.com"; // 普通字符串的 userID
-    NSData *userData = [userID dataUsingEncoding:NSUTF8StringEncoding]; // NSData 格式的 userID
+    NSString *userID = @"lifei_zdjl@qq.com";
     // 签名结果是 RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
-    NSString *signStr = [GMSm2Utils signData:plainData privateKey:priKey userData:userData];
+    NSString *signRS = [GMSm2Utils signText:plaintext privateKey:priKey userText:userID];
     // 验证签名
-    BOOL isOK = [GMSm2Utils verifyData:plainData signRS:signStr publicKey:pubKey userData:userData];
+    BOOL isOK = [GMSm2Utils verifyText:plaintext signRS:signRS publicKey:pubKey userText:userID];
     if (isOK) {
         NSLog(@"SM2 签名验签成功");
     }else{
         NSLog(@"SM2 签名验签失败");
     }
-    // 编码为 Der 格式
-    NSString *derSign = [GMSm2Utils encodeDerWithSignRS:signStr];
+    // 编码为 Der 格式（Hex 编码格式）
+    NSString *derSign = [GMSm2Utils encodeDerWithSignRS:signRS];
     // 解码为 RS 字符串格式，RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
-    NSString *rsStr = [GMSm2Utils decodeDerToSignRS:derSign];
+    NSString *rsSign = [GMSm2Utils decodeDerToSignRS:derSign];
     // Der 解码编码后与原文相同
-    if ([rsStr isEqualToString:signStr]) {
+    if ([rsSign isEqualToString:signRS]) {
         NSLog(@"SM2 Der 编码解码成功");
     }else{
         NSLog(@"SM2 Der 编码解码失败");
     }
     GMTestModel *model = [[GMTestModel alloc] initWithTitle:@"SM2签名与验签:"];
-    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"SM2签名" detail:signStr]];
+    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"SM2签名" detail:signRS]];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"验签结果" detail:(isOK ? @"签名验签成功":@"签名验签失败")]];
     [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"Der编码格式SM2签名" detail:derSign]];
-    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"解码Der格式为RS拼接" detail:rsStr]];
+    [model.itemList addObject:[[GMTestItemModel alloc] initWithTitle:@"解码Der格式为RS拼接" detail:rsSign]];
     return model;
 }
 
@@ -175,18 +177,18 @@
 + (GMTestModel *)testECDH {
     // 客户端client生成一对公私钥
     GMSm2Key *clientKey = [GMSm2Utils generateKey];
-    NSString *cPubKey = clientKey.publicKey;
-    NSString *cPriKey = clientKey.privateKey;
+    NSString *clientPubKey = clientKey.publicKey;
+    NSString *clientPriKey = clientKey.privateKey;
     
     // 服务端server生成一对公私钥
     GMSm2Key *serverKey = [GMSm2Utils generateKey];
-    NSString *sPubKey = serverKey.publicKey;
-    NSString *sPriKey = serverKey.privateKey;
+    NSString *serverPubKey = serverKey.publicKey;
+    NSString *serverPriKey = serverKey.privateKey;
     
-    // 客户端client从服务端server获取公钥sPubKey，client协商出32字节对称密钥clientECDH，转Hex后为64字节
-    NSString *clientECDH = [GMSm2Utils computeECDH:sPubKey privateKey:cPriKey];
-    // 客户端client将公钥cPubKey发送给服务端server，server协商出32字节对称密钥serverECDH，转Hex后为64字节
-    NSString *serverECDH = [GMSm2Utils computeECDH:cPubKey privateKey:sPriKey];
+    // 客户端client从服务端server获取公钥serverPubKey，client协商出32字节对称密钥clientECDH，转Hex后为64字节
+    NSString *clientECDH = [GMSm2Utils computeECDH:serverPubKey privateKey:clientPriKey];
+    // 客户端client将公钥clientPubKey发送给服务端server，server协商出32字节对称密钥serverECDH，转Hex后为64字节
+    NSString *serverECDH = [GMSm2Utils computeECDH:clientPubKey privateKey:serverPriKey];
     
     // 在全部明文传输的情况下，client与server协商出相等的对称密钥，clientECDH==serverECDH 成立
     NSString *ecdhResult = [clientECDH isEqualToString:serverECDH] ? @"ECDH 密钥协商成功" : @"ECDH 密钥协商失败";
