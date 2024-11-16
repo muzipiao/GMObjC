@@ -18,8 +18,8 @@
     NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding]; // 明文 123456 的 NSData 格式
     // 生成一对新的公私钥
     GMSm2Key *keyPair = [GMSm2Utils generateKey];
-    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，Hex 编码格式
-    NSString *priKey = keyPair.privateKey; // 测试用私钥，Hex 编码格式
+    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，HEX 编码格式
+    NSString *priKey = keyPair.privateKey; // 测试用私钥，HEX 编码格式
     
     NSData *encryptData = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // 加密 NSData 类型数据
     NSString *encryptHex = [GMSmUtils hexStringFromData:encryptData];
@@ -62,13 +62,13 @@
 // MARK: - SM2 签名验签
 + (GMTestModel *)testSm2Sign {
     GMSm2Key *keyPair = [GMSm2Utils generateKey];
-    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥（Hex 编码格式）
-    NSString *priKey = keyPair.privateKey; // 测试用私钥（Hex 编码格式）
+    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥（HEX 编码格式）
+    NSString *priKey = keyPair.privateKey; // 测试用私钥（HEX 编码格式）
     
     NSString *plaintext = @"123456";
     // userID 传入 nil 或空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
     NSString *userID = @"lifei_zdjl@qq.com";
-    // 签名结果是 RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
+    // 签名结果是 RS 拼接的 128 字节 HEX 格式字符串，前 64 字节是 R，后 64 字节是 S
     NSString *signRS = [GMSm2Utils signText:plaintext privateKey:priKey userText:userID];
     // 验证签名
     BOOL isOK = [GMSm2Utils verifyText:plaintext signRS:signRS publicKey:pubKey userText:userID];
@@ -77,9 +77,9 @@
     }else{
         NSLog(@"SM2 签名验签失败");
     }
-    // 编码为 Der 格式（Hex 编码格式）
+    // 编码为 Der 格式（HEX 编码格式）
     NSString *derSign = [GMSm2Utils encodeDerWithSignRS:signRS];
-    // 解码为 RS 字符串格式，RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
+    // 解码为 RS 字符串格式，RS 拼接的 128 字节 HEX 格式字符串，前 64 字节是 R，后 64 字节是 S
     NSString *rsSign = [GMSm2Utils decodeDerToSignRS:derSign];
     // Der 解码编码后与原文相同
     if ([rsSign isEqualToString:signRS]) {
@@ -239,8 +239,8 @@
     GMTestModel *model = [[GMTestModel alloc] initWithTitle:@"PEM/DER格式密钥文件保存:"];
     
     GMSm2Key *keyPair = [GMSm2Utils generateKey];
-    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，Hex 编码格式
-    NSString *priKey = keyPair.privateKey; // 测试用私钥，Hex 编码格式
+    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，HEX 编码格式
+    NSString *priKey = keyPair.privateKey; // 测试用私钥，HEX 编码格式
     // 保存公私钥的文件路径
     NSString *tmpDir = NSTemporaryDirectory();
     NSString *publicPemPath = [tmpDir stringByAppendingPathComponent:@"t-public.pem"];
@@ -314,7 +314,7 @@
 // MARK: - 压缩/解压公钥
 + (GMTestModel *)testCompressPublicKey {
     GMSm2Key *keyPair = [GMSm2Utils generateKey];
-    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，Hex 编码格式
+    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，HEX 编码格式
     NSString *compressKey = [GMSm2Utils compressPublicKey:pubKey];  // 压缩公钥
     NSString *decompressKey = [GMSm2Utils decompressPublicKey:compressKey]; // 解压公钥
     GMTestModel *model = [[GMTestModel alloc] initWithTitle:@"公钥压缩与解压:"];
@@ -327,8 +327,8 @@
 // MARK: - PEM与DER格式密钥互转
 + (GMTestModel *)testConvertPemAndDer {
     GMSm2Key *keyPair = [GMSm2Utils generateKey];
-    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，Hex 编码格式
-    NSString *priKey = keyPair.privateKey; // 测试用私钥，Hex 编码格式
+    NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，HEX 编码格式
+    NSString *priKey = keyPair.privateKey; // 测试用私钥，HEX 编码格式
     // 保存公私钥的文件路径
     NSString *tmpDir = NSTemporaryDirectory();
     NSString *pubPemPath = [tmpDir stringByAppendingPathComponent:@"t-public.pem"];

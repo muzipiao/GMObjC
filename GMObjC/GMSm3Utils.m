@@ -17,7 +17,7 @@
 }
 
 // MARK: - 文件的摘要值
-/// 提取数据摘要值。返回值 SM3 摘要值（Hex 编码格式）
+/// 提取数据摘要值。返回值 SM3 摘要值（HEX 编码格式）
 /// @param text 待提取摘要的数据
 + (nullable NSString *)hashWithText:(NSString *)text {
     if (text.length == 0) {
@@ -58,7 +58,7 @@
 }
 
 // MARK: - HMAC
-/// HMAC 算法计算 SM3 摘要。返回 hmac 摘要值（Hex 编码格式）
+/// HMAC 算法计算 SM3 摘要。返回 hmac 摘要值（HEX 编码格式）
 /// @param text 待提取摘要的数据
 /// @param keyText 密钥，任意不为空字符
 + (nullable NSString *)hmacWithText:(NSString *)text keyText:(NSString *)keyText {
@@ -74,7 +74,7 @@
     return hmacData;
 }
 
-/// HMAC 算法计算其他类型摘要。返回 hmac 摘要值（Hex 编码格式）
+/// HMAC 算法计算其他类型摘要。返回 hmac 摘要值（HEX 编码格式）
 /// @param text 待提取摘要的数据
 /// @param keyText 密钥，任意不为空字符
 /// @param keyType 选取的摘要算法，详见 GMHashType 枚举
@@ -89,7 +89,7 @@
     return hmacHex;
 }
 
-/// HMAC 算法计算其他类型摘要。返回 hmac 摘要值（Hex 编码格式）
+/// HMAC 算法计算其他类型摘要。返回 hmac 摘要值（HEX 编码格式）
 /// @param data NSData 格式的数据明文
 /// @param keyData NSData 格式的密钥，任意字符
 /// @param keyType 选取的摘要算法，详见 GMHashType 枚举

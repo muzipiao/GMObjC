@@ -70,13 +70,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: - 写入PEM/DER格式文件
 /// 将公钥/私钥写入PEM文件，返回YES成功，NO失败
-/// @param publicHex 04 开头的公钥，privateHex 私钥（ 皆为Hex 编码格式）
+/// @param publicHex 04 开头的公钥，privateHex 私钥（ 皆为HEX 编码格式）
 /// @param filePath PEM文件存储路径
 + (BOOL)savePublicKey:(NSString *)publicHex toPemFileAtPath:(NSString *)filePath;
 + (BOOL)savePrivateKey:(NSString *)privateHex toPemFileAtPath:(NSString *)filePath;
 
 /// 将公钥/私钥写入DER文件，返回YES成功，NO失败
-/// @param publicHex 04 开头的公钥，privateHex 私钥（ 皆为Hex 编码格式）
+/// @param publicHex 04 开头的公钥，privateHex 私钥（ 皆为HEX 编码格式）
 /// @param filePath DER文件存储路径
 + (BOOL)savePublicKey:(NSString *)publicHex toDerFileAtPath:(NSString *)filePath;
 + (BOOL)savePrivateKey:(NSString *)privateHex toDerFileAtPath:(NSString *)filePath;

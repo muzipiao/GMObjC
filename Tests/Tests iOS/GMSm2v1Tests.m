@@ -466,7 +466,7 @@
         NSString *plaintext = [self randomAny:10000];
         XCTAssertNotNil(plaintext, @"生成明文字符串不为空");
         NSString *plainHex = [GMSmUtils hexStringFromString:plaintext];
-        XCTAssertNotNil(plainHex, @"生成明文 Hex 字符串不为空");
+        XCTAssertNotNil(plainHex, @"生成明文 HEX 字符串不为空");
         NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
         XCTAssertNotNil(plainData, @"生成明文 Data 不为空");
         // ASN1 格式密文

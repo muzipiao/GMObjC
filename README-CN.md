@@ -114,17 +114,17 @@ NSString *prikey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB3422E7838E2
 
 // 明文
 NSString *plaintext = @"123456"; // 普通明文
-NSString *plainHex = @"313233343536"; // Hex 格式字明文（123456 的 Hex 编码为 313233343536）
+NSString *plainHex = @"313233343536"; // HEX 格式字明文（123456 的 HEX 编码为 313233343536）
 NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData 格式明文
 
 // sm2 加密
 NSString *enResult1 = [GMSm2Utils encryptText:plaintext publicKey:pubKey]; // 加密普通字符串
-NSString *enResult2 = [GMSm2Utils encryptHex:plainHex publicKey:pubKey]; // 加密 Hex 编码格式字符串
+NSString *enResult2 = [GMSm2Utils encryptHex:plainHex publicKey:pubKey]; // 加密 HEX 编码格式字符串
 NSData *enResult3 = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // 加密 NSData 类型数据
 
 // sm2 解密
 NSString *deResult1 = [GMSm2Utils decryptToText:enResult1 privateKey:priKey]; // 解密为普通字符串明文
-NSString *deResult2 = [GMSm2Utils decryptToHex:enResult2 privateKey:priKey]; // 解密为 Hex 格式明文
+NSString *deResult2 = [GMSm2Utils decryptToHex:enResult2 privateKey:priKey]; // 解密为 HEX 格式明文
 NSData *deResult3 = [GMSm2Utils decryptToData:enResult3 privateKey:priKey]; // 解密为 NSData 格式明文
 ```
 
@@ -146,15 +146,15 @@ NSString *prikey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB3422E7838E2
 
 // 明文
 NSString *plaintext = @"123456"; // 普通明文
-NSString *plainHex = @"313233343536"; // Hex 格式字明文（123456 的 Hex 编码为 313233343536）
+NSString *plainHex = @"313233343536"; // HEX 格式字明文（123456 的 HEX 编码为 313233343536）
 NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData 格式明文
 
 // userID 传入 nil 或空时默认 1234567812345678；不为空时，签名和验签需要相同 ID
 NSString *userID = @"lifei_zdjl@126.com"; // 普通字符串的 userID
-NSString *userHex = [GMUtils stringToHex:userID]; // Hex 格式的 userID
+NSString *userHex = [GMUtils stringToHex:userID]; // HEX 格式的 userID
 NSData *userData = [userID dataUsingEncoding:NSUTF8StringEncoding]; // NSData 格式的 userID
 
-// 签名结果是 RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
+// 签名结果是 RS 拼接的 128 字节 HEX 格式字符串，前 64 字节是 R，后 64 字节是 S
 NSString *signStr1 = [GMSm2Utils signText:plaintext privateKey:priKey userID:userID];
 NSString *signStr2 = [GMSm2Utils signHex:plainHex privateKey:priKey userHex:userHex];
 NSString *signStr3 = [GMSm2Utils signData:plainData priKey:priKey userData:userData];
@@ -169,7 +169,7 @@ NSString *derSign1 = [GMSm2Utils derEncode:signStr1];
 NSString *derSign2 = [GMSm2Utils derEncode:signStr2];
 NSString *derSign3 = [GMSm2Utils derEncode:signStr3];
 
-// 解码为 RS 字符串格式，RS 拼接的 128 字节 Hex 格式字符串，前 64 字节是 R，后 64 字节是 S
+// 解码为 RS 字符串格式，RS 拼接的 128 字节 HEX 格式字符串，前 64 字节是 R，后 64 字节是 S
 NSString *rs1 = [GMSm2Utils derDecode:derSign1];
 NSString *rs2 = [GMSm2Utils derDecode:derSign2];
 NSString *rs3 = [GMSm2Utils derDecode:derSign3];
@@ -252,7 +252,7 @@ SM4 加解密都很简单，加密传入待加密字符串和密钥，解密传�
 
 ```objc
 
-NSString *sm4Key = @"EA4EBDC1DCEAEC733FFD358BA15E8DCD"; // 32 字节 Hex 编码格式字符串密钥
+NSString *sm4Key = @"EA4EBDC1DCEAEC733FFD358BA15E8DCD"; // 32 字节 HEX 编码格式字符串密钥
 NSString *ivec = @"1AFE5CC82D2DE304343FED0AF5FDE7FA"; // 32 字节初始化向量，CBC 加密模式需要
 
 // 明文
@@ -276,7 +276,7 @@ NSData *cbcDecryptData = [GMSm4Utils cbcDecryptData:cbcCipherData key:sm4Key IV:
 
 ### SM3 摘要
 
-类似于 md5、sha1，SM3 摘要算法可对文本文件进行摘要计算，摘要长度为 64 字节的 Hex 编码格式字符串。
+类似于 md5、sha1，SM3 摘要算法可对文本文件进行摘要计算，摘要长度为 64 字节的 HEX 编码格式字符串。
 
 ```objc
 // 原文
@@ -325,12 +325,12 @@ NSString *prikey = @"90F3A42B9FE24AB196305FD92EC82E647616C3A3694441FB3422E7838E2
 
 // 明文
 NSString *plaintext = @"123456"; // 普通明文
-NSString *plainHex = @"313233343536"; // Hex 格式字明文（123456 的 Hex 编码为 313233343536）
+NSString *plainHex = @"313233343536"; // HEX 格式字明文（123456 的 HEX 编码为 313233343536）
 NSData *plainData = [NSData dataWithBytes:"123456" length:6]; // NSData 格式明文
 
 // sm2 加密结果，ASN1 编码的密文
 NSString *enResult1 = [GMSm2Utils encryptText:plaintext publicKey:pubKey]; // 加密普通字符串
-NSString *enResult2 = [GMSm2Utils encryptHex:plainHex publicKey:pubKey]; // 加密 Hex 编码格式字符串
+NSString *enResult2 = [GMSm2Utils encryptHex:plainHex publicKey:pubKey]; // 加密 HEX 编码格式字符串
 NSData *enResult3 = [GMSm2Utils encryptData:plainData publicKey:pubKey]; // 加密 NSData 类型数据
 
 // ASN1 解码，将 ASN1 编码格式的密文解码字符串，数组或者 NSData
@@ -368,7 +368,7 @@ NSString *deResult1 = [GMSm2Utils decryptToText:asn1Result privateKey:priKey];
 NSString *c1c2c3 = [GMSm2Utils convertC1C3C2ToC1C2C3:c1c3c2 hasPrefix:NO];
 ```
 
-密文拆分原理：假设未进行 ASN1 编码的密文是 Hex 编码（16 进制编码）格式，且按照 C1C2C3 顺序排列的，已知 C1 长度固定为 128 字节，C3 长度固定为 64 字节，那 C2 长度 = 密文字符串总长度 - C1长度 128 - C3长度，这样就分别得到了 C1、C2、C3 字符串，自由拼接。
+密文拆分原理：假设未进行 ASN1 编码的密文是 HEX 编码（16 进制编码）格式，且按照 C1C2C3 顺序排列的，已知 C1 长度固定为 128 字节，C3 长度固定为 64 字节，那 C2 长度 = 密文字符串总长度 - C1长度 128 - C3长度，这样就分别得到了 C1、C2、C3 字符串，自由拼接。
 
 ### 生成公私钥
 
@@ -376,8 +376,8 @@ NSString *c1c2c3 = [GMSm2Utils convertC1C3C2ToC1C2C3:c1c3c2 hasPrefix:NO];
 
 ```objc
 NSArray *keyPair = [GMSm2Utils createKeyPair];
-NSString *pubKey = keyPair[0]; // 04 开头公钥，Hex 编码格式
-NSString *priKey = keyPair[1]; // 私钥，Hex 编码格式
+NSString *pubKey = keyPair[0]; // 04 开头公钥，HEX 编码格式
+NSString *priKey = keyPair[1]; // 私钥，HEX 编码格式
 ```
 
 ## SM2 曲线

@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GMSmUtils : NSObject
 
-// MARK: - Hex 编码
+// MARK: - HEX 编码
 /// 字符串 16 进制编码。返回值：16 进制编码的字符串
 /// @param text 待编码的字符串
 + (nullable NSString *)hexStringFromString:(NSString *)text;
@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: - Padding
 /// HEX字符串前面补0，解决 BIGNUM 转 HEX 时，长度不统一问题
-/// @param originHex 原 Hex 字符串
+/// @param originHex 原 HEX 字符串
 /// @param maxLen 补0后长度
 + (NSString *)prefixPaddingZero:(NSString *)originHex maxLen:(NSUInteger)maxLen;
 

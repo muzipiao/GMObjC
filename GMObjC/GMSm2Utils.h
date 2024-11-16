@@ -42,8 +42,8 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 // SM2 公私钥（默认基于官方文档 NID_sm2 推荐曲线）
 @interface GMSm2Key : NSObject
 
-@property (nullable, nonatomic, copy) NSString *publicKey;  // SM2 公钥(Hex 编码格式)
-@property (nullable, nonatomic, copy) NSString *privateKey; // SM2 私钥(Hex 编码格式)
+@property (nullable, nonatomic, copy) NSString *publicKey;  // SM2 公钥(HEX 编码格式)
+@property (nullable, nonatomic, copy) NSString *privateKey; // SM2 私钥(HEX 编码格式)
 
 @end
 
@@ -56,22 +56,22 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 // MARK: - SM2 加解密
 /// SM2 加密。返回 ASN1 编码密文（ASN1 编码可使用 asn1DecodeToC1C3C2Data 解码为非 ASN1 编码），失败返回 nil
 /// @param plainData 明文（NSData 格式）
-/// @param publicHex 04 开头的公钥（ Hex 编码格式）
+/// @param publicHex 04 开头的公钥（ HEX 编码格式）
 + (nullable NSData *)encryptData:(NSData *)plainData publicKey:(NSString *)publicHex;
 
 /// SM2 加密。返回 ASN1 编码密文（ASN1 编码可使用 asn1DecodeToC1C3C2Hex 解码为非 ASN1 编码），失败返回 nil
 /// @param plaintext 明文（NSString 原文格式）
-/// @param publicHex 04 开头的公钥（ Hex 编码格式）
+/// @param publicHex 04 开头的公钥（ HEX 编码格式）
 + (nullable NSString *)encryptText:(NSString *)plaintext publicKey:(NSString *)publicHex;
 
 /// SM2 解密。返回 NSData 格式明文，解密失败返回 nil
 /// @param asn1Data NSData 格式密文（ASN1 编码，若非 ASN1 编码，需要先使用 asn1EncodeWithC1C3C2Data 进行编码）
-/// @param privateHex 私钥（ Hex 编码格式）
+/// @param privateHex 私钥（ HEX 编码格式）
 + (nullable NSData *)decryptData:(NSData *)asn1Data privateKey:(NSString *)privateHex;
 
 /// SM2 解密。返回字符串格式明文，解密失败返回 nil
 /// @param asn1Hex ASN1 编码密文（ASN1 编码，若非 ASN1 编码，需要先使用 asn1EncodeWithC1C3C2Hex 进行编码）
-/// @param privateHex 私钥（ Hex 编码格式）
+/// @param privateHex 私钥（ HEX 编码格式）
 + (nullable NSString *)decryptHex:(NSString *)asn1Hex privateKey:(NSString *)privateHex;
 
 // MARK: - ASN1 编码解码
@@ -80,7 +80,7 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 /// @param hasPrefix 标记密文 c1c3c2Data 前面是否有前缀标识，例如 0x04 前缀标识，默认 NO
 + (nullable NSData *)asn1EncodeWithC1C3C2Data:(NSData *)c1c3c2Data hasPrefix:(BOOL)hasPrefix;
 
-/// ASN1  编码。返回 ASN1 编码的密文（ Hex 编码格式）
+/// ASN1  编码。返回 ASN1 编码的密文（ HEX 编码格式）
 /// @param c1c3c2Hex 按照 C1C3C2 排序的 16 进制编码密文数据，若非此顺序需要先转换
 /// @param hasPrefix 标记密文 c1c3c2Hex 前面是否有前缀标识，例如 04 前缀标识，默认 NO
 + (nullable NSString *)asn1EncodeWithC1C3C2Hex:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix;
@@ -90,8 +90,8 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 /// @param hasPrefix 返回的密文结果前面是否增加 0x04 前缀标识，YES 时返回结果前面会拼接上 0x04，默认 NO
 + (nullable NSData *)asn1DecodeToC1C3C2Data:(NSData *)asn1Data hasPrefix:(BOOL)hasPrefix;
 
-/// ASN1  解码。返回按照 C1C3C2 排序的密文(Hex 编码格式)，hasPrefix=YES时，返回结果前面会拼接上 04 前缀标识
-/// @param asn1Hex ASN1 编码的密文 (Hex 编码格式)
+/// ASN1  解码。返回按照 C1C3C2 排序的密文(HEX 编码格式)，hasPrefix=YES时，返回结果前面会拼接上 04 前缀标识
+/// @param asn1Hex ASN1 编码的密文 (HEX 编码格式)
 /// @param hasPrefix 返回的密文结果前面是否增加 04 前缀标识，YES 时返回结果前面会拼接上 04，默认 NO
 + (nullable NSString *)asn1DecodeToC1C3C2Hex:(NSString *)asn1Hex hasPrefix:(BOOL)hasPrefix;
 
@@ -117,38 +117,38 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 + (nullable NSString *)convertC1C3C2HexToC1C2C3:(NSString *)c1c3c2Hex hasPrefix:(BOOL)hasPrefix;
 
 // MARK: - 签名验签
-/// SM2 数字签名。返回值：数字签名，RS 拼接的 Hex 编码格式字符串，前半部分是 R，后半部分是 S
+/// SM2 数字签名。返回值：数字签名，RS 拼接的 HEX 编码格式字符串，前半部分是 R，后半部分是 S
 /// @param plainData 明文（NSData 格式）
-/// @param privateHex SM2 私钥（Hex 编码格式）
+/// @param privateHex SM2 私钥（HEX 编码格式）
 /// @param userData 用户 ID（NSData 格式），当为 nil 时默认为 "1234567812345678" 的 NSData 格式
 + (nullable NSString *)signData:(NSData *)plainData privateKey:(NSString *)privateHex userData:(nullable NSData *)userData;
 
-/// SM2 数字签名。返回值：数字签名，RS 拼接的 Hex 编码格式字符串，前半部分是 R，后半部分是 S
+/// SM2 数字签名。返回值：数字签名，RS 拼接的 HEX 编码格式字符串，前半部分是 R，后半部分是 S
 /// @param plaintext 明文（字符串格式）
-/// @param privateHex SM2 私钥（Hex 编码格式）
+/// @param privateHex SM2 私钥（HEX 编码格式）
 /// @param userText 用户 ID（字符串格式），当为 nil 时默认为 "1234567812345678"
 + (nullable NSString *)signText:(NSString *)plaintext privateKey:(NSString *)privateHex userText:(nullable NSString *)userText;
 
 /// SM2 验证数字签名。返回值：验签结果，YES 为通过，NO 为不通过
 /// @param plainData 明文（NSData 格式）
-/// @param signRS 数字签名，RS 拼接的 Hex 编码格式字符串，前半部分是 R，后半部分是 S
-/// @param publicHex SM2 公钥（Hex 编码格式）
+/// @param signRS 数字签名，RS 拼接的 HEX 编码格式字符串，前半部分是 R，后半部分是 S
+/// @param publicHex SM2 公钥（HEX 编码格式）
 /// @param userData 用户 ID（NSData 格式，任意值），当为 nil 时默认为 "1234567812345678" 的 NSData 格式
 + (BOOL)verifyData:(NSData *)plainData signRS:(NSString *)signRS publicKey:(NSString *)publicHex userData:(nullable NSData *)userData;
 
 /// SM2 验证数字签名。返回值：验签结果，YES 为通过，NO 为不通过
 /// @param plaintext 明文（字符串格式）
-/// @param signRS 数字签名，RS 拼接的 Hex 编码格式字符串，前半部分是 R，后半部分是 S
-/// @param publicHex SM2 公钥（Hex 编码格式）
+/// @param signRS 数字签名，RS 拼接的 HEX 编码格式字符串，前半部分是 R，后半部分是 S
+/// @param publicHex SM2 公钥（HEX 编码格式）
 /// @param userText 用户 ID（字符串格式），当为 nil 时默认为 "1234567812345678"
 + (BOOL)verifyText:(NSString *)plaintext signRS:(NSString *)signRS publicKey:(NSString *)publicHex userText:(nullable NSString *)userText;
 
 // MARK: - SM2 签名 Der 编码解码
 /// Der 编码。返回值：SM2 数字签名， Der 编码格式
-/// @param signRS RS 拼接的 Hex 编码格式字符串，前半部分是 R，后半部分是 S
+/// @param signRS RS 拼接的 HEX 编码格式字符串，前半部分是 R，后半部分是 S
 + (nullable NSString *)encodeDerWithSignRS:(NSString *)signRS;
 
-/// Der 解码。SM2 数字签名 Der 解码，返回值：数字签名，RS 拼接的Hex 编码格式字符串，前半部分是 R，后半部分是 S
+/// Der 解码。SM2 数字签名 Der 解码，返回值：数字签名，RS 拼接的HEX 编码格式字符串，前半部分是 R，后半部分是 S
 /// @param derSign Der 编码格式的数字签名，通常以 30 开头
 + (nullable NSString *)decodeDerToSignRS:(NSString *)derSign;
 
@@ -163,13 +163,13 @@ typedef NS_ENUM(int, GMSm2CurveType) {
 
 // MARK: - SM2 私钥计算公钥
 /// SM2 私钥计算公钥。返回值：04 开头的非压缩公钥
-/// @param privateHex  私钥（ Hex 编码格式）
+/// @param privateHex  私钥（ HEX 编码格式）
 + (nullable NSString *)calcPublicKeyFromPrivateKey:(NSString *)privateHex;
 
 // MARK: - ECDH 密钥协商
-/// 椭圆曲线 Diffie-Hellman 密钥协商（ECDH），返回 64 字节 Hex 编码格式密钥
-/// @param publicHex 对方公钥（ Hex 编码格式）
-/// @param privateHex 己方私钥（ Hex 编码格式）
+/// 椭圆曲线 Diffie-Hellman 密钥协商（ECDH），返回 64 字节 HEX 编码格式密钥
+/// @param publicHex 对方公钥（ HEX 编码格式）
+/// @param privateHex 己方私钥（ HEX 编码格式）
 + (nullable NSString *)computeECDH:(NSString *)publicHex privateKey:(NSString *)privateHex;
 
 // MARK: - 椭圆曲线类型

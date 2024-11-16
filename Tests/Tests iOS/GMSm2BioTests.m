@@ -154,8 +154,8 @@
     NSString *tmpDir = NSTemporaryDirectory();
     for (NSInteger i = 0; i < 100; i++) {
         GMSm2Key *keyPair = [GMSm2Utils generateKey];
-        NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，Hex 编码格式
-        NSString *priKey = keyPair.privateKey; // 测试用私钥，Hex 编码格式
+        NSString *pubKey = keyPair.publicKey; // 测试用 04 开头公钥，HEX 编码格式
+        NSString *priKey = keyPair.privateKey; // 测试用私钥，HEX 编码格式
         XCTAssertTrue(pubKey.length > 0 && priKey.length > 0, @"生成密钥不应为空");
         // 保存公私钥的文件路径
         NSString *pubPemName = [NSString stringWithFormat:@"t-pub-%d.pem", (int)i];

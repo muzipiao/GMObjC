@@ -16,7 +16,7 @@
 }
 
 // MARK: - 生成 SM4 密钥
-/// 生成 SM4 密钥（Hex 编码格式）。返回值：长度为 SM4_BLOCK_SIZE(16) 字节密钥
+/// 生成 SM4 密钥（HEX 编码格式）。返回值：长度为 SM4_BLOCK_SIZE(16) 字节密钥
 + (nullable NSString *)generateKey {
     NSInteger len = SM4_BLOCK_SIZE;
     uint8_t bytes[len];
@@ -38,9 +38,9 @@
 }
 
 // MARK: - ECB 加密
-/// SM4 ECB 模式加密。返回值：加密后的密文（Hex 编码格式）
+/// SM4 ECB 模式加密。返回值：加密后的密文（HEX 编码格式）
 /// @param plaintext 明文（字符串类型）
-/// @param keyHex  密钥（Hex 编码格式）
+/// @param keyHex  密钥（HEX 编码格式）
 + (nullable NSString *)encryptTextWithECB:(NSString *)plaintext keyHex:(NSString *)keyHex {
     if (plaintext.length == 0 || keyHex.length == 0) {
         return nil;
@@ -93,9 +93,9 @@
 }
 
 // MARK: - ECB 解密
-/// SM4 ECB 模式解密。返回值：解密后的明文（Hex 编码格式）
-/// @param ciphertext 密文（Hex 编码格式）
-/// @param keyHex 密钥（Hex 编码格式）
+/// SM4 ECB 模式解密。返回值：解密后的明文（HEX 编码格式）
+/// @param ciphertext 密文（HEX 编码格式）
+/// @param keyHex 密钥（HEX 编码格式）
 + (nullable NSString *)decryptTextWithECB:(NSString *)ciphertext keyHex:(NSString *)keyHex {
     NSData *cipherData = [GMSmUtils dataFromHexString:ciphertext];
     NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
@@ -142,10 +142,10 @@
 }
 
 // MARK: - CBC 加密
-/// SM4 CBC 模式加密。返回值：加密后的密文（Hex 编码格式）
+/// SM4 CBC 模式加密。返回值：加密后的密文（HEX 编码格式）
 /// @param plaintext 明文（字符串类型）
-/// @param keyHex 密钥（Hex 编码格式）
-/// @param ivecHex 密钥（Hex 编码格式），确保加解密相同即可
+/// @param keyHex 密钥（HEX 编码格式）
+/// @param ivecHex 密钥（HEX 编码格式），确保加解密相同即可
 + (nullable NSString *)encryptTextWithCBC:(NSString *)plaintext keyHex:(NSString *)keyHex ivecHex:(NSString *)ivecHex {
     if (plaintext.length == 0 || keyHex.length == 0) {
         return nil;
@@ -203,8 +203,8 @@
 // MARK: - CBC 解密
 /// SM4 CBC 模式解密。返回值：解密后的明文
 /// @param ciphertext 密文（字符串类型）
-/// @param keyHex 密钥（Hex 编码格式）
-/// @param ivecHex 密钥（Hex 编码格式），确保加解密相同即可
+/// @param keyHex 密钥（HEX 编码格式）
+/// @param ivecHex 密钥（HEX 编码格式），确保加解密相同即可
 + (nullable NSString *)decryptTextWithCBC:(NSString *)ciphertext keyHex:(NSString *)keyHex ivecHex:(NSString *)ivecHex {
     NSData *cipherData = [GMSmUtils dataFromHexString:ciphertext];
     NSData *keyData = [GMSmUtils dataFromHexString:keyHex];
