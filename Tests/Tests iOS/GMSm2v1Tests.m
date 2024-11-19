@@ -428,8 +428,7 @@
     NSString *ciphertHex = [GMSm2Utils encryptText:plaintext publicKey:self.gPubKey];
     XCTAssertTrue(ciphertHex.length > 0, @"加密字符串不为空");
     
-    NSData *plainData = [plaintext dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *ciphertData = [GMSm2Utils encryptData:plainData publicKey:self.gPubKey];
+    NSData *ciphertData = [GMSmUtils dataFromHexString:ciphertHex];
     XCTAssertNotNil(ciphertData, @"加密字符串不为空");
     
     NSData *c1c3c2Data = [GMSm2Utils asn1DecodeToC1C3C2Data:ciphertData hasPrefix:NO];
@@ -444,21 +443,21 @@
     NSData *c1c3c2HexToData = [GMSmUtils dataFromHexString:c1c3c2Hex];
     XCTAssertTrue([c1c3c2HexToData isEqualToData:c1c3c2Data], @"不同API解码结果应该相同");
     
-    NSData *encodeStr = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:NO];
-    XCTAssertNotNil(encodeStr, @"ASN1编码后字符串不为空");
+    NSData *encodeData = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:NO];
+    XCTAssertNotNil(encodeData, @"ASN1编码后字符串不为空");
     for (NSInteger i = 0; i < 1000; i++) {
-        NSData *newEncodeStr = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:NO];
-        BOOL isSame_encode = [newEncodeStr isEqualToData:encodeStr];
-        XCTAssertTrue(isSame_encode, @"多次编码应该相同");
+        NSData *newEncodeData = [GMSm2Utils asn1EncodeWithC1C3C2Data:c1c3c2Data hasPrefix:NO];
+        BOOL isSameEncode = [newEncodeData isEqualToData:encodeData];
+        XCTAssertTrue(isSameEncode, @"多次编码应该相同");
     }
     
-    BOOL isSame_Ctext = [encodeStr isEqualToData:ciphertData];
-    XCTAssertTrue(isSame_Ctext, @"编码后和原始密文相同");
+    BOOL isSameCiphertext = [encodeData isEqualToData:ciphertData];
+    XCTAssertTrue(isSameCiphertext, @"编码后和原始密文相同");
     
-    NSData *decryptStr = [GMSm2Utils decryptData:ciphertData privateKey:self.gPriKey];
-    XCTAssertNotNil(decryptStr, @"解密结果不为空");
-    BOOL isSame_plain = [decryptStr isEqualToData:plainData];
-    XCTAssertTrue(isSame_plain, @"加解密结果应该相同");
+    NSData *decryptData = [GMSm2Utils decryptData:ciphertData privateKey:self.gPriKey];
+    XCTAssertNotNil(decryptData, @"解密结果不为空");
+    BOOL isSamePlaintext = [decryptData isEqualToData:[plaintext dataUsingEncoding:NSUTF8StringEncoding]];
+    XCTAssertTrue(isSamePlaintext, @"加解密结果应该相同");
 }
 
 - (void)testASN1AnyText {
