@@ -29,6 +29,7 @@
 在终端运行以下命令:
 
 ```ruby
+# 国内用户可访问 git clone https://gitee.com/cocoafei/GMObjC.git
 git clone https://github.com/muzipiao/GMObjC.git
 
 cd GMObjC
