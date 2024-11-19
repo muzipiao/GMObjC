@@ -1,0 +1,6 @@
+framework module GMObjC {
+  umbrella header "GMObjC.h"
+  export *
+
+  module * { export * }
+}
