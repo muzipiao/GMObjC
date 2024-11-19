@@ -1,7 +1,10 @@
-<div style="display: flex; justify-content: center; align-items: center; margin-bottom: 8px;">
+<p align="center">
   <img src="https://muzipiao.github.io/gmdocs/img/gmobjc-logo-rect.svg" width="50%">
-</div>
+</p>
 
+<div align="center">
+
+[![简体中文 README](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%20README-8A2BE2)](https://github.com/muzipiao/GMObjC/blob/master/README-CN.md)
 [![Build Status](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml/badge.svg)](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml)
 [![Pod Version](https://img.shields.io/cocoapods/v/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 [![Platforms](https://img.shields.io/cocoapods/p/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
@@ -9,9 +12,7 @@
 [![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-brightgreen.svg)](https://swift.org/package-manager/)
 [![codecov](https://codecov.io/gh/muzipiao/GMObjC/branch/master/graph/badge.svg)](https://codecov.io/gh/muzipiao/GMObjC)
 
-[简体中文 Readme 文档](https://github.com/muzipiao/GMObjC/blob/master/README-CN.md)
-
-# GMObjC
+</div>
 
 **GMObjC** is an Objective-C open source library based on OpenSSL's national secret (SM2, SM3, SM4) algorithms, suitable for iOS and macOS development. It encapsulates multiple encryption algorithms released by the State Cryptography Administration of China, including:
 

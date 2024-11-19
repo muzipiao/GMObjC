@@ -1,7 +1,10 @@
-<div style="display: flex; justify-content: center; align-items: center; margin-bottom: 8px;">
+<p align="center">
   <img src="https://muzipiao.github.io/gmdocs/img/gmobjc-logo-rect.svg" width="50%">
-</div>
+</p>
 
+<div align="center">
+
+[![English README](https://img.shields.io/badge/English%20README-8A2BE2)](https://github.com/muzipiao/GMObjC/blob/master/README.md)
 [![Build Status](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml/badge.svg)](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml)
 [![Pod Version](https://img.shields.io/cocoapods/v/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 [![Platforms](https://img.shields.io/cocoapods/p/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
@@ -9,9 +12,7 @@
 [![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-brightgreen.svg)](https://swift.org/package-manager/)
 [![codecov](https://codecov.io/gh/muzipiao/GMObjC/branch/master/graph/badge.svg)](https://codecov.io/gh/muzipiao/GMObjC)
 
-[English Readme](https://github.com/muzipiao/GMObjC/blob/master/README.md)
-
-# GMObjC
+</div>
 
 **GMObjC** 是一个基于 OpenSSL 的国密（SM2、SM3、SM4）算法的 Objective-C 开源库，适用于 iOS 和 macOS 开发。它封装了中国国家密码管理局发布的多种加密算法，包括：
 
