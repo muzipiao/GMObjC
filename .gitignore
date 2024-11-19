@@ -27,8 +27,8 @@ DerivedData/
 
 ## App packaging
 *.ipa
-*.dSYM.zip
-*.dSYM
+# *.dSYM.zip
+# *.dSYM
 
 # CocoaPods
 #
