@@ -1,6 +1,6 @@
-<p style="text-align: center; margin-bottom: 8px;">
+<div style="display: flex; justify-content: center; align-items: center; margin-bottom: 8px;">
   <img src="https://muzipiao.github.io/gmdocs/img/gmobjc-logo-rect.svg" width="50%">
-</p>
+</div>
 
 [![Build Status](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml/badge.svg)](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml)
 [![Pod Version](https://img.shields.io/cocoapods/v/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
