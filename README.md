@@ -1,6 +1,6 @@
-<div style="text-align: center; margin-bottom: 8px;">
+<p style="text-align: center; margin-bottom: 8px;">
   <img src="https://muzipiao.github.io/gmdocs/img/gmobjc-logo-rect.svg" width="50%">
-</div>
+</p>
 
 [![Build Status](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml/badge.svg)](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml)
 [![Pod Version](https://img.shields.io/cocoapods/v/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
@@ -92,9 +92,9 @@ NSString *serverECDH = [GMSm2Utils computeECDH:clientPubKey privateKey:serverPri
 
 // In the case of all plaintext transmission, the client and server negotiate an equal symmetric key, and clientECDH==serverECDH holds
 if ([clientECDH isEqualToString:serverECDH]) {
-NSLog(@"ECDH key negotiation is successful, and the negotiated symmetric key is:\n%@", clientECDH);
+    NSLog(@"ECDH key negotiation is successful, and the negotiated symmetric key is:\n%@", clientECDH);
 }else{
-NSLog(@"ECDH Key negotiation failed");
+    NSLog(@"ECDH Key negotiation failed");
 }
 ```
 
