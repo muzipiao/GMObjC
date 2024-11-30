@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![English README](https://img.shields.io/badge/English%20README-8A2BE2)](https://github.com/muzipiao/GMObjC/blob/master/README.md)
+[![English README](https://img.shields.io/badge/%F0%9F%91%89%20English%20README%F0%9F%91%88-8A2BE2)](https://github.com/muzipiao/GMObjC/blob/master/README.md)
 [![Build Status](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml/badge.svg)](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml)
 [![Pod Version](https://img.shields.io/cocoapods/v/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 [![Platforms](https://img.shields.io/cocoapods/p/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)

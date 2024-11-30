@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![简体中文 README](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%20README-8A2BE2)](https://github.com/muzipiao/GMObjC/blob/master/README-CN.md)
+[![简体中文 README](https://img.shields.io/badge/%F0%9F%91%89%20%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%20README%F0%9F%91%88-8A2BE2)](https://github.com/muzipiao/GMObjC/blob/master/README-CN.md)
 [![Build Status](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml/badge.svg)](https://github.com/muzipiao/GMObjC/actions/workflows/build.yml)
 [![Pod Version](https://img.shields.io/cocoapods/v/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
 [![Platforms](https://img.shields.io/cocoapods/p/GMObjC.svg?style=flat)](https://cocoapods.org/pods/GMObjC)
@@ -22,7 +22,7 @@
 
 ## Documentation
 
-For detailed documentation, please visit [https://muzipiao.github.io/gmdocs/zh/](https://muzipiao.github.io/gmdocs/zh/).
+For detailed documentation, please visit [https://muzipiao.github.io/gmdocs/](https://muzipiao.github.io/gmdocs/).
 
 ## Try Demo
 
