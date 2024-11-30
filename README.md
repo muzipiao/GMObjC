@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="https://muzipiao.github.io/gmdocs/img/gmobjc-logo-rect.svg" width="50%">
+  <a href="https://muzipiao.github.io/gmdocs/">
+    <img src="https://muzipiao.github.io/gmdocs/img/gmobjc-logo-rect.svg" width="50%">
+  </a>
 </p>
 
 <div align="center">
