@@ -20,5 +20,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.13'
 
-  s.dependency "GMOpenSSL", "~> 3.0.9"
+  s.dependency "GMOpenSSL", "~> 3.1.0"
 end
