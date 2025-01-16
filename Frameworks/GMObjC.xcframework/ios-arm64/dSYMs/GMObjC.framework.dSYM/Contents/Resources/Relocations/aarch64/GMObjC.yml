@@ -1,9 +1,9 @@
 ---
 triple:          'arm64-apple-darwin'
-binary-path:     '/Users/lifei/Library/Caches/org.carthage.CarthageKit/DerivedData/15.4_15F31d/GMObjC/4.0.0/Build/Intermediates.noindex/ArchiveIntermediates/GMObjC/BuildProductsPath/Release-iphoneos/GMObjC.framework/GMObjC'
+binary-path:     '/Users/lifei/Library/Developer/Xcode/DerivedData/GMObjC-hdhuwzuvilfzjxgffyncwmpbwcvr/Build/Intermediates.noindex/ArchiveIntermediates/GMObjC/BuildProductsPath/Release-iphoneos/GMObjC.framework/GMObjC'
 relocations:
-  - { offsetInCU: 0x34, offset: 0x34F88, size: 0x8, addend: 0x0, symName: _GMObjCVersionString, symObjAddr: 0x0, symBinAddr: 0x1097F0, symSize: 0x0 }
-  - { offsetInCU: 0x69, offset: 0x34FBD, size: 0x8, addend: 0x0, symName: _GMObjCVersionNumber, symObjAddr: 0x28, symBinAddr: 0x109818, symSize: 0x0 }
+  - { offsetInCU: 0x34, offset: 0x34F88, size: 0x8, addend: 0x0, symName: _GMObjCVersionString, symObjAddr: 0x0, symBinAddr: 0x109830, symSize: 0x0 }
+  - { offsetInCU: 0x69, offset: 0x34FBD, size: 0x8, addend: 0x0, symName: _GMObjCVersionNumber, symObjAddr: 0x28, symBinAddr: 0x109858, symSize: 0x0 }
   - { offsetInCU: 0x27, offset: 0x34FFA, size: 0x8, addend: 0x0, symName: '-[GMSm2KeyFiles description]', symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0x8C }
   - { offsetInCU: 0x309, offset: 0x352DC, size: 0x8, addend: 0x0, symName: '-[GMSm2KeyFiles description]', symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0x8C }
   - { offsetInCU: 0x340, offset: 0x35313, size: 0x8, addend: 0x0, symName: '-[GMSm2KeyFiles publicKeyPath]', symObjAddr: 0x8C, symBinAddr: 0x408C, symSize: 0x8 }
@@ -103,10 +103,10 @@ relocations:
   - { offsetInCU: 0x27, offset: 0x3965D, size: 0x8, addend: 0x0, symName: _d2i_SM2_Ciphertext_1, symObjAddr: 0x0, symBinAddr: 0x7C98, symSize: 0xC }
   - { offsetInCU: 0x4F, offset: 0x39685, size: 0x8, addend: 0x0, symName: _SM2_Ciphertext_1_it, symObjAddr: 0x2E08, symBinAddr: 0x1504F8, symSize: 0x0 }
   - { offsetInCU: 0x5E, offset: 0x39694, size: 0x8, addend: 0x0, symName: '+[GMSm2Utils shared]', symObjAddr: 0x10C, symBinAddr: 0x7DA4, symSize: 0x40 }
-  - { offsetInCU: 0x88, offset: 0x396BE, size: 0x8, addend: 0x0, symName: _shared.onceToken, symObjAddr: 0x110F0, symBinAddr: 0x179B58, symSize: 0x0 }
+  - { offsetInCU: 0x88, offset: 0x396BE, size: 0x8, addend: 0x0, symName: _shared.onceToken, symObjAddr: 0x10FD8, symBinAddr: 0x179B58, symSize: 0x0 }
   - { offsetInCU: 0xC9, offset: 0x396FF, size: 0x8, addend: 0x0, symName: '+[GMSm2Utils allocWithZone:]', symObjAddr: 0x190, symBinAddr: 0x7E28, symSize: 0x74 }
-  - { offsetInCU: 0xF3, offset: 0x39729, size: 0x8, addend: 0x0, symName: '_allocWithZone:.onceToken', symObjAddr: 0x11100, symBinAddr: 0x179B68, symSize: 0x0 }
-  - { offsetInCU: 0x160, offset: 0x39796, size: 0x8, addend: 0x0, symName: __instance, symObjAddr: 0x110F8, symBinAddr: 0x179B60, symSize: 0x0 }
+  - { offsetInCU: 0xF3, offset: 0x39729, size: 0x8, addend: 0x0, symName: '_allocWithZone:.onceToken', symObjAddr: 0x10FE8, symBinAddr: 0x179B68, symSize: 0x0 }
+  - { offsetInCU: 0x160, offset: 0x39796, size: 0x8, addend: 0x0, symName: __instance, symObjAddr: 0x10FE0, symBinAddr: 0x179B60, symSize: 0x0 }
   - { offsetInCU: 0x1AD, offset: 0x397E3, size: 0x8, addend: 0x0, symName: _SM2_Ciphertext_1_seq_tt, symObjAddr: 0x2D68, symBinAddr: 0x150458, symSize: 0x0 }
   - { offsetInCU: 0x29F, offset: 0x398D5, size: 0x8, addend: 0x0, symName: _d2i_SM2_Ciphertext_1, symObjAddr: 0x0, symBinAddr: 0x7C98, symSize: 0xC }
   - { offsetInCU: 0x329, offset: 0x3995F, size: 0x8, addend: 0x0, symName: _i2d_SM2_Ciphertext_1, symObjAddr: 0xC, symBinAddr: 0x7CA4, symSize: 0xC }

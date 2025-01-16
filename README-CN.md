@@ -145,7 +145,7 @@ NSString *decrypted = [GMSm4Utils decryptTextWithCBC:ciphertext keyHex:sm4KeyHex
 
 | GMObjC 版本 |   支持架构   | 兼容平台 |         兼容版本          |
 | :---------: | :----------: | :------: | :-----------------------: |
-|    4.0.0    | x86_64 arm64 | iOS OSX  | iOS>= iOS 9.0, OSX>=10.13 |
+|    4.0.2    | x86_64 arm64 | iOS OSX  | iOS>= iOS 9.0, OSX>=10.13 |
 |    3.3.8    | x86_64 arm64 |   iOS    |        >= iOS 9.0         |
 
 ## License

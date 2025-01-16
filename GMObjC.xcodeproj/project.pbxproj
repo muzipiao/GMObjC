@@ -40,7 +40,7 @@
 		9CA353EB2CE2029100630D51 /* GMSm2Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm2Utils.h; sourceTree = "<group>"; };
 		9CA353EC2CE2029100630D51 /* GMSm4Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSm4Utils.h; sourceTree = "<group>"; };
 		9CA353F92CE202BA00630D51 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		9CA353FB2CE202D900630D51 /* OpenSSL.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:9CA5KUE8T7:BEIJING JINHER SOFTWARE CO.LTD."; lastKnownFileType = wrapper.xcframework; path = OpenSSL.xcframework; sourceTree = "<group>"; };
+		9CA353FB2CE202D900630D51 /* OpenSSL.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:4BX77JHQHH:fei li"; lastKnownFileType = wrapper.xcframework; path = OpenSSL.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

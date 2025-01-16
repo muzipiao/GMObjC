@@ -24,7 +24,10 @@
 
 ## Documentation
 
-For detailed documentation, please visit [https://muzipiao.github.io/gmdocs/](https://muzipiao.github.io/gmdocs/).
+For detailed documentation, please visit:
+
+* English document [https://muzipiao.github.io/gmdocs/](https://muzipiao.github.io/gmdocs/)
+* 简体中文文档 [https://muzipiao.github.io/gmdocs/zh/](https://muzipiao.github.io/gmdocs/zh/)
 
 ## Try Demo
 
@@ -144,7 +147,7 @@ NSString *decrypted = [GMSm4Utils decryptTextWithCBC:ciphertext keyHex:sm4KeyHex
 
 | GMObjC Version | Supported Architecture | Compatible Platforms |    Compatible Versions    |
 | :------------: | :--------------------: | :------------------: | :-----------------------: |
-|     4.0.0      |      x86_64 arm64      |       iOS OSX        | iOS>= iOS 9.0, OSX>=10.13 |
+|     4.0.2      |      x86_64 arm64      |       iOS OSX        | iOS>= iOS 9.0, OSX>=10.13 |
 |     3.3.8      |      x86_64 arm64      |         iOS          |        >= iOS 9.0         |
 
 ## License
