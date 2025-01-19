@@ -15,7 +15,8 @@ Pod::Spec.new do |s|
   s.resource_bundles    = {'GMObjC' => ['GMObjC/PrivacyInfo.xcprivacy']}
 
   s.requires_arc = true
-  s.frameworks   = "Security"
+  s.static_framework = true
+  s.frameworks   = "Security"  
   
   s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.13'
