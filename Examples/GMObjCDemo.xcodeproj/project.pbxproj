@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0726408C77272FA3CBD0C416 /* libPods-GMObjC Mac Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 917BF1DEBB71D3B9589B967D /* libPods-GMObjC Mac Demo.a */; };
+		0726408C77272FA3CBD0C416 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		2EB043182AAE819B4F50297F /* Pods_GMDynamic_iOS_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C04F365C181ECC0EA0EC147 /* Pods_GMDynamic_iOS_Demo.framework */; };
+		90531A8A2BA1F9846B20F5EA /* libPods-GMObjC Mac Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C555C941774C0EBB97C8EFF /* libPods-GMObjC Mac Demo.a */; };
 		9C27EEC42CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC32CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 */; };
 		9C27EEC52CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC32CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 */; };
 		9C27EEC82CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC62CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 */; };
@@ -79,6 +81,141 @@
 		9CCDFC0F2B357087004E50AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCDFC0E2B357087004E50AD /* AppDelegate.swift */; };
 		9CCDFC132B357088004E50AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CCDFC122B357088004E50AD /* Assets.xcassets */; };
 		9CD523372B47EDB40077D8E8 /* GMTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD523362B47EDB40077D8E8 /* GMTestCell.swift */; };
+		9CD7690E2D90F9120044CDF7 /* GMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74590F270FE4790062C1E5 /* GMViewController.m */; };
+		9CD7690F2D90F9120044CDF7 /* GMTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC40DDD2AB03E5F00E5C253 /* GMTestCell.m */; };
+		9CD769102D90F9120044CDF7 /* GMTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC40DDB2AB03E5F00E5C253 /* GMTestModel.m */; };
+		9CD769112D90F9120044CDF7 /* GMTestUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC40DDC2AB03E5F00E5C253 /* GMTestUtil.m */; };
+		9CD769122D90F9120044CDF7 /* GMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74590C270FE4790062C1E5 /* GMAppDelegate.m */; };
+		9CD769132D90F9120044CDF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C745905270FE3AE0062C1E5 /* main.m */; };
+		9CD769172D90F9120044CDF7 /* sm2pub-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E627101106008411A1 /* sm2pub-1.pem */; };
+		9CD769182D90F9120044CDF7 /* sm2pri-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C627101105008411A1 /* sm2pri-9.der */; };
+		9CD769192D90F9120044CDF7 /* sm2pub-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E327101106008411A1 /* sm2pub-7.pem */; };
+		9CD7691A2D90F9120044CDF7 /* sm2pri-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BB27101105008411A1 /* sm2pri-10.pem */; };
+		9CD7691B2D90F9120044CDF7 /* sm2pri-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BA27101105008411A1 /* sm2pri-1.pem */; };
+		9CD7691C2D90F9120044CDF7 /* sm2pub-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D627101105008411A1 /* sm2pub-2.der */; };
+		9CD7691D2D90F9120044CDF7 /* sm2pub-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D727101105008411A1 /* sm2pub-3.der */; };
+		9CD7691E2D90F9120044CDF7 /* sm2pri-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B827101105008411A1 /* sm2pri-2.pem */; };
+		9CD7691F2D90F9120044CDF7 /* sm2pub-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D827101105008411A1 /* sm2pub-7.der */; };
+		9CD769202D90F9120044CDF7 /* sm2pri-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BD27101105008411A1 /* sm2pri-9.pem */; };
+		9CD769212D90F9120044CDF7 /* sm2pub-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E027101105008411A1 /* sm2pub-5.pem */; };
+		9CD769222D90F9120044CDF7 /* sm2pri-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C427101105008411A1 /* sm2pri-5.der */; };
+		9CD769232D90F9120044CDF7 /* sm2pri-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C327101105008411A1 /* sm2pri-7.der */; };
+		9CD769242D90F9120044CDF7 /* bing-der-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD42A6FBB25008B80DE /* bing-der-single.cer */; };
+		9CD769252D90F9120044CDF7 /* sm2pri-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B927101105008411A1 /* sm2pri-3.pem */; };
+		9CD769262D90F9120044CDF7 /* sm2pri8-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CE27101105008411A1 /* sm2pri8-2.pem */; };
+		9CD769272D90F9120044CDF7 /* sm2pri-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C227101105008411A1 /* sm2pri-6.der */; };
+		9CD769282D90F9120044CDF7 /* sm2pub-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E727101106008411A1 /* sm2pub-10.pem */; };
+		9CD769292D90F9120044CDF7 /* sm2pri-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B727101105008411A1 /* sm2pri-6.pem */; };
+		9CD7692A2D90F9120044CDF7 /* sm2pri8-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CC27101105008411A1 /* sm2pri8-10.pem */; };
+		9CD7692B2D90F9120044CDF7 /* sm2pub-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D527101105008411A1 /* sm2pub-1.der */; };
+		9CD7692C2D90F9120044CDF7 /* sm2pub-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E827101106008411A1 /* sm2pub-9.pem */; };
+		9CD7692D2D90F9120044CDF7 /* sm2pri-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B427101105008411A1 /* sm2pri-4.pem */; };
+		9CD7692E2D90F9120044CDF7 /* bing-base64-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD32A6FBB25008B80DE /* bing-base64-single.cer */; };
+		9CD7692F2D90F9120044CDF7 /* sm2pub-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E927101106008411A1 /* sm2pub-8.pem */; };
+		9CD769302D90F9120044CDF7 /* sm2pub-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E427101106008411A1 /* sm2pub-3.pem */; };
+		9CD769312D90F9120044CDF7 /* sm2pub-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E527101106008411A1 /* sm2pub-2.pem */; };
+		9CD769322D90F9120044CDF7 /* sm4TestFile.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89EA27101106008411A1 /* sm4TestFile.txt */; };
+		9CD769332D90F9120044CDF7 /* sm2pri-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B627101105008411A1 /* sm2pri-7.pem */; };
+		9CD769342D90F9120044CDF7 /* sm2pri-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C027101105008411A1 /* sm2pri-3.der */; };
+		9CD769352D90F9120044CDF7 /* sm2pub-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E227101106008411A1 /* sm2pub-6.pem */; };
+		9CD769362D90F9120044CDF7 /* sm2pub-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DC27101105008411A1 /* sm2pub-8.der */; };
+		9CD769372D90F9120044CDF7 /* sm2pri-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C827101105008411A1 /* sm2pri-10.der */; };
+		9CD769382D90F9120044CDF7 /* sm2pri-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BF27101105008411A1 /* sm2pri-1.der */; };
+		9CD769392D90F9120044CDF7 /* aiboxkit-pkcs12-single.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC32CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 */; };
+		9CD7693A2D90F9120044CDF7 /* sm2pub-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DB27101105008411A1 /* sm2pub-5.der */; };
+		9CD7693B2D90F9120044CDF7 /* sm2pri8-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D127101105008411A1 /* sm2pri8-4.pem */; };
+		9CD7693C2D90F9120044CDF7 /* sm2pri8-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CD27101105008411A1 /* sm2pri8-3.pem */; };
+		9CD7693D2D90F9120044CDF7 /* sm2pri-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C127101105008411A1 /* sm2pri-2.der */; };
+		9CD7693E2D90F9120044CDF7 /* sm2pri-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C527101105008411A1 /* sm2pri-4.der */; };
+		9CD7693F2D90F9120044CDF7 /* sm2pub-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DE27101105008411A1 /* sm2pub-10.der */; };
+		9CD769402D90F9120044CDF7 /* github-der-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD22A6FBB25008B80DE /* github-der-single.cer */; };
+		9CD769412D90F9120044CDF7 /* github-base64-chain.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD82A6FBB25008B80DE /* github-base64-chain.cer */; };
+		9CD769422D90F9120044CDF7 /* sm2pri8-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CF27101105008411A1 /* sm2pri8-1.pem */; };
+		9CD769432D90F9120044CDF7 /* sm2pub-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E127101106008411A1 /* sm2pub-4.pem */; };
+		9CD769442D90F9120044CDF7 /* sm2pri8-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D327101105008411A1 /* sm2pri8-7.pem */; };
+		9CD769452D90F9120044CDF7 /* sm2pri8-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CA27101105008411A1 /* sm2pri8-9.pem */; };
+		9CD769462D90F9120044CDF7 /* sm2pub-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DD27101105008411A1 /* sm2pub-9.der */; };
+		9CD769472D90F9120044CDF7 /* sm2pri-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C727101105008411A1 /* sm2pri-8.der */; };
+		9CD769482D90F9120044CDF7 /* aiboxkit-cer-ecdsa.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC72CE1F97D0028FF60 /* aiboxkit-cer-ecdsa.cer */; };
+		9CD769492D90F9120044CDF7 /* sm2pub-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D927101105008411A1 /* sm2pub-6.der */; };
+		9CD7694A2D90F9120044CDF7 /* bing-base64-chain.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD12A6FBB25008B80DE /* bing-base64-chain.cer */; };
+		9CD7694B2D90F9120044CDF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C745901270FE3AE0062C1E5 /* LaunchScreen.storyboard */; };
+		9CD7694C2D90F9120044CDF7 /* github-base64-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD62A6FBB25008B80DE /* github-base64-single.cer */; };
+		9CD7694D2D90F9120044CDF7 /* sm2pri-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BC27101105008411A1 /* sm2pri-8.pem */; };
+		9CD7694E2D90F9120044CDF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C7458FF270FE3AE0062C1E5 /* Assets.xcassets */; };
+		9CD7694F2D90F9120044CDF7 /* sm2pri8-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D027101105008411A1 /* sm2pri8-5.pem */; };
+		9CD769502D90F9120044CDF7 /* sm2pri-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B527101105008411A1 /* sm2pri-5.pem */; };
+		9CD769512D90F9120044CDF7 /* sm2pub-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DA27101105008411A1 /* sm2pub-4.der */; };
+		9CD769522D90F9120044CDF7 /* sm2pri8-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CB27101105008411A1 /* sm2pri8-8.pem */; };
+		9CD769532D90F9120044CDF7 /* aiboxkit-pkcs12-pwd.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC62CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 */; };
+		9CD769542D90F9120044CDF7 /* sm2pri8-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D227101105008411A1 /* sm2pri8-6.pem */; };
+		9CD7695E2D90F9A00044CDF7 /* GMTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC40DDB2AB03E5F00E5C253 /* GMTestModel.m */; };
+		9CD7695F2D90F9A00044CDF7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB630D02B3A9DE90017AE18 /* main.swift */; };
+		9CD769602D90F9A00044CDF7 /* GMTestUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC40DDC2AB03E5F00E5C253 /* GMTestUtil.m */; };
+		9CD769612D90F9A00044CDF7 /* GMMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDD89962B396588000FE5C4 /* GMMainVC.swift */; };
+		9CD769622D90F9A00044CDF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCDFC0E2B357087004E50AD /* AppDelegate.swift */; };
+		9CD769632D90F9A00044CDF7 /* GMTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD523362B47EDB40077D8E8 /* GMTestCell.swift */; };
+		9CD769672D90F9A00044CDF7 /* sm2pub-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E227101106008411A1 /* sm2pub-6.pem */; };
+		9CD769682D90F9A00044CDF7 /* sm2pub-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DB27101105008411A1 /* sm2pub-5.der */; };
+		9CD769692D90F9A00044CDF7 /* sm2pri-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C227101105008411A1 /* sm2pri-6.der */; };
+		9CD7696A2D90F9A00044CDF7 /* sm2pri-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B727101105008411A1 /* sm2pri-6.pem */; };
+		9CD7696B2D90F9A00044CDF7 /* sm2pub-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E827101106008411A1 /* sm2pub-9.pem */; };
+		9CD7696C2D90F9A00044CDF7 /* sm2pri-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BB27101105008411A1 /* sm2pri-10.pem */; };
+		9CD7696D2D90F9A00044CDF7 /* sm2pri-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BD27101105008411A1 /* sm2pri-9.pem */; };
+		9CD7696E2D90F9A00044CDF7 /* bing-base64-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD32A6FBB25008B80DE /* bing-base64-single.cer */; };
+		9CD7696F2D90F9A00044CDF7 /* aiboxkit-pkcs12-pwd.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC62CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 */; };
+		9CD769702D90F9A00044CDF7 /* sm2pri-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BF27101105008411A1 /* sm2pri-1.der */; };
+		9CD769712D90F9A00044CDF7 /* sm2pri-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B927101105008411A1 /* sm2pri-3.pem */; };
+		9CD769722D90F9A00044CDF7 /* github-base64-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD62A6FBB25008B80DE /* github-base64-single.cer */; };
+		9CD769732D90F9A00044CDF7 /* sm2pub-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E427101106008411A1 /* sm2pub-3.pem */; };
+		9CD769742D90F9A00044CDF7 /* github-base64-chain.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD82A6FBB25008B80DE /* github-base64-chain.cer */; };
+		9CD769752D90F9A00044CDF7 /* sm2pub-6.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D927101105008411A1 /* sm2pub-6.der */; };
+		9CD769762D90F9A00044CDF7 /* sm2pub-1.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D527101105008411A1 /* sm2pub-1.der */; };
+		9CD769772D90F9A00044CDF7 /* sm2pri-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C127101105008411A1 /* sm2pri-2.der */; };
+		9CD769782D90F9A00044CDF7 /* sm2pub-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DE27101105008411A1 /* sm2pub-10.der */; };
+		9CD769792D90F9A00044CDF7 /* sm2pri-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B627101105008411A1 /* sm2pri-7.pem */; };
+		9CD7697A2D90F9A00044CDF7 /* aiboxkit-cer-ecdsa.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC72CE1F97D0028FF60 /* aiboxkit-cer-ecdsa.cer */; };
+		9CD7697B2D90F9A00044CDF7 /* sm2pri8-6.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D227101105008411A1 /* sm2pri8-6.pem */; };
+		9CD7697C2D90F9A00044CDF7 /* sm2pub-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DC27101105008411A1 /* sm2pub-8.der */; };
+		9CD7697D2D90F9A00044CDF7 /* sm2pri-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B527101105008411A1 /* sm2pri-5.pem */; };
+		9CD7697E2D90F9A00044CDF7 /* sm2pub-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E127101106008411A1 /* sm2pub-4.pem */; };
+		9CD7697F2D90F9A00044CDF7 /* sm2pub-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E327101106008411A1 /* sm2pub-7.pem */; };
+		9CD769802D90F9A00044CDF7 /* sm2pub-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E727101106008411A1 /* sm2pub-10.pem */; };
+		9CD769812D90F9A00044CDF7 /* aiboxkit-pkcs12-single.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 9C27EEC32CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 */; };
+		9CD769822D90F9A00044CDF7 /* sm2pub-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D727101105008411A1 /* sm2pub-3.der */; };
+		9CD769832D90F9A00044CDF7 /* sm2pri8-10.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CC27101105008411A1 /* sm2pri8-10.pem */; };
+		9CD769842D90F9A00044CDF7 /* sm2pri-3.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C027101105008411A1 /* sm2pri-3.der */; };
+		9CD769852D90F9A00044CDF7 /* sm2pri-5.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C427101105008411A1 /* sm2pri-5.der */; };
+		9CD769862D90F9A00044CDF7 /* sm2pub-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D827101105008411A1 /* sm2pub-7.der */; };
+		9CD769872D90F9A00044CDF7 /* sm2pri8-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D127101105008411A1 /* sm2pri8-4.pem */; };
+		9CD769882D90F9A00044CDF7 /* sm2pub-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E627101106008411A1 /* sm2pub-1.pem */; };
+		9CD769892D90F9A00044CDF7 /* sm2pub-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DA27101105008411A1 /* sm2pub-4.der */; };
+		9CD7698A2D90F9A00044CDF7 /* sm2pri8-3.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CD27101105008411A1 /* sm2pri8-3.pem */; };
+		9CD7698B2D90F9A00044CDF7 /* sm2pub-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E927101106008411A1 /* sm2pub-8.pem */; };
+		9CD7698C2D90F9A00044CDF7 /* sm2pub-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89DD27101105008411A1 /* sm2pub-9.der */; };
+		9CD7698D2D90F9A00044CDF7 /* sm2pri8-7.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D327101105008411A1 /* sm2pri8-7.pem */; };
+		9CD7698E2D90F9A00044CDF7 /* sm2pri8-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CF27101105008411A1 /* sm2pri8-1.pem */; };
+		9CD7698F2D90F9A00044CDF7 /* sm2pri-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B827101105008411A1 /* sm2pri-2.pem */; };
+		9CD769902D90F9A00044CDF7 /* sm2pri8-9.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CA27101105008411A1 /* sm2pri8-9.pem */; };
+		9CD769912D90F9A00044CDF7 /* sm2pri-4.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89B427101105008411A1 /* sm2pri-4.pem */; };
+		9CD769922D90F9A00044CDF7 /* sm2pub-2.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D627101105008411A1 /* sm2pub-2.der */; };
+		9CD769932D90F9A00044CDF7 /* sm2pub-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E527101106008411A1 /* sm2pub-2.pem */; };
+		9CD769942D90F9A00044CDF7 /* sm2pri8-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CB27101105008411A1 /* sm2pri8-8.pem */; };
+		9CD769952D90F9A00044CDF7 /* sm4TestFile.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89EA27101106008411A1 /* sm4TestFile.txt */; };
+		9CD769962D90F9A00044CDF7 /* bing-base64-chain.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD12A6FBB25008B80DE /* bing-base64-chain.cer */; };
+		9CD769972D90F9A00044CDF7 /* github-der-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD22A6FBB25008B80DE /* github-der-single.cer */; };
+		9CD769982D90F9A00044CDF7 /* sm2pri8-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89D027101105008411A1 /* sm2pri8-5.pem */; };
+		9CD769992D90F9A00044CDF7 /* sm2pri-1.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BA27101105008411A1 /* sm2pri-1.pem */; };
+		9CD7699A2D90F9A00044CDF7 /* sm2pri8-2.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89CE27101105008411A1 /* sm2pri8-2.pem */; };
+		9CD7699B2D90F9A00044CDF7 /* sm2pub-5.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89E027101105008411A1 /* sm2pub-5.pem */; };
+		9CD7699C2D90F9A00044CDF7 /* sm2pri-9.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C627101105008411A1 /* sm2pri-9.der */; };
+		9CD7699D2D90F9A00044CDF7 /* sm2pri-7.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C327101105008411A1 /* sm2pri-7.der */; };
+		9CD7699E2D90F9A00044CDF7 /* sm2pri-4.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C527101105008411A1 /* sm2pri-4.der */; };
+		9CD7699F2D90F9A00044CDF7 /* sm2pri-8.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C727101105008411A1 /* sm2pri-8.der */; };
+		9CD769A02D90F9A00044CDF7 /* bing-der-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD42A6FBB25008B80DE /* bing-der-single.cer */; };
+		9CD769A12D90F9A00044CDF7 /* sm2pri-8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89BC27101105008411A1 /* sm2pri-8.pem */; };
+		9CD769A22D90F9A00044CDF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CCDFC122B357088004E50AD /* Assets.xcassets */; };
+		9CD769A32D90F9A00044CDF7 /* sm2pri-10.der in Resources */ = {isa = PBXBuildFile; fileRef = 9CBB89C827101105008411A1 /* sm2pri-10.der */; };
 		9CDD89972B396588000FE5C4 /* GMMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDD89962B396588000FE5C4 /* GMMainVC.swift */; };
 		9CE013142B5E4AD700F49627 /* bing-der-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD42A6FBB25008B80DE /* bing-der-single.cer */; };
 		9CE013152B5E4AD700F49627 /* github-base64-chain.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD82A6FBB25008B80DE /* github-base64-chain.cer */; };
@@ -143,15 +280,20 @@
 		9CF02FDE2A6FBB25008B80DE /* bing-der-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD42A6FBB25008B80DE /* bing-der-single.cer */; };
 		9CF02FE02A6FBB25008B80DE /* github-base64-single.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD62A6FBB25008B80DE /* github-base64-single.cer */; };
 		9CF02FE22A6FBB25008B80DE /* github-base64-chain.cer in Resources */ = {isa = PBXBuildFile; fileRef = 9CF02FD82A6FBB25008B80DE /* github-base64-chain.cer */; };
-		A9D35D54CE4CC29ED7ACDCFE /* libPods-GMObjC iOS Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E4A04DB15A16DA7ADA9CC6 /* libPods-GMObjC iOS Demo.a */; };
+		A9D35D54CE4CC29ED7ACDCFE /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		C58ACBA511CCBD60627E0CE6 /* Pods_GMDynamic_Mac_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC1C9952B1AAE74E5F2E812E /* Pods_GMDynamic_Mac_Demo.framework */; };
+		E821A61D66EE6A1FB77DD7DB /* libPods-GMObjC iOS Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48C8E42206A21E6B3232D42D /* libPods-GMObjC iOS Demo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5818E8AA1CA717B3E78E5AD6 /* Pods-GMObjC Mac Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC Mac Demo.release.xcconfig"; path = "Target Support Files/Pods-GMObjC Mac Demo/Pods-GMObjC Mac Demo.release.xcconfig"; sourceTree = "<group>"; };
-		5DA619B03298D7421B799AE8 /* Pods-GMObjC iOS Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC iOS Demo.release.xcconfig"; path = "Target Support Files/Pods-GMObjC iOS Demo/Pods-GMObjC iOS Demo.release.xcconfig"; sourceTree = "<group>"; };
-		68E4A04DB15A16DA7ADA9CC6 /* libPods-GMObjC iOS Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GMObjC iOS Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7359A048C4A87E3BADAFF8AD /* Pods-GMObjC Mac Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC Mac Demo.debug.xcconfig"; path = "Target Support Files/Pods-GMObjC Mac Demo/Pods-GMObjC Mac Demo.debug.xcconfig"; sourceTree = "<group>"; };
-		917BF1DEBB71D3B9589B967D /* libPods-GMObjC Mac Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GMObjC Mac Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A7810B917F6955EA1E9BDBA /* Pods-GMDynamic Mac Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMDynamic Mac Demo.release.xcconfig"; path = "Target Support Files/Pods-GMDynamic Mac Demo/Pods-GMDynamic Mac Demo.release.xcconfig"; sourceTree = "<group>"; };
+		1C04F365C181ECC0EA0EC147 /* Pods_GMDynamic_iOS_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMDynamic_iOS_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C68B35FA5D98AEC5337FF79 /* Pods-GMObjC Mac Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC Mac Demo.debug.xcconfig"; path = "Target Support Files/Pods-GMObjC Mac Demo/Pods-GMObjC Mac Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		3E42181FDCF561F05486D139 /* Pods-GMObjC iOS Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC iOS Demo.debug.xcconfig"; path = "Target Support Files/Pods-GMObjC iOS Demo/Pods-GMObjC iOS Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		48C8E42206A21E6B3232D42D /* libPods-GMObjC iOS Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GMObjC iOS Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C555C941774C0EBB97C8EFF /* libPods-GMObjC Mac Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GMObjC Mac Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DAF64F571F0D7E6E8F7C81F /* Pods-GMDynamic Mac Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMDynamic Mac Demo.debug.xcconfig"; path = "Target Support Files/Pods-GMDynamic Mac Demo/Pods-GMDynamic Mac Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		67453592FB3E302E23B5D47D /* Pods-GMDynamic iOS Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMDynamic iOS Demo.debug.xcconfig"; path = "Target Support Files/Pods-GMDynamic iOS Demo/Pods-GMDynamic iOS Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		9C27EEC32CE1F7A50028FF60 /* aiboxkit-pkcs12-single.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aiboxkit-pkcs12-single.p12"; sourceTree = "<group>"; };
 		9C27EEC62CE1F97D0028FF60 /* aiboxkit-pkcs12-pwd.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aiboxkit-pkcs12-pwd.p12"; sourceTree = "<group>"; };
 		9C27EEC72CE1F97D0028FF60 /* aiboxkit-cer-ecdsa.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aiboxkit-cer-ecdsa.cer"; sourceTree = "<group>"; };
@@ -228,6 +370,9 @@
 		9CCDFC172B357088004E50AD /* GMObjC_Mac_Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GMObjC_Mac_Demo.entitlements; sourceTree = "<group>"; };
 		9CD523352B47E8ED0077D8E8 /* GMObjC_Mac_Demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GMObjC_Mac_Demo-Bridging-Header.h"; sourceTree = "<group>"; };
 		9CD523362B47EDB40077D8E8 /* GMTestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMTestCell.swift; sourceTree = "<group>"; };
+		9CD769592D90F9120044CDF7 /* GMDynamic iOS Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GMDynamic iOS Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CD7695A2D90F9120044CDF7 /* GMDynamic iOS Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GMDynamic iOS Demo-Info.plist"; path = "/Users/lifei/Desktop/github/GMObjC/Examples/GMDynamic iOS Demo-Info.plist"; sourceTree = "<absolute>"; };
+		9CD769A82D90F9A00044CDF7 /* GMDynamic Mac Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GMDynamic Mac Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CDD89962B396588000FE5C4 /* GMMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GMMainVC.swift; sourceTree = "<group>"; };
 		9CF02FD12A6FBB25008B80DE /* bing-base64-chain.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bing-base64-chain.cer"; sourceTree = "<group>"; };
 		9CF02FD22A6FBB25008B80DE /* github-der-single.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "github-der-single.cer"; sourceTree = "<group>"; };
@@ -235,7 +380,10 @@
 		9CF02FD42A6FBB25008B80DE /* bing-der-single.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "bing-der-single.cer"; sourceTree = "<group>"; };
 		9CF02FD62A6FBB25008B80DE /* github-base64-single.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "github-base64-single.cer"; sourceTree = "<group>"; };
 		9CF02FD82A6FBB25008B80DE /* github-base64-chain.cer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "github-base64-chain.cer"; sourceTree = "<group>"; };
-		C5F15FD95DCACC01B478E5C2 /* Pods-GMObjC iOS Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC iOS Demo.debug.xcconfig"; path = "Target Support Files/Pods-GMObjC iOS Demo/Pods-GMObjC iOS Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		C50188F8242A35B08B35E0F7 /* Pods-GMObjC Mac Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC Mac Demo.release.xcconfig"; path = "Target Support Files/Pods-GMObjC Mac Demo/Pods-GMObjC Mac Demo.release.xcconfig"; sourceTree = "<group>"; };
+		D1DF73FBCCAF7E1BC0D86BC7 /* Pods-GMObjC iOS Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMObjC iOS Demo.release.xcconfig"; path = "Target Support Files/Pods-GMObjC iOS Demo/Pods-GMObjC iOS Demo.release.xcconfig"; sourceTree = "<group>"; };
+		DC1C9952B1AAE74E5F2E812E /* Pods_GMDynamic_Mac_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GMDynamic_Mac_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8388F88B1C3F3B4C9669CAC /* Pods-GMDynamic iOS Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMDynamic iOS Demo.release.xcconfig"; path = "Target Support Files/Pods-GMDynamic iOS Demo/Pods-GMDynamic iOS Demo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,7 +391,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9D35D54CE4CC29ED7ACDCFE /* libPods-GMObjC iOS Demo.a in Frameworks */,
+				A9D35D54CE4CC29ED7ACDCFE /* (null) in Frameworks */,
+				E821A61D66EE6A1FB77DD7DB /* libPods-GMObjC iOS Demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,20 +400,41 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0726408C77272FA3CBD0C416 /* libPods-GMObjC Mac Demo.a in Frameworks */,
+				0726408C77272FA3CBD0C416 /* (null) in Frameworks */,
+				90531A8A2BA1F9846B20F5EA /* libPods-GMObjC Mac Demo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CD769142D90F9120044CDF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EB043182AAE819B4F50297F /* Pods_GMDynamic_iOS_Demo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CD769642D90F9A00044CDF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C58ACBA511CCBD60627E0CE6 /* Pods_GMDynamic_Mac_Demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4614C124F07FDB4DFCBCF368 /* Pods */ = {
+		3B9C4956EDE6597471E3E04B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7359A048C4A87E3BADAFF8AD /* Pods-GMObjC Mac Demo.debug.xcconfig */,
-				5818E8AA1CA717B3E78E5AD6 /* Pods-GMObjC Mac Demo.release.xcconfig */,
-				C5F15FD95DCACC01B478E5C2 /* Pods-GMObjC iOS Demo.debug.xcconfig */,
-				5DA619B03298D7421B799AE8 /* Pods-GMObjC iOS Demo.release.xcconfig */,
+				4DAF64F571F0D7E6E8F7C81F /* Pods-GMDynamic Mac Demo.debug.xcconfig */,
+				1A7810B917F6955EA1E9BDBA /* Pods-GMDynamic Mac Demo.release.xcconfig */,
+				67453592FB3E302E23B5D47D /* Pods-GMDynamic iOS Demo.debug.xcconfig */,
+				F8388F88B1C3F3B4C9669CAC /* Pods-GMDynamic iOS Demo.release.xcconfig */,
+				1C68B35FA5D98AEC5337FF79 /* Pods-GMObjC Mac Demo.debug.xcconfig */,
+				C50188F8242A35B08B35E0F7 /* Pods-GMObjC Mac Demo.release.xcconfig */,
+				3E42181FDCF561F05486D139 /* Pods-GMObjC iOS Demo.debug.xcconfig */,
+				D1DF73FBCCAF7E1BC0D86BC7 /* Pods-GMObjC iOS Demo.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
@@ -273,8 +443,10 @@
 		56D0E04BA6AD31614EE08036 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				68E4A04DB15A16DA7ADA9CC6 /* libPods-GMObjC iOS Demo.a */,
-				917BF1DEBB71D3B9589B967D /* libPods-GMObjC Mac Demo.a */,
+				DC1C9952B1AAE74E5F2E812E /* Pods_GMDynamic_Mac_Demo.framework */,
+				1C04F365C181ECC0EA0EC147 /* Pods_GMDynamic_iOS_Demo.framework */,
+				4C555C941774C0EBB97C8EFF /* libPods-GMObjC Mac Demo.a */,
+				48C8E42206A21E6B3232D42D /* libPods-GMObjC iOS Demo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -287,7 +459,8 @@
 				9CCDFC0D2B357087004E50AD /* GMObjC Mac Demo */,
 				9C7458F1270FE3AD0062C1E5 /* Products */,
 				56D0E04BA6AD31614EE08036 /* Frameworks */,
-				4614C124F07FDB4DFCBCF368 /* Pods */,
+				9CD7695A2D90F9120044CDF7 /* GMDynamic iOS Demo-Info.plist */,
+				3B9C4956EDE6597471E3E04B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -296,6 +469,8 @@
 			children = (
 				9C7458F0270FE3AD0062C1E5 /* GMObjC iOS Demo.app */,
 				9CCDFC0C2B357087004E50AD /* GMObjC Mac Demo.app */,
+				9CD769592D90F9120044CDF7 /* GMDynamic iOS Demo.app */,
+				9CD769A82D90F9A00044CDF7 /* GMDynamic Mac Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -500,6 +675,44 @@
 			productReference = 9CCDFC0C2B357087004E50AD /* GMObjC Mac Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9CD7690B2D90F9120044CDF7 /* GMDynamic iOS Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CD769562D90F9120044CDF7 /* Build configuration list for PBXNativeTarget "GMDynamic iOS Demo" */;
+			buildPhases = (
+				9CD7690C2D90F9120044CDF7 /* [CP] Check Pods Manifest.lock */,
+				9CD7690D2D90F9120044CDF7 /* Sources */,
+				9CD769142D90F9120044CDF7 /* Frameworks */,
+				9CD769162D90F9120044CDF7 /* Resources */,
+				51BB3D5D939623AF0D512A2F /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GMDynamic iOS Demo";
+			productName = GMObjCDemo;
+			productReference = 9CD769592D90F9120044CDF7 /* GMDynamic iOS Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9CD7695B2D90F9A00044CDF7 /* GMDynamic Mac Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CD769A52D90F9A00044CDF7 /* Build configuration list for PBXNativeTarget "GMDynamic Mac Demo" */;
+			buildPhases = (
+				9CD7695C2D90F9A00044CDF7 /* [CP] Check Pods Manifest.lock */,
+				9CD7695D2D90F9A00044CDF7 /* Sources */,
+				9CD769642D90F9A00044CDF7 /* Frameworks */,
+				9CD769662D90F9A00044CDF7 /* Resources */,
+				EBAD1F6335F15C9F40072B8A /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GMDynamic Mac Demo";
+			productName = "GMObjC Mac Demo";
+			productReference = 9CD769A82D90F9A00044CDF7 /* GMDynamic Mac Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -533,6 +746,8 @@
 			targets = (
 				9C7458EF270FE3AD0062C1E5 /* GMObjC iOS Demo */,
 				9CCDFC0B2B357087004E50AD /* GMObjC Mac Demo */,
+				9CD7690B2D90F9120044CDF7 /* GMDynamic iOS Demo */,
+				9CD7695B2D90F9A00044CDF7 /* GMDynamic Mac Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -675,9 +890,163 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9CD769162D90F9120044CDF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CD769172D90F9120044CDF7 /* sm2pub-1.pem in Resources */,
+				9CD769182D90F9120044CDF7 /* sm2pri-9.der in Resources */,
+				9CD769192D90F9120044CDF7 /* sm2pub-7.pem in Resources */,
+				9CD7691A2D90F9120044CDF7 /* sm2pri-10.pem in Resources */,
+				9CD7691B2D90F9120044CDF7 /* sm2pri-1.pem in Resources */,
+				9CD7691C2D90F9120044CDF7 /* sm2pub-2.der in Resources */,
+				9CD7691D2D90F9120044CDF7 /* sm2pub-3.der in Resources */,
+				9CD7691E2D90F9120044CDF7 /* sm2pri-2.pem in Resources */,
+				9CD7691F2D90F9120044CDF7 /* sm2pub-7.der in Resources */,
+				9CD769202D90F9120044CDF7 /* sm2pri-9.pem in Resources */,
+				9CD769212D90F9120044CDF7 /* sm2pub-5.pem in Resources */,
+				9CD769222D90F9120044CDF7 /* sm2pri-5.der in Resources */,
+				9CD769232D90F9120044CDF7 /* sm2pri-7.der in Resources */,
+				9CD769242D90F9120044CDF7 /* bing-der-single.cer in Resources */,
+				9CD769252D90F9120044CDF7 /* sm2pri-3.pem in Resources */,
+				9CD769262D90F9120044CDF7 /* sm2pri8-2.pem in Resources */,
+				9CD769272D90F9120044CDF7 /* sm2pri-6.der in Resources */,
+				9CD769282D90F9120044CDF7 /* sm2pub-10.pem in Resources */,
+				9CD769292D90F9120044CDF7 /* sm2pri-6.pem in Resources */,
+				9CD7692A2D90F9120044CDF7 /* sm2pri8-10.pem in Resources */,
+				9CD7692B2D90F9120044CDF7 /* sm2pub-1.der in Resources */,
+				9CD7692C2D90F9120044CDF7 /* sm2pub-9.pem in Resources */,
+				9CD7692D2D90F9120044CDF7 /* sm2pri-4.pem in Resources */,
+				9CD7692E2D90F9120044CDF7 /* bing-base64-single.cer in Resources */,
+				9CD7692F2D90F9120044CDF7 /* sm2pub-8.pem in Resources */,
+				9CD769302D90F9120044CDF7 /* sm2pub-3.pem in Resources */,
+				9CD769312D90F9120044CDF7 /* sm2pub-2.pem in Resources */,
+				9CD769322D90F9120044CDF7 /* sm4TestFile.txt in Resources */,
+				9CD769332D90F9120044CDF7 /* sm2pri-7.pem in Resources */,
+				9CD769342D90F9120044CDF7 /* sm2pri-3.der in Resources */,
+				9CD769352D90F9120044CDF7 /* sm2pub-6.pem in Resources */,
+				9CD769362D90F9120044CDF7 /* sm2pub-8.der in Resources */,
+				9CD769372D90F9120044CDF7 /* sm2pri-10.der in Resources */,
+				9CD769382D90F9120044CDF7 /* sm2pri-1.der in Resources */,
+				9CD769392D90F9120044CDF7 /* aiboxkit-pkcs12-single.p12 in Resources */,
+				9CD7693A2D90F9120044CDF7 /* sm2pub-5.der in Resources */,
+				9CD7693B2D90F9120044CDF7 /* sm2pri8-4.pem in Resources */,
+				9CD7693C2D90F9120044CDF7 /* sm2pri8-3.pem in Resources */,
+				9CD7693D2D90F9120044CDF7 /* sm2pri-2.der in Resources */,
+				9CD7693E2D90F9120044CDF7 /* sm2pri-4.der in Resources */,
+				9CD7693F2D90F9120044CDF7 /* sm2pub-10.der in Resources */,
+				9CD769402D90F9120044CDF7 /* github-der-single.cer in Resources */,
+				9CD769412D90F9120044CDF7 /* github-base64-chain.cer in Resources */,
+				9CD769422D90F9120044CDF7 /* sm2pri8-1.pem in Resources */,
+				9CD769432D90F9120044CDF7 /* sm2pub-4.pem in Resources */,
+				9CD769442D90F9120044CDF7 /* sm2pri8-7.pem in Resources */,
+				9CD769452D90F9120044CDF7 /* sm2pri8-9.pem in Resources */,
+				9CD769462D90F9120044CDF7 /* sm2pub-9.der in Resources */,
+				9CD769472D90F9120044CDF7 /* sm2pri-8.der in Resources */,
+				9CD769482D90F9120044CDF7 /* aiboxkit-cer-ecdsa.cer in Resources */,
+				9CD769492D90F9120044CDF7 /* sm2pub-6.der in Resources */,
+				9CD7694A2D90F9120044CDF7 /* bing-base64-chain.cer in Resources */,
+				9CD7694B2D90F9120044CDF7 /* LaunchScreen.storyboard in Resources */,
+				9CD7694C2D90F9120044CDF7 /* github-base64-single.cer in Resources */,
+				9CD7694D2D90F9120044CDF7 /* sm2pri-8.pem in Resources */,
+				9CD7694E2D90F9120044CDF7 /* Assets.xcassets in Resources */,
+				9CD7694F2D90F9120044CDF7 /* sm2pri8-5.pem in Resources */,
+				9CD769502D90F9120044CDF7 /* sm2pri-5.pem in Resources */,
+				9CD769512D90F9120044CDF7 /* sm2pub-4.der in Resources */,
+				9CD769522D90F9120044CDF7 /* sm2pri8-8.pem in Resources */,
+				9CD769532D90F9120044CDF7 /* aiboxkit-pkcs12-pwd.p12 in Resources */,
+				9CD769542D90F9120044CDF7 /* sm2pri8-6.pem in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CD769662D90F9A00044CDF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CD769672D90F9A00044CDF7 /* sm2pub-6.pem in Resources */,
+				9CD769682D90F9A00044CDF7 /* sm2pub-5.der in Resources */,
+				9CD769692D90F9A00044CDF7 /* sm2pri-6.der in Resources */,
+				9CD7696A2D90F9A00044CDF7 /* sm2pri-6.pem in Resources */,
+				9CD7696B2D90F9A00044CDF7 /* sm2pub-9.pem in Resources */,
+				9CD7696C2D90F9A00044CDF7 /* sm2pri-10.pem in Resources */,
+				9CD7696D2D90F9A00044CDF7 /* sm2pri-9.pem in Resources */,
+				9CD7696E2D90F9A00044CDF7 /* bing-base64-single.cer in Resources */,
+				9CD7696F2D90F9A00044CDF7 /* aiboxkit-pkcs12-pwd.p12 in Resources */,
+				9CD769702D90F9A00044CDF7 /* sm2pri-1.der in Resources */,
+				9CD769712D90F9A00044CDF7 /* sm2pri-3.pem in Resources */,
+				9CD769722D90F9A00044CDF7 /* github-base64-single.cer in Resources */,
+				9CD769732D90F9A00044CDF7 /* sm2pub-3.pem in Resources */,
+				9CD769742D90F9A00044CDF7 /* github-base64-chain.cer in Resources */,
+				9CD769752D90F9A00044CDF7 /* sm2pub-6.der in Resources */,
+				9CD769762D90F9A00044CDF7 /* sm2pub-1.der in Resources */,
+				9CD769772D90F9A00044CDF7 /* sm2pri-2.der in Resources */,
+				9CD769782D90F9A00044CDF7 /* sm2pub-10.der in Resources */,
+				9CD769792D90F9A00044CDF7 /* sm2pri-7.pem in Resources */,
+				9CD7697A2D90F9A00044CDF7 /* aiboxkit-cer-ecdsa.cer in Resources */,
+				9CD7697B2D90F9A00044CDF7 /* sm2pri8-6.pem in Resources */,
+				9CD7697C2D90F9A00044CDF7 /* sm2pub-8.der in Resources */,
+				9CD7697D2D90F9A00044CDF7 /* sm2pri-5.pem in Resources */,
+				9CD7697E2D90F9A00044CDF7 /* sm2pub-4.pem in Resources */,
+				9CD7697F2D90F9A00044CDF7 /* sm2pub-7.pem in Resources */,
+				9CD769802D90F9A00044CDF7 /* sm2pub-10.pem in Resources */,
+				9CD769812D90F9A00044CDF7 /* aiboxkit-pkcs12-single.p12 in Resources */,
+				9CD769822D90F9A00044CDF7 /* sm2pub-3.der in Resources */,
+				9CD769832D90F9A00044CDF7 /* sm2pri8-10.pem in Resources */,
+				9CD769842D90F9A00044CDF7 /* sm2pri-3.der in Resources */,
+				9CD769852D90F9A00044CDF7 /* sm2pri-5.der in Resources */,
+				9CD769862D90F9A00044CDF7 /* sm2pub-7.der in Resources */,
+				9CD769872D90F9A00044CDF7 /* sm2pri8-4.pem in Resources */,
+				9CD769882D90F9A00044CDF7 /* sm2pub-1.pem in Resources */,
+				9CD769892D90F9A00044CDF7 /* sm2pub-4.der in Resources */,
+				9CD7698A2D90F9A00044CDF7 /* sm2pri8-3.pem in Resources */,
+				9CD7698B2D90F9A00044CDF7 /* sm2pub-8.pem in Resources */,
+				9CD7698C2D90F9A00044CDF7 /* sm2pub-9.der in Resources */,
+				9CD7698D2D90F9A00044CDF7 /* sm2pri8-7.pem in Resources */,
+				9CD7698E2D90F9A00044CDF7 /* sm2pri8-1.pem in Resources */,
+				9CD7698F2D90F9A00044CDF7 /* sm2pri-2.pem in Resources */,
+				9CD769902D90F9A00044CDF7 /* sm2pri8-9.pem in Resources */,
+				9CD769912D90F9A00044CDF7 /* sm2pri-4.pem in Resources */,
+				9CD769922D90F9A00044CDF7 /* sm2pub-2.der in Resources */,
+				9CD769932D90F9A00044CDF7 /* sm2pub-2.pem in Resources */,
+				9CD769942D90F9A00044CDF7 /* sm2pri8-8.pem in Resources */,
+				9CD769952D90F9A00044CDF7 /* sm4TestFile.txt in Resources */,
+				9CD769962D90F9A00044CDF7 /* bing-base64-chain.cer in Resources */,
+				9CD769972D90F9A00044CDF7 /* github-der-single.cer in Resources */,
+				9CD769982D90F9A00044CDF7 /* sm2pri8-5.pem in Resources */,
+				9CD769992D90F9A00044CDF7 /* sm2pri-1.pem in Resources */,
+				9CD7699A2D90F9A00044CDF7 /* sm2pri8-2.pem in Resources */,
+				9CD7699B2D90F9A00044CDF7 /* sm2pub-5.pem in Resources */,
+				9CD7699C2D90F9A00044CDF7 /* sm2pri-9.der in Resources */,
+				9CD7699D2D90F9A00044CDF7 /* sm2pri-7.der in Resources */,
+				9CD7699E2D90F9A00044CDF7 /* sm2pri-4.der in Resources */,
+				9CD7699F2D90F9A00044CDF7 /* sm2pri-8.der in Resources */,
+				9CD769A02D90F9A00044CDF7 /* bing-der-single.cer in Resources */,
+				9CD769A12D90F9A00044CDF7 /* sm2pri-8.pem in Resources */,
+				9CD769A22D90F9A00044CDF7 /* Assets.xcassets in Resources */,
+				9CD769A32D90F9A00044CDF7 /* sm2pri-10.der in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		51BB3D5D939623AF0D512A2F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GMDynamic iOS Demo/Pods-GMDynamic iOS Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GMDynamic iOS Demo/Pods-GMDynamic iOS Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GMDynamic iOS Demo/Pods-GMDynamic iOS Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5E9C1840FE79A2D0A747A7E1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -694,6 +1063,50 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-GMObjC iOS Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CD7690C2D90F9120044CDF7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GMDynamic iOS Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CD7695C2D90F9A00044CDF7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GMDynamic Mac Demo-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -756,6 +1169,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GMObjC Mac Demo/Pods-GMObjC Mac Demo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EBAD1F6335F15C9F40072B8A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GMDynamic Mac Demo/Pods-GMDynamic Mac Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GMDynamic Mac Demo/Pods-GMDynamic Mac Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GMDynamic Mac Demo/Pods-GMDynamic Mac Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -782,6 +1212,32 @@
 				9CDD89972B396588000FE5C4 /* GMMainVC.swift in Sources */,
 				9CCDFC0F2B357087004E50AD /* AppDelegate.swift in Sources */,
 				9CD523372B47EDB40077D8E8 /* GMTestCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CD7690D2D90F9120044CDF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CD7690E2D90F9120044CDF7 /* GMViewController.m in Sources */,
+				9CD7690F2D90F9120044CDF7 /* GMTestCell.m in Sources */,
+				9CD769102D90F9120044CDF7 /* GMTestModel.m in Sources */,
+				9CD769112D90F9120044CDF7 /* GMTestUtil.m in Sources */,
+				9CD769122D90F9120044CDF7 /* GMAppDelegate.m in Sources */,
+				9CD769132D90F9120044CDF7 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CD7695D2D90F9A00044CDF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CD7695E2D90F9A00044CDF7 /* GMTestModel.m in Sources */,
+				9CD7695F2D90F9A00044CDF7 /* main.swift in Sources */,
+				9CD769602D90F9A00044CDF7 /* GMTestUtil.m in Sources */,
+				9CD769612D90F9A00044CDF7 /* GMMainVC.swift in Sources */,
+				9CD769622D90F9A00044CDF7 /* AppDelegate.swift in Sources */,
+				9CD769632D90F9A00044CDF7 /* GMTestCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,7 +1374,7 @@
 		};
 		9C74590A270FE3AE0062C1E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5F15FD95DCACC01B478E5C2 /* Pods-GMObjC iOS Demo.debug.xcconfig */;
+			baseConfigurationReference = 3E42181FDCF561F05486D139 /* Pods-GMObjC iOS Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -950,7 +1406,7 @@
 		};
 		9C74590B270FE3AE0062C1E5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DA619B03298D7421B799AE8 /* Pods-GMObjC iOS Demo.release.xcconfig */;
+			baseConfigurationReference = D1DF73FBCCAF7E1BC0D86BC7 /* Pods-GMObjC iOS Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -982,7 +1438,7 @@
 		};
 		9CCDFC182B357088004E50AD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7359A048C4A87E3BADAFF8AD /* Pods-GMObjC Mac Demo.debug.xcconfig */;
+			baseConfigurationReference = 1C68B35FA5D98AEC5337FF79 /* Pods-GMObjC Mac Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1019,7 +1475,7 @@
 		};
 		9CCDFC192B357088004E50AD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5818E8AA1CA717B3E78E5AD6 /* Pods-GMObjC Mac Demo.release.xcconfig */;
+			baseConfigurationReference = C50188F8242A35B08B35E0F7 /* Pods-GMObjC Mac Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1043,6 +1499,144 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.gmobjc.macdemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "GMObjC Mac Demo/GMObjC_Mac_Demo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		9CD769572D90F9120044CDF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67453592FB3E302E23B5D47D /* Pods-GMDynamic iOS Demo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4BX77JHQHH;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "GMDynamic iOS Demo-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = GMObjC;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.gmobjc.dynamiciosdemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e x86_64";
+			};
+			name = Debug;
+		};
+		9CD769582D90F9120044CDF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8388F88B1C3F3B4C9669CAC /* Pods-GMDynamic iOS Demo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4BX77JHQHH;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "GMDynamic iOS Demo-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = GMObjC;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.gmobjc.dynamiciosdemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e x86_64";
+			};
+			name = Release;
+		};
+		9CD769A62D90F9A00044CDF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DAF64F571F0D7E6E8F7C81F /* Pods-GMDynamic Mac Demo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "GMObjC Mac Demo/GMObjC_Mac_Demo.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 4BX77JHQHH;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = "";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.gmobjc.dynamicmacdemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "GMObjC Mac Demo/GMObjC_Mac_Demo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		9CD769A72D90F9A00044CDF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A7810B917F6955EA1E9BDBA /* Pods-GMDynamic Mac Demo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "GMObjC Mac Demo/GMObjC_Mac_Demo.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 4BX77JHQHH;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = "";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lifei.gmobjc.dynamicmacdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
@@ -1080,6 +1674,24 @@
 			buildConfigurations = (
 				9CCDFC182B357088004E50AD /* Debug */,
 				9CCDFC192B357088004E50AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9CD769562D90F9120044CDF7 /* Build configuration list for PBXNativeTarget "GMDynamic iOS Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CD769572D90F9120044CDF7 /* Debug */,
+				9CD769582D90F9120044CDF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9CD769A52D90F9A00044CDF7 /* Build configuration list for PBXNativeTarget "GMDynamic Mac Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CD769A62D90F9A00044CDF7 /* Debug */,
+				9CD769A72D90F9A00044CDF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

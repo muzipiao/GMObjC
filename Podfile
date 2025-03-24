@@ -16,6 +16,21 @@ target 'GMObjC Mac Demo' do
   pod 'SnapKit'
 end
 
+target 'GMDynamic iOS Demo' do
+  use_frameworks!
+  project example_project_path
+  platform :ios, '12.0'
+  pod 'GMDynamic', :path => './'
+end
+
+target 'GMDynamic Mac Demo' do
+  use_frameworks!
+  project example_project_path
+  platform :osx, '10.13'
+  pod 'GMDynamic', :path => './'
+  pod 'SnapKit'
+end
+
 # Test Project
 target 'Tests Host' do
   project test_project_path
