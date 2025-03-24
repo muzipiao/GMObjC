@@ -43,6 +43,16 @@ pod install
 open GMObjC.xcworkspace
 ```
 
+## Installation
+
+Refer to the detailed installation guide **[GMObjC Detailed Installation Instructions: https://muzipiao.github.io/gmdocs/guide/getting-started](https://muzipiao.github.io/gmdocs/zh/guide/getting-started)** 
+
+- **[Install using CocoaPods](https://muzipiao.github.io/gmdocs/guide/getting-started#install-cocoapods)**: Quickly integrate by adding `pod 'GMObjC'` or `pod 'GMDynamic'` to your Podfile.
+- **[Install using Carthage](https://muzipiao.github.io/gmdocs/guide/getting-started#install-carthage)**: Use Carthage to compile into **GMObjC.xcframework** dynamic library.
+- **[Install using Framework](https://muzipiao.github.io/gmdocs/guide/getting-started#install-framework)**: Open the project **GMObjC.xcodeproj** to manually compile into a dynamic or static library.
+- **[Install using SPM](https://muzipiao.github.io/gmdocs/guide/getting-started#install-spm)**: Add dependencies in the project's **Package.swift** for integration.
+- **[Direct Source Integration](https://muzipiao.github.io/gmdocs/guide/getting-started#install-source)**: Directly drag the **GMObjC** folder from the project directory into your project for use.
+
 ## SM2 key pair
 
 ```objc
@@ -147,7 +157,7 @@ NSString *decrypted = [GMSm4Utils decryptTextWithCBC:ciphertext keyHex:sm4KeyHex
 
 | GMObjC Version | Supported Architecture | Compatible Platforms |    Compatible Versions    |
 | :------------: | :--------------------: | :------------------: | :-----------------------: |
-|     4.0.2      |      x86_64 arm64      |       iOS OSX        | iOS>= iOS 9.0, OSX>=10.13 |
+|     4.0.3      |      x86_64 arm64      |       iOS OSX        | iOS>= iOS 9.0, OSX>=10.13 |
 |     3.3.8      |      x86_64 arm64      |         iOS          |        >= iOS 9.0         |
 
 ## License

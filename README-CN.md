@@ -41,6 +41,16 @@ pod install
 open GMObjC.xcworkspace
 ```
 
+## 安装方式
+
+安装方式参考文档 **[GMObjC 详细安装说明: https://muzipiao.github.io/gmdocs/zh/guide/getting-started](https://muzipiao.github.io/gmdocs/zh/guide/getting-started)** 
+
+- **[使用 CocoaPods 安装](https://muzipiao.github.io/gmdocs/zh/guide/getting-started#install-cocoapods)**：在 Podfile 中添加`pod 'GMObjC'`或`pod 'GMDynamic'`快速集成。
+- **[使用 Carthage 安装](https://muzipiao.github.io/gmdocs/zh/guide/getting-started#install-carthage)**：使用 Carthage 编译为 **GMObjC.xcframework** 动态库。
+- **[使用 Framework 安装](https://muzipiao.github.io/gmdocs/zh/guide/getting-started#install-framework)**：打开项目 **GMObjC.xcodeproj** 手动编译为动态库或静态库。
+- **[使用 SPM 安装](https://muzipiao.github.io/gmdocs/zh/guide/getting-started#install-spm)**：在项目 **Package.swift** 中添加依赖集成。
+- **[源码直接集成](https://muzipiao.github.io/gmdocs/zh/guide/getting-started#install-source)**：将项目目录下的 **GMObjC** 文件夹直接拖入项目使用。
+
 ## SM2 密钥对
 
 ```objc
@@ -145,7 +155,7 @@ NSString *decrypted = [GMSm4Utils decryptTextWithCBC:ciphertext keyHex:sm4KeyHex
 
 | GMObjC 版本 |   支持架构   | 兼容平台 |         兼容版本          |
 | :---------: | :----------: | :------: | :-----------------------: |
-|    4.0.2    | x86_64 arm64 | iOS OSX  | iOS>= iOS 9.0, OSX>=10.13 |
+|    4.0.3    | x86_64 arm64 | iOS OSX  | iOS>= iOS 9.0, OSX>=10.13 |
 |    3.3.8    | x86_64 arm64 |   iOS    |        >= iOS 9.0         |
 
 ## License
