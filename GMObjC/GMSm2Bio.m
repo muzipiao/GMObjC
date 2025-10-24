@@ -361,10 +361,15 @@ typedef NS_ENUM(int, GMSm2CerType) {
     NSString *pubPath = [tmpPath stringByAppendingPathComponent:pubFileName];
     NSString *priPath = [tmpPath stringByAppendingPathComponent:priFileName];
     FILE *fpPub = fopen(pubPath.UTF8String, "w");
-    FILE *fpPri = fopen(priPath.UTF8String, "w");
-    if (fpPub == NULL || fpPri == NULL) {
+    if (fpPub == NULL) {
         return keyFiles;
     }
+    FILE *fpPri = fopen(priPath.UTF8String, "w");
+    if (fpPri == NULL) {
+        fclose(fpPub);
+        return keyFiles;
+    }
+    
     EC_GROUP *group = EC_GROUP_new_by_curve_name([GMSm2Utils curveType]);
     EC_KEY *key = NULL; // 密钥对
     BOOL success = YES;
